@@ -18,22 +18,21 @@
     </properties>
     <dependencies>
 
-<!--        &lt;!&ndash; JPA &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-data-jpa</artifactId>-->
-<!--        </dependency>-->
+		<!-- 어노테이션 사용을 위한 dependency-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
 
-<!--        &lt;!&ndash; Querydsl &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.querydsl</groupId>-->
-<!--            <artifactId>querydsl-apt</artifactId>-->
-<!--        </dependency>-->
-
-<!--        <dependency>-->
-<!--            <groupId>com.querydsl</groupId>-->
-<!--            <artifactId>querydsl-jpa</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-apt</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-jpa</artifactId>
+        </dependency>
 
 <!--        &lt;!&ndash; API, java.xml.bind module &ndash;&gt;-->
 <!--        <dependency>-->
@@ -73,11 +72,11 @@
 <!--            <artifactId>thymeleaf-extras-springsecurity5</artifactId>-->
 <!--        </dependency>-->
 
-<!--        &lt;!&ndash; validation &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-validation</artifactId>-->
-<!--        </dependency>-->
+		<!-- javax.validation을 사용하기 위한 dependency  -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
 
         <!-- spring web -->
         <dependency>
