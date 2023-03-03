@@ -1,0 +1,32 @@
+
+<!-- 메인 레이 아웃 -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <title>Main</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../static/css/main_layout.css" th:href="@{/css/main_layout.css}"/>
+</head>
+
+<body>
+    <div class="container__common">
+        <nav class="wrapper__nav">
+            <div class="wrapper__button__profile">
+                <img class="button__profile" th:src="@{/img/button__profile.png}">
+            </div>
+            <!-- 클릭시 버튼 바뀌어야함 -->
+            <img class="button__login" th:src="@{/img/button__login.png}">
+            <img th:src="@{/img/button__dashboard.png}">
+            <img th:src="@{/img/button__friends.png}">
+            <img th:src="@{/img/button__planner.png}">
+            <img th:src="@{/img/button__gallery.png}">
+            <img th:src="@{/img/button__board.png}">
+        </nav>
+        <div class="container__contents" layout:fragment="content"></div>
+    </div>
+
+</body>
+</html>
