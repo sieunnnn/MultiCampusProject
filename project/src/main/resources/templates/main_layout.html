@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <title>Main</title>
@@ -15,18 +15,31 @@
     <div class="container__common">
         <nav class="wrapper__nav">
             <div class="wrapper__button__profile">
-                <img class="button__profile" th:src="@{/img/button__profile.png}">
+                <button><img class="button__profile" th:src="@{/img/button__profile.png}"></button>
             </div>
-            <!-- 클릭시 버튼 바뀌어야함 -->
-            <img class="button__login" th:src="@{/img/button__login.png}">
-            <img th:src="@{/img/button__dashboard.png}">
-            <img th:src="@{/img/button__friends.png}">
-            <img th:src="@{/img/button__planner.png}">
-            <img th:src="@{/img/button__gallery.png}">
-            <img th:src="@{/img/button__board.png}">
+            <div class="wrapper__button">
+                <button><img th:src="@{/img/button__dashboard.png}"></button>
+                <button><img th:src="@{/img/button__friends.png}"></button>
+                <button><img th:src="@{/img/button__planner.png}"></button>
+                <button><img th:src="@{/img/button__gallery.png}"></button>
+                <button><img th:src="@{/img/button__board.png}"></button>
+            </div>
+            <label for="toggle" class="toggleSwitch">
+                <span class="toggleButton"></span>
+            </label>
         </nav>
         <div class="container__contents" layout:fragment="content"></div>
     </div>
 
 </body>
+
+<script>
+    const toggleList = document.querySelectorAll(".toggleSwitch");
+
+    toggleList.forEach(($toggle) => {
+        $toggle.onclick = () => {
+            $toggle.classList.toggle('active');
+        }
+    });
+</script>
 </html>
