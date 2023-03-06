@@ -38,17 +38,23 @@ public class MemberController {
 	@InitBinder("signUpRequest")
 	public void initBinder(WebDataBinder webDataBinder) {
 		webDataBinder.addValidators(signUpValidator);
+		System.out.println("@InitBinder(\"signUpRequest\") signUpValidator :  " +signUpValidator);
 	}
 	
 	@GetMapping("signup")
 	public void signUp(Model model) {
 		model.addAttribute("signUpRequest", new SignUpRequest());
+		
+		System.out.println("@GetMapping(\"signup\") new SignUpRequest() :  " +new SignUpRequest());
+		System.out.println("@GetMapping(\"signup\") model :  "+model);
 	}
 	
 	@GetMapping("checkId")
 	@ResponseBody
 	public Map<String,Boolean> checkId(String userId) {
+		System.out.println("@GetMapping(\"checkId\") memberService.existUser(userId) :  "+memberService.existUser(userId));
 		return Map.of("exist", memberService.existUser(userId));
+		
 	}
 	
 	@PostMapping("signup")
@@ -62,9 +68,11 @@ public class MemberController {
 		}
 		
 		session.setAttribute("signupForm", form);
+		System.out.println("@PostMapping(\"signup\") form :  "+form);
 		
 		String authToken = UUID.randomUUID().toString();
 		session.setAttribute("authToken", authToken);
+		System.out.println("@PostMapping(\"signup\") authToken :  "+authToken);
 		
 		memberService.authenticateEmail(form, authToken);
 		return "redirect:/";
@@ -92,6 +100,8 @@ public class MemberController {
 	@GetMapping("login")
 	public void login(Model model) {
 		model.addAttribute("loginRequest", new LoginRequest());
+		System.out.println("@GetMapping(\"login\") new LoginRequest() :  "+new LoginRequest());
+		System.out.println("@GetMapping(\"login\") model :  "+model);
 	};
 	
 	@PostMapping("login")
@@ -103,14 +113,14 @@ public class MemberController {
 		if(error.hasErrors()) {
 			return "/member/login";
 		}
-		
+		System.out.println("@PostMapping(\"login\") loginRequest :  "+loginRequest);
 		Principal principal = memberService.authenticateUser(loginRequest);
 		
 		if(principal == null) {
 			redirectAttributes.addFlashAttribute("msg", "아이디나 비밀번호가 일치하지 않습니다.");
 			return "redirect:/member/login";
 		}
-		
+		System.out.println("@PostMapping(\"login\") principal :  "+principal);
 		session.setAttribute("auth", principal);
 		return "redirect:/";
 	}
