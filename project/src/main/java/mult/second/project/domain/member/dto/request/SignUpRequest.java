@@ -1,4 +1,4 @@
-package mult.second.project.domain.member.domain.request;
+package mult.second.project.domain.member.dto.request;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

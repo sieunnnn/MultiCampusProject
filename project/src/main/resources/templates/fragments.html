@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:fragment="flg_head">
+
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+	<link href="/css/common.css" rel="stylesheet">
+	<link href="/icon/css/all.css" rel="stylesheet">
+	<script src="/js/common.js"></script>
+
+</th:block>
+</head>
+<body>
+	<div class="container" th:fragment="top">
+	    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+	      <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+	        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
+	      </a>
+	
+	      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+	        <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+	        <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
+	      </ul>
+		
+	      <div class="col-md-3 text-end" th:if="${session.auth == null}">
+        	<a href="/member/login" class="btn btn-outline-primary me-2">Login</a>
+        	<a href="/member/signup" class="btn btn-primary">Sign-up</a>
+        	<a href="/board/list" class="btn btn-primary me-1">Board</a>
+	      </div>
+	    
+	      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" th:if="${session.auth != null}">
+        	<li><a class="nav-link px-2 link-dark" th:text="${session.auth.userId}"></a></li>
+        	<li><a href="/member/mypage" class="nav-link px-2 link-dark">MyPage</a></li>
+        	<li><a href="/board/list" class="nav-link px-2 link-dark">Board</a></li>
+        	<li><a href="/member/logout" class="btn btn-primary">Logout</a></li>
+	      </ul>
+	   </header>
+   </div>
+   
+   <div class="container footer" th:fragment="flg_footer">
+	  <footer class="py-3 my-4">
+	    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+	      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+	      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+	      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+	      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+	      <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+	    </ul>
+	    <p class="text-center text-muted">© 2022 Company, Inc</p>
+	  </footer>
+   </div>
+
+
+</body>
+</html>

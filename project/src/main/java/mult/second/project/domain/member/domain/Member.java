@@ -15,7 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import mult.second.project.domain.member.domain.request.SignUpRequest;
+import mult.second.project.domain.member.dto.request.SignUpRequest;
 
 @Entity
 @DynamicInsert // insert 쿼리를 생성할 때 null인 필드는 쿼리에서 생략
