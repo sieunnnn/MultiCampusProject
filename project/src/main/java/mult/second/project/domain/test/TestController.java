@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class TestController {
 
+//    @GetMapping(value = "/")
+//    public String layout() {
+//        return "main_layout";
+//    }
+
     @GetMapping(value = "/")
     public String test() {
         return "test";
