@@ -1,4 +1,4 @@
-package mult.second.project.domain.test;
+package multi.second.project.domain.test;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

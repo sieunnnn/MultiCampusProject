@@ -1,4 +1,4 @@
-package mult.second.project;
+package multi.second.project;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
