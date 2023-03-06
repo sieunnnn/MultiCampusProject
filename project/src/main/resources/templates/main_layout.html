@@ -24,8 +24,8 @@
                 <button><img th:src="@{/img/button__gallery.png}"></button>
                 <button><img th:src="@{/img/button__board.png}"></button>
             </div>
-            <label for="toggle" class="toggleSwitch">
-                <span class="toggleButton"></span>
+            <label class="toggle__switch">
+                <span class="toggle__button"></span>
             </label>
         </nav>
         <div class="container__contents" layout:fragment="content"></div>
@@ -33,8 +33,11 @@
 
 </body>
 
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="/js/jQuery-2.1.4.min.js"></script>
 <script>
-    const toggleList = document.querySelectorAll(".toggleSwitch");
+    const toggleList = document.querySelectorAll(".toggle__switch");
 
     toggleList.forEach(($toggle) => {
         $toggle.onclick = () => {
