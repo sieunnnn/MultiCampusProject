@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<!-- script tag안에서 thymeleaf 사용하기 -->
+<script type="text/javascript" th:inline="javascript">
+
+if([[${msg}]]){
+	 alert([[${msg}]]); 
+}
+
+location.href=[[${redirect}]];
+
+
+</script>
+
+
+</body>
+</html>
