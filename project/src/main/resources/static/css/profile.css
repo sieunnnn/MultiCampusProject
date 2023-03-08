@@ -1,0 +1,143 @@
+
+/* 웹폰트 */
+@font-face {
+
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+button {
+
+    cursor: grab;
+}
+
+button:focus {
+
+    outline: none;
+    border: none;
+}
+
+.container__profile {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.txt__welcome {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 64px;
+    /* identical to box height, or 38% */
+
+    letter-spacing: 0.02em;
+
+    color: #1C1C1E;
+
+    margin-bottom: 65px;
+}
+
+.wrapper__user__pic {
+
+    border-radius: 50%;
+
+    width: 280px;
+    height: 280px;
+
+    background: linear-gradient(0deg, #D9D9D9, #D9D9D9), rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.wrapper__lank {
+
+    width: auto;
+    height: auto;
+    margin: 29px;
+
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+.user__lank {
+
+    margin: 10px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    /* identical to box height, or 120% */
+
+    letter-spacing: 0.02em;
+
+    color: #FFFFFF;
+}
+
+.wrapper__profile__btn {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn__travel1, .btn__travel1:focus {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 23px;
+    line-height: 24px;
+    /* or 104% */
+
+    letter-spacing: 0.02em;
+
+    color: #FFFFFF;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: auto;
+    height: 42px;
+    margin-right: 10px;
+
+    background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+    box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25);
+    border-radius: 6px;
+}
+
+.btn__travel2, .btn_travel2:focus {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 23px;
+    line-height: 24px;
+    /* or 104% */
+
+    letter-spacing: 0.02em;
+
+    color: #1C1C1E;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: auto;
+    height: 42px;
+    margin-left: 10px;
+
+    background: #FFFFFF;
+    border: 0.5px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+}
