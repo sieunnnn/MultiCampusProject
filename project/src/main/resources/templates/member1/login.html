@@ -69,5 +69,12 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="/js/jQuery-2.1.4.min.js"></script>
 <script>
+    const toggleList = document.querySelectorAll(".toggle__switch__login");
+
+    toggleList.forEach(($toggle) => {
+        $toggle.onclick = () => {
+            $toggle.classList.toggle('active');
+        }
+    });
 </script>
 </html>
