@@ -44,9 +44,10 @@ button {
     cursor: grab;
 }
 
-button:active  {
+button:focus  {
 
     outline: none;
+    border: none;
 }
 
 
