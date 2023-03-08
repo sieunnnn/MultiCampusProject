@@ -146,6 +146,7 @@ nav {
 
 
 .container__contents {
+
     display: flex;
     flex-direction: row;
     justify-content: center;
