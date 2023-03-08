@@ -17,8 +17,13 @@ public class TestController {
 //        return "test";
 //    }
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "/login")
     public String member() {
         return "member1/login";
+    }
+
+    @GetMapping(value = "/")
+    public String Profile() {
+        return "profile1/profile";
     }
 }
