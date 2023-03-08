@@ -8,6 +8,25 @@
     font-style: normal;
 }
 
+input {
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 7px;
+
+    width: 245px;
+    height: 28px;
+
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+}
+
+input:focus {
+
+    outline: solid 3.5px rgba(58, 108, 217, 0.5);
+}
 
 .wrapper__login {
 
@@ -29,12 +48,99 @@
     border-radius: 16px;
 }
 
+button {
+
+    margin: 7px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    /* identical to box height, or 171% */
+
+    letter-spacing: 0.02em;
+
+    color: #FFFFFF;
+
+    cursor: grab;
+}
+
+button:active  {
+
+    outline: none;
+}
+
+
 .txt__login {
 
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 700;
     font-size: 60px;
+    letter-spacing: 0.02em;
+
+    color: #1C1C1E;
+
+}
+
+.txt__login__info {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: 0.02em;
     line-height: 24px;
 
+    color: #1C1C1E;
+}
+
+.wrapper__login__input {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 14px;
+}
+
+.wrapper__login__btn {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn__login {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 116px;
+    height: 30px;
+
+    background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+    box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25);
+    border-radius: 6px;
+}
+
+#closeBtn {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 115px;
+    height: 30px;
+
+    background: #868686;
+    border: 0.5px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1), inset 0px 0.5px 0.5px rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
 }
