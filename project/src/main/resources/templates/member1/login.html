@@ -1,0 +1,56 @@
+
+<!-- 로그인 화면 -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="main_layout">
+
+<head>
+    <title>Login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../static/css/main_layout.css" th:href="@{/css/main_layout.css}"/>
+    <link rel="stylesheet" href="../../static/css/login.css" th:href="@{/css/login.css}"/>
+</head>
+
+<body>
+<div layout:fragment="content">
+
+    <div class="wrapper__login">
+        <div class="txt__login">Login</div>
+        <div class="txt__login__info">
+            <p>
+
+            </p>
+        </div>
+
+        <!-- 아이디 / 비밀번호 입력 부분 -->
+        <div class="wrapper__login__input">
+            <div class="input__id">
+                <input type="text" id="userId" name="userId" />
+            </div>
+
+            <div class="input__pw">
+                <input type="password" id="password" name="password" />
+            </div>
+        </div>
+
+        <!-- 하단 버튼 -->
+        <div class="wrapper__login__btn">
+            <span><button class="btn__login"></button></span>
+            <span><button id="closeBtn" onclick="closeTab()"></button></span>
+        </div>
+
+
+    </div>
+</div>
+</body>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="/js/jQuery-2.1.4.min.js"></script>
+<script>
+
+    function closeTab() {
+        window.close();
+    }
+</script>
