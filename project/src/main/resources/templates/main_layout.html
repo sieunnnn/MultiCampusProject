@@ -1,19 +1,14 @@
 
-<!-- 로그인 화면 -->
+<!-- 메인 레이 아웃 -->
 
 <!DOCTYPE html>
-<!-- 메인 레이 아웃 -->
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
-
-    <title>Login</title>
+    <title>Main</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="/css/main_layout.css"/>
-
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="/css/main_layout.css"/>
-    <link rel="stylesheet" href="/css/login.css"/>
 </head>
 
 <body>
@@ -33,8 +28,8 @@
             <span class="toggle__button"></span>
         </label>
     </nav>
-    <div class="container__contents">
-    </div>
+
+    <div layout:fragment="content" class="container__contents"></div>
 </div>
 
 </body>
