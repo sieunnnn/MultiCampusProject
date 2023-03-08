@@ -21,8 +21,6 @@ img {
     width: 85px;
     height: 85px;
 
-    margin: 7px;
-
     /* 마우스 커서 변경 */
     cursor: grab;
 }
@@ -30,6 +28,12 @@ img {
 button {
 
     border: none;
+    background-color: transparent;
+}
+
+button:active {
+
+    outline: none;
     background-color: transparent;
 }
 
@@ -58,6 +62,9 @@ nav {
     align-items: center;
     justify-content: space-between;
 
+    padding: 0;
+    margin: 0;
+
     width: 122px;
     height: 840px;
 
@@ -80,6 +87,7 @@ nav {
     height: 90px;
 
     margin-top: 60px;
+    margin-bottom: 7px;
 }
 
 
@@ -88,7 +96,7 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content:center;
 }
 
 

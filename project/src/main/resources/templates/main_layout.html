@@ -1,35 +1,70 @@
 
-<!-- 메인 레이 아웃 -->
+<!-- 로그인 화면 -->
 
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!-- 메인 레이 아웃 -->
+<html>
 
 <head>
-    <title>Main</title>
+
+    <title>Login</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="../static/css/main_layout.css" th:href="@{/css/main_layout.css}"/>
+    <link rel="stylesheet" href="/css/main_layout.css"/>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/main_layout.css"/>
+    <link rel="stylesheet" href="/css/login.css"/>
 </head>
 
 <body>
-    <div class="container__common">
-        <nav>
-            <div class="wrapper__btn__profile">
-                <button><img th:src="@{/img/btn_profile.png}"></button>
+<div class="container__common">
+    <nav>
+        <div class="wrapper__btn__profile">
+            <button><img src="/img/btn_profile.png"></button>
+        </div>
+        <div class="wrapper__btn">
+            <button><img src="/img/btn_dashboard.png"></button>
+            <button><img src="/img/btn_message.png"></button>
+            <button><img src="/img/btn_planner.png"></button>
+            <button><img src="/img/btn_gallery.png"></button>
+            <button><img src="/img/btn_board.png"></button>
+        </div>
+        <label class="toggle__switch__login">
+            <span class="toggle__button"></span>
+        </label>
+    </nav>
+    <div class="container__contents">
+
+        <div class="wrapper__login">
+            <div class="txt__login">Login</div>
+            <div class="txt__login__info">
+                <p>
+                    현재 로그아웃 상태입니다<br>
+                    서비스 이용은 로그인 후에 가능합니다
+                </p>
             </div>
-            <div class="wrapper__btn">
-                <button><img th:src="@{/img/btn_dashboard.png}"></button>
-                <button><img th:src="@{/img/btn_message.png}"></button>
-                <button><img th:src="@{/img/btn_planner.png}"></button>
-                <button><img th:src="@{/img/btn_gallery.png}"></button>
-                <button><img th:src="@{/img/btn_board.png}"></button>
+
+            <!-- 아이디 / 비밀번호 입력 부분 -->
+            <div class="wrapper__login__input">
+                <div class="input__id">
+                    <input type="text" id="userId" name="userId" />
+                </div>
+
+                <div class="input__pw">
+                    <input type="password" id="password" name="password" />
+                </div>
             </div>
-            <label class="toggle__switch__login">
-                <span class="toggle__button"></span>
-            </label>
-        </nav>
-        <div class="container__contents" layout:fragment="content"></div>
+
+            <!-- 하단 버튼 -->
+            <div class="wrapper__login__btn">
+                <button class="btn__login" >로그인</button>
+                <button id="closeBtn" onclick="closeTab()">창닫기</button>
+            </div>
+
+
+        </div>
     </div>
+</div>
 
 </body>
 
