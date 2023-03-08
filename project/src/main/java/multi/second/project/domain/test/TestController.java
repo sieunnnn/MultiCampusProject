@@ -16,4 +16,9 @@ public class TestController {
 //    public String test() {
 //        return "test";
 //    }
+
+    @GetMapping(value = "/")
+    public String member() {
+        return "member1/login";
+    }
 }
