@@ -1,4 +1,4 @@
-package mult.second.project.domain.test;
+package multi.second.project.domain.test;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +12,8 @@ public class TestController {
 //        return "main_layout";
 //    }
 
-    @GetMapping(value = "/")
-    public String test() {
-        return "test";
-    }
+//    @GetMapping(value = "/")
+//    public String test() {
+//        return "test";
+//    }
 }
