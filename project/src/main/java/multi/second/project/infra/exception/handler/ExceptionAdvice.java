@@ -17,7 +17,7 @@ import multi.second.project.infra.exception.HandlableException;
 
 // @ControllerAdvice:  
 //		com.mc.mvc 패키지 아래에 존재하는 Controller의 공통 작업(예외처리, 데이터바인딩)을 모듈화한 객체
-@ControllerAdvice(basePackages = "mult.second.project")
+@ControllerAdvice(basePackages = "multi.second.project")
 public class ExceptionAdvice {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
