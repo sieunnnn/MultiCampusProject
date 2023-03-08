@@ -17,10 +17,10 @@ public class TestController {
 //        return "test";
 //    }
 
-//    @GetMapping(value = "/")
-//    public String member() {
-//        return "member1/login";
-//    }
+    @GetMapping(value = "/login")
+    public String member() {
+        return "member1/login";
+    }
 
     @GetMapping(value = "/")
     public String Profile() {
