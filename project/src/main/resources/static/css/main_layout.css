@@ -28,6 +28,7 @@ img {
 }
 
 button {
+
     border: none;
     background-color: transparent;
 }
@@ -92,6 +93,7 @@ button {
 
 
 .wrapper__button {
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -101,7 +103,8 @@ button {
 
 /* toggle ============================================================*/
 
-.toggleSwitch {
+.toggle__switch {
+
     width: 70px;
     height: 35px;
 
@@ -117,7 +120,8 @@ button {
 }
 
 
-.toggleSwitch .toggleButton {
+.toggle__switch .toggle__button {
+
     width: 29px;
     height: 28px;
     position: absolute;
@@ -130,16 +134,19 @@ button {
     background: #fff;
 }
 
-.toggleSwitch.active {
+.toggle__switch.active {
+
     background: #34C759;
 }
 
-.toggleSwitch.active .toggleButton {
+.toggle__switch.active .toggle__button {
+
     left: calc(100% - 33px);
     background: #fff !important;
 }
 
-.toggleSwitch, .toggleButton {
+.toggle__switch, .toggle__button {
+
     transition: all 0.2s ease-in;
 }
 

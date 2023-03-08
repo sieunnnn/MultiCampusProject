@@ -12,8 +12,8 @@ public class TestController {
 //        return "main_layout";
 //    }
 
-    @GetMapping(value = "/")
-    public String test() {
-        return "test";
-    }
+//    @GetMapping(value = "/")
+//    public String test() {
+//        return "test";
+//    }
 }
