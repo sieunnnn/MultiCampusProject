@@ -13,18 +13,18 @@
 
 <body>
     <div class="container__common">
-        <nav class="wrapper__nav">
-            <div class="wrapper__button__profile">
-                <button><img class="button__profile" th:src="@{/img/button__profile.png}"></button>
+        <nav>
+            <div class="wrapper__btn__profile">
+                <button><img th:src="@{/img/btn_profile.png}"></button>
             </div>
-            <div class="wrapper__button">
-                <button><img th:src="@{/img/button__dashboard.png}"></button>
-                <button><img th:src="@{/img/button__friends.png}"></button>
-                <button><img th:src="@{/img/button__planner.png}"></button>
-                <button><img th:src="@{/img/button__gallery.png}"></button>
-                <button><img th:src="@{/img/button__board.png}"></button>
+            <div class="wrapper__btn">
+                <button><img th:src="@{/img/btn_dashboard.png}"></button>
+                <button><img th:src="@{/img/btn_message.png}"></button>
+                <button><img th:src="@{/img/btn_planner.png}"></button>
+                <button><img th:src="@{/img/btn_gallery.png}"></button>
+                <button><img th:src="@{/img/btn_board.png}"></button>
             </div>
-            <label class="toggle__switch">
+            <label class="toggle__switch__login">
                 <span class="toggle__button"></span>
             </label>
         </nav>
@@ -37,7 +37,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="/js/jQuery-2.1.4.min.js"></script>
 <script>
-    const toggleList = document.querySelectorAll(".toggle__switch");
+    const toggleList = document.querySelectorAll(".toggle__switch__login");
 
     toggleList.forEach(($toggle) => {
         $toggle.onclick = () => {

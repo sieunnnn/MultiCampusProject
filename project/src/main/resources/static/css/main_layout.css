@@ -21,7 +21,7 @@ img {
     width: 85px;
     height: 85px;
 
-    margin-bottom: 7px;
+    margin: 7px;
 
     /* 마우스 커서 변경 */
     cursor: grab;
@@ -51,14 +51,12 @@ button {
 }
 
 
-.wrapper__nav {
+nav {
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-
-    flex-grow: 1;
 
     width: 122px;
     height: 840px;
@@ -69,7 +67,7 @@ button {
 }
 
 
-.wrapper__button__profile {
+.wrapper__btn__profile {
 
     display: flex;
     align-items: center;
@@ -82,17 +80,10 @@ button {
     height: 90px;
 
     margin-top: 60px;
-    margin-bottom: 20px;
 }
 
 
-.button__profile {
-
-    margin-top: 15px;
-}
-
-
-.wrapper__button {
+.wrapper__btn {
 
     display: flex;
     flex-direction: column;
@@ -103,7 +94,7 @@ button {
 
 /* toggle ============================================================*/
 
-.toggle__switch {
+.toggle__switch__login {
 
     width: 70px;
     height: 35px;
@@ -120,7 +111,7 @@ button {
 }
 
 
-.toggle__switch .toggle__button {
+.toggle__switch__login .toggle__button {
 
     width: 29px;
     height: 28px;
@@ -134,18 +125,18 @@ button {
     background: #fff;
 }
 
-.toggle__switch.active {
+.toggle__switch__login.active {
 
     background: #34C759;
 }
 
-.toggle__switch.active .toggle__button {
+.toggle__switch__login.active .toggle__button {
 
     left: calc(100% - 33px);
     background: #fff !important;
 }
 
-.toggle__switch, .toggle__button {
+.toggle__switch__login, .toggle__button {
 
     transition: all 0.2s ease-in;
 }
@@ -158,6 +149,8 @@ button {
 
     flex-grow:12;
 
-    width: 1131px;
+    width: 1169px;
     height: 840px;
+    padding: 0;
+    margin: 0;
 }
