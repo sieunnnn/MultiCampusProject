@@ -1,0 +1,107 @@
+
+/* 웹폰트 */
+@font-face {
+
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.container__message__contents {
+    display: flex;
+    flex-direction: column;
+    width: 736px;
+    height: 798px;
+}
+
+.wrapper__message__head {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 735px;
+    height: 134px;
+
+    background-color: rgba(249, 249, 249, 0.7);
+    border-radius: 16px 16px 0 0;
+
+    border-bottom: 0.5px solid rgba(151, 151, 151, 0.7);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.img__friends {
+
+    width: 90px;
+    height: 90px;
+    margin: 22px 34px 22px 29px;
+
+    border-radius: 50%;
+
+    background-color: lightgray;
+}
+
+.text__friends__name {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 57px;
+
+    color: #1C1C1E;
+}
+
+.wrapper__messages {
+
+    width: 736px;
+    height: 100%;
+
+    padding: 30px 60px 40px 60px;
+
+    background-color: transparent;
+
+    overflow: auto;
+}
+
+.wrapper__send__message {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items:flex-end;
+
+    width: 687px;
+    height: 147px;
+    margin: 24px;
+
+    /* System Background/Light/Primary
+
+    white
+    */
+    background: #FFFFFF;
+    /* Separator Color/Light/With Transparency */
+
+    border: 1px solid rgba(60, 60, 67, 0.36);
+    border-radius: 18px;
+}
+
+#message {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+
+    color: #1C1C1E;
+
+    width: 620px;
+    height: 113px;
+    margin: 18px;
+
+    resize: none;
+    border: none;
+    outline: none;
+}
