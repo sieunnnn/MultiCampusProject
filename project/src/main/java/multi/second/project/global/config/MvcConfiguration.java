@@ -1,4 +1,4 @@
-package mult.second.project.global.config;
+package multi.second.project.global.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.CacheControl;
