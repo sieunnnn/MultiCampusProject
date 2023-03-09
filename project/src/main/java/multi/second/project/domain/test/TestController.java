@@ -22,10 +22,10 @@ public class TestController {
         return "member1/login";
     }
 
-    @GetMapping(value = "/profile")
-    public String Profile() {
-        return "profile1/profile";
-   }
+//    @GetMapping(value = "/profile")
+//    public String Profile() {
+//        return "profile1/profile";
+//   }
 
     @GetMapping(value = "/friends")
     public String friends() {
