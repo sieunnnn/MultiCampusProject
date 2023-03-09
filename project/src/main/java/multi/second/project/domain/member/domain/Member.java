@@ -35,9 +35,6 @@ public class Member {
 	@Column(columnDefinition = "timestamp default now()")
 	private LocalDateTime regDate;
 	
-	@Column(columnDefinition = "timestamp default now()")
-	private LocalDateTime rentableDate;
-
 	public static Member createMember(SignUpRequest dto) {
 		return Member.builder()
 				.userId(dto.getUserId())
