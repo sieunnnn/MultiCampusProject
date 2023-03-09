@@ -1,0 +1,57 @@
+
+<!-- 친구 목록 부분 -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="main_layout">
+
+<head>
+    <title>friends</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../static/css/friends.css" th:href="@{/css/friends.css}"/>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div class="container__friends">
+
+        <!-- 상단부분 -->
+        <div class="wrapper__friends__head">
+            <div class="txt__friends">Friends</div>
+
+            <div class="wrapper__search__friends">
+                <div class="search__friends">
+                    <img src="/img/img_magnify.png" style="width: 15px; height: 15px; margin: 10px">
+                    <input id="search" type="text">
+                </div>
+                <input type="submit" class="btn__search" value="Search">
+            </div>
+        </div>
+
+        <!-- 친구 설정 메뉴 -->
+        <div class="wrapper__setting__friends">
+            <div class="wrapper__setting__btn">
+                <!-- 경로는 나중에 알맞게 수정 해주세요 -->
+                <div th:onclick="|location.href='@{/add/friends}'|">
+                    <input type="button" class="btn__add__friends" value="친구 추가">
+                </div>
+                <span class="divider"></span>
+                <div th:onclick="|location.href='@{/delete/friends}'|">
+                    <input type="button" class="btn__setting__friends" value="친구 편집">
+                </div>
+            </div>
+        </div>
+
+        <!-- 친구 목록 추가 -->
+        <!-- 대략 작성 해주시면 제가 나중에 수정 하겠습니다 -->
+        <div class="wrapper__friends__list">
+        </div>
+    </div>
+
+    <!-- 결과물 출력 부분 -->
+    <div class="container__friends__contents">
+        <div layout:fragment="container__friends__contents"></div>
+    </div>
+</div>
+</body>
