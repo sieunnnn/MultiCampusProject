@@ -15,18 +15,19 @@
 <div class="container__common">
     <nav>
         <div class="wrapper__btn__profile">
-            <button><img src="/img/btn_profile.png"></button>
+            <button th:onclick="|location.href='@{/profile}'|"><img src="/img/btn_profile.png"></button>
         </div>
         <div class="wrapper__btn">
-            <button><img src="/img/btn_dashboard.png"></button>
-            <button><img src="/img/btn_message.png"></button>
+            <button th:onclick="|location.href='@{/}'|"><img src="/img/btn_dashboard.png"></button>
+            <button th:onclick="|location.href='@{/friends}'|"><img src="/img/btn_message.png"></button>
             <button><img src="/img/btn_planner.png"></button>
             <button><img src="/img/btn_gallery.png"></button>
             <button><img src="/img/btn_board.png"></button>
         </div>
-        <label class="toggle__switch__login">
+
+        <button class="toggle__switch__login">
             <span class="toggle__button"></span>
-        </label>
+        </button>
     </nav>
 
     <div layout:fragment="content" class="container__contents"></div>
@@ -43,6 +44,7 @@
     toggleList.forEach(($toggle) => {
         $toggle.onclick = () => {
             $toggle.classList.toggle('active');
+            window.location.href = '/login';
         }
     });
 </script>
