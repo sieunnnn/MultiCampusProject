@@ -44,7 +44,7 @@ public class GalleryService {
 	@Transactional
 	public void createGallery(GalleryRegistRequest dto, List<MultipartFile> files) {
 		
-		Member member = memberRepository.findById(dto.getUserId()).get(); 
+		Member member = memberRepository.findById(dto.getUserId()).get();
 		Gallery gallery = Gallery.createGallery(dto, member);
 		
 		FilePathDto filePath = new FilePathDto();
@@ -63,7 +63,7 @@ public class GalleryService {
 	}
 
 	public Map<String, Object> findGalleryList(Pageable pageable) {
-		
+		//findAll 을 findByUserId로 바꿀 예정
 		Page<Gallery> page = galleryRepository.findAll(pageable);
 		
 		Paging paging = Paging.builder()

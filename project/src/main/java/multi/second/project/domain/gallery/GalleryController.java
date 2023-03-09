@@ -30,18 +30,20 @@ import multi.second.project.infra.util.file.dto.FilePathDto;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("board")
+@RequestMapping("gallery")
 public class GalleryController {
 
 	private final GalleryService galleryService;
 	
+	//갤러리 포스트 추가 폼
 	@GetMapping("form")
-	public String boardForm() {
-		return "/board/board-form";
+	public String galleryForm() {
+		return "/gallery/gallery-form";
 	}
 	
+	//파일(사진) 업로드시
 	@PostMapping("upload")
-	public String upload(
+	public String upload(//업로드 했을때 사진이 보이게 해야될것 같은데 어떻게 해야 할까?
 			@RequestParam List<MultipartFile> files,
 			@SessionAttribute(name="auth", required=false) Principal principal,
 			GalleryRegistRequest dto
@@ -53,29 +55,33 @@ public class GalleryController {
 		return "redirect:/";
 	}
 	
+	//갤러리 리스트 화면
 	@GetMapping("list")
-	public String boardList(
-			@PageableDefault(size=10, sort="psotIdx", direction = Direction.DESC, page = 0)
+	public String galleryList(//등록글들을 타이틀이 아닌 그림으로 보여줘야 하는데 어떻게 할까?
+			@PageableDefault(size=10, sort="postIdx", direction = Direction.DESC, page = 0)
 			Pageable pageable,
 			Model model
 			
 			) {
-
+		//갤러리 리스트를 찾을 때 UserId기준으로 찾아야하는데 어떻게 할까?
 		Map<String, Object> commandMap = galleryService.findGalleryList(pageable); 
 		model.addAllAttributes(commandMap);
 		
-		return "/board/board-list";
+		return "/gallery/gallery-list";
 	}
 	
+	//갤러리 특정 포스트 방문시
 	@GetMapping("detail")
-	public String boardDetail(Long postIdx, Model model) {
-		
+	public String galleryDetail(Long postIdx, Model model) {
+		//포스트 번호로 특정 포스트를 찾는다
 		GalleryDetailResponse dto = galleryService.findGalleryByPostIdx(postIdx);
-		model.addAttribute("board", dto);
+		model.addAttribute("gallery", dto);
 		
-		return "/board/board-contents";
+		
+		return "/gallery/gallery-contents";
 	}
 	
+	//갤러리 포스트에서 사진 다운로드 시(필요 없을지도)
 	@GetMapping("download")
 	public ResponseEntity<FileSystemResource> downloadFile(Long fpIdx){
 		
@@ -91,14 +97,14 @@ public class GalleryController {
 		return ResponseEntity.ok().headers(headers).body(fsr);
 	}
 	
-	
+	//갤러리 포스트 수정 화면
 	@GetMapping("modify")
-	public String boardModify(Long postIdx, Model model) {
+	public String galleryModify(Long postIdx, Model model) {
 		GalleryDetailResponse dto = galleryService.findGalleryByPostIdx(postIdx);
-		model.addAttribute("board", dto);
-		return "board/board-modify";
+		model.addAttribute("gallery", dto);
+		return "gallery/gallery-modify";
 	}
-	
+	//갤러리 포스트 수정완료시
 	@PostMapping("modify")
 	public String modify(GalleryModifyRequest dto,
 						@RequestParam List<MultipartFile> fileList,
@@ -108,15 +114,15 @@ public class GalleryController {
 		dto.setUserId(principal.getUserId());
 		galleryService.updateGallery(dto, fileList);
 		
-		return "redirect:/board/detail?postIdx="+dto.getPostIdx();
+		return "redirect:/gallery/detail?postIdx="+dto.getPostIdx();
 	}
-	
+	//갤러리 포스트 삭제시
 	@PostMapping("remove")
-	public String remove(Long bdIdx, @SessionAttribute("auth") Principal principal) {
+	public String remove(Long postIdx, @SessionAttribute("auth") Principal principal) {
 		
-		galleryService.removeGallery(bdIdx, principal);
+		galleryService.removeGallery(postIdx, principal);
 		
-		return "redirect:/board/list";
+		return "redirect:/gallery/list";
 	}
 	
 	
