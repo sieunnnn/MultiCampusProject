@@ -46,4 +46,9 @@ public class TestController {
     public String deleteFriends() {
         return "messages1/delete_friends";
     }
+
+    @GetMapping(value = "/gallery")
+    public String gallery() {
+        return "gallery1/common_layout";
+    }
 }
