@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout}">
+<head>
+</head>
+
+<body>
+
+<div class="container wrap_content" layout:fragment="content">
+	<ul>
+		<li th:text="${session.auth.userId}"></li>
+		<li th:text="${session.auth.email}"></li>
+	</ul>
+</div>
+
+</body>
+</html>
