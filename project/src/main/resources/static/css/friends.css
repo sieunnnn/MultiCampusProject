@@ -1,0 +1,228 @@
+
+/* 웹폰트 */
+@font-face {
+
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+.container__friends {
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    width: 386px;
+    height: 798px;
+
+    /* Blur Light/Extra Light */
+
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(24px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 16px;
+}
+
+.wrapper__friends__head {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    width: 386px;
+    height: 201px;
+
+    background-color:rgba(249, 249, 249, 0.8);
+    border-radius: 16px 16px 0 0;
+
+    border-bottom:  0.5px solid rgba(151, 151, 151, 0.7);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.txt__friends {
+
+    margin: 47px 165px 63px 31px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 24px;
+    /* identical to box height, or 38% */
+
+    letter-spacing: 0.02em;
+
+    color: #1C1C1E;
+}
+
+.wrapper__search__friends {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px 31px 20px;
+
+}
+
+.search__friends {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: 276px;
+    height: 36px;
+
+    background: rgba(118, 118, 128, 0.2);
+    border-radius: 10px;
+
+    outline: none;
+    border: none;
+}
+
+#search {
+
+    background-color: transparent;
+    outline: none;
+    border: none;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+
+    color: #1C1C1E;
+}
+
+.btn__search {
+
+    background-color: transparent;
+    border: none;
+    outline: none;
+
+    width: auto;
+    height: auto;
+    margin: 0 21px 0 5px;
+
+    /* Body/Regular */
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    /* identical to box height, or 129% */
+
+    display: flex;
+    align-items: center;
+    text-align: right;
+    letter-spacing: -0.408px;
+    font-feature-settings: 'case' on;
+
+    /* Default/SystemBlue/Light */
+
+    color: #007AFF;
+}
+
+.wrapper__setting__friends {
+
+    width: 386px;
+    height: auto;
+}
+
+.wrapper__setting__btn {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 345px;
+    height: 32px;
+    margin: 19px 21px 19px 23px;
+
+    /* Fill Color/Light/Tertiary */
+
+    background: rgba(118, 118, 128, 0.12);
+    border-radius: 8px;
+}
+
+.btn__add__friends, .btn__setting__friends {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    /* identical to box height */
+
+
+    color: #1C1C1E;
+
+    width: 169.5px;
+    height: 26px;
+
+    background-color: transparent;
+
+    border: none;
+    outline: none;
+}
+
+.btn__add__friends:focus, .btn__setting__friends:focus {
+
+    border: none;
+    outline: none;
+
+    width: 169.5px;
+    height: 26px;
+
+    /* System Background/Light/Primary
+
+    white
+    */
+    background: #FFFFFF;
+    border: 0.5px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.12), 0px 3px 1px rgba(0, 0, 0, 0.04);
+    border-radius: 7px;
+}
+
+.divider {
+
+    width: 0.97px;
+    height: 16px;
+
+    background: rgba(60, 60, 67, 0.36);
+    border-radius: 0.5px;
+}
+
+.wrapper__friends__list {
+
+    width: 386px;
+    height: 100%;
+
+    background-color: transparent;
+
+    overflow: auto;
+}
+
+.container__friends__contents {
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    width: 735px;
+    height: 798px;
+    margin-left: 18px;
+
+    /* Blur Light/Extra Light */
+
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(24px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 16px;
+}

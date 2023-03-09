@@ -18,8 +18,8 @@ html {
 
 img {
 
-    width: 85px;
-    height: 85px;
+    width: 90px;
+    height: 90px;
 
     /* 마우스 커서 변경 */
     cursor: grab;
@@ -86,7 +86,7 @@ nav {
     width: 90px;
     height: 90px;
 
-    margin-top: 60px;
+    margin-top: 77px;
     margin-bottom: 7px;
 }
 
@@ -107,12 +107,12 @@ nav {
     width: 70px;
     height: 35px;
 
-    margin-bottom: 65px;
+    margin-bottom: 75px;
     display: block;
     position: relative;
 
     border-radius: 30px;
-    background: rgba(120, 120, 128, 32%);
+    background: #34C759;
     /*box-shadow: 0 0 8px 3px rgba(0 0 0 / 15%);*/
 
     cursor: pointer;
@@ -125,7 +125,7 @@ nav {
     height: 28px;
     position: absolute;
     top: 50%;
-    left: 4px;
+    left: 37px;
     transform: translateY(-50%);
 
     border-radius: 50%;
@@ -135,12 +135,12 @@ nav {
 
 .toggle__switch__login.active {
 
-    background: #34C759;
+    background: rgba(120, 120, 128, 32%);
 }
 
 .toggle__switch__login.active .toggle__button {
 
-    left: calc(100% - 33px);
+    left: calc(100% - 66px);
     background: #fff !important;
 }
 

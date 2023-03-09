@@ -1,0 +1,79 @@
+
+/* 웹폰트 */
+@font-face {
+
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.container__delete__friends {
+    display: flex;
+    flex-direction: column;
+    width: 736px;
+    height: 798px;
+}
+
+.wrapper__delete__head {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    width: 735px;
+    height: 201px;
+
+    background-color: rgba(249, 249, 249, 0.7);
+    border-radius: 16px 16px 0 0;
+
+    border-bottom: 0.5px solid rgba(151, 151, 151, 0.7);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.text__delete__friends {
+
+    margin: 47px 165px 0 31px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 24px;
+    /* identical to box height, or 38% */
+
+    letter-spacing: 0.02em;
+
+    color: #1C1C1E;
+}
+
+.text__delete__info {
+
+    margin: 60px 0 37px 36px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    /* identical to box height, or 38% */
+
+    letter-spacing: 0.02em;
+
+    color: #1C1C1E;
+}
+
+.wrapper__delete__help {
+
+    padding-top: 30px;
+    width: 736px;
+    height: 100%;
+
+    background-color: transparent;
+
+    overflow: auto;
+
+    text-align: center;
+    font-family: 'Pretendard';
+    font-size: 30px;
+}
