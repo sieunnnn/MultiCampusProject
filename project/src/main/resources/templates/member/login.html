@@ -12,7 +12,7 @@
 
 <!-- 대체하고 싶은 요소에 layout:fragment 속성을 부여한다. -->
 <div layout:fragment="content">
-    <div class="wrapper__login">
+    <div class="container__login">
         <div class="txt__login">Login</div>
         <div class="txt__login__info">
             <p>
@@ -23,24 +23,20 @@
 
         <!-- 아이디 / 비밀번호 입력 부분 -->
         <form action="/member/login" method="post" th:object="${loginRequest}">
-        <div class="wrapper__login__input">
-            <div class="input__id">
-                <input type="text" id="userId" name="userId" placeholder="아이디 입력"/>
-                <span th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></span>
+            <div class="wrapper__login__input">
+                <div class="input__id">
+                    <input type="text" id="userId" name="userId" placeholder="아이디 입력"/>
+                    <span class="error__id" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></span>
+                </div>
+                <div class="input__pw">
+                    <input type="password" id="password" name="password" placeholder="비밀번호 입력"/>
+                    <span class="error__pw" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                </div>
             </div>
-
-            <div class="input__pw">
-                <input type="password" id="password" name="password" placeholder="비밀번호 입력"/>
-                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-            </div>
-        </div>
-
-        <!-- 하단 버튼 -->
-        <div class="wrapper__login__btn">
+            <!-- 하단 버튼 -->
             <button class="btn__login" >로그인</button>
-        </div>
-		</form>
-		<button id="closeBtn">홈으로</button>
-
+        </form>
+        <button class="closeBtn">홈으로</button>
     </div>
 </div>
+
