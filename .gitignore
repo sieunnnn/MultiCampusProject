@@ -219,3 +219,6 @@ buildNumber.properties
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/eclipse,intellij,visualstudiocode,maven
+project/src/main/java/multi/second/project/infra/code/Code.java
+project/pom.xml
+project/src/main/resources/application.properties
