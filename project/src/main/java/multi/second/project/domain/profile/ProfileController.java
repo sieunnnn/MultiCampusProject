@@ -1,4 +1,4 @@
-package multi.second.project.domain.profile.domain;
+package multi.second.project.domain.profile;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
