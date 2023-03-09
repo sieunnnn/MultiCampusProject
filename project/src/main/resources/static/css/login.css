@@ -14,6 +14,7 @@ input {
     flex-direction: column;
     align-items: flex-start;
     margin: 7px;
+    padding-left: 10px;
 
     width: 245px;
     height: 28px;
@@ -21,6 +22,11 @@ input {
     background: rgba(255, 255, 255, 0.3);
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 6px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
 }
 
 input:focus {
@@ -89,7 +95,7 @@ button:focus  {
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 500;
-    font-size: 15px;
+    font-size: 17px;
     text-align: center;
     letter-spacing: 0.02em;
     line-height: 24px;
@@ -113,7 +119,7 @@ button:focus  {
     justify-content: space-between;
     align-items: center;
 
-    width: 245px;
+    width: auto;
 }
 
 .btn__login {
@@ -124,7 +130,7 @@ button:focus  {
     align-items: center;
     margin-right: 7px;
 
-    width: 116px;
+    width: 122px;
     height: 30px;
 
     background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
@@ -140,7 +146,7 @@ button:focus  {
     align-items: center;
     margin-left: 7px;
 
-    width: 115px;
+    width: 122px;
     height: 30px;
 
     background: #868686;
