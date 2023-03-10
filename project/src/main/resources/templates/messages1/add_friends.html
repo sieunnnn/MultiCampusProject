@@ -1,0 +1,38 @@
+
+<!-- 친구 추가 화면 -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="messages1/friends">
+
+<head>
+    <title>friends</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../static/css/message/add_friends.css" th:href="@{/css/message/add_friends.css}"/>
+</head>
+
+<body>
+    <div layout:fragment="container__friends__contents">
+        <div class="container__add__friends">
+            <div class="wrapper__add__head">
+                <div class="text__search__friends">Search</div>
+
+                <!-- 친구 검색 영역 -->
+                <form class="wrapper__search__add">
+                    <div class="search__add">
+                        <img src="/img/img_magnify.png" style="width: 15px; height: 15px; margin: 10px">
+                        <input id="search" type="text">
+                    </div>
+                    <input type="reset" class="btn__cancel" value="cancel">
+                    <input type="button" class="btn__search__fiends" value="검색">
+                </form>
+            </div>
+
+            <!-- 친구 목록 영역 -->
+            <div class="wrapper__search__list">
+            </div>
+
+        </div>
+    </div>
+</body>

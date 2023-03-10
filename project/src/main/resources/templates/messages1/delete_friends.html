@@ -1,0 +1,40 @@
+
+<!-- 친구 삭제 화면 -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="messages1/friends">
+
+<head>
+    <title>friends</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../static/css/message/delete_friends.css" th:href="@{/css/message/delete_friends.css}"/>
+</head>
+
+<body>
+<div layout:fragment="container__friends__contents">
+    <div class="container__delete__friends">
+        <div class="wrapper__delete__head">
+            <div class="text__delete__friends">How to?</div>
+            <div class="text__delete__info">가벼운 슬라이딩으로 친구목록 조정하기</div>
+        </div>
+
+        <!-- 친구 목록 영역 -->
+        <div class="wrapper__delete__help">
+            <div style="font-weight: 400">
+                <p>
+                    친구 목록을 수정하기 위해 여러 버튼을 누르셨나요?<br>
+                    더이상 그럴 필요가 없습니다.
+                </p>
+            </div>
+
+            <!-- 드래그앤 드롭 시연 gif 들어갈 자리 -->
+<!--            <div></div>-->
+
+            <div style="font-weight: 600">위와 같이 가볍게 밀어서 삭제하세요</div>
+        </div>
+
+    </div>
+</div>
+</body>
