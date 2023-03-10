@@ -66,4 +66,9 @@ public class TestController {
     public String galleryAdd() {
         return "gallery1/add";
     }
+
+    @GetMapping(value = "/home")
+    public String home() {
+        return "home";
+    }
 }
