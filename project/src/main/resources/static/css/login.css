@@ -1,0 +1,230 @@
+
+/* 웹폰트 */
+@font-face {
+
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+input {
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 7px;
+    padding-left: 10px;
+
+    width: 245px;
+    height: 28px;
+
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+input:focus {
+
+    outline: solid 3.5px rgba(58, 108, 217, 0.5);
+}
+
+button {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    /* identical to box height, or 171% */
+
+    letter-spacing: 0.02em;
+
+    color: #FFFFFF;
+
+    cursor: grab;
+}
+
+button:focus  {
+
+    outline: none;
+    border: none;
+}
+
+
+.container__login {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 351px;
+    height: 510px;
+
+    /* Blur Light/Thin */
+
+    background: rgba(255, 255, 255, 0.56);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(40px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 16px;
+}
+
+
+.txt__login {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 60px;
+    letter-spacing: 0.02em;
+
+    color: #1C1C1E;
+
+}
+
+.txt__login__info {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    text-align: center;
+    letter-spacing: 0.02em;
+    line-height: 24px;
+
+    color: #1C1C1E;
+}
+
+.wrapper__login {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    width: 245px;
+    height: 122px;
+}
+
+.wrapper__login__input {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0 30px 0;
+}
+
+.error__id, .error__pw {
+
+    font-family: 'Pretendard';
+    color: #FF3B30;
+    margin-left: 10px;
+}
+
+
+.wrapper__login__btn {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    width: auto;
+}
+
+.btn__login {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: 7px;
+
+    position: absolute;
+    width: 122px;
+    height: 33px;
+    left: 47px;
+    top: 400px;
+
+    background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+    box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25);
+    border-radius: 6px;
+}
+
+.closeBtn {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 7px;
+
+    position: absolute;
+    width: 122px;
+    height: 33px;
+    right: 47px;
+    top: 400px;
+
+    background: #868686;
+    border: 0.5px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.1), inset 0 0.5px 0.5px rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+}
+
+/* toggle ============================================================*/
+
+.toggle__switch__login {
+
+    width: 70px;
+    height: 35px;
+
+    margin-bottom: 75px;
+    display: block;
+    position: relative;
+
+    border-radius: 30px;
+    background: rgba(120, 120, 128, 32%);
+    /*box-shadow: 0 0 8px 3px rgba(0 0 0 / 15%);*/
+
+    cursor: pointer;
+}
+
+
+.toggle__switch__login .toggle__button {
+
+    width: 29px;
+    height: 28px;
+    position: absolute;
+    top: 50%;
+    left: 4px;
+    transform: translateY(-50%);
+
+    border-radius: 50%;
+
+    background: #fff;
+}
+
+.toggle__switch__login.active {
+
+    background: #34C759;
+}
+
+.toggle__switch__login.active .toggle__button {
+
+    left: calc(100% - 33px);
+    background: #fff !important;
+}
+
+.toggle__switch__login, .toggle__button {
+
+    transition: all 0.2s ease-in;
+}
