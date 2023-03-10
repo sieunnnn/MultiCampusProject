@@ -59,12 +59,17 @@ public class GalleryController {
 	@GetMapping("list")
 	public String galleryList(//등록글들을 타이틀이 아닌 그림으로 보여줘야 하는데 어떻게 할까?
 			@PageableDefault(size=10, sort="postIdx", direction = Direction.DESC, page = 0)
+			@SessionAttribute(name="auth", required=false) Principal principal,//현재 아이디정보를 얻기위해 추가
 			Pageable pageable,
 			Model model
 			
 			) {
-		//갤러리 리스트를 찾을 때 UserId기준으로 찾아야하는데 어떻게 할까?
-		Map<String, Object> commandMap = galleryService.findGalleryList(pageable); 
+		//갤러리 리스트를 찾을 때 UserId기준으로 찾아야하는데 어떻게 할까? 완료
+		//Map<String, Object> commandMap = galleryService.findGalleryList(pageable);
+		//System.out.println("galleryService.findGalleryList(pageable) : "+commandMap);
+		
+		Map<String, Object> commandMap = galleryService.findGalleryListByUserId(principal.getUserId(),pageable);
+		System.out.println("galleryService.findGalleryListByUserId(principal.getUserId(),pageable) : "+commandMap);
 		model.addAllAttributes(commandMap);
 		
 		return "/gallery/gallery-list";

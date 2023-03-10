@@ -47,6 +47,7 @@ public class GalleryService {
 		Member member = memberRepository.findById(dto.getUserId()).get();
 		Gallery gallery = Gallery.createGallery(dto, member);
 		
+		
 		FilePathDto filePath = new FilePathDto();
 		filePath.setGroupName("gallery");
 		
@@ -64,15 +65,42 @@ public class GalleryService {
 
 	public Map<String, Object> findGalleryList(Pageable pageable) {
 		//findAll 을 findByUserId로 바꿀 예정
+		System.out.println("pageable :  "+pageable);
 		Page<Gallery> page = galleryRepository.findAll(pageable);
+		System.out.println("galleryRepository.findAll(pageable) :  "+page);
+		
+		Page<Gallery> page2 = galleryRepository.findByMemberUserId("group2B",pageable);
+		System.out.println("galleryRepository.findByMemberUserId(\"group2B\",pageable) :  "+page2);
 		
 		Paging paging = Paging.builder()
 				.page(page)
 				.blockCnt(5)
 				.build();
 		
+		System.out.println("page.getContent() :  " +page.getContent());
+		System.out.println("GalleryListResponse.toDtoList(page.getContent()) :  "+ GalleryListResponse.toDtoList(page.getContent()));
+		System.out.println("----------------------------");
+		System.out.println("page2.getContent() :  " +page2.getContent());
+		System.out.println("GalleryListResponse.toDtoList(page2.getContent()) :  "+ GalleryListResponse.toDtoList(page2.getContent()));
 		return Map.of("galleryList",GalleryListResponse.toDtoList(page.getContent()), "paging", paging);
 	}
+	
+	//특정 유저의 게시물 리스트만 가져오는 코드
+	public Map<String, Object> findGalleryListByUserId(String userId, Pageable pageable) {
+		
+		Page<Gallery> page = galleryRepository.findByMemberUserId(userId,pageable);
+		System.out.println("galleryRepository.findByMemberUserId(userId,pageable) :  "+page);
+		
+		Paging paging = Paging.builder()
+				.page(page)
+				.blockCnt(5)
+				.build();
+		
+		System.out.println("page.getContent() :  " +page.getContent());
+		System.out.println("GalleryListResponse.toDtoList(page.getContent()) :  "+ GalleryListResponse.toDtoList(page.getContent()));
+		return Map.of("galleryList",GalleryListResponse.toDtoList(page.getContent()), "paging", paging);
+	}
+	
 
 	public GalleryDetailResponse findGalleryByPostIdx(Long postIdx) {
 		Gallery gallery = galleryRepository.findById(postIdx)
@@ -142,8 +170,7 @@ public class GalleryService {
 		
 	}
 	
-	
-	
+
 	
 	
 	
