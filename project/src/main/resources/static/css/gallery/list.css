@@ -1,0 +1,65 @@
+/* 웹폰트 */
+@font-face {
+
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+.wrapper__button {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+
+    width: 760px;
+    height: 60px;
+}
+
+.wrapper__button {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+
+    width: 760px;
+    height: 60px;
+}
+
+
+.wrapper__photo__list {
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    width: 760px;
+    height: 550px;
+}
+
+.photo__list {
+
+    width: 701px;
+    height: 100%;
+
+    overflow: auto;
+}
+
+/* 레이아웃 확인용 코드입니다 나중에 지워주세요 */
+/*input {*/
+
+/*    width: 170px;*/
+/*    height: 170px;*/
+/*    margin-bottom: 7px;*/
+/*    background-color: blue;*/
+/*}*/

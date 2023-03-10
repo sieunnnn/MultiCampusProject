@@ -39,11 +39,31 @@ public class TestController {
 
     @GetMapping(value = "/add/friends")
     public String addFriends() {
-        return "messages1/add_friends";
+        return "messages1/add";
     }
 
     @GetMapping(value = "/delete/friends")
     public String deleteFriends() {
-        return "messages1/delete_friends";
+        return "messages1/delete";
+    }
+
+    @GetMapping(value = "/gallery")
+    public String gallery() {
+        return "gallery1/list";
+    }
+
+    @GetMapping(value = "/gallery/detail")
+    public String galleryDetail() {
+        return "gallery1/detail";
+    }
+
+    @GetMapping(value = "/gallery/modify")
+    public String galleryModify() {
+        return "gallery1/modify";
+    }
+
+    @GetMapping(value = "/gallery/add")
+    public String galleryAdd() {
+        return "gallery1/add";
     }
 }
