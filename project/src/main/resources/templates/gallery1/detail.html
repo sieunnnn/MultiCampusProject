@@ -1,0 +1,47 @@
+
+<!-- 사진 상세보기 화면 -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="gallery1/common">
+
+<head>
+    <title>Detail</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../static/css/gallery/detail.css" th:href="@{/css/gallery/detail.css}"/>
+</head>
+
+<body>
+    <!-- 대체하고 싶은 요소에 layout:fragment 속성을 부여한다. -->
+    <div layout:fragment="gallery__content">
+        <div class="previous__page">
+            <button class="btn_prev">뒤로가기</button>
+        </div>
+
+        <div class="txt_head">제목입니다</div>
+        <div class="wrapper">
+            <div class="txt_day">날짜입니다</div>
+            <hr>
+            <div class="wrapper__detail__btn">
+                <button class="btn__blue" onclick="window.open('/gallery/modify', 'window_name', 'width=430, height=500, location=no, status=no, scrollbars=yes');">편집</button>
+                <button class="btn__white">삭제</button>
+            </div>
+        </div>
+        <div class="container__post__contents">
+            <div class="wrapper__photo">
+                <div class="photo"></div>
+            </div>
+            <hr>
+            <div class="wrapper__post">
+                <div class="post">
+                    <p>감귤국 여행 1일차</p>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- 좋아요 기능, 댓글기능 추가 예정 -->
+
+    </div>
+</body>
