@@ -198,7 +198,7 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
     width: 785px;
@@ -239,45 +239,4 @@
 
     border-radius: 50%;
     background-color: lightgray;
-}
-
-.wrapper__button {
-
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-
-    width: 760px;
-    height: 60px;
-}
-
-
-.wrapper__photo__list {
-
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-
-    width: 701px;
-    height: 550px;
-}
-
-.photo__list {
-
-    width: 701px;
-    height: 100%;
-
-    overflow: auto;
-}
-
-/* 레이아웃 확인용 코드입니다 나중에 지워주세요 -->
-input {
-
-    width: 170px;
-    height: 170px;
-    margin-bottom: 7px;
-    background-color: blue;
 }
