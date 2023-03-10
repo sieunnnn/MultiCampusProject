@@ -33,7 +33,7 @@ public class ProfileService {
         int month = cal.get(cal.MONTH) + 1;
         int date = cal.get(cal.DATE);
 
-        base_path = "/Users/hong-uiju/Documents/MultiCampusProject/project/src/main/resources/static/image/";
+        base_path = "/Users/hong-uiju/Documents/MultiCampusProject/project/src/main/resources/static/img/image/";
 
         base_path += Integer.toString(year);
         base_path += Integer.toString(month);
