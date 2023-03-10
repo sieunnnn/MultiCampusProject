@@ -1,5 +1,4 @@
 
-<<<<<<< Updated upstream
 <!-- 메인 레이 아웃 -->
 
 <!DOCTYPE html>
@@ -14,93 +13,28 @@
 
 <body>
 <div class="container__common">
-    <nav class="wrapper__nav">
-        <div class="wrapper__button__profile">
-            <button><img class="button__profile" th:src="@{/img/btn_profile.png}"></button>
+    <nav>
+        <div class="wrapper__btn__profile">
+            <button th:onclick="|location.href='@{/profile}'|"><img src="/img/btn_profile.png"></button>
         </div>
-        <div class="wrapper__button">
-            <button><img th:src="@{/img/btn_dashboard.png}"></button>
-            <button><img th:src="@{/img/btn_message.png}"></button>
-            <button><img th:src="@{/img/btn_planner.png}"></button>
-            <button><img th:src="@{/img/btn_gallery.png}"></button>
-            <button><img th:src="@{/img/btn_board.png}"></button>
+        <div class="wrapper__btn">
+            <button th:onclick="|location.href='@{/}'|"><img src="/img/btn_dashboard.png"></button>
+            <button th:onclick="|location.href='@{/friends}'|"><img src="/img/btn_message.png"></button>
+            <button><img src="/img/btn_planner.png"></button>
+            <button><img src="/img/btn_gallery.png"></button>
+            <button><img src="/img/btn_board.png"></button>
         </div>
-        <label class="toggleSwitch">
-            <span class="toggleButton"></span>
-        </label>
+
+        <button class="toggle__switch__login">
+            <span class="toggle__button"></span>
+        </button>
     </nav>
-    <div class="container__contents" layout:fragment="content"></div>
-=======
-<!-- 프로필 화면 -->
 
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="main_layout">
-
-<head>
-    <title>Profile</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="../../static/css/profile_layout.css" th:href="@{/css/profile_layout.css}"/>
-</head>
-
-<body>
-<!-- 정말 위치와 CSS 만 입혀 놨으니, 만들어 놓으신 파일 들을 보면서 수정해주세요 -->
-<div class="container__contents" layout:fragment="content">
-    <div class="container">
-        <div class="popup-wrap" id="popup">
-            <div class="popup">
-                <div class="popup-head">
-                    <span class="head-title">프로필 변경</span>
-                </div>
-                <div class="popup-body">
-                    <div class="body-content">
-                        <div class="body-titlebox">
-                            <h1>사진 업로드</h1>
-                        </div>
-                        <div class="body-contentbox">
-                            <p> 모달 내용칸 </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="popup-foot">
-                    <span class="pop-btn confirm" id="confirm">확인</span>
-                    <span class="pop-btn close" id="close">창 닫기</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="wrapper__profile">
-        <!--        <div class="wrapper__button__profile" style="width: 200px; height: 200px;">-->
-        <!--            <button><img class="button__profile" th:src="@{/img/btn_profile.png}"></button>-->
-        <!--        </div>-->
-
-        <div class="container__profile">
-            <div class="txt__welcome">님 안녕하세요</div>
-
-            <!-- 클릭 하면 유저 사진 바꿀수 있는 팝업창 생성 -->
-            <button class="wrapper__user__pic" onclick="modalOpen();"></button>
-            <!--            <div>-->
-            <!--                <button class="button__modify">수정</button>-->
-            <!--            </div>-->
-            <!-- 랭크 부분은 나중에 다같이 상의 -->
-            <div class="wrapper__lank">
-                <div class="user__lank">새싹 여행자</div>
-            </div>
-
-            <!-- 클래스 이름을 알맞게 수정 해서 쓰면 됩니다 . id 를 쓰셔도 좋아요 -->
-            <div class="wrapper__profile__btn">
-                <button class="btn__travel1">님의 여행 일정</button>
-                <button class="btn__travel2">님의 이전 여행</button>
-            </div>
-        </div>
-    </div>
->>>>>>> Stashed changes
+    <div layout:fragment="content" class="container__contents"></div>
 </div>
 
 </body>
 
-<<<<<<< Updated upstream
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="/js/jQuery-2.1.4.min.js"></script>
@@ -116,26 +50,3 @@
     });
 </script>
 </html>
-=======
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="/js/jQuery-2.1.4.min.js"></script>
-<script>
-    // $(function(){
-    //     $("#confirm").click(function(){
-    //         modalClose(); //모달 닫기 함수 호출
-    //
-    //         //컨펌 이벤트 처리
-    //     });
-    //     $("#close").click(function(){
-    //         modalClose(); //모달 닫기 함수 호출
-    //     });
-    //     function modalClose(){
-    //         $("#popup").fadeOut(); //페이드아웃 효과
-    //     }
-    // });
-    function modalOpen(){
-        $("#popup").css('display','flex').hide().fadeIn();
-        //팝업을 flex속성으로 바꿔준 후 hide()로 숨기고 다시 fadeIn()으로 효과
-    }
-</script>
->>>>>>> Stashed changes
