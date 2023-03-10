@@ -1,0 +1,269 @@
+
+
+/* 웹폰트 */
+@font-face {
+
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+html,body {
+
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+
+    overflow:hidden;
+}
+
+#home {
+
+    position:relative;
+    top:0;
+    z-index:9;
+    width:100%;
+    height:100%;}
+
+#home span{
+
+    display:block;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    color:#fff;font-size:4em;font-weight:bold;
+}
+
+.num2 span{
+    color:#000;
+}
+
+ul, li{
+    margin:0;
+    padding:0;
+    list-style:none
+}
+
+.quick {
+    position:fixed;
+    right:20px;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:100000}
+
+.quick li {
+    width:10px;
+    height:10px;
+    margin-bottom:10px;
+    border-radius:15px;
+    border:2px solid #fff;
+    cursor:pointer;
+}
+
+.quick .on {
+    background:#fff;
+}
+
+.page{
+
+    width:100%;
+    height:100%;
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    position:relative;
+}
+
+.num1 {
+    background:#1A71CC;
+}
+
+.num2 {
+
+    background: linear-gradient(180deg, #1A71CC 20.29%, rgba(26, 113, 204, 0.81) 60.15%, rgba(26, 113, 204, 0.56) 79.66%, rgba(26, 113, 204, 0.29) 90.45%, rgba(26, 113, 204, 0) 100%);
+
+}
+
+.num3 {
+    background:white;
+}
+
+.num4{
+    background:white;
+}
+
+.num5{
+    background:white;
+}
+
+.num6{
+
+    background: linear-gradient(180deg, rgba(26, 113, 204, 0) 0%, rgba(26, 113, 204, 0.48) 20.62%, rgba(26, 113, 204, 0.81) 44.06%, #1A71CC 76.87%, #1A71CC 100%);
+}
+
+
+
+/* ================================================================== */
+
+/* 회원 가입 부분 */
+
+.txt__signup {
+
+    position: absolute;
+    width: 675px;
+    height: 84px;
+    left: 34%;
+    top: 20%;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 70px;
+    line-height: 84px;
+    /* identical to box height */
+
+
+    color: #1E1E1C;
+
+    mix-blend-mode: normal;
+}
+
+.wrapper__signup {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+
+    position: absolute;
+    width: 428px;
+    height: 506px;
+    left: 40%;
+    top: 32%;
+
+    background: rgba(255, 255, 255, 0.7);
+    border: 0.5px solid rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(30px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 10px;
+
+    filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.15)) drop-shadow(0px 25px 30px rgba(0, 0, 0, 0.35));
+}
+
+.wrapper__input {
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: flex-start;
+
+    width: auto;
+}
+
+.wrapper__email {
+
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+}
+
+input {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+
+    margin: 17px 0 17px 50px;
+    padding-left: 10px;
+
+    background-color: transparent;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+}
+
+input:focus {
+
+    outline: solid 3.5px rgba(58, 108, 217, 0.5);
+}
+
+#email {
+
+    width: 220px;
+    height: 28px;
+}
+
+#name, #nickName, #pw, #pwCheck {
+
+    width: 311px;
+    height: 28px;
+}
+
+button {
+
+    width: 83px;
+    height: 32px;
+
+    background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+    box-shadow: 0 0.5px 1.5px rgba(54, 122, 246, 0.25);
+    border-radius: 6px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    color: white;
+
+    border: none;
+    outline: none;
+    margin: 5px;
+
+    cursor: grab;
+}
+
+button:active {
+
+    border: none;
+    outline: none;
+}
+
+#btnCheck {
+
+    margin: 16px 50px 0 3px;
+}
+
+#signup {
+
+    background: #FFFFFF;
+    border: 0.5px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+
+    color: #1E1E1C;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.login {
+
+    display: flex;
+    flex-direction: row;
+
+    color: #1E1E1C;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+
+}
+
+/* ================================================================= */
