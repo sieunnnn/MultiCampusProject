@@ -28,6 +28,7 @@ public class Member {
 	private String password;
 	private String email;
 	private String grade;
+	private String profileImg;
 	
 	@ColumnDefault("false")
 	private Boolean isLeave;
