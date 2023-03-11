@@ -1,0 +1,40 @@
+
+<!-- 프로필 화면 -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="main_layout">
+
+<head>
+    <title>Profile</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../static/css/profile/profile.css" th:href="@{/css/profile/profile.css}"/>
+</head>
+
+<body>
+    <!-- 정말 위치와 CSS 만 입혀 놨으니, 만들어 놓으신 파일 들을 보면서 수정해주세요 -->
+    <div layout:fragment="content">
+        <div class="container__profile">
+            <div class="txt__welcome">님 안녕하세요</div>
+
+            <!-- 클릭 하면 유저 사진 바꿀수 있는 팝업창 생성 -->
+            <button class="wrapper__user__pic" onclick="window.open('/login', 'window_name', 'width=430, height=500, location=no, status=no, scrollbars=yes');"></button>
+
+            <!-- 랭크 부분은 나중에 다같이 상의 -->
+            <div class="wrapper__lank">
+                <div class="user__lank">새싹 여행자</div>
+            </div>
+
+            <!-- 클래스 이름을 알맞게 수정 해서 쓰면 됩니다 . id 를 쓰셔도 좋아요 -->
+            <div class="wrapper__profile__btn">
+                <button class="btn__travel1">님의 여행 일정</button>
+                <button class="btn__travel2">님의 이전 여행</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="/js/jQuery-2.1.4.min.js"></script>
+<script></script>

@@ -1,0 +1,242 @@
+
+/* 웹폰트 */
+@font-face {
+
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+.btn__blue {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 14px;
+    gap: 10px;
+
+    width: 84px;
+    height: 25px;
+    margin: 7px;
+
+    background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+    box-shadow: 0 0.5px 1.5px rgba(54, 122, 246, 0.25);
+    border-radius: 6px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    /* identical to box height */
+
+    color: #FFFFFF;
+}
+
+.btn__white {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 14px;
+    gap: 10px;
+
+    width: 84px;
+    height: 25px;
+    margin: 7px;
+
+    background: #FFFFFF;
+    border: 0.5px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    /* identical to box height */
+
+    color: #1C1C1E;
+}
+
+.container__gallery__contents {
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    width: 338px;
+    height: 798px;
+    margin: 8px 8px 0 8px;
+}
+
+.wrapper__notification {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    width: 338px;
+    height: 353px;
+
+    /* Blur Light/Extra Light */
+
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(24px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 16px;
+}
+
+.wrapper__notification__head {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    width: 338px;
+    height: 90px;
+
+    background-color:rgba(249, 249, 249, 0.8);
+    border-radius: 16px 16px 0 0;
+
+    border-bottom:  0.5px solid rgba(151, 151, 151, 0.7);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.txt__notification {
+
+    width: 220px;
+    height: 48px;
+    margin: 21px 0 21px 22px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 48px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: flex-end;
+
+    color: #1C1C1E;
+
+}
+
+.wrapper__list {
+
+    width: 338px;
+    height: 100%;
+
+    background-color: transparent;
+
+    overflow: auto;
+}
+
+.txt__Bookmark, .txt__advertise {
+
+    width: auto;
+    height: 29px;
+    margin: 23px 0 5px 5px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: flex-end;
+
+    color: #1C1C1E;
+
+}
+
+.wrapper__bookmark, #Ad1, #Ad2, #Ad3 {
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    width: 338px;
+    height: 72px;
+
+    background: #FFFFFF;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(24px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 13px;
+}
+
+.wrapper__advertise {
+
+    width: 338px;
+    height: 254px;
+}
+
+#Ad1, #Ad2 {
+
+    margin-bottom: 19px;
+}
+
+
+.wrapper__gallery {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 785px;
+    height: 798px;
+    margin: 7px;
+
+    /* Blur Light/Extra Light */
+
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(24px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 16px;
+}
+
+.wrapper__gallery__head {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    width: 785px;
+    height: 136px;
+
+    background-color:rgba(249, 249, 249, 0.8);
+    border-radius: 16px 16px 0 0;
+
+    border-bottom:  0.5px solid rgba(151, 151, 151, 0.7);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.user__profile__pic {
+
+    width: 90px;
+    height: 90px;
+    margin: 24px 0 22px 28px;
+
+    border-radius: 50%;
+    background-color: lightgray;
+}

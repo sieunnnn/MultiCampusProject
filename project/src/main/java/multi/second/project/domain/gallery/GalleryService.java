@@ -62,7 +62,7 @@ public class GalleryService {
 		
 		fileUtil.uploadFile(fileUploadDtos);
 	}
-
+	//이건 이제 안쓸듯
 	public Map<String, Object> findGalleryList(Pageable pageable) {
 		//findAll 을 findByUserId로 바꿀 예정
 		System.out.println("pageable :  "+pageable);

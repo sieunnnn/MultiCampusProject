@@ -1,0 +1,36 @@
+
+<!-- 메세지 부분 -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="messages1/friends">
+
+<head>
+    <title>messages</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../static/css/message/messages.css" th:href="@{/css/message/messages.css}"/>
+</head>
+
+<body>
+    <div layout:fragment="container__friends__contents">
+        <div class="container__message__contents">
+            <div class="wrapper__message__head">
+
+                <!-- 메세지 보낸 유저의 사진 -->
+                <div class="img__friends"></div>
+                <div class="text__friends__name">이준형</div>
+            </div>
+
+            <!-- 메세지 영역 -->
+            <div class="wrapper__messages">
+            </div>
+
+            <!-- 메세지 전송 영역 -->
+            <div class="wrapper__send__message">
+                <textarea id="message"></textarea>
+                <img id="magnify" src="/img/btn_send_message.png" style="width: 28px; height: 28px; margin: 8px">
+            </div>
+        </div>
+    </div>
+</body>
