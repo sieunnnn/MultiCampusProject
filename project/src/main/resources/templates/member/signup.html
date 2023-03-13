@@ -1,96 +1,246 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layout}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
-	<style type="text/css">
-		.valid_info{
-			display:block; 
-			color:red;
-			font-size: 0.5vw;
-		}
-	</style>
+    <title>Home</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../static/css/home.css" th:href="@{/css/home.css}"/>
 </head>
 
 <body>
+<div id="home">
+    <div class="quick"><ul></ul></div>
+    <div class="page num1" pageNum="1"><img src="/img/home_1.png"></div>
+    <div class="page num2" pageNum="2" ><img src="/img/home_2.png"></div>
+    <div class="page num3" pageNum="3">
+    </div>
+    <div class="page num4" pageNum="4"></div>
+    <div class="page num5" pageNum="5"></div>
 
-<div class="container wrap_content" layout:fragment="content">
-	<h1>회원 가입 양식</h1>
-	
-   <form th:action="@{/member/signup}" method="post" id="frmJoin"  th:object="${signUpRequest}">
-      <table>
-        <tr>
-           <td>ID : </td>
-           <td>
-           	  <input type="text" name="userId" id="inpId" size="10" />
-              <button type="button" id="btnIdCheck">check</button>
-              <span class="valid_info" id="idCheck"></span>
-           </td>
-        </tr>
-        <tr>
-           <td>PASSWORD : </td>
-           <td>
-           	  <input type="password" name="password" id="pw" />
-           	  <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" id="pw_confirm" class="valid_info"></span>
-           </td>
-        </tr>
-        <tr>
-           <td>email : </td>
-           <td>
-           	  <input type="email" name="email" />
-           	  <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="valid_info"></span>
-           </td>
-        </tr>
-        <tr>
-           <td>
-              <input type="submit" value="가입" />
-              <input type="reset" value="취소" />
-           </td>
-       </tr>
-   	</table>
-   </form>
+    <!-- 회원가입 / 로그인 -->
+    <div class="page num6" pageNum="6">
+        <div>
+            <img src="/img/home_6.png">
+            <div class="txt__signup">지금, 바로 시작해보세요</div>
+            <div class="wrapper__signup">
+                <div class="txt__head">Sign Up</div>
+                <form th:action="@{/member/signup}" method="post" id="frmJoin"  th:object="${signUpRequest}">
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="text" name="userId" id="inpId" size="10" style="width: 154px" placeholder="아이디"/>
+                                <button id="btnIdCheck">확인</button>
+                                <span class="valid_info" id="idCheck"></span>
+                            </td>
+                        </tr>
 
+                        <tr>
+                            <td>
+                                <input type="password" name="password" id="pw" style="width: 243px" placeholder="비밀번호"/>
+                                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" id="pw_confirm" class="valid_info"></span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <input type="email" name="email" style="width: 243px" placeholder="이메일"/>
+                                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="valid_info"></span>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <input class="btn__blue" style="margin: 10px 0 0 90px" type="submit" value="가입" />
+                                <input class="btn__blue" type="reset" value="취소" />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div class="wrapper__login">
+                                        <label>이미 회원이신가요?</label>
+                                        <input type="button" class="btn__login" th:onclick="|location.href='@{/member/login}'|" value="로그인">
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+                </form>
+
+                <!--                <div class="wrapper__input">-->
+                <!--                    <div class="wrapper__email">-->
+                <!--                        <input type="email" id="email" placeholder="이메일을 입력해주세요">-->
+                <!--                        <button id="btnCheck">확인</button>-->
+                <!--                    </div>-->
+                <!--                    <div><input type="text" id="name" placeholder="이름을 입력해주세요"></div>-->
+                <!--                    <div><input type="text" id="nickName" placeholder="닉네임을 입력해주세요"></div>-->
+                <!--                    <div><input type="password" id="pw" placeholder="비밀번호를 입력해주세요"></div>-->
+                <!--                    <div><input type="password" id="pwCheck" placeholder="비밀번호를 재입력해주세요"></div>-->
+                <!--                </div>-->
+                <!--                <div class="wrapper__button" style="margin: 17px 0 10px 288px;">-->
+                <!--                    <button id="signup">회원가입</button>-->
+                <!--                </div>-->
+                <!--                <div class="login">-->
+                <!--                    <div style="margin: 5px 3px 0 142px">이미 회원 이신가요?</div>-->
+                <!--                    <button style="margin: 0 0 20px 7px;" th:onclick="|location.href='@{/login}'|">로그인</button>-->
+                <!--                </div>-->
+            </div>
+        </div>
+    </div>
 </div>
-
- <script type="text/javascript" layout:fragment="script">
- 
-	 let idCheckFlg = false;
-	 
-	 btnIdCheck.addEventListener("click", ev => {
-	
-	  let userId = inpId.value;
-	  
-	  if(userId){
-	   
-	   fetch("/member/checkId?userId=" + userId)
-	   .then(response => response.json())
-	   .then(obj => {
-		   if(obj.exist){
-			   idCheck.innerHTML = '이미 존재하는 아이디 입니다.';
-			   idCheckFlg = false;
-			   return;
-		   }
-		   
-		   idCheck.innerHTML = '사용 가능한 아이디 입니다.';
-		   idCheckFlg = true;
-		   
-	   });
-	  }
-	 })
-	 
-	 frmJoin.addEventListener('submit', ev => {
-	  if(!idCheckFlg){
-	   ev.preventDefault();
-	   alert("아이디 중복검사에 실패했습니다.");
-	   inpId.focus();   
-	  }
-	  
-	 })
- 
- </script>
-
-
-
-
 </body>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<script>
+
+
+    // 6번 페이지 ========================================================//
+
+    $(document).ready(function(){
+        pageSet();
+        quickClick();
+    });
+
+    function pageSet(){
+
+        // page 개수 확인
+        var pageIndex = $("#home > .page").size();
+
+        for(var i=1;i<=pageIndex;i++){
+            $("#home > .quick > ul").append("<li></li>");
+        }
+
+        // 화면이 load 되었을 때 첫번째 quick btn 에 불이 들어온다.
+        $("#home .quick ul :first-child").addClass("on");
+
+        //마우스 휠 event
+        $(window).bind("mousewheel", function(event){
+
+            // 현재 위치 하는 페이지
+            var page = $(".quick ul li.on");
+
+            if($("body").find("#home:animated").length >= 1) return false;
+
+            //마우스 휠을 위로 올렸을 때
+            if(event.originalEvent.wheelDelta >= 0) {
+                var before=page.index();
+
+                // 퀵 버튼 옮기기
+                if(page.index() >= 0) page.prev().addClass("on").siblings(".on").removeClass("on");
+
+                // 첫번째 페이지
+                var pageLength=0;
+                for(var i=1; i<(before); i++)
+                {
+                    pageLength += $(".full"+i).height();
+                }
+
+                // 첫번째 페이지가 아닐 때
+                if(page.index() > 0){
+                    page=page.index()-1;
+                    $("#home").animate({"top": -pageLength + "px"},1000, "swing");
+                }
+
+            }else{
+                // 마우스 휠을 아래로 할때
+                // 다음 페이지 번호
+                var nextPage=parseInt(page.index()+1);
+                // 마지막 페이지 번호
+                var lastPageNum=parseInt($(".quick ul li").size());
+
+                // 현재 페이지 번호 (마지막 페이지 - 1) => 퀵버튼 옮기기
+                if(page.index() <= $(".quick ul li").size()-1){
+                    page.next().addClass("on").siblings(".on").removeClass("on");
+                }
+
+                // 마지막 페이지 아닐 때 에만 animate
+                if(nextPage < lastPageNum){
+
+                    var pageLength=0;
+
+                    for(var i = 1; i<(nextPage+1); i++){
+
+                        //총 페이지 길이 구하기
+                        pageLength += $(".num"+i).height();
+                    }
+
+                    $("#home").animate({"top": -pageLength + "px"},1000, "swing");
+                }
+            }
+        });
+
+        $(window).resize(function(){
+            var resizeIndex = $(".quick ul li.on").index()+1;
+
+            var pageLength=0;
+            for(var i = 1; i<resizeIndex; i++){
+
+                //총 페이지 길이 구하기
+                //ex) 현재 1번페이지에서 2번페이지로 내려갈때는 1번페이지 길이 + 2번페이지 길이가 더해짐
+                pageLength += $(".num"+i).height();
+            }
+
+            $("#home").animate({"top": -pageLength + "px"},0);
+        });
+    }
+
+    // 사이드 퀵버튼 클릭 이동
+    function quickClick(){
+        $(".quick li").click(function(){
+            var gnbIndex = $(this).index()+1;
+            var length=0;
+            for(var i=1; i<(gnbIndex); i++)
+            {
+                length+=$(".num"+i).height();
+            }
+            if($("body").find("#home:animated").length >= 1) return false;
+            $(this).addClass("on").siblings("li").removeClass("on");
+
+            $("#home").animate({"top": -length + "px"},800, "swing");
+            return false;
+        });
+    }
+
+</script>
+
+<!-- 회원가입 -->
+<script type="text/javascript" layout:fragment="script">
+
+    let idCheckFlg = false;
+
+    btnIdCheck.addEventListener("click", ev => {
+
+        let userId = inpId.value;
+
+        if(userId){
+
+            fetch("/member/checkId?userId=" + userId)
+                .then(response => response.json())
+                .then(obj => {
+                    if(obj.exist){
+                        idCheck.innerHTML = '이미 존재 하는 아이디 입니다.';
+                        idCheckFlg = false;
+                        return;
+                    }
+
+                    idCheck.innerHTML = '사용 가능한 아이디 입니다.';
+                    idCheckFlg = true;
+
+                });
+        }
+    })
+
+    frmJoin.addEventListener('submit', ev => {
+        if(!idCheckFlg){
+            ev.preventDefault();
+            alert("아이디 중복 검사에 실패 했습니다.");
+            inpId.focus();
+        }
+
+    })
+
+</script>
+
 </html>

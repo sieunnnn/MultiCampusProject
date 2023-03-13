@@ -26,20 +26,7 @@ html,body {
     top:0;
     z-index:9;
     width:100%;
-    height:100%;}
-
-#home span{
-
-    display:block;
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    color:#fff;font-size:4em;font-weight:bold;
-}
-
-.num2 span{
-    color:#000;
+    height:100%;
 }
 
 ul, li{
@@ -53,19 +40,22 @@ ul, li{
     right:20px;
     top:50%;
     transform:translateY(-50%);
-    z-index:100000}
+    z-index:100000
+}
 
 .quick li {
     width:10px;
     height:10px;
+
     margin-bottom:10px;
+
     border-radius:15px;
-    border:2px solid #fff;
+    border:2px solid #EBEBF0;
     cursor:pointer;
 }
 
 .quick .on {
-    background:#fff;
+    background:#EBEBF0;
 }
 
 .page{
@@ -103,7 +93,7 @@ ul, li{
 
 .num6{
 
-    background: linear-gradient(180deg, rgba(26, 113, 204, 0) 0%, rgba(26, 113, 204, 0.48) 20.62%, rgba(26, 113, 204, 0.81) 44.06%, #1A71CC 76.87%, #1A71CC 100%);
+    background: linear-gradient(180deg, rgba(26, 113, 204, 0) 0%, rgba(26, 113, 204, 0.27) 6.56%, rgba(26, 113, 204, 0.48) 12.94%, rgba(26, 113, 204, 0.81) 39.9%, rgba(26, 113, 204, 0.98) 66.46%, #1A71CC 100%);
 }
 
 
@@ -118,7 +108,7 @@ ul, li{
     width: 675px;
     height: 84px;
     left: 34%;
-    top: 20%;
+    top: 18%;
 
     font-family: 'Pretendard';
     font-style: normal;
@@ -142,9 +132,9 @@ ul, li{
 
     position: absolute;
     width: 428px;
-    height: 506px;
+    height: 550px;
     left: 40%;
-    top: 32%;
+    top: 30%;
 
     background: rgba(255, 255, 255, 0.7);
     border: 0.5px solid rgba(0, 0, 0, 0.12);
@@ -155,6 +145,22 @@ ul, li{
 
     filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.15)) drop-shadow(0px 25px 30px rgba(0, 0, 0, 0.35));
 }
+
+.txt__head {
+
+    margin: 0 0 30px 120px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 58px;
+    line-height: 69px;
+    display: flex;
+    align-items: flex-end;
+
+    color: #1E1E1C;
+}
+
 
 .wrapper__input {
 
@@ -175,10 +181,12 @@ ul, li{
 }
 
 input {
-    border: 1px solid rgba(0, 0, 0, 0.15);
+
+    border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 6px;
 
-    margin: 17px 0 17px 50px;
+    margin: 17px 0 17px 90px;
+    height: 28px;
     padding-left: 10px;
 
     background-color: transparent;
@@ -187,6 +195,8 @@ input {
     font-style: normal;
     font-weight: 400;
     font-size: 17px;
+
+    color: #1E1E1C;
 }
 
 input:focus {
@@ -194,21 +204,9 @@ input:focus {
     outline: solid 3.5px rgba(58, 108, 217, 0.5);
 }
 
-#email {
+.btn__blue, .btn__blue:focus {
 
-    width: 220px;
-    height: 28px;
-}
-
-#name, #nickName, #pw, #pwCheck {
-
-    width: 311px;
-    height: 28px;
-}
-
-button {
-
-    width: 83px;
+    width: 123px;
     height: 32px;
 
     background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
@@ -228,42 +226,74 @@ button {
     cursor: grab;
 }
 
-button:active {
+.btn__blue:active {
 
     border: none;
     outline: none;
 }
 
-#btnCheck {
+#btnIdCheck, #btnIdCheck:focus{
 
-    margin: 16px 50px 0 3px;
-}
-
-#signup {
+    width: 78px;
+    height: 30px;
+    margin-left: 4px;
 
     background: #FFFFFF;
     border: 0.5px solid rgba(0, 0, 0, 0.12);
     box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.1);
     border-radius: 6px;
 
-    color: #1E1E1C;
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 17px;
+
+    color: #1E1E1C;
 }
 
-.login {
+.wrapper__login {
 
     display: flex;
     flex-direction: row;
+    align-content: center;
+    justify-content: flex-start;
 
-    color: #1E1E1C;
+}
+
+label{
+
+    margin: 30px 0 0 90px;
+    width: 160px;
+
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 20px;
 
+    color: #1E1E1C;
 }
+
+.btn__login, .btn__login:focus {
+
+    width: 89px;
+    height: 30px;
+
+    margin: 26px 0 0 10px;
+
+    background: #6E6D70;
+    border: 0.5px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.1), inset 0px 0.5px 0.5px rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+
+    color: white;
+
+    outline: none;
+}
+
 
 /* ================================================================= */
