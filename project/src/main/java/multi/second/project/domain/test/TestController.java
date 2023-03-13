@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class TestController {
 
-    @GetMapping(value = "/")
+    @GetMapping(value = "/dashboard")
     public String layout() {
         return "main_layout";
     }
@@ -67,7 +67,7 @@ public class TestController {
         return "gallery1/add";
     }
 
-    @GetMapping(value = "/home")
+    @GetMapping(value = "/")
     public String home() {
         return "home";
     }
