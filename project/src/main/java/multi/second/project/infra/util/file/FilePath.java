@@ -1,60 +1,75 @@
-package multi.second.project.domain.member.domain;
+package multi.second.project.infra.util.file;
 
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import multi.second.project.domain.member.dto.request.SignUpRequest;
+import multi.second.project.infra.util.file.dto.FilePathDto;
 
 @Entity
 @DynamicInsert // insert 쿼리를 생성할 때 null인 필드는 쿼리에서 생략
 @DynamicUpdate // entity에서 변경이 발견되지 않은 값은 쿼리에서 생략
 @Builder @NoArgsConstructor @AllArgsConstructor @Getter
-public class Member {
+@EqualsAndHashCode
+public class FilePath {
 	
 	@Id
-	private String userId;
-	private String password;
-	private String email;
-	private String grade;
-	private String imagePath;
+	@GeneratedValue
+	private Long fpIdx;
 	
-	@ColumnDefault("false")
-	private Boolean isLeave;
+	private String originFileName;
+	private String renameFileName;
+	private String savePath;
 	
 	@Column(columnDefinition = "timestamp default now()")
 	private LocalDateTime regDate;
+	
+	@ColumnDefault("false")
+	private Boolean isDel;
+	
+	private String groupName;
 
-	public static Member createMember(SignUpRequest dto) {
-		return Member.builder()
-				.userId(dto.getUserId())
-				.password(dto.getPassword())
-				.email(dto.getEmail())
-				.imagePath(dto.getImagePath())
+	public static FilePath createFilePath(FilePathDto dto) {
+		return FilePath.builder()
+				.originFileName(dto.getOriginFileName())
+				.renameFileName(dto.getRenameFileName())
+				.savePath(dto.getSavePath())
+				.groupName(dto.getGroupName())
 				.build();
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
