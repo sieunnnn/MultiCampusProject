@@ -30,22 +30,22 @@
                         <tr>
                             <td>
                                 <input type="text" name="userId" id="inpId" size="10" style="width: 154px" placeholder="아이디"/>
-                                <button id="btnIdCheck">확인</button>
-                                <span class="valid_info" id="idCheck"></span>
+                                <input type="button" id="btnIdCheck" value="확인">
+                                <div class="valid_info" id="idCheck"></div>
                             </td>
                         </tr>
 
                         <tr>
                             <td>
                                 <input type="password" name="password" id="pw" style="width: 243px" placeholder="비밀번호"/>
-                                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" id="pw_confirm" class="valid_info"></span>
+                                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" id="pw_confirm" class="valid_info"></div>
                             </td>
                         </tr>
 
                         <tr>
                             <td>
                                 <input type="email" name="email" style="width: 243px" placeholder="이메일"/>
-                                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="valid_info"></span>
+                                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="valid_info"></div>
                             </td>
                         </tr>
 
@@ -67,24 +67,6 @@
 
                     </table>
                 </form>
-
-                <!--                <div class="wrapper__input">-->
-                <!--                    <div class="wrapper__email">-->
-                <!--                        <input type="email" id="email" placeholder="이메일을 입력해주세요">-->
-                <!--                        <button id="btnCheck">확인</button>-->
-                <!--                    </div>-->
-                <!--                    <div><input type="text" id="name" placeholder="이름을 입력해주세요"></div>-->
-                <!--                    <div><input type="text" id="nickName" placeholder="닉네임을 입력해주세요"></div>-->
-                <!--                    <div><input type="password" id="pw" placeholder="비밀번호를 입력해주세요"></div>-->
-                <!--                    <div><input type="password" id="pwCheck" placeholder="비밀번호를 재입력해주세요"></div>-->
-                <!--                </div>-->
-                <!--                <div class="wrapper__button" style="margin: 17px 0 10px 288px;">-->
-                <!--                    <button id="signup">회원가입</button>-->
-                <!--                </div>-->
-                <!--                <div class="login">-->
-                <!--                    <div style="margin: 5px 3px 0 142px">이미 회원 이신가요?</div>-->
-                <!--                    <button style="margin: 0 0 20px 7px;" th:onclick="|location.href='@{/login}'|">로그인</button>-->
-                <!--                </div>-->
             </div>
         </div>
     </div>
@@ -235,7 +217,7 @@
     frmJoin.addEventListener('submit', ev => {
         if(!idCheckFlg){
             ev.preventDefault();
-            alert("아이디 중복 검사에 실패 했습니다.");
+            alert("회원가입에 실패하였습니다. 양식을 다시 확인해주세요");
             inpId.focus();
         }
 
