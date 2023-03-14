@@ -102,6 +102,19 @@ ul, li{
 
 /* 회원 가입 부분 */
 
+.valid_info{
+
+    margin-left: 92px;
+    padding: 0;
+
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+
+    color: #1E1E1C;
+}
+
 .txt__signup {
 
     position: absolute;
@@ -249,6 +262,8 @@ input:focus {
     font-size: 17px;
 
     color: #1E1E1C;
+
+    outline: none;
 }
 
 .wrapper__login {
