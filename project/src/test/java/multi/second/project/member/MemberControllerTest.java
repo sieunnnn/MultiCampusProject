@@ -39,7 +39,7 @@ public class MemberControllerTest {
 		form.setUserId("group1B");
 		form.setPassword("123qwe!@#QWE");
 		form.setEmail("azimemory@gmail.com");
-		form.setImagePath(null);
+		//form.setImagePath(null);
 		
 		mockMvc.perform(get("/member/signupimpl/1234")
 				.sessionAttr("signupForm", form)

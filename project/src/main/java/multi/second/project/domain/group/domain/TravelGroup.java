@@ -31,6 +31,7 @@ public class TravelGroup {
 	@GeneratedValue
 	private Long tgIdx;
 	
+	//플래너 공유 인원
 	@OneToMany
 	private List<Member> members = new ArrayList<>();
 	

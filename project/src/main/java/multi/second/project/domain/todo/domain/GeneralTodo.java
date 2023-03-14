@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.ColumnDefault;
@@ -28,17 +29,22 @@ public class GeneralTodo {
 	@GeneratedValue
 	private Long gtIdx;
 	
-	@OneToOne
+	//투두카드 1번
+	@ManyToOne
 	@JoinColumn(name = "todoType")
 	private Todo todo;
 	
+	//일정날짜
 	@Column(columnDefinition = "timestamp default now()")
 	private LocalDateTime todoDate;
 	
+	//제목
 	private String title;
+	//내용
 	private String contents;
+	//주소
 	private String address;
-	
+	//공개여부
 	@ColumnDefault("false")
 	private Boolean isPrivate;
 }

@@ -34,10 +34,12 @@ public class Profile {
 	@GeneratedValue
 	private Long pfIdx;
 	
+	//나
 	@OneToOne
 	@JoinColumn(name = "userId")
 	private Member member;
 
+	//프로필 이미지 경로
 	private String imagePath;
 	
 	

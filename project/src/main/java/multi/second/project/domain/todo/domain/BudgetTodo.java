@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.ColumnDefault;
@@ -29,17 +30,24 @@ public class BudgetTodo {
 	@GeneratedValue
 	private Long btIdx;
 	
-	@OneToOne
+	//투두카드 5번
+	@ManyToOne
 	@JoinColumn(name = "todoType")
 	private Todo todo;
 	
+	//지출예정 일자
 	@Column(columnDefinition = "timestamp default now()")
 	private LocalDateTime todoDate;
 	
+	//제목
 	private String title;
+	//내용
 	private String contents;
+	//예산 종류(1:식비 ~)
 	private Integer budgetType;
-	
+	//예산비
+	private Integer budget;
+	//투두카드 공개여부
 	@ColumnDefault("false")
 	private Boolean isPrivate;
 }

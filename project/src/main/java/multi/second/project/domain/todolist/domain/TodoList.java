@@ -29,15 +29,19 @@ public class TodoList {
 	@GeneratedValue
 	private Long tlIdx;
 	
+	//플래너 번호
 	@ManyToOne
 	@JoinColumn(name = "tpIdx")
 	private Planner planner;
 	
+	//투두리스트 생성 시간
 	@Column(columnDefinition = "timestamp default now()")
 	private LocalDateTime regDate;
 	
+	//투두리스트 제목
 	private String title;
 	
+	//투두리스트 삭제 여부
 	@ColumnDefault("false")
 	private Boolean isDel;
 }

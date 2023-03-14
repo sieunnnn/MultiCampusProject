@@ -1,13 +1,19 @@
 package multi.second.project.domain.note.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
@@ -29,13 +35,25 @@ public class Note {
 	@GeneratedValue
 	private Long ntIdx;
 	
+	//나
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private Member member;
 	
+//	//상대방
+//	@OneToOne
+//	@JoinColumn(name = "userId")
+//	private Member member2;
+	
+	//상대방
+	@OneToOne
+	private Member member2;
+	
+	//쪽지 처음 만들어진 시간
 	@Column(columnDefinition = "timestamp default now()")
 	private LocalDateTime regDate;
 	
+	//쪽지 삭제 여부
 	@ColumnDefault("false")
 	private Boolean isDel;
 }

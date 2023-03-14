@@ -30,19 +30,24 @@ public class Message {
 	@GeneratedValue
 	private Long msIdx;
 	
+	//메시지 작성자(나 혹은 상대)
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private Member member;
 	
+	//메시지들을 담고있는 쪽지 번호
 	@ManyToOne
 	@JoinColumn(name = "ntIdx")
 	private Note note;
 	
+	//메시지 작성 시간
 	@Column(columnDefinition = "timestamp default now()")
 	private LocalDateTime regDate;
 	
+	//메시지 내용
 	private String content;
 	
+	//메시지 내용 삭제여부
 	@ColumnDefault("false")
 	private Boolean isDel;
 	

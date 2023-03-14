@@ -31,24 +31,31 @@ public class Planner {
 	@GeneratedValue
 	private Long tpIdx;
 	
+	//나
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private Member member;
 	
+	//플래너를 공유한 그룹
 	@OneToOne
 	@JoinColumn(name = "tgIdx")
 	private TravelGroup travelGroup;
 	
+	//플래너 생성 날짜
 	@Column(columnDefinition = "timestamp default now()")
 	private LocalDateTime regDate;
 	
+	//플래너 제목
 	private String title;
 	
+	//플래너 호스트
 	private String host;
 	
+	//플래너 공개여부
 	@ColumnDefault("false")
 	private Boolean isPrivate;
 	
+	//플래너 삭제여부
 	@ColumnDefault("false")
 	private Boolean isDel;
 }

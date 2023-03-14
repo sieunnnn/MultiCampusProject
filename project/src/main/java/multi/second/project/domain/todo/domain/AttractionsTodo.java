@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.ColumnDefault;
@@ -28,17 +29,23 @@ public class AttractionsTodo {
 	@GeneratedValue
 	private Long atIdx;
 	
-	@OneToOne
+	//투두카드 2번
+	@ManyToOne
 	@JoinColumn(name = "todoType")
 	private Todo todo;
 	
+	//관광일자
 	@Column(columnDefinition = "timestamp default now()")
 	private LocalDateTime todoDate;
 	
+	//제목
 	private String title;
+	//내용
 	private String contents;
+	//관광지 정보
 	private String attractions;
 	
+	//투두카드 공개여부
 	@ColumnDefault("false")
 	private Boolean isPrivate;
 }

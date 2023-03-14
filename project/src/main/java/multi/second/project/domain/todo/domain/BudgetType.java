@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -23,10 +25,10 @@ public class BudgetType {
 	@Id
 	@GeneratedValue
 	private Long btpIdx;
-	
-	@OneToOne
+	//예산 종류
+	@ManyToOne
 	@JoinColumn(name = "budgetType")
 	private BudgetTodo budgetTodo;
-	
-	private String budget;
+	//지출예정 항목
+	private String budgetItem;
 }

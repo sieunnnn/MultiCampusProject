@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.ColumnDefault;
@@ -27,11 +29,11 @@ public class TransportType {
 	@Id
 	@GeneratedValue
 	private Long ttpIdx;
-	
-	@OneToOne
+	//교통수단 종류(1:비행기 ~)
+	@ManyToOne
 	@JoinColumn(name = "transportType")
 	private TransportTodo transportTodo;
-	
+	//교통수단 이름
 	private String transport;
 	
 

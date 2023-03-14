@@ -36,20 +36,26 @@ public class Gallery {
 	@GeneratedValue
 	private Long postIdx;
 	
+	//포스트 작성자
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private Member member;
 	
+	//포스트 작성 시간
 	@Column(columnDefinition = "timestamp default now()")
 	private LocalDateTime regDate;
 	
+	//포스트 제목
 	private String title;
 	
+	//포스트 글
 	private String content;
 	
+	//포스트 삭제 여부
 	@ColumnDefault("false")
 	private Boolean isDel;
 	
+	//포스트 이미지 파일
 	@OneToMany(cascade = CascadeType.ALL)
 	@Builder.Default
 	private List<FilePath> files = new ArrayList<FilePath>();

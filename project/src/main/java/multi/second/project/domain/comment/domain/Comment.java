@@ -31,20 +31,25 @@ public class Comment {
 	@GeneratedValue
 	private Long cmIdx;
 	
+	//댓글 달린 갤러리포스트 번호
 	@ManyToOne
 	@JoinColumn(name = "postIdx")
 	private Gallery gallery;
 	
+	//댓글 단 시간
 	@Column(columnDefinition = "timestamp default now()")
 	private LocalDateTime regDate;
 	
+	//댓글 작성자
 	//private String commenterId;
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private Member member;
 	
+	//댓글 내용
 	private String context;
 	
+	//댓글 삭제여부
 	@ColumnDefault("false")
 	private Boolean isDel;
 
