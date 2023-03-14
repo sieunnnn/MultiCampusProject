@@ -28,6 +28,7 @@ public class Member {
 	private String password;
 	private String email;
 	private String grade;
+	private String imagePath;
 	
 	@ColumnDefault("false")
 	private Boolean isLeave;
@@ -40,6 +41,7 @@ public class Member {
 				.userId(dto.getUserId())
 				.password(dto.getPassword())
 				.email(dto.getEmail())
+				.imagePath(dto.getImagePath())
 				.build();
 	}
 	

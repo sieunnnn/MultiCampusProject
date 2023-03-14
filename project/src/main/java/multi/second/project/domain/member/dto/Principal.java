@@ -11,11 +11,13 @@ public class Principal {
 	private String userId;
 	private String password;
 	private String email;
+	private String imagePath;
 
 	public Principal(Member member) {
 		this.userId = member.getUserId();
 		this.password = member.getPassword();
 		this.email = member.getEmail();
+		this.imagePath = member.getImagePath();
 	}
 
 	
