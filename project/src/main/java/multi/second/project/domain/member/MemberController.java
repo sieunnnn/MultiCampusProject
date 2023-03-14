@@ -75,7 +75,7 @@ public class MemberController {
 		System.out.println("@PostMapping(\"signup\") authToken :  "+authToken);
 		
 		memberService.authenticateEmail(form, authToken);
-		return "redirect:/";
+		return "redirect:/member/signup";
 	}
 	
 	@GetMapping("signupimpl/{authToken}")
@@ -113,6 +113,7 @@ public class MemberController {
 		if(error.hasErrors()) {
 			return "/member/login";
 		}
+
 		System.out.println("@PostMapping(\"login\") loginRequest :  "+loginRequest);
 		Principal principal = memberService.authenticateUser(loginRequest);
 		
@@ -122,13 +123,7 @@ public class MemberController {
 		}
 		System.out.println("@PostMapping(\"login\") principal :  "+principal);
 		session.setAttribute("auth", principal);
-		return "redirect:/";
-	}
-	
-	@GetMapping("logout")
-	public String logout(HttpSession session) {
-		session.removeAttribute("auth");
-		return "redirect:/";
+		return "redirect:/dashboard";
 	}
 
 	
