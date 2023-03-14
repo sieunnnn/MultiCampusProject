@@ -69,19 +69,19 @@ public class GalleryService {
 		Page<Gallery> page = galleryRepository.findAll(pageable);
 		System.out.println("galleryRepository.findAll(pageable) :  "+page);
 		
-		Page<Gallery> page2 = galleryRepository.findByMemberUserId("group2B",pageable);
-		System.out.println("galleryRepository.findByMemberUserId(\"group2B\",pageable) :  "+page2);
+//		Page<Gallery> page2 = galleryRepository.findByMemberUserId("group2B",pageable);
+//		System.out.println("galleryRepository.findByMemberUserId(\"group2B\",pageable) :  "+page2);
 		
 		Paging paging = Paging.builder()
 				.page(page)
 				.blockCnt(5)
 				.build();
 		
-		System.out.println("page.getContent() :  " +page.getContent());
-		System.out.println("GalleryListResponse.toDtoList(page.getContent()) :  "+ GalleryListResponse.toDtoList(page.getContent()));
-		System.out.println("----------------------------");
-		System.out.println("page2.getContent() :  " +page2.getContent());
-		System.out.println("GalleryListResponse.toDtoList(page2.getContent()) :  "+ GalleryListResponse.toDtoList(page2.getContent()));
+//		System.out.println("page.getContent() :  " +page.getContent());
+//		System.out.println("GalleryListResponse.toDtoList(page.getContent()) :  "+ GalleryListResponse.toDtoList(page.getContent()));
+//		System.out.println("----------------------------");
+//		System.out.println("page2.getContent() :  " +page2.getContent());
+//		System.out.println("GalleryListResponse.toDtoList(page2.getContent()) :  "+ GalleryListResponse.toDtoList(page2.getContent()));
 		return Map.of("galleryList",GalleryListResponse.toDtoList(page.getContent()), "paging", paging);
 	}
 	
@@ -100,6 +100,13 @@ public class GalleryService {
 		System.out.println("GalleryListResponse.toDtoList(page.getContent()) :  "+ GalleryListResponse.toDtoList(page.getContent()));
 		return Map.of("galleryList",GalleryListResponse.toDtoList(page.getContent()), "paging", paging);
 	}
+	
+	//포스트의 댓글 가져오는 코드
+//	public Map<String, Object> findCommentListByPostId(Long postIdx) {
+//		
+//		
+//		return Map.of("commentList",CommentListResponse.toDtoList(galleryRepository.findByGalleryPostIdx(postIdx)));
+//	}
 	
 
 	public GalleryDetailResponse findGalleryByPostIdx(Long postIdx) {

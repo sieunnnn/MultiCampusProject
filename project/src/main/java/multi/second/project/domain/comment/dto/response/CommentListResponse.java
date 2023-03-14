@@ -1,4 +1,4 @@
-package multi.second.project.domain.gallery.dto.response;
+package multi.second.project.domain.comment.dto.response;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -7,20 +7,22 @@ import java.util.stream.Collectors;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import multi.second.project.domain.gallery.domain.Gallery;
+import multi.second.project.domain.comment.domain.Comment;
 
 @Data
 @NoArgsConstructor
-public class GalleryListResponse {
+public class CommentListResponse {
 
+	private Long cmIdx;
 	private Long postIdx;
 	private String userId;
-	private String title;
+	private String context;
 	private LocalDateTime regDate;
 
-	public GalleryListResponse(Gallery entity) {
-		this.postIdx = entity.getPostIdx();
-		this.title = entity.getTitle();
+	public CommentListResponse(Comment entity) {
+		this.cmIdx = entity.getCmIdx();
+		this.postIdx = entity.getGallery().getPostIdx();
+		this.context = entity.getContext();
 		this.regDate = entity.getRegDate();
 		this.userId = entity.getMember().getUserId();
 	}
@@ -33,8 +35,8 @@ public class GalleryListResponse {
 		return regDate.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
 	}
 	
-	public static List<GalleryListResponse> toDtoList(List<Gallery> entityList){
-		return entityList.stream().map(e -> new GalleryListResponse(e)).collect(Collectors.toList());
+	public static List<CommentListResponse> toDtoList(List<Comment> entityList){
+		return entityList.stream().map(e -> new CommentListResponse(e)).collect(Collectors.toList());
 	}
 
 }

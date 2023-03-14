@@ -22,6 +22,10 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
+import multi.second.project.domain.comment.CommentService;
+import multi.second.project.domain.comment.dto.request.CommentModifyRequest;
+import multi.second.project.domain.comment.dto.request.CommentRegistRequest;
+import multi.second.project.domain.comment.dto.response.CommentListResponse;
 import multi.second.project.domain.gallery.dto.request.GalleryModifyRequest;
 import multi.second.project.domain.gallery.dto.request.GalleryRegistRequest;
 import multi.second.project.domain.gallery.dto.response.GalleryDetailResponse;
@@ -34,6 +38,7 @@ import multi.second.project.infra.util.file.dto.FilePathDto;
 public class GalleryController {
 
 	private final GalleryService galleryService;
+	private final CommentService commentService;
 	
 	//갤러리 포스트 추가 폼
 	@GetMapping("form")
@@ -82,10 +87,42 @@ public class GalleryController {
 		GalleryDetailResponse dto = galleryService.findGalleryByPostIdx(postIdx);
 		model.addAttribute("gallery", dto);
 		
+		//특정 포스트의 댓글을 가져오는 코드 (확인필요)
+		List<CommentListResponse> dto2 = commentService.findCommentListByPostIdx(postIdx);
+		model.addAttribute("comment", dto2);
 		
 		return "/gallery/gallery-contents";
 	}
-	
+//	
+//	//갤러리 특정 포스트에서 댓글 작성 시
+//	@PostMapping("comment")
+//	public String comment(
+//			@SessionAttribute(name="auth", required=false) Principal principal,
+//			CommentRegistRequest dto
+//			) {
+//		
+//		return "redirect:/";
+//	}
+//	
+//	//갤러리 특정 포스트에서 댓글 삭제 시(is_del이 true일 경우 "삭제된 댓글입니다."로 보여지게 할 것) 
+//	@PostMapping("comment-delete")
+//	public String commentDelete(
+//			@SessionAttribute(name="auth", required=false) Principal principal
+//			) {
+//		
+//		return "redirect:/";
+//	}
+//	
+//	//갤러리 특정 포스트에서 댓글 수정 시(해야되나?)
+//	@PostMapping("comment-modify")
+//	public String commentModify(
+//			@SessionAttribute(name="auth", required=false) Principal principal,
+//			CommentModifyRequest dto
+//			) {
+//		
+//		return "redirect:/";
+//	}
+//	
 	//갤러리 포스트에서 사진 다운로드 시(필요 없을지도)
 	@GetMapping("download")
 	public ResponseEntity<FileSystemResource> downloadFile(Long fpIdx){
