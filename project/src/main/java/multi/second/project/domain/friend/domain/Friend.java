@@ -38,14 +38,14 @@ public class Friend {
 	@GeneratedValue
 	private Long frIdx;
 	
-	//나
-	@ManyToOne
-	@JoinColumn(name = "userId")
-	private Member member;
+//	//나
+//	@ManyToOne
+//	@JoinColumn(name = "userId")
+//	private Member member;
 	
 	//친구 ID
 	@OneToOne
-	private Member member2;
+	private Member member;
 	
 //	//친구 ID
 //	@OneToMany

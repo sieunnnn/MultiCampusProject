@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -25,29 +27,33 @@ import lombok.NoArgsConstructor;
 @Builder @NoArgsConstructor @AllArgsConstructor @Getter
 public class BudgetTodo {
 
-
-	@Id
-	@GeneratedValue
-	private Long btIdx;
+	@Enumerated(EnumType.STRING)
+	private BudgetType budgetType;
 	
-	//투두카드 5번
-	@ManyToOne
-	@JoinColumn(name = "todoType")
-	private Todo todo;
-	
-	//지출예정 일자
-	@Column(columnDefinition = "timestamp default now()")
-	private LocalDateTime todoDate;
-	
-	//제목
-	private String title;
-	//내용
-	private String contents;
-	//예산 종류(1:식비 ~)
-	private Integer budgetType;
 	//예산비
 	private Integer budget;
+
+//	@Id
+//	@GeneratedValue
+//	private Long btIdx;
+//	
+//	//투두카드 5번
+//	@ManyToOne
+//	@JoinColumn(name = "todoType")
+//	private Todo todo;
+	
+//	//지출예정 일자
+//	@Column(columnDefinition = "timestamp default now()")
+//	private LocalDateTime todoDate;
+	
+//	//제목
+//	private String title;
+//	//내용
+//	private String contents;
+//	//예산 종류(1:식비 ~)
+//	private Integer budgetType;
+
 	//투두카드 공개여부
-	@ColumnDefault("false")
-	private Boolean isPrivate;
+//	@ColumnDefault("false")
+//	private Boolean isPrivate;
 }

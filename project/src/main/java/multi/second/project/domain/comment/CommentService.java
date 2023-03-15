@@ -67,8 +67,7 @@ public class CommentService {
 	public void createComment(CommentRegistRequest dto) {
 		// TODO Auto-generated method stub
 		Member member = memberRepository.findById(dto.getUserId()).get();
-		Gallery gallery = galleryRepository.findById(dto.getPostIdx()).get();
-		Comment comment = Comment.addComment(dto, gallery, member);
+		Comment comment = Comment.createComment(dto, member);
 		
 		// JPA가 변경된 내용을 데이터베이스에 반영
 		commentRepository.saveAndFlush(comment);
@@ -81,7 +80,7 @@ public class CommentService {
 		// TODO Auto-generated method stub
 		Comment comment = commentRepository.findById(dto.getCmIdx()).orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		if(!comment.getMember().getUserId().equals(dto.getUserId())) throw new AuthException(ErrorCode.UNAUTHORIZED_REQUEST);
-		if(!comment.getGallery().getPostIdx().equals(dto.getPostIdx())) throw new AuthException(ErrorCode.UNAUTHORIZED_REQUEST);
+		//if(!comment.getGallery().getPostIdx().equals(dto.getPostIdx())) throw new AuthException(ErrorCode.UNAUTHORIZED_REQUEST);//(피드백)필요없음 UserId만 검사
 		
 		comment.updateComment(dto);
 		

@@ -31,17 +31,13 @@ public class Comment {
 	@GeneratedValue
 	private Long cmIdx;
 	
-	//댓글 달린 갤러리포스트 번호
-	@ManyToOne
-	@JoinColumn(name = "postIdx")
-	private Gallery gallery;
-	
 	//댓글 단 시간
 	@Column(columnDefinition = "timestamp default now()")
 	private LocalDateTime regDate;
 	
+	//(피드백)양방향 매핑은 위험하니 되도록이면 안하는게 좋다.postIdx 조인한거 뺌
+	
 	//댓글 작성자
-	//private String commenterId;
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private Member member;
@@ -60,9 +56,8 @@ public class Comment {
 //				.context(dto.getContext())
 //				.build();
 //	}
-	public static Comment addComment(CommentRegistRequest dto, Gallery gallery ,Member member) {
+	public static Comment createComment(CommentRegistRequest dto, Member member) {
 	return Comment.builder()
-			.gallery(gallery)
 			.member(member)
 			.context(dto.getContext())
 			.build();

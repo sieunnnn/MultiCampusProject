@@ -23,7 +23,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import multi.second.project.domain.comment.domain.Comment;
 import multi.second.project.domain.member.domain.Member;
+import multi.second.project.domain.message.domain.Message;
 
 @Entity
 @DynamicInsert // insert 쿼리를 생성할 때 null인 필드는 쿼리에서 생략
@@ -36,18 +38,26 @@ public class Note {
 	private Long ntIdx;
 	
 	//나
-	@ManyToOne
-	@JoinColumn(name = "userId")
-	private Member member;
+//	@ManyToOne
+//	@JoinColumn(name = "userId")
+//	private Member member;
 	
-//	//상대방
+	//상대방
 //	@OneToOne
 //	@JoinColumn(name = "userId")
 //	private Member member2;
 	
-	//상대방
-	@OneToOne
-	private Member member2;
+	@OneToMany(cascade = CascadeType.ALL)
+	@Builder.Default
+	private List<Member> members = new ArrayList<>();
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@Builder.Default
+	private List<Message> messages = new ArrayList<>();
+	
+//	//상대방
+//	@OneToOne
+//	private Member partner;
 	
 	//쪽지 처음 만들어진 시간
 	@Column(columnDefinition = "timestamp default now()")

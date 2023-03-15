@@ -21,7 +21,6 @@ public class CommentListResponse {
 
 	public CommentListResponse(Comment entity) {
 		this.cmIdx = entity.getCmIdx();
-		this.postIdx = entity.getGallery().getPostIdx();
 		this.context = entity.getContext();
 		this.regDate = entity.getRegDate();
 		this.userId = entity.getMember().getUserId();
