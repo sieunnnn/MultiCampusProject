@@ -22,6 +22,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import multi.second.project.domain.group.domain.TravelGroup;
+import multi.second.project.domain.host.domain.Host;
 import multi.second.project.domain.member.domain.Member;
 import multi.second.project.domain.todolist.domain.TodoList;
 
@@ -58,7 +59,7 @@ public class Planner {
 	
 	//플래너 호스트
 	@OneToOne
-	private Member host;
+	private Host host;
 	
 	//플래너 공개여부
 	@ColumnDefault("false")

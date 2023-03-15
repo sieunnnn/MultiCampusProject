@@ -40,9 +40,9 @@ public class Member {
 	@Builder.Default
 	private List<Friend> friends = new ArrayList<>();
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@Builder.Default
-	private List<Planner> planners = new ArrayList<>();
+//	@OneToMany(cascade = CascadeType.ALL)
+//	@Builder.Default
+//	private List<Planner> planners = new ArrayList<>();
 	
 //	@OneToMany(cascade = CascadeType.ALL)
 //	@Builder.Default

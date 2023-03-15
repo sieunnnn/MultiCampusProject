@@ -88,8 +88,8 @@ public class GalleryController {
 		model.addAttribute("gallery", dto);
 		
 		//특정 포스트의 댓글을 가져오는 코드 (확인필요)
-		List<CommentListResponse> dto2 = commentService.findCommentListByPostIdx(postIdx);
-		model.addAttribute("comment", dto2);
+//		List<CommentListResponse> dto2 = commentService.findCommentListByPostIdx(postIdx);
+//		model.addAttribute("comment", dto2);
 		
 		return "/gallery/gallery-contents";
 	}

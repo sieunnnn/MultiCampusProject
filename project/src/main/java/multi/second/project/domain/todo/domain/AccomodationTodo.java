@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 public class AccomodationTodo extends Todo{
 
 
-	//투두카드 여행 목적지 주소
+	//투두카드 여행 주소
 	private Integer address;
 	
 //	//숙박일자

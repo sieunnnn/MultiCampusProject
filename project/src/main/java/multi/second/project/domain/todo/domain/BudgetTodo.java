@@ -3,6 +3,7 @@ package multi.second.project.domain.todo.domain;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -25,7 +26,8 @@ import lombok.NoArgsConstructor;
 @DynamicInsert // insert 쿼리를 생성할 때 null인 필드는 쿼리에서 생략
 @DynamicUpdate // entity에서 변경이 발견되지 않은 값은 쿼리에서 생략
 @Builder @NoArgsConstructor @AllArgsConstructor @Getter
-public class BudgetTodo {
+@DiscriminatorValue("tdIdx")
+public class BudgetTodo extends Todo{
 
 	@Enumerated(EnumType.STRING)
 	private BudgetType budgetType;

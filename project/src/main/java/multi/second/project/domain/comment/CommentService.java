@@ -47,10 +47,10 @@ public class CommentService {
 	private final CommentRepository commentRepository;
 	
 	//포스트의 댓글 가져오는 코드
-	public List<CommentListResponse> findCommentListByPostIdx(Long postIdx) {
-		
-		return CommentListResponse.toDtoList(commentRepository.findByGalleryPostIdx(postIdx));
-	}
+//	public List<CommentListResponse> findCommentListByPostIdx(Long postIdx) {
+//		
+//		return CommentListResponse.toDtoList(commentRepository.findByGalleryPostIdx(postIdx));
+//	}
 	
 	@Transactional
 	public void deleteComment(Long cmIdx, Principal principal) {

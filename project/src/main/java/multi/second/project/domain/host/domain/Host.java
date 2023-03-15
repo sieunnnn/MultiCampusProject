@@ -32,7 +32,7 @@ public class Host {//(피드백)프랜드처럼
 	@ManyToOne
 	private Member member;
 	
-	//친구 등록 시간
+	// 시간
 	@Column(columnDefinition = "timestamp default now()")
 	private LocalDateTime regDate;
 
