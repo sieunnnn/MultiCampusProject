@@ -90,10 +90,13 @@ public class CommentService {
 	@Transactional
 	public void updateComment(CommentModifyRequest dto) {
 		// TODO Auto-generated method stub
+		System.out.println("dto.getCmIdx() :  "+dto.getCmIdx());
 		Comment comment = commentRepository.findById(dto.getCmIdx()).orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		System.out.println("comment.getMember().getUserId() :  " +comment.getMember().getUserId());
+		System.out.println("dto.getUserId() :  " +dto.getUserId());
 		if(!comment.getMember().getUserId().equals(dto.getUserId())) throw new AuthException(ErrorCode.UNAUTHORIZED_REQUEST);
 		//if(!comment.getGallery().getPostIdx().equals(dto.getPostIdx())) throw new AuthException(ErrorCode.UNAUTHORIZED_REQUEST);//(피드백)필요없음 UserId만 검사
-		
+		System.out.println("dto :  "+dto);
 		comment.updateComment(dto);
 		
 		commentRepository.flush();

@@ -63,6 +63,7 @@
       	 		<p th:text="${comment.context}">
       	 		<form th:action="@{/comment/modify}" method="post" >
 	          	<input type="text" id="context" name="context" required="required">
+	          	<input type="hidden" th:value="${comment.cmIdx}" name="cmIdx"/> 
 	          	<input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/> 
 	          	<button><span>수정</span></button>
 	          </form>
