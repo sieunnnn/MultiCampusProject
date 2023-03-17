@@ -48,28 +48,29 @@ public class CommentController {
 		dto.setUserId(principal.getUserId());
 		commentService.createComment(dto, postIdx);
 		
-		//근데 상대도 리다이렉트 해야되는것 아닌가?
 		return "redirect:/gallery/detail?postIdx="+postIdx;
 	}
 	
 	//갤러리 특정 포스트에서 댓글 수정 시(해야되나?)
-	@PostMapping("comment-modify")
+	@PostMapping("modify")
 	public String modify(
 			CommentModifyRequest dto,
-			@SessionAttribute("auth") Principal principal
+			@SessionAttribute("auth") Principal principal,
+			Long postIdx
 			) {
 		
 		dto.setUserId(principal.getUserId());
 		commentService.updateComment(dto);
 		
-		return "redirect:/";
+		return "redirect:/gallery/detail?postIdx="+postIdx;
 	}
 	
 	//갤러리 특정 포스트에서 댓글 삭제 시(is_del이 true일 경우 "삭제된 댓글입니다."로 보여지게 할 것) 
-	@PostMapping("comment-delete")
+	@PostMapping("delete")
 	public String delete(
 			Long cmIdx, 
-			@SessionAttribute("auth") Principal principal
+			@SessionAttribute("auth") Principal principal,
+			Long postIdx
 			) {
 		
 		commentService.deleteComment(cmIdx, principal);
