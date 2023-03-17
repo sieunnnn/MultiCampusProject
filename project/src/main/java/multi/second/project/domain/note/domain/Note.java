@@ -23,7 +23,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import multi.second.project.domain.comment.domain.Comment;
+//import multi.second.project.domain.comment.domain.Comment;
 import multi.second.project.domain.member.domain.Member;
 import multi.second.project.domain.message.domain.Message;
 
