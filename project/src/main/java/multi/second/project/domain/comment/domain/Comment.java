@@ -19,7 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import multi.second.project.domain.comment.dto.request.CommentModifyRequest;
 import multi.second.project.domain.comment.dto.request.CommentRegistRequest;
-//import multi.second.project.domain.gallery.domain.Gallery;
+import multi.second.project.domain.gallery.domain.Gallery;
 import multi.second.project.domain.member.domain.Member;
 
 @Entity

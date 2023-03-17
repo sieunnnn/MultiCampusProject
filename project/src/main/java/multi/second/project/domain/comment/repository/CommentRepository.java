@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import multi.second.project.domain.comment.domain.Comment;
-//import multi.second.project.domain.gallery.domain.Gallery;
+import multi.second.project.domain.gallery.domain.Gallery;
 
 
 @Repository
