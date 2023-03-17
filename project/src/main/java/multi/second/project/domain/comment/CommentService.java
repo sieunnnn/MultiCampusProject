@@ -56,13 +56,17 @@ public class CommentService {
 
 	
 	@Transactional
-	public void deleteComment(Long cmIdx, Principal principal) {
+	public void deleteComment(Long cmIdx, Principal principal, Long postIdx) {
 		// TODO Auto-generated method stub
 		Comment comment = commentRepository.findById(cmIdx)
 					.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
+		Gallery gallery = galleryRepository.findById(postIdx)
+				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		
 		if(!comment.getMember().getUserId().equals(principal.getUserId())) throw new AuthException(ErrorCode.UNAUTHORIZED_REQUEST);
 		
+		gallery.removeComment(comment);
 		commentRepository.delete(comment);
 		
 	}

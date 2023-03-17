@@ -57,7 +57,7 @@ public class GalleryController {
 		dto.setUserId(principal.getUserId());
 		galleryService.createGallery(dto, files);
 		
-		return "redirect:/";
+		return "redirect:/gallery/gallery-list";
 	}
 	
 	//갤러리 리스트 화면
