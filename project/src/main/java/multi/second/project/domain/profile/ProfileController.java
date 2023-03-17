@@ -1,8 +1,10 @@
 package multi.second.project.domain.profile;
 
+import multi.second.project.domain.member.dto.Principal;
 import multi.second.project.domain.profile.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Controller
@@ -20,7 +23,13 @@ public class ProfileController {
     @Autowired
     ProfileService profileService;
     @GetMapping
-    public String index(){
+    public String index(HttpSession session, Model model){
+        Principal principal = (Principal)session.getAttribute("auth");
+        if(principal != null){
+            System.out.println("princ"+ principal);
+            model.addAttribute("data", principal.getUserId());
+        }
+
         return "profile/index";
     }
 

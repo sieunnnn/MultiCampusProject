@@ -74,7 +74,10 @@
         <!--        </div>-->
 
         <div class="container__profile">
-            <div class="txt__welcome">님 안녕하세요</div>
+            <div class="txt__welcome">
+                <span th:text="${data}">message</span>
+                <span>님 안녕하세요!</span>
+            </div>
 
             <!-- 클릭 하면 유저 사진 바꿀수 있는 팝업창 생성 -->
             <button id="image-show" class="wrapper__user__pic" onclick="modalOpen();"></button>

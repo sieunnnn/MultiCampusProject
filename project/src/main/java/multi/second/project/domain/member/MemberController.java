@@ -123,6 +123,7 @@ public class MemberController {
 		}
 		System.out.println("@PostMapping(\"login\") principal :  "+principal);
 		session.setAttribute("auth", principal);
+		System.out.println(session.getAttribute("auth"));
 		return "redirect:/dashboard";
 	}
 

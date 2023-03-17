@@ -12,6 +12,7 @@ import java.util.Calendar;
 public class ProfileService {
     private String base_path = "";
 
+
     public int uploadFile(MultipartFile upFile) throws IOException {
         //사진 저장
         String originalFilename = upFile.getOriginalFilename();
@@ -33,7 +34,7 @@ public class ProfileService {
         int month = cal.get(cal.MONTH) + 1;
         int date = cal.get(cal.DATE);
 
-        base_path = "/Users/hong-uiju/Documents/MultiCampusProject/project/src/main/resources/static/img/image/";
+        base_path = "/Users/hong-uiju/Documents/project/MultiCampusProject/project/src/main/resources/static/img/image/";
 
         base_path += Integer.toString(year);
         base_path += Integer.toString(month);

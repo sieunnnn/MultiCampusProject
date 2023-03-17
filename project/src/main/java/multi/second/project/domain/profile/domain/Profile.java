@@ -41,6 +41,5 @@ public class Profile {
 
 	//프로필 이미지 경로
 	private String imagePath;
-	
-	
+
 }
