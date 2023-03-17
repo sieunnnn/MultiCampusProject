@@ -20,11 +20,18 @@
       	<ol>
       		<li th:each="file : ${gallery.filePathDtos}">  
       	 		<a th:href="@{/gallery/download(fpIdx=${file.fpIdx})}" th:text="${file.originFileName}"></a> 
+     
+      	 		<img th:src="@{|C://Program Files//CODE//storage//${file.originFileName}|}">
       	 	</li>	     
       	</ol>
       </div>
       <div class="article_content">
       	<pre>[[${gallery.content}]]</pre>
+      	<ol>
+      		<li th:each="file : ${gallery.filePathDtos}"> 
+      	 		<img th:src="@{|C:\\Users\\dcome\\Downloads\\Untitled.png|}">
+      	 	</li>	     
+      	</ol>
       </div>
       <div class="btn_section">
       
@@ -62,8 +69,8 @@
       	 		<!--<form th:action="@{/comment/modify}" method="post" >
 	          	<input type="text" id="context" name="context" required="required">
 	          	<input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/> 
-	          	<button><span>수정</span></button>-->
-	          </form>
+	          	<button><span>수정</span></button>
+	          </form>-->
       	 	</li>	     
       	</ol>
       </div>
