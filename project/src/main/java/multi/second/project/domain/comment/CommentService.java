@@ -96,6 +96,8 @@ public class CommentService {
 		
 		comment.updateComment(dto);
 		
+		commentRepository.flush();
+		
 	}
 	
 
