@@ -20,5 +20,5 @@ public class SignUpRequest {
 	@Email
 	private String email;
 	
-	
+	private String imagePath;
 }

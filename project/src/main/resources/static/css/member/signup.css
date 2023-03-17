@@ -1,0 +1,314 @@
+
+
+/* 웹폰트 */
+@font-face {
+
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+html,body {
+
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+
+    overflow:hidden;
+}
+
+#home {
+
+    position:relative;
+    top:0;
+    z-index:9;
+    width:100%;
+    height:100%;
+}
+
+ul, li{
+    margin:0;
+    padding:0;
+    list-style:none
+}
+
+.quick {
+    position:fixed;
+    right:20px;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:100000
+}
+
+.quick li {
+    width:10px;
+    height:10px;
+
+    margin-bottom:10px;
+
+    border-radius:15px;
+    border:2px solid #EBEBF0;
+    cursor:pointer;
+}
+
+.quick .on {
+    background:#EBEBF0;
+}
+
+.page{
+
+    width:100%;
+    height:100%;
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    position:relative;
+}
+
+.num1 {
+    background:#1A71CC;
+}
+
+.num2 {
+
+    background: linear-gradient(180deg, #1A71CC 20.29%, rgba(26, 113, 204, 0.81) 60.15%, rgba(26, 113, 204, 0.56) 79.66%, rgba(26, 113, 204, 0.29) 90.45%, rgba(26, 113, 204, 0) 100%);
+
+}
+
+.num3 {
+    background:white;
+}
+
+.num4{
+    background:white;
+}
+
+.num5{
+    background:white;
+}
+
+.num6{
+
+    background: linear-gradient(180deg, rgba(26, 113, 204, 0) 0%, rgba(26, 113, 204, 0.27) 6.56%, rgba(26, 113, 204, 0.48) 12.94%, rgba(26, 113, 204, 0.81) 39.9%, rgba(26, 113, 204, 0.98) 66.46%, #1A71CC 100%);
+}
+
+
+
+/* ================================================================== */
+
+/* 회원 가입 부분 */
+
+.valid_info{
+
+    margin-left: 92px;
+    padding: 0;
+
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+
+    color: #1E1E1C;
+}
+
+.txt__signup {
+
+    position: absolute;
+    width: 675px;
+    height: 84px;
+    left: 34%;
+    top: 18%;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 70px;
+    line-height: 84px;
+    /* identical to box height */
+
+
+    color: #1E1E1C;
+
+    mix-blend-mode: normal;
+}
+
+.wrapper__signup {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+
+    position: absolute;
+    width: 428px;
+    height: 550px;
+    left: 40%;
+    top: 30%;
+
+    background: rgba(255, 255, 255, 0.7);
+    border: 0.5px solid rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(30px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 10px;
+
+    filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.15)) drop-shadow(0px 25px 30px rgba(0, 0, 0, 0.35));
+}
+
+.txt__head {
+
+    margin: 0 0 30px 120px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 58px;
+    line-height: 69px;
+    display: flex;
+    align-items: flex-end;
+
+    color: #1E1E1C;
+}
+
+
+.wrapper__input {
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: flex-start;
+
+    width: auto;
+}
+
+.wrapper__email {
+
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+}
+
+input {
+
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+
+    margin: 17px 0 17px 90px;
+    height: 28px;
+    padding-left: 10px;
+
+    background-color: transparent;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+
+    color: #1E1E1C;
+}
+
+input:focus {
+
+    outline: solid 3.5px rgba(58, 108, 217, 0.5);
+}
+
+.btn__blue, .btn__blue:focus {
+
+    width: 123px;
+    height: 32px;
+
+    background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+    box-shadow: 0 0.5px 1.5px rgba(54, 122, 246, 0.25);
+    border-radius: 6px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    color: white;
+
+    border: none;
+    outline: none;
+    margin: 5px;
+
+    cursor: grab;
+}
+
+.btn__blue:active {
+
+    border: none;
+    outline: none;
+}
+
+#btnIdCheck, #btnIdCheck:focus{
+
+    width: 78px;
+    height: 30px;
+    margin-left: 4px;
+
+    background: #FFFFFF;
+    border: 0.5px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+
+    color: #1E1E1C;
+
+    outline: none;
+}
+
+.wrapper__login {
+
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: flex-start;
+
+}
+
+label{
+
+    margin: 30px 0 0 90px;
+    width: 160px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+
+    color: #1E1E1C;
+}
+
+.btn__login, .btn__login:focus {
+
+    width: 89px;
+    height: 30px;
+
+    margin: 26px 0 0 10px;
+
+    background: #6E6D70;
+    border: 0.5px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.1), inset 0px 0.5px 0.5px rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+
+    color: white;
+
+    outline: none;
+}
+
+
+/* ================================================================= */
