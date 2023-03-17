@@ -71,7 +71,6 @@ public class TestController {
 //    public String home() {
 //        return "home";
 //    }
-<<<<<<< HEAD
 
 
 //    @GetMapping(value = "/login")
@@ -128,7 +127,4 @@ public class TestController {
 //    public String home() {
 //        return "home";
 //    }
-
-=======
->>>>>>> member
 }
