@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
+import multi.second.project.domain.comment.domain.Comment;
+import multi.second.project.domain.comment.dto.request.CommentRegistRequest;
 import multi.second.project.domain.gallery.domain.Gallery;
 import multi.second.project.domain.gallery.dto.request.GalleryModifyRequest;
 import multi.second.project.domain.gallery.dto.request.GalleryRegistRequest;
@@ -107,7 +109,16 @@ public class GalleryService {
 //		
 //		return Map.of("commentList",CommentListResponse.toDtoList(galleryRepository.findByGalleryPostIdx(postIdx)));
 //	}
-	
+	//포스트의 댓글 가져오는 코드
+//	public List<CommentListResponse> findCommentListByPostIdx(Long postIdx) {
+//		
+//		return CommentListResponse.toDtoList(commentRepository.findByGalleryPostIdx(postIdx));
+//	}
+//	
+//	public List<Gallery> findCommentListByPostIdx(Long postIdx){
+//		
+//		return galleryRepository.findCommentByPostIdx(postIdx);
+//	}
 
 	public GalleryDetailResponse findGalleryByPostIdx(Long postIdx) {
 		Gallery gallery = galleryRepository.findById(postIdx)
@@ -158,6 +169,23 @@ public class GalleryService {
 			fileUtil.deleteFile(e);
 		});
 	}
+	
+//	@Transactional
+//	public void createComment(CommentRegistRequest dto) {
+//		// TODO Auto-generated method stub
+//		Member member = memberRepository.findById(dto.getUserId()).get();
+//		Comment comment = Comment.createComment(dto, member);
+//		
+////		Gallery gallery = galleryRepository.findById(null).get();
+////				addComment(comment);
+//		
+//		// JPA가 변경된 내용을 데이터베이스에 반영
+//		commentRepository.saveAndFlush(comment);
+//		
+//		
+//	}
+	
+	
 
 	@Transactional
 	public void removeGallery(Long postIdx, Principal principal) {

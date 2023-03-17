@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CommentRegistRequest {
 
-	private Long postIdx;
+	//private Long postIdx;
 	
 	private String userId;
 	

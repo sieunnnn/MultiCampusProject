@@ -39,7 +39,7 @@ public class Comment {
 	
 	//댓글 작성자
 	@ManyToOne
-	@JoinColumn(name = "userId")
+	//@JoinColumn(name = "userId")
 	private Member member;
 	
 	//댓글 내용

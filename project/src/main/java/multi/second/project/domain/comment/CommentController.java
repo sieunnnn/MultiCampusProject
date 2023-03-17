@@ -38,15 +38,18 @@ public class CommentController {
 	private final CommentService commentService;
 
 	//갤러리 특정 포스트에서 댓글 작성 시
-	@PostMapping("comment")
-	public String comment(
+	@PostMapping("upload")
+	public String upload(
 			@SessionAttribute(name="auth", required=false) Principal principal,
-			CommentRegistRequest dto
+			CommentRegistRequest dto,
+			Long postIdx
 			) {
-		commentService.createComment(dto);
 		
+		dto.setUserId(principal.getUserId());
+		commentService.createComment(dto, postIdx);
 		
-		return "redirect:/";
+		//근데 상대도 리다이렉트 해야되는것 아닌가?
+		return "redirect:/gallery/detail?postIdx="+postIdx;
 	}
 	
 	//갤러리 특정 포스트에서 댓글 수정 시(해야되나?)

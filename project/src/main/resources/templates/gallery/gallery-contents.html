@@ -41,33 +41,28 @@
 	          	<button id="btnModify"><span>수정</span></button>
 	          </form>	
           </th:block>
-          
-          
-          <div class="row">
- <h2 class="tit">* 게시판</h2>
-    <a href="/gallery/form">게시글 쓰기</a>
- 	   
- 	   <table style="text-align: center" border="1">
-       <thead>
-           <tr>
-               <th style="width: 10%; height:20%;"><span>번호</span></th>
-               <th style="width: 70%;"><span>제목</span></th>
-               <th style="width: 10%;"><span>작성자</span></th>
-               <th style="width: 10%;"><span>등록일</span></th>
-           </tr>
-       </thead>
-       <tbody>
-           <tr th:each="gallery, status : ${galleryList}">
-               <td th:text="${gallery.postIdx}"></td>
-               <td><a th:href="@{|/gallery/detail?postIdx=${gallery.postIdx}|}" th:text="${gallery.title}"></a></td>
-               <td th:text="${gallery.userId}"></td>
-               <td th:text="${gallery.regDate}"></td>
-           </tr>
-       </tbody>
-    </table>
-	</div>
+
           
       </div>
+      
+      <th:block th:if="${session.auth ne null and gallery.userId eq session.auth.userId}">
+	          <form th:action="@{/comment/upload}" method="post" >
+	          	<input type="text" id="context" name="context" required="required">
+	          	<input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/> 
+	          	<button><span>댓글 등록</span></button>
+	          </form>
+          </th:block>
+      
+      
+      
+      <div>
+      	<ol>
+      		<li th:each="comment : ${gallery.commentResponses}">  
+      	 		<p th:text="${comment.context}">
+      	 	</li>	     
+      	</ol>
+      </div>
+      
    </div>
 </div>
 

@@ -15,7 +15,7 @@ import lombok.AllArgsConstructor;
 import multi.second.project.domain.comment.domain.Comment;
 import multi.second.project.domain.comment.dto.request.CommentModifyRequest;
 import multi.second.project.domain.comment.dto.request.CommentRegistRequest;
-import multi.second.project.domain.comment.dto.response.CommentListResponse;
+import multi.second.project.domain.comment.dto.response.CommentResponse;
 import multi.second.project.domain.comment.repository.CommentRepository;
 import multi.second.project.domain.gallery.domain.Gallery;
 import multi.second.project.domain.gallery.dto.request.GalleryModifyRequest;
@@ -49,8 +49,11 @@ public class CommentService {
 	//포스트의 댓글 가져오는 코드
 //	public List<CommentListResponse> findCommentListByPostIdx(Long postIdx) {
 //		
-//		return CommentListResponse.toDtoList(commentRepository.findByGalleryPostIdx(postIdx));
+//		System.out.println();
+//		//return CommentListResponse.toDtoList(galleryRepository.findCommentByPostIdx(postIdx));
+//		return null;
 //	}
+
 	
 	@Transactional
 	public void deleteComment(Long cmIdx, Principal principal) {
@@ -64,13 +67,22 @@ public class CommentService {
 		
 	}
 	
-	public void createComment(CommentRegistRequest dto) {
+	
+	@Transactional
+	public void createComment(CommentRegistRequest dto, Long postIdx) {
 		// TODO Auto-generated method stub
 		Member member = memberRepository.findById(dto.getUserId()).get();
 		Comment comment = Comment.createComment(dto, member);
 		
+		Gallery gallery = galleryRepository.findById(postIdx)
+				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+//		Gallery gallery = galleryRepository.findById(null).get();
+//				addComment(comment);
+		
 		// JPA가 변경된 내용을 데이터베이스에 반영
+		gallery.addComment(comment);
 		commentRepository.saveAndFlush(comment);
+		
 		
 		
 	}

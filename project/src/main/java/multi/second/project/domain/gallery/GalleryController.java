@@ -25,7 +25,7 @@ import lombok.AllArgsConstructor;
 import multi.second.project.domain.comment.CommentService;
 import multi.second.project.domain.comment.dto.request.CommentModifyRequest;
 import multi.second.project.domain.comment.dto.request.CommentRegistRequest;
-import multi.second.project.domain.comment.dto.response.CommentListResponse;
+import multi.second.project.domain.comment.dto.response.CommentResponse;
 import multi.second.project.domain.gallery.dto.request.GalleryModifyRequest;
 import multi.second.project.domain.gallery.dto.request.GalleryRegistRequest;
 import multi.second.project.domain.gallery.dto.response.GalleryDetailResponse;
@@ -87,9 +87,9 @@ public class GalleryController {
 		GalleryDetailResponse dto = galleryService.findGalleryByPostIdx(postIdx);
 		model.addAttribute("gallery", dto);
 		
-		//특정 포스트의 댓글을 가져오는 코드 (확인필요)
-//		List<CommentListResponse> dto2 = commentService.findCommentListByPostIdx(postIdx);
-//		model.addAttribute("comment", dto2);
+//		//특정 포스트의 댓글을 가져오는 코드 (확인필요)(필요없을듯)
+//		System.out.println("galleryService.findCommentListByPostIdx(postIdx) :  "+galleryService.findCommentListByPostIdx(postIdx));
+//		model.addAttribute("comment", galleryService.findCommentListByPostIdx(postIdx));
 		
 		return "/gallery/gallery-contents";
 	}

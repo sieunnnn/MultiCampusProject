@@ -11,7 +11,7 @@ import multi.second.project.domain.comment.domain.Comment;
 
 @Data
 @NoArgsConstructor
-public class CommentListResponse {
+public class CommentResponse {
 
 	private Long cmIdx;
 	private Long postIdx;
@@ -19,7 +19,7 @@ public class CommentListResponse {
 	private String context;
 	private LocalDateTime regDate;
 
-	public CommentListResponse(Comment entity) {
+	public CommentResponse(Comment entity) {
 		this.cmIdx = entity.getCmIdx();
 		this.context = entity.getContext();
 		this.regDate = entity.getRegDate();
@@ -34,8 +34,8 @@ public class CommentListResponse {
 		return regDate.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
 	}
 	
-	public static List<CommentListResponse> toDtoList(List<Comment> entityList){
-		return entityList.stream().map(e -> new CommentListResponse(e)).collect(Collectors.toList());
+	public static List<CommentResponse> toDtoList(List<Comment> entityList){
+		return entityList.stream().map(e -> new CommentResponse(e)).collect(Collectors.toList());
 	}
 
 }
