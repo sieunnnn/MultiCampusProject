@@ -37,6 +37,7 @@ function showImage() {
         success : function(data) {
             alert('업로드 성공');
 
+
         },
         error : function(xhr, status, error) {
             alert(error);
