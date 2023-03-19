@@ -51,13 +51,14 @@ public class ProfileService {
 
     public String uploadFile(MultipartFile upFile) throws IOException {
         //사진 저장
+        originalFilename = "";
         mkDir();
         originalFilename += upFile.getOriginalFilename();
         System.out.println("테스트"+originalFilename);
         long fileSize = upFile.getSize();
         byte [] data = upFile.getBytes();
 
-        FileOutputStream fos = new FileOutputStream(base_path +"\\"+ originalFilename);
+        FileOutputStream fos = new FileOutputStream(base_path + originalFilename);
         fos.write(upFile.getBytes());
         fos.close();
 

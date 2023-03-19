@@ -31,6 +31,7 @@ public class ProfileController {
 
     @Autowired
     ProfileService profileService;
+
     @GetMapping
     public String index(HttpSession session, Model model, HttpServletResponse response) throws IOException {
         Principal principal = (Principal)session.getAttribute("auth");
@@ -39,23 +40,9 @@ public class ProfileController {
             Profile profile = profileService.getProfileData(principal.getUserId());
             System.out.println(profile);
             if(profile != null){
-                String base_path = "file:///Users/hong-uiju/Documents/project/MultiCampusProject/project/src/main/resources/static/img/image/" +"\\";
-
-                StringBuilder sb = new StringBuilder(base_path);
-                // 파일이 실제로 저장되어 있는 경로에
-                String fileName = profile.getImagePath();
-                sb.append(fileName);
-                // 파일 이름을 더해
-
-                URL fileUrl = new URL(sb.toString());
-                // file URL을 생성하고
-
-                //IOUtils.copy(fileUrl.openStream(), response.getOutputStream());
-
-
-
-                System.out.println(fileUrl);
-                model.addAttribute("imageUrl", sb);
+                String imagePath = "/img/image/"+ profile.getImagePath();
+                System.out.println(imagePath);
+                model.addAttribute("imageUrl", imagePath);
             }
         }
 
@@ -85,7 +72,8 @@ public class ProfileController {
         Profile result = profileService.saveProfileImage(file, principal.getUserId());
         System.out.println("사진 업로드");
         model.addAttribute("data", principal.getUserId());
-        model.addAttribute("imagePath", result.getImagePath());
+        String imagePath = "/img/image/"+ result.getImagePath();
+        model.addAttribute("imagePath", imagePath);
         return result.getImagePath();
     }
 }
