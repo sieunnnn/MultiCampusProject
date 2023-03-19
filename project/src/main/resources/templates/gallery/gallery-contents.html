@@ -61,10 +61,16 @@
       	<ol>
       		<li th:each="comment : ${gallery.commentResponses}">  
       	 		<p th:text="${comment.context}">
+      	 		<form th:action="@{/comment/remove}" method="post" >
+      	 		<input type="hidden" th:value="${comment.cmIdx}" name="cmIdx"/> 
+	          	<input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/> 
+	          	<button id="btnDel"><span>댓글 삭제</span></button>
+	          	</form>
       	 		<form th:action="@{/comment/modify}" method="post" >
 	          	<input type="text" id="context" name="context" required="required">
+	          	<input type="hidden" th:value="${comment.cmIdx}" name="cmIdx"/> 
 	          	<input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/> 
-	          	<button><span>수정</span></button>
+	          	<button><span>댓글 수정</span></button>
 	          </form>
       	 	</li>	     
       	</ol>

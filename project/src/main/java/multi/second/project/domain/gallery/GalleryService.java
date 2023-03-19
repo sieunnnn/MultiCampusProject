@@ -203,6 +203,7 @@ public class GalleryService {
 			fileUtil.deleteFile(e);
 		});
 		
+		
 	}
 	
 
