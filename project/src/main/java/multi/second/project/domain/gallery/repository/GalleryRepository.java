@@ -15,7 +15,6 @@ import multi.second.project.domain.gallery.domain.Gallery;
 public interface GalleryRepository extends JpaRepository<Gallery, Long>, GalleryRepositoryExtension{
 
 	Page<Gallery> findByMemberUserId(String userId, Pageable pageable);
-	
-	//List<Gallery> findCommentByPostIdx(Long postIdx);
+//	List<Gallery> findCommentByPostIdx(Long postIdx);
 	
 }

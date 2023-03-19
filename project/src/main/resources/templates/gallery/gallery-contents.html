@@ -18,10 +18,8 @@
       </div>
       <div class="info file_info">
       	<ol>
-      		<li th:each="file : ${gallery.filePathDtos}">  
-      	 		<a th:href="@{/gallery/download(fpIdx=${file.fpIdx})}" th:text="${file.originFileName}"></a> 
-     
-      	 		<!--<img th:src="@{|C://Program Files//CODE//storage//${file.originFileName}|}">-->
+      		<li th:each="file : ${gallery.filePathDtos}">
+				<img th:src="@{/gallery/download(fpIdx=${file.fpIdx})}" th:text="${file.originFileName}">
       	 	</li>	     
       	</ol>
       </div>

@@ -2,10 +2,7 @@ package multi.second.project.infra.util.file;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
@@ -26,7 +23,7 @@ import multi.second.project.infra.util.file.dto.FilePathDto;
 public class FilePath {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long fpIdx;
 	
 	private String originFileName;
