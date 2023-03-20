@@ -23,7 +23,7 @@ import multi.second.project.infra.util.file.dto.FilePathDto;
 public class FilePath {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	private Long fpIdx;
 	
 	private String originFileName;
