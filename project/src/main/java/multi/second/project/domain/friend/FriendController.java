@@ -1,6 +1,6 @@
-package multi.second.project.domain.friends;
+package multi.second.project.domain.friend;
 
-import multi.second.project.domain.friends.domain.Friend;
+import multi.second.project.domain.friend.domain.Friend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,7 +49,7 @@ public class FriendController {
 
     @PostMapping("/editFriend/{id}")
     public String editFriendSubmit(@PathVariable Long id, @ModelAttribute Friend friend) {
-        friend.setId(id);
+       // friend.setId(id);
         friendService.saveFriend(friend);
         return "redirect:/";
     }

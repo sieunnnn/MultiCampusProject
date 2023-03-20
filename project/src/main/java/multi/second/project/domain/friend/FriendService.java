@@ -1,7 +1,7 @@
-package multi.second.project.domain.friends;
+package multi.second.project.domain.friend;
 
-import multi.second.project.domain.friends.domain.Friend;
-import multi.second.project.domain.friends.repository.FriendRepository;
+import multi.second.project.domain.friend.domain.Friend;
+import multi.second.project.domain.friend.repository.FriendRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

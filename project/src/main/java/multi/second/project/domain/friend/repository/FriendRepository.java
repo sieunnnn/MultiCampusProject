@@ -1,6 +1,6 @@
-package multi.second.project.domain.friends.repository;
+package multi.second.project.domain.friend.repository;
 
-import multi.second.project.domain.friends.domain.Friend;
+import multi.second.project.domain.friend.domain.Friend;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
