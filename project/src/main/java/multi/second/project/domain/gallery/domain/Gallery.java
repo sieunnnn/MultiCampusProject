@@ -92,6 +92,9 @@ public class Gallery {
 		this.comments.add(comment);
 	}
 	
+	public void removeComment(Comment comment) {
+		this.comments.remove(comment);
+	}
 	
 	
 	

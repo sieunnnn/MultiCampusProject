@@ -23,9 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import multi.second.project.domain.comment.CommentService;
-import multi.second.project.domain.comment.dto.request.CommentModifyRequest;
-import multi.second.project.domain.comment.dto.request.CommentRegistRequest;
-import multi.second.project.domain.comment.dto.response.CommentResponse;
 import multi.second.project.domain.gallery.dto.request.GalleryModifyRequest;
 import multi.second.project.domain.gallery.dto.request.GalleryRegistRequest;
 import multi.second.project.domain.gallery.dto.response.GalleryDetailResponse;
@@ -56,8 +53,8 @@ public class GalleryController {
 		
 		dto.setUserId(principal.getUserId());
 		galleryService.createGallery(dto, files);
-		
-		return "redirect:/";
+
+		return "redirect:/gallery/list";
 	}
 	
 	//갤러리 리스트 화면
