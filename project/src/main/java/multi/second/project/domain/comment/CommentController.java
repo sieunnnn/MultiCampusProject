@@ -27,6 +27,7 @@ import multi.second.project.domain.comment.dto.request.CommentRegistRequest;
 import multi.second.project.domain.gallery.dto.request.GalleryModifyRequest;
 import multi.second.project.domain.gallery.dto.request.GalleryRegistRequest;
 import multi.second.project.domain.gallery.dto.response.GalleryDetailResponse;
+import multi.second.project.domain.member.UserPrincipal;
 import multi.second.project.domain.member.dto.Principal;
 import multi.second.project.infra.util.file.dto.FilePathDto;
 
@@ -40,12 +41,13 @@ public class CommentController {
 	//갤러리 특정 포스트에서 댓글 작성 시
 	@PostMapping("upload")
 	public String upload(
-			@SessionAttribute(name="auth", required=false) Principal principal,
+//			@SessionAttribute(name="auth", required=false) Principal principal,
 			CommentRegistRequest dto,
 			Long postIdx
 			) {
 		
-		dto.setUserId(principal.getUserId());
+//		dto.setUserId(principal.getUserId());
+		dto.setUserId(UserPrincipal.getUserPrincipal().getUserId());
 		commentService.createComment(dto, postIdx);
 		
 		return "redirect:/gallery/detail?postIdx="+postIdx;
@@ -55,11 +57,12 @@ public class CommentController {
 	@PostMapping("modify")
 	public String modify(
 			CommentModifyRequest dto,
-			@SessionAttribute("auth") Principal principal,
+//			@SessionAttribute("auth") Principal principal,
 			Long postIdx
 			) {
 		
-		dto.setUserId(principal.getUserId());
+//		dto.setUserId(principal.getUserId());
+		dto.setUserId(UserPrincipal.getUserPrincipal().getUserId());
 		commentService.updateComment(dto);
 		
 		return "redirect:/gallery/detail?postIdx="+postIdx;
@@ -69,11 +72,11 @@ public class CommentController {
 	@PostMapping("remove")
 	public String remove(
 			Long cmIdx, 
-			@SessionAttribute("auth") Principal principal,
+//			@SessionAttribute("auth") Principal principal,
 			Long postIdx
 			) {
 		
-		commentService.deleteComment(cmIdx, principal, postIdx);
+		commentService.deleteComment(cmIdx, UserPrincipal.getUserPrincipal().getPrincipal(), postIdx);
 		
 		return "redirect:/gallery/detail?postIdx="+postIdx;
 	}
