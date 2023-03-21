@@ -37,10 +37,13 @@ public class SecurityConfig {
 	
 	@Bean                                                            
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		
+
+		http.headers()
+				.frameOptions().sameOrigin().and();
+
 		http.authorizeHttpRequests()
 		.antMatchers(HttpMethod.GET, "/").permitAll()
-		.antMatchers(HttpMethod.GET, "/member/signup", "/member/checkId", "/member/signupimpl/**").permitAll()
+		.antMatchers(HttpMethod.GET, "/member/signup", "/member/checkId", "/member/signupimpl/**", "/chat").permitAll()
 		.antMatchers(HttpMethod.POST,"/member/signup").permitAll()
 		.antMatchers(HttpMethod.POST, "/mail").permitAll()
 		.antMatchers(HttpMethod.GET,"/board/list", "/board/detail", "/board/download").permitAll()
@@ -75,8 +78,7 @@ public class SecurityConfig {
 		return web -> web.ignoring().antMatchers("/css/**","/js/**", "/img/**", "/icon/**")
 				.requestMatchers(PathRequest.toStaticResources().atCommonLocations());
 	}
-	
-	
+
 	
 	
 	
