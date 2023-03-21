@@ -48,7 +48,7 @@
           
       </div>
       
-      <th:block th:if="${session.auth ne null and gallery.userId eq session.auth.userId}">
+      <th:block sec:authorize="isAuthenticated()" th:if="${gallery.userId eq #authentication.name}">
 	          <form th:action="@{/comment/upload}" method="post" >
 	          	<input type="text" id="context" name="context" required="required">
 	          	<input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/> 
