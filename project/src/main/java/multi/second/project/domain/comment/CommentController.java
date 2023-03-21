@@ -65,17 +65,17 @@ public class CommentController {
 		return "redirect:/gallery/detail?postIdx="+postIdx;
 	}
 	
-	//갤러리 특정 포스트에서 댓글 삭제 시(is_del이 true일 경우 "삭제된 댓글입니다."로 보여지게 할 것) 
-	@PostMapping("delete")
-	public String delete(
+	//갤러리 특정 포스트에서 댓글 삭제 시(is_del이 true일 경우 "삭제된 댓글입니다."로 보여지게 할 것->일단 그냥삭제로 변경) 
+	@PostMapping("remove")
+	public String remove(
 			Long cmIdx, 
 			@SessionAttribute("auth") Principal principal,
 			Long postIdx
 			) {
 		
-		commentService.deleteComment(cmIdx, principal);
+		commentService.deleteComment(cmIdx, principal, postIdx);
 		
-		return "redirect:/";
+		return "redirect:/gallery/detail?postIdx="+postIdx;
 	}
 	
 	
