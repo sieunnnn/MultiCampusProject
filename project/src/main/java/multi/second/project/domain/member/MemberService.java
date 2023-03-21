@@ -8,6 +8,9 @@ import javax.validation.Valid;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +27,7 @@ import multi.second.project.infra.util.mail.EmailSender;
 @Service
 @AllArgsConstructor
 @Transactional(readOnly = true)
-public class MemberService {
+public class MemberService implements UserDetailsService{
 	
 	private final MemberRepository memberRepository;
 	private final RestTemplate restTemplate;
@@ -63,16 +66,24 @@ public class MemberService {
 		
 	}
 
-	public Principal authenticateUser(LoginRequest loginRequest) {
-		
-		Member member = memberRepository.findByUserIdAndIsLeave(loginRequest.getUserId(), false);
-		
-		if(member == null) return null;
-		if(!passwordEncoder.matches(loginRequest.getPassword(), member.getPassword())) return null;
-		
-		return new Principal(member);
-	}
+//	public Principal authenticateUser(LoginRequest loginRequest) {
+//		
+//		Member member = memberRepository.findByUserIdAndIsLeave(loginRequest.getUserId(), false);
+//		
+//		if(member == null) return null;
+//		if(!passwordEncoder.matches(loginRequest.getPassword(), member.getPassword())) return null;
+//		
+//		return new Principal(member);
+//	}
 	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		
+		Member member = memberRepository.findByUserIdAndIsLeave(username, false);
+		if(member == null) throw new UsernameNotFoundException(username);
+		
+		return new UserPrincipal(new Principal(member));
+	}
 	
 	
 	

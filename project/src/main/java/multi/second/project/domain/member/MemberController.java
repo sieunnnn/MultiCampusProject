@@ -25,6 +25,7 @@ import multi.second.project.domain.member.dto.request.LoginRequest;
 import multi.second.project.domain.member.dto.request.SignUpRequest;
 import multi.second.project.domain.member.validator.SignUpValidator;
 import multi.second.project.infra.code.ErrorCode;
+import multi.second.project.infra.code.Role;
 import multi.second.project.infra.exception.HandlableException;
 
 @Controller
@@ -89,6 +90,7 @@ public class MemberController {
 			
 		if(!authToken.equals(sessionToken)) throw new HandlableException(ErrorCode.EXPRIATION_SIGNUP_TOKEN);
 		
+		form.setGrade(Role.USER.desc());
 		memberService.registNewMember(form);
 		
 		session.removeAttribute("authToken");
@@ -102,29 +104,30 @@ public class MemberController {
 		model.addAttribute("loginRequest", new LoginRequest());
 		System.out.println("@GetMapping(\"login\") new LoginRequest() :  "+new LoginRequest());
 		System.out.println("@GetMapping(\"login\") model :  "+model);
+			
 	};
 	
-	@PostMapping("login")
-	public String loginImpl(@Valid LoginRequest loginRequest
-							, Errors error
-							, HttpSession session
-							, RedirectAttributes redirectAttributes ) {
-		
-		if(error.hasErrors()) {
-			return "/member/login";
-		}
-
-		System.out.println("@PostMapping(\"login\") loginRequest :  "+loginRequest);
-		Principal principal = memberService.authenticateUser(loginRequest);
-		
-		if(principal == null) {
-			redirectAttributes.addFlashAttribute("msg", "아이디나 비밀번호가 일치하지 않습니다.");
-			return "redirect:/member/login";
-		}
-		System.out.println("@PostMapping(\"login\") principal :  "+principal);
-		session.setAttribute("auth", principal);
-		return "redirect:/dashboard";
-	}
+//	@PostMapping("login")
+//	public String loginImpl(@Valid LoginRequest loginRequest
+//							, Errors error
+//							, HttpSession session
+//							, RedirectAttributes redirectAttributes ) {
+//		
+//		if(error.hasErrors()) {
+//			return "/member/login";
+//		}
+//
+//		System.out.println("@PostMapping(\"login\") loginRequest :  "+loginRequest);
+//		Principal principal = memberService.authenticateUser(loginRequest);
+//		
+//		if(principal == null) {
+//			redirectAttributes.addFlashAttribute("msg", "아이디나 비밀번호가 일치하지 않습니다.");
+//			return "redirect:/member/login";
+//		}
+//		System.out.println("@PostMapping(\"login\") principal :  "+principal);
+//		session.setAttribute("auth", principal);
+//		return "redirect:/dashboard";
+//	}
 
 	
 	

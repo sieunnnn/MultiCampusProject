@@ -36,9 +36,10 @@ public class MemberControllerTest {
 	public void testSignUpImpl() throws Exception {
 		
 		SignUpRequest form = new SignUpRequest();
-		form.setUserId("group1B");
+		form.setUserId("admin");
 		form.setPassword("123qwe!@#QWE");
 		form.setEmail("azimemory@gmail.com");
+		form.setGrade("ROLE_ADMIN");
 		//form.setImagePath(null);
 		
 		mockMvc.perform(get("/member/signupimpl/1234")

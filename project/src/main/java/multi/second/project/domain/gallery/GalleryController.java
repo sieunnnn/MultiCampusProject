@@ -26,6 +26,7 @@ import multi.second.project.domain.comment.CommentService;
 import multi.second.project.domain.gallery.dto.request.GalleryModifyRequest;
 import multi.second.project.domain.gallery.dto.request.GalleryRegistRequest;
 import multi.second.project.domain.gallery.dto.response.GalleryDetailResponse;
+import multi.second.project.domain.member.UserPrincipal;
 import multi.second.project.domain.member.dto.Principal;
 import multi.second.project.infra.util.file.dto.FilePathDto;
 
@@ -47,11 +48,12 @@ public class GalleryController {
 	@PostMapping("upload")
 	public String upload(//업로드 했을때 사진이 보이게 해야될것 같은데 어떻게 해야 할까?
 			@RequestParam List<MultipartFile> files,
-			@SessionAttribute(name="auth", required=false) Principal principal,
+			//@SessionAttribute(name="auth", required=false) Principal principal,
 			GalleryRegistRequest dto
 			) {
 		
-		dto.setUserId(principal.getUserId());
+		//dto.setUserId(principal.getUserId());
+		dto.setUserId(UserPrincipal.getUserPrincipal().getUserId());
 		galleryService.createGallery(dto, files);
 
 		return "redirect:/gallery/list";
@@ -61,7 +63,7 @@ public class GalleryController {
 	@GetMapping("list")
 	public String galleryList(//등록글들을 타이틀이 아닌 그림으로 보여줘야 하는데 어떻게 할까?
 			@PageableDefault(size=10, sort="postIdx", direction = Direction.DESC, page = 0)
-			@SessionAttribute(name="auth", required=false) Principal principal,//현재 아이디정보를 얻기위해 추가
+//			@SessionAttribute(name="auth", required=false) Principal principal,//현재 아이디정보를 얻기위해 추가
 			Pageable pageable,
 			Model model
 			
@@ -70,7 +72,8 @@ public class GalleryController {
 		//Map<String, Object> commandMap = galleryService.findGalleryList(pageable);
 		//System.out.println("galleryService.findGalleryList(pageable) : "+commandMap);
 		
-		Map<String, Object> commandMap = galleryService.findGalleryListByUserId(principal.getUserId(),pageable);
+//		Map<String, Object> commandMap = galleryService.findGalleryListByUserId(principal.getUserId(),pageable);
+		Map<String, Object> commandMap = galleryService.findGalleryListByUserId(UserPrincipal.getUserPrincipal().getPrincipal().getUserId(),pageable);
 		System.out.println("galleryService.findGalleryListByUserId(principal.getUserId(),pageable) : "+commandMap);
 		model.addAllAttributes(commandMap);
 		
@@ -146,20 +149,24 @@ public class GalleryController {
 	//갤러리 포스트 수정완료시
 	@PostMapping("modify")
 	public String modify(GalleryModifyRequest dto,
-						@RequestParam List<MultipartFile> fileList,
-						@SessionAttribute("auth") Principal principal
+						@RequestParam List<MultipartFile> fileList
+//						,@SessionAttribute("auth") Principal principal
 			) {
 		
-		dto.setUserId(principal.getUserId());
+//		dto.setUserId(principal.getUserId());
+		dto.setUserId(UserPrincipal.getUserPrincipal().getUserId());
 		galleryService.updateGallery(dto, fileList);
 		
 		return "redirect:/gallery/detail?postIdx="+dto.getPostIdx();
 	}
 	//갤러리 포스트 삭제시
 	@PostMapping("remove")
-	public String remove(Long postIdx, @SessionAttribute("auth") Principal principal) {
+	public String remove(Long postIdx
+//			,@SessionAttribute("auth") Principal principal
+			) {
 		
-		galleryService.removeGallery(postIdx, principal);
+//		galleryService.removeGallery(postIdx, principal);
+		galleryService.removeGallery(postIdx, UserPrincipal.getUserPrincipal().getPrincipal());
 		
 		return "redirect:/gallery/list";
 	}
