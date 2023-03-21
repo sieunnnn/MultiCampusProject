@@ -59,6 +59,7 @@ public class Member {
 				.userId(dto.getUserId())
 				.password(dto.getPassword())
 				.email(dto.getEmail())
+				.grade(dto.getGrade())
 				//.imagePath(dto.getImagePath())
 				.build();
 	}

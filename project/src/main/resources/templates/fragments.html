@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <th:block th:fragment="flg_head">
 
@@ -26,18 +27,21 @@
 	        <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
 	      </ul>
 		
-	      <div class="col-md-3 text-end" th:if="${session.auth == null}">
+	      <div class="col-md-3 text-end" sec:authorize="!isAuthenticated()">
         	<a href="/member/login" class="btn btn-outline-primary me-2">Login</a>
-        	<a href="/member/signup" class="btn btn-primary">Sign-up</a>
-        	<a href="/board/list" class="btn btn-primary me-1">Board</a>
+        	<a href="/member/signup" class="btn btn-outline-primary">Sign-up</a>
+        	<a href="/board/list" class="btn btn-outline-primary me-1">Board</a>
 	      </div>
-	    
-	      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" th:if="${session.auth != null}">
-        	<li><a class="nav-link px-2 link-dark" th:text="${session.auth.userId}"></a></li>
+	      
+	      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" sec:authorize="isAuthenticated()">
+        	<li><a class="nav-link px-2 link-dark" th:text="${#authentication.name}"></a></li>
         	<li><a href="/member/mypage" class="nav-link px-2 link-dark">MyPage</a></li>
         	<li><a href="/board/list" class="nav-link px-2 link-dark">Board</a></li>
-        	<li><a href="/member/logout" class="btn btn-primary">Logout</a></li>
+        	<li><a href="/gallery/list" class="nav-link px-2 link-dark">Gallery</a></li>
 	      </ul>
+	      <form th:action="@{/member/logout}" method="post" sec:authorize="isAuthenticated()">
+	      	<button class="btn btn-primary">Logout</button>
+	      </form>
 	   </header>
    </div>
    
