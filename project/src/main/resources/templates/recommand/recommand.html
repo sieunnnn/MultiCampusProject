@@ -18,6 +18,7 @@
 	<input name="message" id="con" placeholder="채팅을 입력하세요.">
 	<input type="text" th:value="${#authentication.name}" name="userId" id="user"/> 
 	<button onclick="sendChat()">전송하기</button>
+	<button onclick="sendChat2()">전송하기2</button>
 	
 	<hr>
 	<div id="response"></div>
@@ -26,6 +27,7 @@
 
 <script type="text/javascript" layout:fragment="script" th:inline="javascript">
 	var stompClient = null;
+	var stompClient2 = null;
 	
 	<!--  
 	function connect() {
@@ -53,13 +55,35 @@
 	        	res = JSON.parse(recommand.body);
 	          	console.dir(res)
 	          	response.innerHTML += '<span style="background:yellow">' + res.userId + " :  " +res.message + '<br>'+'</span>';
-	        });
+	        }    
+	        );
+	    });
+	}
+	
+	function connect2() {
+	    var socket = new SockJS('/gs-guide-websocket');
+	    stompClient2 = Stomp.over(socket);
+	    
+	    stompClient2.connect({}, function (frame) {
+	        console.log('Connected: ' + frame);
+	        stompClient.subscribe('/topic/recommand-plan2/' + [[${tgIdx}]], function (recommand) {
+	        	res = JSON.parse(recommand.body);
+	          	console.dir(res)
+	          	response.innerHTML += '<span style="background:yellow">' + res.userId + " :  " +res.message + '<br>'+'</span>';
+	        }    
+	        );
 	    });
 	}
 	
 	function disconnect() {
 	    if (stompClient !== null) {
 	        stompClient.disconnect();
+	    }
+	    console.log("Disconnected");
+	}
+	function disconnect2() {
+	    if (stompClient2 !== null) {
+	        stompClient2.disconnect();
 	    }
 	    console.log("Disconnected");
 	}
@@ -79,8 +103,15 @@
 	    stompClient.send("/app/recommand-plan/" + [[${tgIdx}]], {}, JSON.stringify({'message':message, 'userId':userId}));
 	}
 	
-	connect();
+	function sendChat2() {
+		let message = con.value;
+		let userId = user.value;
+		
+	    stompClient.send("/app/recommand-plan2/" + [[${tgIdx}]], {}, JSON.stringify({'message':message, 'userId':userId}));
+	}
 	
+	connect();
+	connect2();
 
 
 

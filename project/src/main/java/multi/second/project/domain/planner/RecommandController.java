@@ -41,6 +41,10 @@ public class RecommandController {
 	  public void recommandPlan(@DestinationVariable("tgIdx") Long tgIdx, ChatRequest dto) throws Exception {
 		  simpMessagingTemplate.convertAndSend("/topic/recommand-plan/" + tgIdx, recommandService.generateChat(dto));
 	  }
+	  @MessageMapping("/recommand-plan2/{tgIdx}")
+	  public void recommandPlan2(@DestinationVariable("tgIdx") Long tgIdx, ChatRequest dto) throws Exception {
+		  simpMessagingTemplate.convertAndSend("/topic/recommand-plan2/" + tgIdx, recommandService.generateChat(dto));
+	  }
 //	  @MessageMapping("/recommand-plan/{tgIdx}")
 //	  public void recommandPlan(@DestinationVariable("tgIdx") Long tgIdx, @RequestParam Map<String, String> message) throws Exception {
 //		  return Map.of("message" ,"["+ UserPrincipal.getUserPrincipal().getUserId() +"]"+" : " );
