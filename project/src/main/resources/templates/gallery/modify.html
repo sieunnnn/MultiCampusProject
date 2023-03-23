@@ -3,89 +3,89 @@
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="gallery/common">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="gallery/common">
 
 <head>
-	<title>Detail</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" href="../../static/css/gallery/modify.css" th:href="@{/css/gallery/modify.css}"/>
+    <title>Detail</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../static/css/gallery/modify.css" th:href="@{/css/gallery/modify.css}"/>
 </head>
 
 <body>
 <div layout:fragment="gallery__content">
 
-	<form th:action="@{/gallery/modify}" id="frmModify" class="frm_modify" method="post" enctype="multipart/form-data">
-		<input type="hidden" th:value="${gallery.postIdx}" name="postIdx">
+    <form th:action="@{/gallery/modify}" id="frmModify" class="frm_modify" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:value="${gallery.postIdx}" name="postIdx">
 
-		<div class="previous__page">
-			<button class="btn_prev" onclick="location.href='/gallery/list'">뒤로가기</button>
-		</div>
+        <div class="previous__page">
+            <button class="btn_prev" onclick="location.href='/gallery/list'">뒤로가기</button>
+        </div>
 
-		<!-- 제목 -->
-		<div class="wrapper__input__title">
-			<input type="text" name="title" class="input__title" required="required" th:value="${gallery.title}"/>
-		</div>
+        <!-- 제목 -->
+        <div class="wrapper__input__title">
+            <input type="text" name="title" class="input__title" required="required" th:value="${gallery.title}"/>
+        </div>
 
-		<!-- 제목 밑의 bar -->
-		<div class="wrapper">
-			<div class="txt_day"></div>
-			<hr>
-			<div class="wrapper__detail__btn">
-				<!-- 전송 버튼 -->
-				<button class="btn__blue">전송</button>
-			</div>
-		</div>
+        <!-- 제목 밑의 bar -->
+        <div class="wrapper">
+            <div class="txt_day"></div>
+            <hr>
+            <div class="wrapper__detail__btn">
+                <!-- 전송 버튼 -->
+                <button class="btn__blue">전송</button>
+            </div>
+        </div>
 
-		<div class="container__post__contents">
-			<div class="wrapper__photo">
-				<!-- 사진 -->
-				<div class="wrapper__file">
-					<label for="file">
-						<div class="btn__gray">파일 선택</div>
-					</label>
-					<input type="file" class="mt-2" name="fileList" id="file" multiple/>
-				</div>
+        <div class="container__post__contents">
+            <div class="wrapper__photo">
+                <!-- 사진 -->
+                <div class="wrapper__file">
+                    <label for="file">
+                        <div class="btn__gray">파일 선택</div>
+                    </label>
+                    <input type="file" class="mt-2" name="fileList" id="file" multiple/>
+                </div>
 
-				<div class="wrapper__detail__file">
-					<!-- 현재 등록 되어있는 사진 -->
-					<div th:each="file : ${gallery.filePathDtos}" th:id="|f${file.fpIdx}|" class="file__list">
-						<img th:attr="data-idx=|f${file.fpIdx}|" class="btnClose" th:src="@{/gallery/download(fpIdx=${file.fpIdx})}">
-					</div>
-				</div>
-			</div>
+                <div class="wrapper__detail__file">
+                    <!-- 현재 등록 되어있는 사진 -->
+                    <div th:each="file : ${gallery.filePathDtos}" th:id="|f${file.fpIdx}|" class="file__list">
+                        <img th:attr="data-idx=|f${file.fpIdx}|" class="btnClose" th:src="@{/gallery/download(fpIdx=${file.fpIdx})}">
+                    </div>
+                </div>
+            </div>
 
-			<hr>
+            <hr>
 
-			<div class="wrapper__post">
-				<div>
-					<textarea name="content" required="required"  th:text="${gallery.content}"></textarea>
-				</div>
-			</div>
-		</div>
+            <div class="wrapper__post">
+                <div>
+                    <textarea name="content" required="required"  th:text="${gallery.content}"></textarea>
+                </div>
+            </div>
+        </div>
 
-		<hr>
-	</form>
+        <hr>
+    </form>
 
 
-	<script type="text/javascript" >
+    <script type="text/javascript" >
 
-		document.querySelectorAll('.btnClose').forEach(e => {
+        document.querySelectorAll('.btnClose').forEach(e => {
 
-			e.addEventListener('click', ev => {
+            e.addEventListener('click', ev => {
 
-				let fileId = ev.target.dataset.idx;
-				document.querySelector('#'+fileId).style.display='none';
+                let fileId = ev.target.dataset.idx;
+                document.querySelector('#'+fileId).style.display='none';
 
-				fileId = fileId.replace('f','');
+                fileId = fileId.replace('f','');
 
-				inpDelfile = createElement("input",{prop:{"type":"hidden","value":fileId,"name":"delFiles"}});
-				frmModify.append(inpDelfile);
+                inpDelfile = createElement("input",{prop:{"type":"hidden","value":fileId,"name":"delFiles"}});
+                frmModify.append(inpDelfile);
 
-			});
-		})
+            });
+        })
 
-	</script>
+    </script>
 
 </div>
 </body>
