@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
@@ -27,7 +26,6 @@ import multi.second.project.domain.gallery.dto.request.GalleryModifyRequest;
 import multi.second.project.domain.gallery.dto.request.GalleryRegistRequest;
 import multi.second.project.domain.gallery.dto.response.GalleryDetailResponse;
 import multi.second.project.domain.member.UserPrincipal;
-import multi.second.project.domain.member.dto.Principal;
 import multi.second.project.infra.util.file.dto.FilePathDto;
 
 @Controller
@@ -39,9 +37,9 @@ public class GalleryController {
 	private final CommentService commentService;
 	
 	//갤러리 포스트 추가 폼
-	@GetMapping("form")
+	@GetMapping("add")
 	public String galleryForm() {
-		return "/gallery/gallery-form";
+		return "gallery/add";
 	}
 	
 	//파일(사진) 업로드시
@@ -77,7 +75,7 @@ public class GalleryController {
 		System.out.println("galleryService.findGalleryListByUserId(principal.getUserId(),pageable) : "+commandMap);
 		model.addAllAttributes(commandMap);
 		
-		return "/gallery/gallery-list";
+		return "gallery/list";
 	}
 	
 	//갤러리 특정 포스트 방문시
@@ -91,7 +89,7 @@ public class GalleryController {
 //		System.out.println("galleryService.findCommentListByPostIdx(postIdx) :  "+galleryService.findCommentListByPostIdx(postIdx));
 //		model.addAttribute("comment", galleryService.findCommentListByPostIdx(postIdx));
 		
-		return "/gallery/gallery-contents";
+		return "gallery/detail";
 	}
 //	
 //	//갤러리 특정 포스트에서 댓글 작성 시
@@ -123,7 +121,7 @@ public class GalleryController {
 //		return "redirect:/";
 //	}
 //	
-	//갤러리 포스트에서 사진 다운로드 시(필요 없을지도)
+	//갤러리 포스트에서 사진 다운로드
 	@GetMapping("download")
 	public ResponseEntity<FileSystemResource> downloadFile(Long fpIdx){
 		
@@ -144,7 +142,7 @@ public class GalleryController {
 	public String galleryModify(Long postIdx, Model model) {
 		GalleryDetailResponse dto = galleryService.findGalleryByPostIdx(postIdx);
 		model.addAttribute("gallery", dto);
-		return "gallery/gallery-modify";
+		return "gallery/modify";
 	}
 	//갤러리 포스트 수정완료시
 	@PostMapping("modify")

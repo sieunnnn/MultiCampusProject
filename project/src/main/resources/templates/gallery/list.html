@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{gallery1/common}">
+      layout:decorate="~{gallery/common}">
 
 <head>
     <title>Gallery</title>
@@ -16,7 +16,7 @@
 <!-- 대체하고 싶은 요소에 layout:fragment 속성을 부여한다. -->
 <div layout:fragment="gallery__content">
     <div class="wrapper__button">
-        <button class="btn__blue" onclick="window.open('/gallery/form', 'window_name', 'width=430, height=500, location=no, status=no, scrollbars=yes');">글쓰기</button>
+        <button th:onclick="|location.href='@{/gallery/add}'|" class="btn__blue">글쓰기</button>
     </div>
     <div class="wrapper__photo__list">
         <div class="photo__list">
