@@ -55,6 +55,7 @@ public class Planner {
 	private LocalDateTime regDate;
 	
 	//플래너 제목
+	@ColumnDefault("제목없음")
 	private String title;
 	
 	//플래너 호스트
