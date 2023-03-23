@@ -23,7 +23,7 @@
 
         <!-- 제목 -->
         <div class="wrapper__input__title">
-            <input type="text" name="title" class="input__title" required="required" th:value="${gallery.title}"/>
+            <input type="text" name="title" class="input__title" required="required"/>
         </div>
 
         <!-- 제목 밑의 bar -->
@@ -40,10 +40,10 @@
             <div class="wrapper__photo">
                 <!-- 사진 -->
                 <div class="wrapper__file">
-                    <label for="file">
-                        <div class="btn__gray">파일 등록</div>
+                    <label for="contract_file" class="btn__gray">
+                        파일등록
                     </label>
-                    <input type="file" class="mt-2" name="fileList" id="file" multiple/>
+                    <input type="file" name="files" id="contract_file" multiple/>
                 </div>
             </div>
 
