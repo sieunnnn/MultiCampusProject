@@ -1,0 +1,94 @@
+
+<!-- 사진 상세보기 화면 -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="gallery/common">
+
+<head>
+    <title>Detail</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../static/css/gallery/detail.css" th:href="@{/css/gallery/detail.css}"/>
+</head>
+
+<body>
+<!-- 대체하고 싶은 요소에 layout:fragment 속성을 부여한다. -->
+<div layout:fragment="gallery__content">
+    <div class="previous__page">
+        <button class="btn_prev" onclick="location.href='/gallery/list'">뒤로가기</button>
+    </div>
+
+    <div class="txt_head">[[${gallery.title}]]</div>
+
+    <div class="wrapper" sec:authorize="isAuthenticated()" th:if="${gallery.userId eq #authentication.name}">
+        <div class="txt_day">[[${gallery.regDateAsDate}]]</div>
+        <hr>
+        <div class="wrapper__detail__btn">
+            <form action="/gallery/modify" method="get">
+                <input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/>
+                <button class="btn__blue"><span>수정</span></button>
+            </form>
+
+            <form th:action="@{/gallery/remove}" method="post" >
+                <input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/>
+                <button class="btn__white"><span>삭제</span></button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container__post__contents">
+        <div class="wrapper__photo">
+            <div>
+				<span th:each="file : ${gallery.filePathDtos}">
+					<img class="photo" th:src="@{/gallery/download(fpIdx=${file.fpIdx})}">
+				</span>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="wrapper__post">
+            <div class="post">
+                <p>[[${gallery.content}]]</p>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- 좋아요 기능, 댓글기능 추가 예정 -->
+    <th:block sec:authorize="isAuthenticated()" th:if="${gallery.userId eq #authentication.name}">
+        <form th:action="@{/comment/upload}" method="post" >
+            <input type="text" id="context" name="context" required="required">
+            <input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/>
+            <button><span>댓글 등록</span></button>
+        </form>
+    </th:block>
+
+
+
+    <div>
+        <ol>
+            <li th:each="comment : ${gallery.commentResponses}">
+                <p th:text="${comment.context}">
+                <form th:action="@{/comment/remove}" method="post" >
+                    <input type="hidden" th:value="${comment.cmIdx}" name="cmIdx"/>
+                    <input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/>
+                    <button id="btnDel"><span>댓글 삭제</span></button>
+                </form>
+                <form th:action="@{/comment/modify}" method="post" >
+                    <input type="text" id="context" name="context" required="required">
+                    <input type="hidden" th:value="${comment.cmIdx}" name="cmIdx"/>
+                    <input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/>
+                    <button><span>댓글 수정</span></button>
+                </form>
+            </li>
+        </ol>
+    </div>
+
+</div>
+</body>
+
+</html>
