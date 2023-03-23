@@ -1,0 +1,248 @@
+
+/* 웹폰트 */
+@font-face {
+
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+button {
+
+    cursor: grab;
+}
+
+button:active {
+
+    border: none;
+    outline: none;
+}
+
+.container__gallery {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.previous__page {
+
+    display: flex;
+    align-content: center;
+    justify-content: flex-start;
+
+    width: 786px;
+    height: 56px;
+}
+
+.btn_prev {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #1C1C1E;
+
+}
+
+.wrapper__input__title {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-content: flex-start;
+
+    height: 86px;
+    width: 400px;
+
+    margin: 0 0 7px 17px;
+
+}
+
+.input__title {
+
+    height: 48px;
+    width: 400px;
+
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+
+    margin-bottom: 5px;
+    padding: 0 0 10px 7px;
+    /*background-color: orange;*/
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+
+    color: #1C1C1E;
+}
+
+.wrapper {
+
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+
+    width: 752px;
+    height: 41px;
+
+    margin-left: 18px;
+    border-top: 0.5px solid #1C1C1E;
+    border-bottom: 0.5px solid #1C1C1E;
+}
+
+.txt_day {
+
+    width: 335px;
+    padding-left: 5px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 41px;
+    /* identical to box height */
+
+    color: #1C1C1E;
+}
+
+.wrapper__detail__btn {
+
+    width: 446px;
+    height: 41px;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: flex-end;
+}
+
+.container__post__contents {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+
+    width: 752px;
+    height: 400px;
+}
+
+.wrapper__photo {
+
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-content: flex-start;
+
+    width: 358px;
+    height: 400px;
+}
+
+.wrapper__file {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-content: center;
+
+    width: 100%;
+    height: 100px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    /* identical to box height */
+
+    color: #FFFFFF;
+
+}
+
+.btn__gray {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 14px;
+    gap: 10px;
+
+    width: 60px;
+    height: 18px;
+    margin-left: 35px;
+
+    background: #6E6D70;
+    border: 0.5px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.1), inset 0px 0.5px 0.5px rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    /* identical to box height */
+
+    color: #FFFFFF;
+
+}
+
+#file {
+
+    display: none;
+}
+
+.wrapper__detail__file {
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    width: 274px;
+    height: 100%;
+
+    overflow: auto;
+
+    margin: 38px;
+}
+
+.wrapper__post {
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    margin-top: 26px;
+    width: 427px;
+    height: 300px;
+}
+
+
+textarea {
+
+    width: 376px;
+    height: 300px;
+
+    margin-left: 25px;
+
+    resize: none;
+
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+
+    margin-bottom: 5px;
+    padding: 0 0 10px 7px;
+    /*background-color: orange;*/
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+
+    color: #1C1C1E;
+}
