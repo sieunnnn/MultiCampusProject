@@ -39,12 +39,12 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		
 		http.authorizeHttpRequests()
-		.antMatchers(HttpMethod.GET, "/").permitAll()
+		.antMatchers(HttpMethod.GET, "/**").permitAll()
 		.antMatchers(HttpMethod.GET, "/member/signup", "/member/checkId", "/member/signupimpl/**").permitAll()
 		.antMatchers(HttpMethod.POST,"/member/signup").permitAll()
 		.antMatchers(HttpMethod.POST, "/mail").permitAll()
 		.antMatchers(HttpMethod.GET,"/board/list", "/board/detail", "/board/download").permitAll()
-//		.antMatchers(HttpMethod.GET,"/gallery/list", "/gallery/detail").permitAll()
+		.antMatchers(HttpMethod.GET,"/gallery/list", "/gallery/detail").permitAll()
 		.antMatchers(HttpMethod.GET, "/admin").hasAuthority("ROLE_ADMIN")
 		.anyRequest().authenticated();
 		
@@ -69,7 +69,7 @@ public class SecurityConfig {
 		http.csrf().ignoringAntMatchers("/mail");
 		return http.build();
 	}
-	
+
 	@Bean
 	public WebSecurityCustomizer webSecurityCustomizer() {
 		return web -> web.ignoring().antMatchers("/css/**","/js/**", "/img/**", "/icon/**")
