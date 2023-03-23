@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -31,7 +32,7 @@ public class TodoList {
 	@GeneratedValue
 	private Long tlIdx;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@Builder.Default
 	private List<Todo> todos = new ArrayList<>();
 	
@@ -50,4 +51,8 @@ public class TodoList {
 	//투두리스트 삭제 여부
 	@ColumnDefault("false")
 	private Boolean isDel;
+	
+	public void addTodo(Todo todo) {
+		todos.add(todo);
+	}
 }

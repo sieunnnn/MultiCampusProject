@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import multi.second.project.domain.comment.domain.Comment;
 import multi.second.project.domain.todo.domain.AccomodationTodo;
+import multi.second.project.domain.todo.domain.BudgetType;
 import multi.second.project.domain.todo.domain.Todo;
 import multi.second.project.domain.todolist.domain.TodoList;
 
@@ -22,7 +23,7 @@ public class AccomodationTodoResponse {
 	private String contents;
 	private LocalDateTime regDate;
 	private Boolean isPrivate;
-	private Integer address;
+	private String address;
 
 	public AccomodationTodoResponse(AccomodationTodo entity) {
 		this.tdIdx = entity.getTdIdx();

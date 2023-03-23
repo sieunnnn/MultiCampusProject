@@ -1,4 +1,4 @@
-package multi.second.project.domain.planner.repository;
+package multi.second.project.domain.todo.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -7,11 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import multi.second.project.domain.gallery.domain.Gallery;
 import multi.second.project.domain.planner.domain.Planner;
+import multi.second.project.domain.todo.domain.AccomodationTodo;
 
 
 @Repository
-public interface PlannerRepository extends JpaRepository<Planner, Long>, PlannerRepositoryExtension{
+public interface AccomadationRepository extends JpaRepository<AccomodationTodo, Long>, AccomadationRepositoryExtension{
 
-	Page<Planner> findByTravelGroupMembersUserId(String userId, Pageable pageable);
+	
 	
 }

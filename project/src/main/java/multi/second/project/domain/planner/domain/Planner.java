@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -46,7 +47,7 @@ public class Planner {
 	@JoinColumn(name = "tgIdx")
 	private TravelGroup travelGroup;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@Builder.Default
 	private List<TodoList> todolists = new ArrayList<>();
 	
@@ -55,8 +56,8 @@ public class Planner {
 	private LocalDateTime regDate;
 	
 	//플래너 제목
-	@ColumnDefault("제목없음")
-	private String title;
+	@Builder.Default
+	private String title = "제목없";
 	
 	//플래너 호스트
 	@OneToOne
@@ -69,4 +70,10 @@ public class Planner {
 	//플래너 삭제여부
 	@ColumnDefault("false")
 	private Boolean isDel;
+	
+	public void addTodoList(TodoList todoList) {
+		todolists.add(todoList);
+	}
+	
+	
 }

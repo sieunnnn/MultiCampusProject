@@ -21,18 +21,22 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import multi.second.project.domain.todolist.domain.TodoList;
 
 @Entity
 @DynamicInsert // insert 쿼리를 생성할 때 null인 필드는 쿼리에서 생략
 @DynamicUpdate // entity에서 변경이 발견되지 않은 값은 쿼리에서 생략
+@SuperBuilder
 @NoArgsConstructor @AllArgsConstructor @Getter @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn
+@DiscriminatorColumn(name = "DTYPE")
 public class Todo {
 	//투두 카드 번호
 	@Id
 	@GeneratedValue
 	private Long tdIdx;
+	
+//	private String dType;
 	
 	//투두카드 생성 일자
 	@Column(columnDefinition = "timestamp default now()")
