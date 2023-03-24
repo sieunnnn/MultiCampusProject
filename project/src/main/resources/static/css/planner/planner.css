@@ -1,0 +1,217 @@
+
+/* 웹폰트 */
+@font-face {
+
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.container__planner {
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content:center;
+
+    width: 100%;
+    height: 100%;
+}
+
+.wrapper__title {
+
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+
+    width: 1169px;
+    height: 39px;
+
+    background: #FFFFFF;
+    box-shadow: 0 0.5px 0 rgba(0, 0, 0, 0.15), inset 0 -0.5px 0 rgba(0, 0, 0, 0.05);
+    border-radius: 0 16px 0 0;
+}
+
+.txt__title {
+
+    margin-top: 6px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+
+    color: #1C1C1E;
+}
+
+.container__menu {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+
+    padding-top: 20px;
+
+    width: 1169px;
+    height: 80px;
+}
+
+.wrapper__friends {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+
+    margin-left: 21px;
+    width: auto;
+    height: 73px;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    border-radius: 50px;
+
+}
+
+.profile {
+
+    margin: 7px 7px 6px 7px;
+    width: 60px;
+    height: 60px;
+
+    background-color: rgba(0, 0, 0, 0.32);
+    border-radius: 50%;
+}
+
+.wrapper__menu {
+
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    margin-right: 22px;
+
+    width: auto;
+    height: 73px;
+
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 10px;
+}
+
+.wrapper__menu img {
+
+    width: 70px;
+    height: 70px;
+}
+
+.container__plan {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+
+    width: 1169px;
+    height: 710px;
+
+    background-color: green;
+}
+
+.wrapper__plan {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: flex-start;
+
+    margin-top: 18px;
+    width: 1126px;
+    height: 665px;
+
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 16px;
+}
+
+.wrapper__money {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+
+    position: fixed;
+
+    width: 389px;
+    height: 665px;
+}
+
+.money__title {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+
+    width: 320px;
+    height: 57px;
+    margin: 26px 0 27px 33px;
+
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(40px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 16px;
+
+    color: #1C1C1E;
+}
+
+.txt__money__title {
+
+    margin-left: 107px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px;
+}
+
+.wrapper__summary {
+
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
+
+    margin: 0 0 28px 33px;
+    width: 320px;
+    height: 527px;
+
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(40px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 16px;
+}
+
+.wrapper__kanban {
+
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    justify-content: flex-start;
+
+    position: fixed;
+
+    left: 533px;
+
+    width: 736px;
+    height: 665px;
+
+    overflow-x: scroll;
+
+    background-color: blue;
+}

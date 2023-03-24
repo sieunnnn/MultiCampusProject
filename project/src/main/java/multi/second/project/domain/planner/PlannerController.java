@@ -33,9 +33,12 @@ import multi.second.project.infra.util.file.dto.FilePathDto;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("gallery")
 public class PlannerController {
 
+    @GetMapping("planner")
+    public String planner() {
+        return "planner/planner";
+    }
 //	private final PlannerService galleryService;
 //	private final CommentService commentService;
 //	

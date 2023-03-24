@@ -1,0 +1,88 @@
+
+<!-- 플래너 계획 부분 -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="main_layout">
+
+<head>
+    <title>friends</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../static/css/planner/planner.css" th:href="@{/css/planner/planner.css}"/>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div class="container__planner">
+
+        <!-- 타이틀 -->
+        <div class="wrapper__title">
+            <div class="txt__title">
+                제주도 감귤여행
+            </div>
+        </div>
+
+        <!-- 독바 -->
+        <div class="container__menu">
+
+            <!-- 같이 여행가는 친구들 -->
+            <div class="wrapper__friends">
+
+                <div class="profile">
+                    <img style="width:60px; height: 60px" src="/img/btn_profile.png">
+                </div>
+
+                <div class="profile">
+                    <img style="width:60px; height: 60px" src="/img/btn_profile.png">
+                </div>
+
+            </div>
+
+            <!-- 메뉴 -->
+            <div class="wrapper__menu">
+                <!-- 나중에 주소 넣을때 사용 th:onclick="|location.href='@{/컨트롤러 주소}'|" -->
+                <button><img src="/img/btn_weather.png"></button>
+                <button><img src="/img/btn_live_chat.png"></button>
+                <button><img src="/img/btn_recommendation.png"></button>
+                <button><img src="/img/btn_planner.png"></button>
+                <button><img src="/img/btn_chatGPT.png"></button>
+                <button><img src="/img/btn_help.png"></button>
+            </div>
+        </div>
+
+        <!-- 내용 -->
+        <div class="container__plan">
+
+            <!-- 계획 들어가는 박스 -->
+            <div class="wrapper__plan">
+
+                <!-- 예산 박스 (고정) -->
+                <div class="wrapper__money">
+                    <div class="money__title">
+                        <div class="txt__money__title">
+                            예산 요약
+                        </div>
+                    </div>
+
+                    <div class="wrapper__summary">
+
+                        <!-- 총 예산 내역 (table)-->
+                        <div class="summary">
+                        </div>
+
+                        <!-- 세부 내역 (table)-->
+                        <div class="details">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 계획 박스 -->
+                <div class="wrapper__kanban">
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
