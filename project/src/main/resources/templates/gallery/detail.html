@@ -44,9 +44,9 @@
             <div class="container__post__contents">
                 <div class="wrapper__photo">
                     <div>
-                <span th:each="file : ${gallery.filePathDtos}">
-                    <img class="photo" th:src="@{/gallery/download(fpIdx=${file.fpIdx})}">
-                </span>
+                        <div th:each="file : ${gallery.filePathDtos}">
+                            <img class="photo" th:src="@{/gallery/download(fpIdx=${file.fpIdx})}">
+                        </div>
                     </div>
                 </div>
 
@@ -89,29 +89,30 @@
                     <div class="container__comment" style="margin-top: 15px">
                         <div class="profile"></div>
                         <!-- 댓글 겸 댓글 수정창 나오는 버튼 -->
-                        <div class="txt__comment" id="showBtn" th:text="${comment.context}" onclick="div_show()"></div>
+                        <div class="txt__comment" th:text="${comment.context}"></div>
                         <form th:action="@{/comment/remove}" method="post" >
                             <input type="hidden" th:value="${comment.cmIdx}" name="cmIdx"/>
                             <input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/>
-                            <button class="btn__comment__white" id="btnDel">삭제</button>
+                            <button class="btn__comment__white" id="btnDel" style="margin: 20px 2px 0 0;">삭제</button>
                         </form>
+                        <button class="btn__comment__white" id="showBtn" style="margin: 20px 24px 0 0;">수정</button>
                     </div>
 
-                    <div id="modify" style="width: 520px; height: 20px; margin: 20px 0 50px 120px">
+                    <!-- 보여야 하는 div -->
+                    <div id="modify" style="width: 520px; height: 20px; margin: 20px 0 50px 170px" class="container__comment__hidden">
                         <form th:action="@{/comment/modify}" method="post"  class="container__comment__hidden" id="context">
-                            <!-- 보여야 하는 div -->
-                            <div id="showDiv">
+                            <div>
                                 <input type="text" class="input__modify__comment" name="context" placeholder="댓글 수정" required="required">
                                 <input type="hidden" th:value="${comment.cmIdx}" name="cmIdx"/>
                                 <input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/>
                             </div>
                             <div>
-                                <!-- 전송 버튼 겸 수정창 숨기기 버튼 -->
-                                <button id="hideBtn" onclick="div_hide()">
-                                    <span><img style="width: 23px; height: 23px" src="/img/btn_send_message.png"></span>
-                                </button>
+                                <button><img style="width: 23px; height: 23px; margin-right: 5px" src="/img/btn_send_message.png"></button>
                             </div>
                         </form>
+                        <div>
+                            <button class="btn__comment__white"  style="margin: 5px 0 0 85px;" id="hideBtn">닫기</button>
+                        </div>
                     </div>
 
                     <div>
@@ -123,19 +124,6 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    //보이기
-    function div_show() {
-        document.getElementById("modify").style.display = "block";
-    }
-
-    //숨기기
-    function div_hide() {
-        document.getElementById("modify").style.display = "none";
-    }
-</script>
-
 </body>
-
 
 </html>
