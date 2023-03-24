@@ -119,18 +119,23 @@ button:active {
 .wrapper__photo {
 
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-content: center;
 
     width: 358px;
     height: 400px;
+
+    overflow: scroll;
 }
 
 .photo {
 
-    margin-top: 50px;
+    margin: 50px 0 50px 0;
+
     width: 300px;
     height: 300px;
+
     background-color: lightgray;
 }
 
@@ -225,7 +230,7 @@ button:active {
     gap: 10px;
 
     width: 84px;
-    height: 30px;
+    height: 28px;
     margin: 18px 25px 0 5px;
 
     background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
@@ -250,10 +255,10 @@ button:active {
     align-items: center;
     padding: 4px 14px;
     gap: 10px;
-    margin: 20px 24px 0 0;
+    /*margin: 20px 24px 0 0;*/
 
     width: 84px;
-    height: 30px;
+    height: 28px;
 
     background: #FFFFFF;
     border: 0.5px solid rgba(0, 0, 0, 0.12);
@@ -264,7 +269,6 @@ button:active {
     font-style: normal;
     font-weight: 500;
     font-size: 15px;
-    line-height: 18px;
     /* identical to box height */
 
     color: #1C1C1E;
@@ -273,7 +277,7 @@ button:active {
 .txt__comment {
 
     margin-top: 20px;
-    width: 530px;
+    width: 440px;
     height: auto;
 
     font-family: 'Pretendard';
@@ -297,7 +301,7 @@ button:active {
 
 .input__modify__comment {
 
-    width: 470px;
+    width: 440px;
     height: 20px;
 
     outline: none;
