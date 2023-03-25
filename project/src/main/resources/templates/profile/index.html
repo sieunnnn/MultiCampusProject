@@ -1,0 +1,108 @@
+
+<!-- 프로필 화면 -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="main_layout">
+
+<head>
+    <title>Profile</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../static/css/profile_layout.css" th:href="@{/css/profile_layout.css}"/>
+</head>
+
+<body>
+<!-- 정말 위치와 CSS 만 입혀 놨으니, 만들어 놓으신 파일 들을 보면서 수정해주세요 -->
+<div class="container__contents" layout:fragment="content">
+    <div class="container">
+        <div class="popup-wrap" id="popup">
+            <div class="popup">
+                <div class="popup-head">
+                    <span class="head-title">프로필 변경</span>
+                </div>
+                <div class="popup-body">
+                    <div class="body-content">
+                        <div class="body-titlebox">
+                            <h1>사진 업로드</h1>
+                        </div>
+                        <div class="body-contentbox">
+                            <div class="file-container">
+                                <div class="image-upload" id="image-upload">
+
+                                    <form method="post" action="/profile/saveImg" enctype="multipart/form-data">
+<!--                                        <div class="button">-->
+<!--                                            <label for="chooseFile">-->
+<!--                                                사진찾기-->
+<!--                                            </label>-->
+<!--                                        </div>-->
+
+
+
+                                        <div class="fileContainer">
+                                            <div class="fileInput">
+                                                <p id="fileNameLabel">FILE NAME: </p>
+                                                <p id="fileName"></p>
+                                            </div>
+                                            <div class="buttonContainer">
+                                                <div class="submitButton" id="submitButton">
+                                                    <label for="chooseFile">
+                                                        사진찾기
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)">
+                                    </form>
+                                </div>
+
+<!--                                <div class="image-show" id="image-show"></div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="popup-foot">
+                    <span class="pop-btn confirm" id="confirm">확인</span>
+                    <span class="pop-btn close" id="close">창 닫기</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper__profile">
+        <!--        <div class="wrapper__button__profile" style="width: 200px; height: 200px;">-->
+        <!--            <button><img class="button__profile" th:src="@{/img/btn_profile.png}"></button>-->
+        <!--        </div>-->
+
+        <div class="container__profile">
+            <div class="txt__welcome">
+                <span th:text="${data}">message</span>
+                <span>님 안녕하세요!</span>
+            </div>
+
+            <!-- 클릭 하면 유저 사진 바꿀수 있는 팝업창 생성 -->
+            <button id="image-show" class="wrapper__user__pic" onclick="modalOpen();"><img id="newImage" th:src="${imageUrl}"></button>
+            <!--            <div>-->
+            <!--                <button class="button__modify">수정</button>-->
+            <!--            </div>-->
+            <!-- 랭크 부분은 나중에 다같이 상의 -->
+            <div class="wrapper__lank">
+                <div class="user__lank">새싹 여행자</div>
+            </div>
+
+            <!-- 클래스 이름을 알맞게 수정 해서 쓰면 됩니다 . id 를 쓰셔도 좋아요 -->
+            <div class="wrapper__profile__btn">
+                <button class="btn__travel1">님의 여행 일정</button>
+                <button class="btn__travel2">님의 이전 여행</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="/js/jQuery-2.1.4.min.js"></script>
+
+<script>
+
+</script>
