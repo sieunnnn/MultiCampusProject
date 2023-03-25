@@ -31,25 +31,25 @@ import multi.second.project.infra.util.file.FilePath;
 @DynamicUpdate // entity에서 변경이 발견되지 않은 값은 쿼리에서 생략
 @Builder @NoArgsConstructor @AllArgsConstructor @Getter
 public class Board {
-	
+
 	@Id
 	@GeneratedValue
 	private Long bdIdx;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private Member member;
-	
+
 	@Column(columnDefinition = "timestamp default now()")
 	private LocalDateTime regDate;
-	
+
 	private String title;
-	
+
 	private String content;
-	
+
 	@ColumnDefault("false")
 	private Boolean isDel;
-	
+
 	@OneToMany(cascade = CascadeType.ALL)
 	@Builder.Default
 	private List<FilePath> files = new ArrayList<FilePath>();
@@ -76,29 +76,29 @@ public class Board {
 	}
 
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

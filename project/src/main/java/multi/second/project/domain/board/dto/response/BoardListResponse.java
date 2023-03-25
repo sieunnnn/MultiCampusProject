@@ -24,27 +24,27 @@ public class BoardListResponse {
 		this.regDate = entity.getRegDate();
 		this.userId = entity.getMember().getUserId();
 	}
-	
+
 	public String getRegDateAsDate() {
 		return regDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
-	
+
 	public String getRegDateAsTime() {
 		return regDate.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
 	}
-	
+
 	public static List<BoardListResponse> toDtoList(List<Board> entityList){
 		return entityList.stream().map(e -> new BoardListResponse(e)).collect(Collectors.toList());
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
 }

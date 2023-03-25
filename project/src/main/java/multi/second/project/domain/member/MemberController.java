@@ -102,7 +102,7 @@ public class MemberController {
 		model.addAttribute("loginRequest", new LoginRequest());
 		System.out.println("@GetMapping(\"login\") new LoginRequest() :  "+new LoginRequest());
 		System.out.println("@GetMapping(\"login\") model :  "+model);
-	};
+	}
 	
 	@PostMapping("login")
 	public String loginImpl(@Valid LoginRequest loginRequest
@@ -116,7 +116,7 @@ public class MemberController {
 
 		System.out.println("@PostMapping(\"login\") loginRequest :  "+loginRequest);
 		Principal principal = memberService.authenticateUser(loginRequest);
-		
+
 		if(principal == null) {
 			redirectAttributes.addFlashAttribute("msg", "아이디나 비밀번호가 일치하지 않습니다.");
 			return "redirect:/member/login";
