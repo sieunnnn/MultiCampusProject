@@ -17,7 +17,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import multi.second.project.domain.group.domain.TravelGroup;
+import multi.second.project.domain.host.dto.request.HostRegistRequest;
 import multi.second.project.domain.member.domain.Member;
+import multi.second.project.domain.planner.domain.Planner;
+import multi.second.project.domain.planner.dto.request.PlannerRegistRequest;
 
 @Entity
 @DynamicInsert // insert 쿼리를 생성할 때 null인 필드는 쿼리에서 생략
@@ -39,4 +43,10 @@ public class Host {//(피드백)프랜드처럼
 //	//친구 삭제 여부
 //	@ColumnDefault("false")
 //	private Boolean isDel;
+	public static Host createHost(Member member) {
+		return Host.builder()
+				.member(member)
+				.build();
+		
+	}
 }

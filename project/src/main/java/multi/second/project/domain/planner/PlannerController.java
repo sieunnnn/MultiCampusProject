@@ -28,14 +28,126 @@ import multi.second.project.domain.comment.dto.request.CommentRegistRequest;
 import multi.second.project.domain.gallery.dto.request.GalleryModifyRequest;
 import multi.second.project.domain.gallery.dto.request.GalleryRegistRequest;
 import multi.second.project.domain.gallery.dto.response.GalleryDetailResponse;
+import multi.second.project.domain.member.UserPrincipal;
 import multi.second.project.domain.member.dto.Principal;
+import multi.second.project.domain.planner.domain.Planner;
+import multi.second.project.domain.planner.dto.request.PlannerGroupModifyRequest;
+import multi.second.project.domain.planner.dto.request.PlannerHostModifyRequest;
+import multi.second.project.domain.planner.dto.request.PlannerRegistRequest;
+import multi.second.project.domain.planner.dto.request.PlannerTitleModifyRequest;
+import multi.second.project.domain.planner.dto.response.PlannerDetailResponse;
 import multi.second.project.infra.util.file.dto.FilePathDto;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("gallery")
+@RequestMapping("planner")
 public class PlannerController {
+	
+	private final PlannerService plannerService;
 
+	//planner 리스트 뷰
+	@GetMapping("list")
+	public String plannerList(
+			@PageableDefault(size=10, sort="postIdx", direction = Direction.DESC, page = 0)
+			Pageable pageable,
+			Model model
+			) {
+		
+		Map<String, Object> commandMap = plannerService.findPlannerListByUserId(UserPrincipal.getUserPrincipal().getPrincipal().getUserId(),pageable);
+		model.addAllAttributes(commandMap);
+		
+		return "/planner/planner-list";
+	}
+	
+	//planner추가
+	@PostMapping("create")
+	public String create(
+			PlannerRegistRequest dto) {
+		
+		dto.setUserId(UserPrincipal.getUserPrincipal().getUserId());
+		plannerService.createPlanner(dto);
+		
+		return "redirect:/planner/list";
+	}
+	
+	//planner 삭제(host여야지만 삭제할 수 있다.)
+	@PostMapping("remove")
+	public String remove(Long tpIdx) {
+		
+		plannerService.removePlanner(tpIdx, UserPrincipal.getUserPrincipal().getPrincipal());
+		
+		return "redirect:/planner/list";
+	}
+	
+	//planner detail(플래너 하위 요소-todolist, todo 데이터 가져오기)
+	@GetMapping("detail")
+	public String plannerDetail(Long tpIdx, Model model) {
+		
+		PlannerDetailResponse dto = plannerService.findPlannerBytpIdx(tpIdx);
+		model.addAttribute("planner", dto);
+		
+		return "/planner/planner-contents";
+	}
+	
+	
+	//planner 이름 변경(host가 변경가능)
+	@PostMapping("modify-title")
+	public String modifyTitle(PlannerTitleModifyRequest dto) {
+		plannerService.updatePlannerTitle(dto, UserPrincipal.getUserPrincipal().getPrincipal());
+		
+		return "redirect:/planner/detail?tpIdx="+dto.getTpIdx();
+	}
+	
+	//planner host 변경(기본 만든사람)//host변경기능은 중요기능이 아니기 때문에 빼도 될듯
+	@PostMapping("modify-host")
+	public String modifyHost(PlannerHostModifyRequest dto) {
+		plannerService.updatePlannerHost(dto, UserPrincipal.getUserPrincipal().getPrincipal());
+		
+		return "redirect:/planner/detail?tpIdx="+dto.getTpIdx();
+	}
+	
+	//planner 공유인원 변경
+//	@PostMapping("modify-group")
+//	public String modifyGroup(PlannerGroupModifyRequest dto) {
+//		plannerService.updatePlannerGroup(dto, UserPrincipal.getUserPrincipal().getPrincipal());
+//		
+//		return "redirect:/planner/detail?tpIdx="+dto.getTpIdx();
+//	}
+	
+	//planner 공유인원 한명추가
+	@PostMapping("add-group")
+	public String addGroup(PlannerGroupModifyRequest dto) {
+	plannerService.addPlannerGroup(dto, UserPrincipal.getUserPrincipal().getPrincipal());
+	
+	return "redirect:/planner/detail?tpIdx="+dto.getTpIdx();
+}
+	
+	//planner 공유인원 추방? 필요한가?
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 //	private final PlannerService galleryService;
 //	private final CommentService commentService;
 //	

@@ -1,6 +1,7 @@
 package multi.second.project.domain.planner.dto.request;
 
-import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
+import java.util.List;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,16 +9,10 @@ import multi.second.project.domain.host.domain.Host;
 
 @Data
 @NoArgsConstructor
-public class PlannerRegistRequest {
+public class PlannerTitleModifyRequest {
 
-	private String userId;
-	
-	private Long tgIdx;
-	
-	@NotEmpty
+	private Long tpIdx;
 	private String title;
-	
-//	@NotEmpty
-//	private Host host;
+	private Host host;
 	
 }

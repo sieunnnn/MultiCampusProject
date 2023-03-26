@@ -25,6 +25,9 @@ import lombok.NoArgsConstructor;
 import multi.second.project.domain.group.domain.TravelGroup;
 import multi.second.project.domain.host.domain.Host;
 import multi.second.project.domain.member.domain.Member;
+import multi.second.project.domain.planner.dto.request.PlannerHostModifyRequest;
+import multi.second.project.domain.planner.dto.request.PlannerRegistRequest;
+import multi.second.project.domain.planner.dto.request.PlannerTitleModifyRequest;
 import multi.second.project.domain.todolist.domain.TodoList;
 
 @Entity
@@ -57,7 +60,7 @@ public class Planner {
 	
 	//플래너 제목
 	@Builder.Default
-	private String title = "제목없";
+	private String title = "제목없음";
 	
 	//플래너 호스트
 	@OneToOne
@@ -71,8 +74,34 @@ public class Planner {
 	@ColumnDefault("false")
 	private Boolean isDel;
 	
+	public static Planner createPlanner(PlannerRegistRequest dto, Host host, TravelGroup travelGroup) {
+		return Planner.builder()
+				.travelGroup(travelGroup)
+				.title(dto.getTitle())
+				.host(host)
+				.build();
+		
+	}
+	
+	
 	public void addTodoList(TodoList todoList) {
-		todolists.add(todoList);
+		this.todolists.add(todoList);
+	}
+	
+	public void removeTodoList(TodoList todoList) {
+		this.todolists.remove(todoList);
+	}
+
+
+	public void updatePlannerTitle(PlannerTitleModifyRequest dto) {
+		this.title = dto.getTitle();
+	}
+
+
+	public void updatePlannerHost(PlannerHostModifyRequest dto) {
+		// TODO Auto-generated method stub
+		this.host = dto.getHost();
+		
 	}
 	
 	

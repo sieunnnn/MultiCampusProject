@@ -1,4 +1,4 @@
-package multi.second.project.domain.planner.dto.request;
+package multi.second.project.domain.host.dto.request;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -8,16 +8,9 @@ import multi.second.project.domain.host.domain.Host;
 
 @Data
 @NoArgsConstructor
-public class PlannerRegistRequest {
+public class HostRegistRequest {
 
 	private String userId;
 	
-	private Long tgIdx;
-	
-	@NotEmpty
-	private String title;
-	
-//	@NotEmpty
-//	private Host host;
 	
 }

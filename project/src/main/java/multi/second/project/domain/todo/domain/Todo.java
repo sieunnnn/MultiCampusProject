@@ -22,6 +22,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import multi.second.project.domain.todo.dto.request.TodoRegistRequest;
 import multi.second.project.domain.todolist.domain.TodoList;
 
 @Entity
@@ -59,6 +60,34 @@ public class Todo {
 	//투두카드 삭제 여부
 	@ColumnDefault("false")
 	private Boolean isDel;
+
+	public static Todo createAccomodationTodo(TodoRegistRequest dto) {//리퀘스트는 하나로 해도 되나?
+		
+		return AccomodationTodo.builder()
+				.address(dto.getAcAddress())
+				.contents(dto.getContents())
+				.title(dto.getTitle())
+				.build();
+	}
+	
+//	private String title;
+//	
+//	private String contents;
+//	
+//	private LocalDateTime todoDate;
+//	
+//	private String acAddress;
+//	
+//	private String attractions;
+//	
+//	private BudgetType budgetType;
+//	private Integer budget;
+//	
+//	private String gnAddress;
+//	
+//	private String time;
+//	private TransportType transportType;
+	
 	
 //	//투두리스트 번호
 //	@ManyToOne

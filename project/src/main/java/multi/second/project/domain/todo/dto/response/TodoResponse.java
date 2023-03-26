@@ -27,6 +27,7 @@ public class TodoResponse {
 	private String title;
 	private String contents;
 	private LocalDateTime regDate;
+	private LocalDateTime todoDate;
 	private Boolean isPrivate;
 	
 	private String acAddress;
@@ -47,6 +48,7 @@ public class TodoResponse {
 		this.title = entity.getTitle();
 		this.contents = entity.getContents();
 		this.regDate = entity.getRegDate();
+		this.todoDate = entity.getTodoDate();
 		this.isPrivate = entity.getIsPrivate();
 		this.acAddress = ((AccomodationTodo) entity).getAddress();
 		this.attractions = ((AttractionsTodo) entity).getAttractions();
@@ -62,6 +64,14 @@ public class TodoResponse {
 	}
 	
 	public String getRegDateAsTime() {
+		return regDate.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+	}
+	
+	public String getTodoDateAsDate() {
+		return regDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+	}
+	
+	public String getTodoDateAsTime() {
 		return regDate.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
 	}
 	

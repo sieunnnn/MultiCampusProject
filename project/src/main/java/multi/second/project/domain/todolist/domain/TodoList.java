@@ -20,7 +20,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import multi.second.project.domain.comment.dto.request.CommentModifyRequest;
 import multi.second.project.domain.todo.domain.Todo;
+import multi.second.project.domain.todolist.dto.request.TodoListModifyRequest;
+import multi.second.project.domain.todolist.dto.request.TodoListRegistRequest;
 
 @Entity
 @DynamicInsert // insert 쿼리를 생성할 때 null인 필드는 쿼리에서 생략
@@ -54,5 +57,14 @@ public class TodoList {
 	
 	public void addTodo(Todo todo) {
 		todos.add(todo);
+	}
+
+	public static TodoList createTodoList(TodoListRegistRequest dto) {
+		return TodoList.builder()
+				.title(dto.getTitle()).build();
+	}
+	
+	public void updateTodoList(TodoListModifyRequest dto) {
+		this.title = dto.getTitle();
 	}
 }

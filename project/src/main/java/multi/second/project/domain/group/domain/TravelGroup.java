@@ -38,6 +38,11 @@ public class TravelGroup {
 	public void addMembers(Member member) {
 		members.add(member);
 	}
+
+	public void removeMembers(Member member) {
+		// TODO Auto-generated method stub
+		members.remove(member);
+	}
 	
 	
 	
