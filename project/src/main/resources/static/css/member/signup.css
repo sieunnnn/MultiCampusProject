@@ -120,8 +120,8 @@ ul, li{
     position: absolute;
     width: 675px;
     height: 84px;
-    left: 34%;
-    top: 18%;
+    left: 31%;
+    top: 7%;
 
     font-family: 'Pretendard';
     font-style: normal;
@@ -146,8 +146,8 @@ ul, li{
     position: absolute;
     width: 428px;
     height: 550px;
-    left: 40%;
-    top: 30%;
+    left: 38%;
+    top: 20%;
 
     background: rgba(255, 255, 255, 0.7);
     border: 0.5px solid rgba(0, 0, 0, 0.12);

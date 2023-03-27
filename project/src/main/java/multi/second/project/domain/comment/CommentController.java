@@ -27,6 +27,7 @@ import multi.second.project.domain.comment.dto.request.CommentRegistRequest;
 import multi.second.project.domain.gallery.dto.request.GalleryModifyRequest;
 import multi.second.project.domain.gallery.dto.request.GalleryRegistRequest;
 import multi.second.project.domain.gallery.dto.response.GalleryDetailResponse;
+import multi.second.project.domain.member.UserPrincipal;
 import multi.second.project.domain.member.dto.Principal;
 import multi.second.project.infra.util.file.dto.FilePathDto;
 
@@ -38,40 +39,46 @@ public class CommentController {
 	private final CommentService commentService;
 
 	//갤러리 특정 포스트에서 댓글 작성 시
-	@PostMapping("comment")
-	public String comment(
-			@SessionAttribute(name="auth", required=false) Principal principal,
-			CommentRegistRequest dto
+	@PostMapping("upload")
+	public String upload(
+//			@SessionAttribute(name="auth", required=false) Principal principal,
+			CommentRegistRequest dto,
+			Long postIdx
 			) {
-		commentService.createComment(dto);
 		
+//		dto.setUserId(principal.getUserId());
+		dto.setUserId(UserPrincipal.getUserPrincipal().getUserId());
+		commentService.createComment(dto, postIdx);
 		
-		return "redirect:/";
+		return "redirect:/gallery/detail?postIdx="+postIdx;
 	}
 	
 	//갤러리 특정 포스트에서 댓글 수정 시(해야되나?)
-	@PostMapping("comment-modify")
+	@PostMapping("modify")
 	public String modify(
 			CommentModifyRequest dto,
-			@SessionAttribute("auth") Principal principal
+//			@SessionAttribute("auth") Principal principal,
+			Long postIdx
 			) {
 		
-		dto.setUserId(principal.getUserId());
+//		dto.setUserId(principal.getUserId());
+		dto.setUserId(UserPrincipal.getUserPrincipal().getUserId());
 		commentService.updateComment(dto);
 		
-		return "redirect:/";
+		return "redirect:/gallery/detail?postIdx="+postIdx;
 	}
 	
-	//갤러리 특정 포스트에서 댓글 삭제 시(is_del이 true일 경우 "삭제된 댓글입니다."로 보여지게 할 것) 
-	@PostMapping("comment-delete")
-	public String delete(
+	//갤러리 특정 포스트에서 댓글 삭제 시(is_del이 true일 경우 "삭제된 댓글입니다."로 보여지게 할 것->일단 그냥삭제로 변경) 
+	@PostMapping("remove")
+	public String remove(
 			Long cmIdx, 
-			@SessionAttribute("auth") Principal principal
+//			@SessionAttribute("auth") Principal principal,
+			Long postIdx
 			) {
 		
-		commentService.deleteComment(cmIdx, principal);
+		commentService.deleteComment(cmIdx, UserPrincipal.getUserPrincipal().getPrincipal(), postIdx);
 		
-		return "redirect:/";
+		return "redirect:/gallery/detail?postIdx="+postIdx;
 	}
 	
 	

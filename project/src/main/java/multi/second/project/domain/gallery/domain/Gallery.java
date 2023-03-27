@@ -21,6 +21,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import multi.second.project.domain.comment.domain.Comment;
+import multi.second.project.domain.comment.dto.request.CommentRegistRequest;
 import multi.second.project.domain.gallery.dto.request.GalleryModifyRequest;
 import multi.second.project.domain.gallery.dto.request.GalleryRegistRequest;
 import multi.second.project.domain.member.domain.Member;
@@ -36,20 +38,31 @@ public class Gallery {
 	@GeneratedValue
 	private Long postIdx;
 	
+	//댓글 작성자//(피드백)학생 과 교실을 생각하라. 교실이 학생정보를 갖고 있는것
+	@OneToMany(cascade = CascadeType.ALL)
+	@Builder.Default
+	private List<Comment> comments = new ArrayList<>();
+	
+	//포스트 작성자
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private Member member;
 	
+	//포스트 작성 시간
 	@Column(columnDefinition = "timestamp default now()")
 	private LocalDateTime regDate;
 	
+	//포스트 제목
 	private String title;
 	
+	//포스트 글
 	private String content;
 	
+	//포스트 삭제 여부
 	@ColumnDefault("false")
 	private Boolean isDel;
 	
+	//포스트 이미지 파일
 	@OneToMany(cascade = CascadeType.ALL)
 	@Builder.Default
 	private List<FilePath> files = new ArrayList<FilePath>();
@@ -75,8 +88,13 @@ public class Gallery {
 		this.content = dto.getContent();
 	}
 
-
+	public void addComment(Comment comment) {
+		this.comments.add(comment);
+	}
 	
+	public void removeComment(Comment comment) {
+		this.comments.remove(comment);
+	}
 	
 	
 	

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layout}">
+	  layout:decorate="~{layout}"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 	<link href="/css/board/board.css" rel="stylesheet"> 
 </head>
@@ -18,8 +19,8 @@
       </div>
       <div class="info file_info">
       	<ol>
-      		<li th:each="file : ${gallery.filePathDtos}">  
-      	 		<a th:href="@{/gallery/download(fpIdx=${file.fpIdx})}" th:text="${file.originFileName}"></a> 
+      		<li th:each="file : ${gallery.filePathDtos}">
+				<img th:src="@{/gallery/download(fpIdx=${file.fpIdx})}" th:text="${file.originFileName}">
       	 	</li>	     
       	</ol>
       </div>
@@ -31,7 +32,7 @@
           <button onclick="location.href='/gallery/list'"><span>목록</span></button>
           
           
-          <th:block th:if="${session.auth ne null and gallery.userId eq session.auth.userId}">
+          <th:block sec:authorize="isAuthenticated()" th:if="${gallery.userId eq #authentication.name}">
 	          <form th:action="@{/gallery/remove}" method="post" >
 	          	<input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/> 
 	          	<button id="btnDel"><span>삭제</span></button>
@@ -41,8 +42,39 @@
 	          	<button id="btnModify"><span>수정</span></button>
 	          </form>	
           </th:block>
+
           
       </div>
+      
+      <th:block sec:authorize="isAuthenticated()" th:if="${gallery.userId eq #authentication.name}">
+	          <form th:action="@{/comment/upload}" method="post" >
+	          	<input type="text" id="context" name="context" required="required">
+	          	<input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/> 
+	          	<button><span>댓글 등록</span></button>
+	          </form>
+          </th:block>
+      
+      
+      
+      <div>
+      	<ol>
+      		<li th:each="comment : ${gallery.commentResponses}">  
+      	 		<p th:text="${comment.context}">
+      	 		<form th:action="@{/comment/remove}" method="post" >
+      	 		<input type="hidden" th:value="${comment.cmIdx}" name="cmIdx"/> 
+	          	<input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/> 
+	          	<button id="btnDel"><span>댓글 삭제</span></button>
+	          	</form>
+      	 		<form th:action="@{/comment/modify}" method="post" >
+	          	<input type="text" id="context" name="context" required="required">
+	          	<input type="hidden" th:value="${comment.cmIdx}" name="cmIdx"/> 
+	          	<input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/> 
+	          	<button><span>댓글 수정</span></button>
+	          </form>
+      	 	</li>	     
+      	</ol>
+      </div>
+      
    </div>
 </div>
 

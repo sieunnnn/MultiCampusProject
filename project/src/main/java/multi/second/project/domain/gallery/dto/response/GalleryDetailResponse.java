@@ -7,6 +7,8 @@ import java.util.List;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import multi.second.project.domain.comment.domain.Comment;
+import multi.second.project.domain.comment.dto.response.CommentResponse;
 import multi.second.project.domain.gallery.domain.Gallery;
 import multi.second.project.infra.util.file.dto.FilePathDto;
 
@@ -20,6 +22,7 @@ public class GalleryDetailResponse {
 	private String userId;
 	private String content;
 	private List<FilePathDto> filePathDtos = new ArrayList<FilePathDto>();
+	private List<CommentResponse> commentResponses = new ArrayList<CommentResponse>();
 	
 	public GalleryDetailResponse(Gallery gallery) {
 		this.postIdx = gallery.getPostIdx();
@@ -28,6 +31,7 @@ public class GalleryDetailResponse {
 		this.userId = gallery.getMember().getUserId();
 		this.content = gallery.getContent();
 		this.filePathDtos = FilePathDto.toDtoList(gallery.getFiles());
+		this.commentResponses = CommentResponse.toDtoList(gallery.getComments());
 	}
 	
 	public String getRegDateAsDate() {

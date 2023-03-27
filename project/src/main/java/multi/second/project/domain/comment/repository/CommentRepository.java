@@ -14,6 +14,8 @@ import multi.second.project.domain.gallery.domain.Gallery;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long>, CommentRepositoryExtension{
 
-	List<Comment> findByGalleryPostIdx(Long postIdx);
+	//List<Comment> findByGalleryPostIdx(Long postIdx);
+	
+	//List<Comment> findCommentsByGalleryPostIdx(Long postIdx);
 	
 }

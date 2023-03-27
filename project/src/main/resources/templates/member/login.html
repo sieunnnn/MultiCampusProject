@@ -22,21 +22,30 @@
         </div>
 
         <!-- 아이디 / 비밀번호 입력 부분 -->
-        <form action="/member/login" method="post" th:object="${loginRequest}">
+        <form th:action="@{/member/login}" method="post" th:object="${loginRequest}">
             <div class="wrapper__login__input">
                 <div class="input__id">
-                    <input type="text" id="userId" name="userId" placeholder="아이디 입력"/>
+                    <input style="width: 245px; height: 28px" type="text" id="userId" name="userId" placeholder="아이디 입력"/>
                     <span class="error__id" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></span>
                 </div>
                 <div class="input__pw">
-                    <input type="password" id="password" name="password" placeholder="비밀번호 입력"/>
+                    <input style="width: 245px; height: 28px" type="password" id="password" name="password" placeholder="비밀번호 입력"/>
                     <span class="error__pw" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
                 </div>
             </div>
+
+            <div class="wrapper__check">
+                <!-- rememberMe를 사용하기 위한 요청파라미터명의 default가 remember-me -->
+                <input type="checkbox" class="check__remember__me" id="rememberMe" name="remember-me" checked>
+                <span style="margin-top: 4px;">로그인 유지</span>
+            </div>
+
+
             <!-- 하단 버튼 -->
             <button class="btn__login">로그인</button>
         </form>
         <button class="closeBtn" th:onclick="|location.href='@{/member/signup}'|">홈으로</button>
+
     </div>
 </div>
 

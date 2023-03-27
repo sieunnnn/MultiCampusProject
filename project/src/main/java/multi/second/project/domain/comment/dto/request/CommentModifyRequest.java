@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 public class CommentModifyRequest {
 
 	private Long cmIdx;
-	private Long postIdx;
+	//private Long postIdx;
 	private String userId;
 	private String context;
 	

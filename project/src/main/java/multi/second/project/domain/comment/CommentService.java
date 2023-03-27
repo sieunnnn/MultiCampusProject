@@ -15,7 +15,7 @@ import lombok.AllArgsConstructor;
 import multi.second.project.domain.comment.domain.Comment;
 import multi.second.project.domain.comment.dto.request.CommentModifyRequest;
 import multi.second.project.domain.comment.dto.request.CommentRegistRequest;
-import multi.second.project.domain.comment.dto.response.CommentListResponse;
+import multi.second.project.domain.comment.dto.response.CommentResponse;
 import multi.second.project.domain.comment.repository.CommentRepository;
 import multi.second.project.domain.gallery.domain.Gallery;
 import multi.second.project.domain.gallery.dto.request.GalleryModifyRequest;
@@ -47,31 +47,46 @@ public class CommentService {
 	private final CommentRepository commentRepository;
 	
 	//포스트의 댓글 가져오는 코드
-	public List<CommentListResponse> findCommentListByPostIdx(Long postIdx) {
-		
-		return CommentListResponse.toDtoList(commentRepository.findByGalleryPostIdx(postIdx));
-	}
+//	public List<CommentListResponse> findCommentListByPostIdx(Long postIdx) {
+//		
+//		System.out.println();
+//		//return CommentListResponse.toDtoList(galleryRepository.findCommentByPostIdx(postIdx));
+//		return null;
+//	}
+
 	
 	@Transactional
-	public void deleteComment(Long cmIdx, Principal principal) {
+	public void deleteComment(Long cmIdx, Principal principal, Long postIdx) {
 		// TODO Auto-generated method stub
 		Comment comment = commentRepository.findById(cmIdx)
 					.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
+		Gallery gallery = galleryRepository.findById(postIdx)
+				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		
 		if(!comment.getMember().getUserId().equals(principal.getUserId())) throw new AuthException(ErrorCode.UNAUTHORIZED_REQUEST);
 		
+		gallery.removeComment(comment);
 		commentRepository.delete(comment);
 		
 	}
 	
-	public void createComment(CommentRegistRequest dto) {
+	
+	@Transactional
+	public void createComment(CommentRegistRequest dto, Long postIdx) {
 		// TODO Auto-generated method stub
 		Member member = memberRepository.findById(dto.getUserId()).get();
-		Gallery gallery = galleryRepository.findById(dto.getPostIdx()).get();
-		Comment comment = Comment.addComment(dto, gallery, member);
+		Comment comment = Comment.createComment(dto, member);
+		
+		Gallery gallery = galleryRepository.findById(postIdx)
+				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+//		Gallery gallery = galleryRepository.findById(null).get();
+//				addComment(comment);
 		
 		// JPA가 변경된 내용을 데이터베이스에 반영
+		gallery.addComment(comment);
 		commentRepository.saveAndFlush(comment);
+		
 		
 		
 	}
@@ -79,11 +94,16 @@ public class CommentService {
 	@Transactional
 	public void updateComment(CommentModifyRequest dto) {
 		// TODO Auto-generated method stub
+		System.out.println("dto.getCmIdx() :  "+dto.getCmIdx());
 		Comment comment = commentRepository.findById(dto.getCmIdx()).orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		System.out.println("comment.getMember().getUserId() :  " +comment.getMember().getUserId());
+		System.out.println("dto.getUserId() :  " +dto.getUserId());
 		if(!comment.getMember().getUserId().equals(dto.getUserId())) throw new AuthException(ErrorCode.UNAUTHORIZED_REQUEST);
-		if(!comment.getGallery().getPostIdx().equals(dto.getPostIdx())) throw new AuthException(ErrorCode.UNAUTHORIZED_REQUEST);
-		
+		//if(!comment.getGallery().getPostIdx().equals(dto.getPostIdx())) throw new AuthException(ErrorCode.UNAUTHORIZED_REQUEST);//(피드백)필요없음 UserId만 검사
+		System.out.println("dto :  "+dto);
 		comment.updateComment(dto);
+		
+		commentRepository.flush();
 		
 	}
 	

@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
+import multi.second.project.domain.comment.domain.Comment;
+import multi.second.project.domain.comment.dto.request.CommentRegistRequest;
 import multi.second.project.domain.gallery.domain.Gallery;
 import multi.second.project.domain.gallery.dto.request.GalleryModifyRequest;
 import multi.second.project.domain.gallery.dto.request.GalleryRegistRequest;
@@ -62,40 +64,19 @@ public class GalleryService {
 		
 		fileUtil.uploadFile(fileUploadDtos);
 	}
-	//이건 이제 안쓸듯
-	public Map<String, Object> findGalleryList(Pageable pageable) {
-		//findAll 을 findByUserId로 바꿀 예정
-		System.out.println("pageable :  "+pageable);
-		Page<Gallery> page = galleryRepository.findAll(pageable);
-		System.out.println("galleryRepository.findAll(pageable) :  "+page);
-		
-//		Page<Gallery> page2 = galleryRepository.findByMemberUserId("group2B",pageable);
-//		System.out.println("galleryRepository.findByMemberUserId(\"group2B\",pageable) :  "+page2);
-		
-		Paging paging = Paging.builder()
-				.page(page)
-				.blockCnt(5)
-				.build();
-		
-//		System.out.println("page.getContent() :  " +page.getContent());
-//		System.out.println("GalleryListResponse.toDtoList(page.getContent()) :  "+ GalleryListResponse.toDtoList(page.getContent()));
-//		System.out.println("----------------------------");
-//		System.out.println("page2.getContent() :  " +page2.getContent());
-//		System.out.println("GalleryListResponse.toDtoList(page2.getContent()) :  "+ GalleryListResponse.toDtoList(page2.getContent()));
-		return Map.of("galleryList",GalleryListResponse.toDtoList(page.getContent()), "paging", paging);
-	}
-	
+
 	//특정 유저의 게시물 리스트만 가져오는 코드
 	public Map<String, Object> findGalleryListByUserId(String userId, Pageable pageable) {
-		
+
 		Page<Gallery> page = galleryRepository.findByMemberUserId(userId,pageable);
+
 		System.out.println("galleryRepository.findByMemberUserId(userId,pageable) :  "+page);
-		
+
 		Paging paging = Paging.builder()
 				.page(page)
 				.blockCnt(5)
 				.build();
-		
+
 		System.out.println("page.getContent() :  " +page.getContent());
 		System.out.println("GalleryListResponse.toDtoList(page.getContent()) :  "+ GalleryListResponse.toDtoList(page.getContent()));
 		return Map.of("galleryList",GalleryListResponse.toDtoList(page.getContent()), "paging", paging);
@@ -107,7 +88,16 @@ public class GalleryService {
 //		
 //		return Map.of("commentList",CommentListResponse.toDtoList(galleryRepository.findByGalleryPostIdx(postIdx)));
 //	}
-	
+	//포스트의 댓글 가져오는 코드
+//	public List<CommentListResponse> findCommentListByPostIdx(Long postIdx) {
+//		
+//		return CommentListResponse.toDtoList(commentRepository.findByGalleryPostIdx(postIdx));
+//	}
+//	
+//	public List<Gallery> findCommentListByPostIdx(Long postIdx){
+//		
+//		return galleryRepository.findCommentByPostIdx(postIdx);
+//	}
 
 	public GalleryDetailResponse findGalleryByPostIdx(Long postIdx) {
 		Gallery gallery = galleryRepository.findById(postIdx)
@@ -158,6 +148,23 @@ public class GalleryService {
 			fileUtil.deleteFile(e);
 		});
 	}
+	
+//	@Transactional
+//	public void createComment(CommentRegistRequest dto) {
+//		// TODO Auto-generated method stub
+//		Member member = memberRepository.findById(dto.getUserId()).get();
+//		Comment comment = Comment.createComment(dto, member);
+//		
+////		Gallery gallery = galleryRepository.findById(null).get();
+////				addComment(comment);
+//		
+//		// JPA가 변경된 내용을 데이터베이스에 반영
+//		commentRepository.saveAndFlush(comment);
+//		
+//		
+//	}
+	
+	
 
 	@Transactional
 	public void removeGallery(Long postIdx, Principal principal) {
@@ -175,26 +182,8 @@ public class GalleryService {
 			fileUtil.deleteFile(e);
 		});
 		
+		
 	}
-	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

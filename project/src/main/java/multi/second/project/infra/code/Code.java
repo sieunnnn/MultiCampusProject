@@ -6,7 +6,7 @@ public enum Code {
 	SMTP_FROM(""),
 	
 	// 배포시 servlet-context.xml의 resources 경로도 함께 수정
-	STORAGE_PATH("C:\\Program Files\\CODE\\storage\\");
+	STORAGE_PATH("C:\\post\\postImg\\");
 
 	public String desc;
 	
