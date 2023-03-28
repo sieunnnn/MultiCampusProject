@@ -54,7 +54,7 @@ public class PlannerController {
 	//planner 리스트 뷰
 	@GetMapping("list")
 	public String plannerList(
-			@PageableDefault(size=10, sort="postIdx", direction = Direction.DESC, page = 0)
+			@PageableDefault(size=10, sort="tpIdx", direction = Direction.DESC, page = 0)
 			Pageable pageable,
 			Model model
 			) {
