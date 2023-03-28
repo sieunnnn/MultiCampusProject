@@ -197,7 +197,12 @@
     border-radius: 16px;
 }
 
-.wrapper__kanban {
+
+/* ============================================================ */
+
+/* 칸반보드 */
+
+.container__kanban {
 
     display: flex;
     flex-direction: row;
@@ -216,154 +221,74 @@
     background-color: blue;
 }
 
+.wrapper__date__box {
 
-/* ============================================================ */
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
 
-/* 칸반보드 */
+    width: auto;
+    height: 100%;
 
-#addTodoListDiv{
-    margin-left: 2em;
-    margin-top: 4em;
-
+    overflow-y: scroll;
     background-color: orange;
 }
 
-#addTodoListDiv button{
-    margin-left: 0.5em;
+#date {
+
+    width: 280px;
+    height: 57px;
+
+    background: #FFFFFF;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(40px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 16px;
 }
 
+#addDate, #addCard {
 
-#root{
-    margin: 1em;
-    /*border: 1px solid grey;*/
-    /*display: flex;*/
-    min-width: 1200px;
+    width: 280px;
+    height: 57px;
+
+    background: rgba(255, 255, 255, 0.6);
+    border: 0.5px dashed #676767;
+    backdrop-filter: blur(40px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 16px;
 }
 
+#addDate:focus, #addCard:focus {
 
-.todoList{
-    /*border: 1px solid red;*/
-    border-radius: 4px;
-    min-height: 100px;
-    background: rgb(235, 235, 235);
-    padding: 0.7em;
-    margin: 1em 0 1em 1em;
-
-    float: left;
+    outline: solid 3.5px rgba(58, 108, 217, 0.5);
 }
 
-.todoList h2{
-    font-size: 1em;
-    margin-bottom: 0.5em;
-}
+#card {
 
-#to-do-list-button{
-    margin-left: 0.5em;
-}
+    width: 280px;
+    height: auto;
 
-.card{
-    /*border: 1px solid blue;*/
-    border-radius: 4px;
-    border-bottom: rgb(180, 180, 180) 1px solid;
-    background: white;
-    margin: 0.5em 0 0 0;
-    padding: 0.5em;
-    font-size: 0.9em;
-    position: relative;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(40px);
+    /* Note: backdrop-filter has minimal browser support */
 
-    display: flex;
-    justify-content: space-between;
-
-    cursor: pointer;
-}
-
-.card button{
-    visibility: hidden;
-    height: max-content;
-
-    background: none;
-    border: none;
-    padding: 0.3em;
+    border-radius: 16px;
 
 }
 
+#costPerDay {
 
-.card:hover button{
-    visibility: visible;
-}
+    width: 280px;
+    height: 57px;
 
-.card button:hover{
-    background-color: rgb(235, 235, 235);
-    border-radius: 4px;
-    cursor: pointer;
-}
+    background: #007AFF;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(40px);
+    /* Note: backdrop-filter has minimal browser support */
 
-
-.menuContainer{
-    display: flex;
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    width: 100%;
-    height: 100%;
-}
-
-.menu{
-    top: 0;
-    left: 0;
-    background-color: rgb(235, 235, 235);
-    width: 500px;
-    min-height: 300px;
-
-    margin: auto;
-
-    padding: 1em;
-    border-radius: 4px;
-
-}
-
-.menuTitle{
-    font-weight: bold;
-    font-size: 1.5em;
-    margin-bottom: 1em;
-}
-
-.menuDescription{
-    margin-bottom: 2em;
-    line-height: 1.5em;
-}
-
-.menuDescription textarea{
-    width: 100%;
-    height: 5em;
-    padding: 0.5em;
-    font-size: 1.1em;
-}
-
-
-
-.comment{
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-top: 0.5em;
-    padding: 0.5em;
-    font-size: 0.8em;
-}
-
-.commentsInput{
-    margin-right: 0.5em;
-}
-
-.btn-save {
-    background-color: #5aac44;
-    color: white;
-    border: none;
-    border-radius: 4px;
-
-    padding: 0.5em;
-    margin-top: 0.5em;
-
+    border-radius: 16px;
 }
