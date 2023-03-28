@@ -45,6 +45,12 @@ public class PlannerController {
 	
 	private final PlannerService plannerService;
 
+	//테스트용?
+	@GetMapping("planner")
+    public String planner() {
+        return "planner/planner";
+    }
+	
 	//planner 리스트 뷰
 	@GetMapping("list")
 	public String plannerList(
@@ -126,28 +132,8 @@ public class PlannerController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+    
 //	private final PlannerService galleryService;
 //	private final CommentService commentService;
 //	
