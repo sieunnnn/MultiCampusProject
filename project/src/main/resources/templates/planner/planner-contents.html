@@ -12,15 +12,15 @@
     <h2 class="tit">*게시판</h2>
     <div class="desc_board">
       <div class="info" >
-          <span >번호 : [[${gallery.postIdx}]]</span>
-          <span>제목 : [[${gallery.title}]]</span>
-          <span>등록일 : [[${gallery.regDateAsDate}]]</span>
-          <span>작성자 : [[${gallery.userId}]]</span>
+          <span >번호 : [[${planner.tpIdx}]]</span>
+          <span>제목 : [[${planner.title}]]</span>
+          <span>등록일 : [[${planner.regDateAsDate}]]</span>
+          <span>호스트 : [[${planner.host}]]</span>
       </div>
       <div class="info file_info">
       	<ol>
-      		<li th:each="file : ${gallery.filePathDtos}">
-				<img th:src="@{/gallery/download(fpIdx=${file.fpIdx})}" th:text="${file.originFileName}">
+      		<li th:each="group : ${planner.travelGroup}">
+				<a th:text="${group.members.userId}"></a> 
       	 	</li>	     
       	</ol>
       </div>

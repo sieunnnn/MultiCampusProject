@@ -11,7 +11,7 @@ import multi.second.project.domain.todo.domain.AccomodationTodo;
 
 
 @Repository
-public interface AccomadationRepository extends JpaRepository<AccomodationTodo, Long>, AccomadationRepositoryExtension{
+public interface AccomodationRepository extends JpaRepository<AccomodationTodo, Long>, AccomodationRepositoryExtension{
 
 	
 	

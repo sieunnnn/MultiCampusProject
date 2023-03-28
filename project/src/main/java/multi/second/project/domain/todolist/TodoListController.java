@@ -12,6 +12,9 @@ import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,38 +42,69 @@ import multi.second.project.infra.util.file.dto.FilePathDto;
 public class TodoListController {
 	
 	private final TodoListService todoListService;
+	private final SimpMessagingTemplate simpMessagingTemplate;
 
-	@PostMapping("upload")
-	public String upload(
-			TodoListRegistRequest dto,
-			Long tpIdx
-			) {
+//	@PostMapping("upload")
+//	public String upload(
+//			TodoListRegistRequest dto,
+//			Long tpIdx
+//			) {
+//		
+//		todoListService.createTodoList(dto, tpIdx);
+//		
+//		return "redirect:/planner/detail?tpIdx="+tpIdx;
+//	}
+	
+	@MessageMapping("/upload-todolist/{tpIdx}")
+	public void upload(
+			@DestinationVariable("tpIdx") Long tpIdx,
+			TodoListRegistRequest dto
+			) throws Exception {
+		simpMessagingTemplate.convertAndSend("/topic/upload-todolist/" + tpIdx, todoListService.createTodoList(dto, tpIdx));
 		
-		todoListService.createTodoList(dto, tpIdx);
-		
-		return "redirect:/planner/detail?tpIdx="+tpIdx;
 	}
 	
-	@PostMapping("modify")
-	public String modify(
-			TodoListModifyRequest dto,
-			Long tpIdx
-			) {
+//	@PostMapping("modify")
+//	public String modify(
+//			TodoListModifyRequest dto,
+//			Long tpIdx
+//			) {
+//
+//		todoListService.updateTodoList(dto);
+//		
+//		return "redirect:/planner/detail?tpIdx="+tpIdx;
+//	}
+	
+	//삭제나 업데이트는 어떻게...?
+	//삭제는 리퀘스트에 isdel 바꾸는거 넣어서?
+	
+	@MessageMapping("modify-todolist/{tpIdx}")
+	public void modify(
+			@DestinationVariable("tpIdx") Long tpIdx,
+			TodoListModifyRequest dto
+			) throws Exception {
 
-		todoListService.updateTodoList(dto);
+		simpMessagingTemplate.convertAndSend("/topic/modify-todolist/" + tpIdx, todoListService.updateTodoList(dto));
 		
-		return "redirect:/planner/detail?tpIdx="+tpIdx;
 	}
 	
-	@PostMapping("remove")
-	public String remove(
-			Long tlIdx, 
-			Long tpIdx
+//	@PostMapping("remove")
+//	public String remove(
+//			Long tlIdx, 
+//			Long tpIdx
+//			) {
+//		
+//		todoListService.deleteTodoList(tlIdx, tpIdx);
+//		return "redirect:/gallery/detail?postIdx="+tpIdx;
+//	}
+	
+	@MessageMapping("remove-todolist/{tpIdx}")
+	public void remove( 
+			@DestinationVariable("tpIdx") Long tpIdx,
+			Long tlIdx
 			) {
+		simpMessagingTemplate.convertAndSend("/topic/remove-todolist/" + tpIdx, todoListService.deleteTodoList(tlIdx, tpIdx));
 		
-		todoListService.deleteTodoList(tlIdx, tpIdx);
-		
-		return "redirect:/gallery/detail?postIdx="+tpIdx;
 	}
 	
 	

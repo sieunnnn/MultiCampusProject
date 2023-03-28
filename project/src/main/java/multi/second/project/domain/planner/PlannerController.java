@@ -98,13 +98,13 @@ public class PlannerController {
 		return "redirect:/planner/detail?tpIdx="+dto.getTpIdx();
 	}
 	
-	//planner host 변경(기본 만든사람)//host변경기능은 중요기능이 아니기 때문에 빼도 될듯
-	@PostMapping("modify-host")
-	public String modifyHost(PlannerHostModifyRequest dto) {
-		plannerService.updatePlannerHost(dto, UserPrincipal.getUserPrincipal().getPrincipal());
-		
-		return "redirect:/planner/detail?tpIdx="+dto.getTpIdx();
-	}
+//	//planner host 변경(기본 만든사람)//host변경기능은 중요기능이 아니기 때문에 빼도 될듯
+//	@PostMapping("modify-host")
+//	public String modifyHost(PlannerHostModifyRequest dto) {
+//		plannerService.updatePlannerHost(dto, UserPrincipal.getUserPrincipal().getPrincipal());
+//		
+//		return "redirect:/planner/detail?tpIdx="+dto.getTpIdx();
+//	}
 	
 	//planner 공유인원 변경
 //	@PostMapping("modify-group")
@@ -117,7 +117,7 @@ public class PlannerController {
 	//planner 공유인원 한명추가
 	@PostMapping("add-group")
 	public String addGroup(PlannerGroupModifyRequest dto) {
-	plannerService.addPlannerGroup(dto, UserPrincipal.getUserPrincipal().getPrincipal());
+	plannerService.addPlannerGroup(dto);
 	
 	return "redirect:/planner/detail?tpIdx="+dto.getTpIdx();
 }

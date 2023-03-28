@@ -20,6 +20,7 @@ import lombok.NoArgsConstructor;
 import multi.second.project.domain.group.domain.TravelGroup;
 import multi.second.project.domain.host.dto.request.HostRegistRequest;
 import multi.second.project.domain.member.domain.Member;
+import multi.second.project.domain.planner.domain.Participant;
 import multi.second.project.domain.planner.domain.Planner;
 import multi.second.project.domain.planner.dto.request.PlannerRegistRequest;
 
@@ -33,8 +34,10 @@ public class Host {//(피드백)프랜드처럼
 	@GeneratedValue
 	private Long hostIdx;
 	
-	@ManyToOne
-	private Member member;
+//	@ManyToOne
+//	private Member member;
+	@OneToOne
+	private Participant participant = new Participant();
 	
 	// 시간
 	@Column(columnDefinition = "timestamp default now()")
@@ -43,9 +46,9 @@ public class Host {//(피드백)프랜드처럼
 //	//친구 삭제 여부
 //	@ColumnDefault("false")
 //	private Boolean isDel;
-	public static Host createHost(Member member) {
+	public static Host createHost(Participant participant) {
 		return Host.builder()
-				.member(member)
+				.participant(participant)
 				.build();
 		
 	}

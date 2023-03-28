@@ -25,6 +25,7 @@ import multi.second.project.domain.host.repository.HostRepository;
 import multi.second.project.domain.member.MemberRepository;
 import multi.second.project.domain.member.domain.Member;
 import multi.second.project.domain.member.dto.Principal;
+import multi.second.project.domain.planner.domain.Participant;
 import multi.second.project.domain.planner.domain.Planner;
 import multi.second.project.domain.planner.dto.request.PlannerGroupModifyRequest;
 import multi.second.project.domain.planner.dto.request.PlannerHostModifyRequest;
@@ -32,6 +33,7 @@ import multi.second.project.domain.planner.dto.request.PlannerRegistRequest;
 import multi.second.project.domain.planner.dto.request.PlannerTitleModifyRequest;
 import multi.second.project.domain.planner.dto.response.PlannerDetailResponse;
 import multi.second.project.domain.planner.dto.response.PlannerListResponse;
+import multi.second.project.domain.planner.repository.ParticipantRepository;
 import multi.second.project.domain.planner.repository.PlannerRepository;
 import multi.second.project.infra.code.ErrorCode;
 import multi.second.project.infra.exception.AuthException;
@@ -52,10 +54,12 @@ public class PlannerService {
 	private final TravelGroupRepository travelGroupRepository;
 	private final HostRepository hostRepository;
 	private final MemberRepository memberRepository;
+	private final ParticipantRepository participantRepository;
 
+	//내가 속한 플래너 전부 페이지 형태로 보내기
 	public Map<String, Object> findPlannerListByUserId(String userId, Pageable pageable) {
 		
-		Page<Planner> page = plannerRepository.findByTravelGroupMembersUserId(userId, pageable);
+		Page<Planner> page = plannerRepository.findByTravelGroupParticipantsMemberUserId(userId, pageable);
 		
 		Paging paging = Paging.builder()
 						.page(page)
@@ -66,55 +70,59 @@ public class PlannerService {
 		return Map.of("plannerList",PlannerListResponse.toDtoList(page.getContent()), "paging", paging);
 	}
 
+	//플래너 생성
 	@Transactional
 	public void createPlanner(PlannerRegistRequest dto) {
 		
-//		TravelGroup travelGroup = travelGroupRepository.findTravelGroupByMembersUserId(dto.getUserId());
-//		Host host = hostRepository.findByMemberUserId(dto.getUserId());
-		//이거 아냐...
-		//또 빌더해서 만들어놔야돼
 		Member member = memberRepository.findById(dto.getUserId()).get();
 		
 		//host 생성
-		Host host = Host.createHost(member);//자신을 host로
+		Participant hostParticipant =  Participant.builder().member(member).build();
+		participantRepository.save(hostParticipant);
+		Host host = Host.builder().participant(hostParticipant).build();
 		hostRepository.save(host);
 		
 		//travelGroup생성
-		TravelGroup travelGroup = new TravelGroup();
-		travelGroup.addMembers(member);//자신을 그룹멤버에 추가
-		travelGroupRepository.save(travelGroup);
+		Participant groupParticipant =  Participant.builder().member(member).build();
+		participantRepository.save(groupParticipant);
+		TravelGroup group = new TravelGroup();
+		group.addParticipant(groupParticipant);
+		travelGroupRepository.save(group);
 		
 		//planner 생성
-		Planner planner = Planner.createPlanner(dto, host, travelGroup);
+		Planner planner = Planner.createPlanner(dto, host, group);
 		plannerRepository.saveAndFlush(planner);
 	}
 
+	//플래너 제거
 	@Transactional
 	public void removePlanner(Long tpIdx, Principal principal) {
 		
+		//제거할 planner 찾기
 		Planner	planner = plannerRepository.findById(tpIdx)
 					.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
-//		if(!planner.getHost().getMember().getUserId().equals(principal.getUserId())) throw new AuthException(ErrorCode.HOST_UNAUTHORIZED_REQUEST);
-//		plannerRepository.delete(planner);
-		
-		//삭제한사람이 host가 아닐경우 그플랜의 그룹 자신을 뺀다.
-		if(!planner.getHost().getMember().getUserId().equals(principal.getUserId())) {
-			Member member = memberRepository.findById(principal.getUserId()).get();
-			
+		//플래너의 호스트가 내가 아니면 플래너의 그룹에서 나를 제거한다.
+		if(!planner.getHost().getParticipant().getMember().getUserId().equals(principal.getUserId())) {
 			TravelGroup travelGroup = travelGroupRepository.findById(planner.getTravelGroup().getTgIdx())
 					.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
-			
-			travelGroup.removeMembers(member);
-			
+			List<Participant> participants = travelGroup.getParticipants();
+			for (Participant participant : participants) {
+				if(participant.getMember().getUserId().equals("group1A")) {
+					travelGroup.removeParticipant(participant);
+					break;
+				}
+			}
 			travelGroupRepository.save(travelGroup);
 		}
-		else {//삭제한 사람이 host일 경우 방을 삭제한다.
+		else {//플래너의 호스트가 나이면 방을 삭제한다.
 			plannerRepository.delete(planner);
+			//그룹도 delete해야하지 않나..?
 		}
 		
 	}
 
+	//특정 플래너의 정보 보내기
 	public PlannerDetailResponse findPlannerBytpIdx(Long tpIdx) {
 		
 		Planner planner = plannerRepository.findById(tpIdx)
@@ -123,13 +131,14 @@ public class PlannerService {
 		return new PlannerDetailResponse(planner);
 	}
 	
+	//플래너 제목 변경
 	@Transactional
 	public void updatePlannerTitle(PlannerTitleModifyRequest dto, Principal principal) {
 		// TODO Auto-generated method stub
 		Planner planner = plannerRepository.findById(dto.getTpIdx())
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
-		if(!planner.getHost().getMember().getUserId().equals(principal.getUserId())) throw new AuthException(ErrorCode.HOST_UNAUTHORIZED_REQUEST);
+		if(!planner.getHost().getParticipant().getMember().getUserId().equals(principal.getUserId())) throw new AuthException(ErrorCode.HOST_UNAUTHORIZED_REQUEST);
 		
 		planner.updatePlannerTitle(dto);
 		
@@ -137,45 +146,41 @@ public class PlannerService {
 		
 	}
 
-	@Transactional
-	public void updatePlannerHost(PlannerHostModifyRequest dto, Principal principal) {
-		Planner planner = plannerRepository.findById(dto.getTpIdx())
-				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
-		
-		if(!planner.getHost().getMember().getUserId().equals(principal.getUserId())) throw new AuthException(ErrorCode.HOST_UNAUTHORIZED_REQUEST);
-		
-		planner.updatePlannerHost(dto);
-		
-		plannerRepository.flush();
-	}
+	//플래너 호스트 변경
+//	@Transactional
+//	public void updatePlannerHost(PlannerHostModifyRequest dto, Principal principal) {
+//		Planner planner = plannerRepository.findById(dto.getTpIdx())
+//				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+//		
+//		if(!planner.getHost().getParticipant().getMember().getUserId().equals(principal.getUserId())) throw new AuthException(ErrorCode.HOST_UNAUTHORIZED_REQUEST);
+//		
+//		planner.updatePlannerHost(dto);
+//		
+//		plannerRepository.flush();
+//	}
 
+	//플래너 그룹에 맴버 추가(한명씩)
 	@Transactional
-	public void addPlannerGroup(PlannerGroupModifyRequest dto, Principal principal) {
-		// TODO Auto-generated method stub
+	public void addPlannerGroup(PlannerGroupModifyRequest dto) {
+		
+		//그룹에 추가할 멤버 아이디
 		Member member = memberRepository.findById(dto.getNewUserId()).get();
 		
+		//그룹편집할 플래너
 		Planner planner = plannerRepository.findById(dto.getTpIdx())
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		
+		//멤버를 플래너그룹에 추가
+		Participant participant =  Participant.builder().member(member).build();
+		participantRepository.save(participant);
 		TravelGroup travelGroup = travelGroupRepository.findById(planner.getTravelGroup().getTgIdx())
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
-		
-		travelGroup.addMembers(member);
-		
+		travelGroup.addParticipant(participant);
 		travelGroupRepository.save(travelGroup);
 		
 		
 	}
 
-//	public void updatePlannerGroup(PlannerGroupModifyRequest dto, Principal principal) {
-//		Planner planner = plannerRepository.findById(dto.getTpIdx())
-//				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
-//		if(!planner.getHost().getMember().getUserId().equals(principal.getUserId())) throw new AuthException(ErrorCode.HOST_UNAUTHORIZED_REQUEST);
-//		
-//		
-//		planner.getTravelGroup().getMembers().u
-//		
-//	}
-	
 	
 	
 	

@@ -28,9 +28,22 @@ import multi.second.project.domain.member.domain.Member;
 import multi.second.project.domain.member.dto.Principal;
 import multi.second.project.domain.planner.domain.Planner;
 import multi.second.project.domain.planner.repository.PlannerRepository;
+import multi.second.project.domain.todo.domain.AccomodationTodo;
+import multi.second.project.domain.todo.domain.AttractionsTodo;
+import multi.second.project.domain.todo.domain.BudgetTodo;
+import multi.second.project.domain.todo.domain.GeneralTodo;
 import multi.second.project.domain.todo.domain.Todo;
+import multi.second.project.domain.todo.domain.TransportTodo;
+import multi.second.project.domain.todo.dto.request.TodoModifyRequest;
 import multi.second.project.domain.todo.dto.request.TodoRegistRequest;
+import multi.second.project.domain.todo.dto.response.AccomodationTodoResponse;
+import multi.second.project.domain.todo.dto.response.TodoResponse;
+import multi.second.project.domain.todo.repository.AccomodationRepository;
+import multi.second.project.domain.todo.repository.AttractionsRepository;
+import multi.second.project.domain.todo.repository.BudgetRepository;
+import multi.second.project.domain.todo.repository.GeneralRepository;
 import multi.second.project.domain.todo.repository.TodoRepository;
+import multi.second.project.domain.todo.repository.TransportRepository;
 import multi.second.project.domain.todolist.domain.TodoList;
 import multi.second.project.domain.todolist.dto.request.TodoListModifyRequest;
 import multi.second.project.domain.todolist.dto.request.TodoListRegistRequest;
@@ -53,56 +66,152 @@ public class TodoService {
 	private final PlannerRepository plannerRepository;
 	private final TodoListRepository todoListRepository;
 	private final TodoRepository todoRepository;
-
 	
+	private final AccomodationRepository accomodationRepository;
+	private final AttractionsRepository attractionsRepository;
+	private final BudgetRepository budgetRepository;
+	private final GeneralRepository generalRepository;
+	private final TransportRepository transportRepository;
+
 	@Transactional
-	public void deleteTodoList(Long tlIdx, Long tpIdx) {
+	public TodoResponse createAccomodationTodo(TodoRegistRequest dto, Long tpIdx, Long tlIdx) {//AccomodationTodoResponse 로 해야되나?
+		//어떻게 
+		Todo todo =Todo.createAccomodationTodo(dto);//AccomodationTodo로 해야되나?
 		
 		TodoList todoList = todoListRepository.findById(tlIdx)
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
-		Planner planner = plannerRepository.findById(tpIdx)
+		todoList.addTodo(todo);
+		
+		todoRepository.saveAndFlush(todo);
+		
+		return new TodoResponse(todo);
+	}
+	@Transactional
+	public TodoResponse createAttractionsTodo(TodoRegistRequest dto, Long tpIdx, Long tlIdx) {
+		Todo todo =Todo.createAttractionsTodo(dto);
+
+		TodoList todoList = todoListRepository.findById(tlIdx)
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
+		todoList.addTodo(todo);
 		
+		todoRepository.saveAndFlush(todo);
 		
-		
-		planner.removeTodoList(todoList);
-		todoListRepository.delete(todoList);
-		
+		return new TodoResponse(todo);
 	}
-	
-	
 	@Transactional
-	public void createTodoList(TodoListRegistRequest dto, Long tpIdx) {
-		
-		TodoList todoList =TodoList.createTodoList(dto);
-		
-		Planner planner = plannerRepository.findById(tpIdx)
+	public TodoResponse createBudgetTodo(TodoRegistRequest dto, Long tpIdx, Long tlIdx) {
+		Todo todo =Todo.createBudgetTodo(dto);
+
+		TodoList todoList = todoListRepository.findById(tlIdx)
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
-		planner.addTodoList(todoList);
-		todoListRepository.saveAndFlush(todoList);
+		todoList.addTodo(todo);
+		
+		todoRepository.saveAndFlush(todo);
+		
+		return new TodoResponse(todo);
 	}
+	@Transactional
+	public TodoResponse createGeneralTodo(TodoRegistRequest dto, Long tpIdx, Long tlIdx) {
+		Todo todo =Todo.createGeneralTodo(dto);
+
+		TodoList todoList = todoListRepository.findById(tlIdx)
+				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		
+		todoList.addTodo(todo);
+		
+		todoRepository.saveAndFlush(todo);
+		
+		return new TodoResponse(todo);
+	}
+	@Transactional
+	public TodoResponse createTransportTodo(TodoRegistRequest dto, Long tpIdx, Long tlIdx) {
+		Todo todo =Todo.createTransportTodo(dto);
+
+		TodoList todoList = todoListRepository.findById(tlIdx)
+				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		
+		todoList.addTodo(todo);
+		
+		todoRepository.saveAndFlush(todo);
+		
+		return new TodoResponse(todo);
+	}
+	
+	//////////////////////////////////////
 	
 	@Transactional
-	public void createTodo(TodoRegistRequest dto, Long tpIdx, Long tlIdx) {
+	public TodoResponse modifyAccomodationTodo(TodoModifyRequest dto) {
+		AccomodationTodo todo = accomodationRepository.findById(dto.getTdIdx()).orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
-//		Todo todo = Todo.createTodo(dto);
+		todo.updateAccomodationTodo(dto);
 		
+		accomodationRepository.flush();
+		
+		return new TodoResponse(todo);
 	}
-	
+	@Transactional
+	public TodoResponse modifyAttractionsTodo(TodoModifyRequest dto) {
+		AttractionsTodo todo = attractionsRepository.findById(dto.getTdIdx()).orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		
+		todo.updateAttractionsTodo(dto);
+		
+		attractionsRepository.flush();
+		
+		return new TodoResponse(todo);
+	}
+	@Transactional
+	public TodoResponse modifyBudgetTodo(TodoModifyRequest dto) {
+		BudgetTodo todo = budgetRepository.findById(dto.getTdIdx()).orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		
+		todo.updateBudgetTodo(dto);
+		
+		budgetRepository.flush();
+		
+		return new TodoResponse(todo);
+	}
+	@Transactional
+	public TodoResponse modifyGeneralTodo(TodoModifyRequest dto) {
+		GeneralTodo todo = generalRepository.findById(dto.getTdIdx()).orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		
+		todo.updateGeneralTodo(dto);
+		
+		generalRepository.flush();
+		
+		return new TodoResponse(todo);
+	}
+	@Transactional
+	public TodoResponse modifyTransportTodo(TodoModifyRequest dto) {
+		TransportTodo todo = transportRepository.findById(dto.getTdIdx()).orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		
+		todo.updateTransportTodo(dto);
+		
+		transportRepository.flush();
+		
+		return new TodoResponse(todo);
+	}
+
+	////////////////////
+
+
 	
 	@Transactional
-	public void updateTodoList(TodoListModifyRequest dto) {
+	public Boolean deleteTodo(Long tdIdx, Long tlIdx) {
 		
-		TodoList todoList = todoListRepository.findById(dto.getTlIdx()).orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		Todo todo = todoRepository.findById(tdIdx)
+				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
-		todoList.updateTodoList(dto);
+		TodoList todoList = todoListRepository.findById(tlIdx)
+				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
-		todoListRepository.flush();
+		todoList.removeTodo(todo);
+		todoRepository.delete(todo);
 		
+		return true;
 	}
+	
 
 
 

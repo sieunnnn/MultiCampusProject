@@ -27,10 +27,12 @@ import multi.second.project.domain.member.MemberRepository;
 import multi.second.project.domain.member.domain.Member;
 import multi.second.project.domain.member.dto.Principal;
 import multi.second.project.domain.planner.domain.Planner;
+import multi.second.project.domain.planner.dto.response.PlannerDetailResponse;
 import multi.second.project.domain.planner.repository.PlannerRepository;
 import multi.second.project.domain.todolist.domain.TodoList;
 import multi.second.project.domain.todolist.dto.request.TodoListModifyRequest;
 import multi.second.project.domain.todolist.dto.request.TodoListRegistRequest;
+import multi.second.project.domain.todolist.dto.response.TodoListResponse;
 import multi.second.project.domain.todolist.repository.TodoListRepository;
 import multi.second.project.infra.code.ErrorCode;
 import multi.second.project.infra.exception.AuthException;
@@ -47,23 +49,54 @@ import multi.second.project.infra.util.paging.Paging;
 @AllArgsConstructor
 public class TodoListService {
 
-	
-	
 	private final PlannerRepository plannerRepository;
 	private final TodoListRepository todoListRepository;
-	
-	//포스트의 댓글 가져오는 코드
-//	public List<CommentListResponse> findCommentListByPostIdx(Long postIdx) {
+
+	//postmapping했을때
+//	@Transactional
+//	public void createTodoList(TodoListRegistRequest dto, Long tpIdx) {
 //		
-//		System.out.println();
-//		//return CommentListResponse.toDtoList(galleryRepository.findCommentByPostIdx(postIdx));
-//		return null;
+//		TodoList todoList =TodoList.createTodoList(dto);
+//		
+//		Planner planner = plannerRepository.findById(tpIdx)
+//				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+//		
+//		planner.addTodoList(todoList);
+//		todoListRepository.saveAndFlush(todoList);
+//		
 //	}
-
-
 	
+	//투두리스트 추가
 	@Transactional
-	public void deleteTodoList(Long tlIdx, Long tpIdx) {
+	public TodoListResponse createTodoList(TodoListRegistRequest dto, Long tpIdx) {
+		
+		TodoList todoList =TodoList.createTodoList(dto);
+		
+		Planner planner = plannerRepository.findById(tpIdx)
+				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		
+		planner.addTodoList(todoList);
+		todoListRepository.saveAndFlush(todoList);
+		//TodoListResponse res = new TodoListResponse();
+		return new TodoListResponse(todoList);//굳이 response에 담을 필요없이 이렇게 받아도 되지 않나?
+	}
+	
+	//투두리스트 수정
+	@Transactional
+	public TodoListResponse updateTodoList(TodoListModifyRequest dto) {
+		
+		TodoList todoList = todoListRepository.findById(dto.getTlIdx()).orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		
+		todoList.updateTodoList(dto);
+		
+		todoListRepository.flush();
+		
+		return new TodoListResponse(todoList);//업데이트인데 뭘보내야하지..?
+	}
+	
+	//투두리스트 삭제
+	@Transactional
+	public Boolean deleteTodoList(Long tlIdx, Long tpIdx) {//삭제는 뭘보내야하지?
 		
 		TodoList todoList = todoListRepository.findById(tlIdx)
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
@@ -74,31 +107,11 @@ public class TodoListService {
 		planner.removeTodoList(todoList);
 		todoListRepository.delete(todoList);
 		
+		return true;
 	}
 	
 	
-	@Transactional
-	public void createTodoList(TodoListRegistRequest dto, Long tpIdx) {
-		
-		TodoList todoList =TodoList.createTodoList(dto);
-		
-		Planner planner = plannerRepository.findById(tpIdx)
-				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
-		
-		planner.addTodoList(todoList);
-		todoListRepository.saveAndFlush(todoList);
-	}
-	
-	@Transactional
-	public void updateTodoList(TodoListModifyRequest dto) {
-		
-		TodoList todoList = todoListRepository.findById(dto.getTlIdx()).orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
-		
-		todoList.updateTodoList(dto);
-		
-		todoListRepository.flush();
-		
-	}
+
 
 
 

@@ -8,19 +8,55 @@
 <body>
 
 <div class="container" layout:fragment="content">
-	<div class="row">
+<div class="row">
  <h2 class="tit">* 게시판</h2>
-    <a href="/gallery/form">게시글 쓰기</a>
-
-		<div th:each="gallery, status : ${galleryList}">
-			<div>
-				<span th:text="${gallery}"></span>
-			</div>
-				<a th:href="@{|/gallery/detail?postIdx=${gallery.postIdx}|}">
-					<img th:src="@{/gallery/download(fpIdx=${gallery.thumb})}">
-				</a>
-		</div>
+ 	   
+ 	   <table style="text-align: center" border="1">
+       <thead>
+           <tr>
+               <th style="width: 10%; height:20%;"><span>번호</span></th>
+               <th style="width: 70%;"><span>제목</span></th>
+               <th style="width: 10%;"><span>작성자</span></th>
+               <th style="width: 10%;"><span>등록일</span></th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr th:each="planner, status : ${plannerList}">
+               <td th:text="${planner.tpIdx}"></td>
+               <td><a th:href="@{|/planner/detail?tpIdx=${planner.tpIdx}|}" th:text="${planner.title}"></a>
+               
+               <form th:action="@{/planner/remove}" method="post" >
+	          	<input type="hidden" th:value="${planner.tpIdx}" name="tpIdx"/> 
+	          	<button id="btnDel"><span>삭제</span></button>
+	          </form>
+               
+               </td>
+               <td th:text="${planner.host}"></td>
+               <td th:text="${planner.regDate}"></td>
+           </tr>
+       </tbody>
+    </table>
+	</div>
+	<div class="row mt-3">
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination justify-content-center">
+		   
+		    <li class="page-item">
+		      <a class="page-link" th:href="@{|/planner/list?page=${paging.prevPage}&size=10&sort=title,ASC|}">Previous</a>
+		    </li>
+		   
+	    	<li class="page-item" th:each="page : ${#numbers.sequence(paging.blockStart, paging.blockEnd)}">
+	    		<a class="page-link" th:href="@{|/planner/list?page=${page-1}&size=10&sort=title,ASC|}" th:text="${page}"></a>
+	    	</li>
+		  
+		    <li class="page-item">
+		      <a class="page-link" th:href="@{|/planner/list?page=${paging.nextPage}&size=10&sort=title,ASC|}">Next</a>
+		    </li>
+		    
+		  </ul>
+		</nav>
 	</div>
 </div>
+
 </body>
 </html>

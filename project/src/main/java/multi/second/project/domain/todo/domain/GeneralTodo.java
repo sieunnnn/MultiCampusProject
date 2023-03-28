@@ -20,6 +20,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import multi.second.project.domain.todo.dto.request.TodoModifyRequest;
 
 @Entity
 @DynamicInsert // insert 쿼리를 생성할 때 null인 필드는 쿼리에서 생략
@@ -33,6 +34,15 @@ public class GeneralTodo extends Todo{
 //	@Id
 //	@GeneratedValue
 //	private Long gtIdx;
+
+	public void updateGeneralTodo(TodoModifyRequest dto) {
+		this.title = dto.getTitle();
+		this.contents = dto.getContents();
+		this.todoDate = dto.getTodoDate();
+		this.isPrivate = dto.getIsPrivate();
+		this.address = dto.getGnAddress();
+		
+	}
 	
 //	//투두카드 1번
 //	@ManyToOne

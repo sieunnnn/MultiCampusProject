@@ -5,7 +5,7 @@ import java.util.List;
 import multi.second.project.domain.gallery.domain.Gallery;
 
 
-public interface AccomadationRepositoryExtension {
+public interface AccomodationRepositoryExtension {
 	
 
 }

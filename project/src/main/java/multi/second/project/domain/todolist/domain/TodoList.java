@@ -67,4 +67,9 @@ public class TodoList {
 	public void updateTodoList(TodoListModifyRequest dto) {
 		this.title = dto.getTitle();
 	}
+
+	public void removeTodo(Todo todo) {
+		todos.remove(todo);
+		
+	}
 }

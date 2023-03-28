@@ -28,20 +28,40 @@ public class TravleGroupServiceTest {
 		
 		TravelGroup group1 = new TravelGroup();
 		TravelGroup group2 = new TravelGroup();
+//		TravelGroup group3 = new TravelGroup();
 		
-		group1.addMembers(group1A);
-		group1.addMembers(group1B);
+//		group1.addMembers(group1A);
+//		group1.addMembers(group1B);
+//		
+//		group2.addMembers(group2A);
+//		group2.addMembers(group2B);
 		
-		group2.addMembers(group2A);
-		group2.addMembers(group2B);
+//		group3.addMembers(group1A);
 		
 		travelGroupRepository.save(group1);
 		travelGroupRepository.save(group2);
+//		travelGroupRepository.save(group3);
 		
 	}
 	
 	
-	
+	@Test
+	public void testRemoveTravelGroup() {
+		
+		Member group1A = memberRepository.findById("group1A").get();
+		Member group1B = memberRepository.findById("group1B").get();
+		Member group2A = memberRepository.findById("group2A").get();
+		Member group2B = memberRepository.findById("group2B").get();
+		
+		TravelGroup travelGroup = travelGroupRepository.findById(1L).get();
+		
+//		travelGroup.removeMembers(group1A);
+//		group3.addMembers(group1A);
+		
+		travelGroupRepository.save(travelGroup);
+//		travelGroupRepository.save(group3);
+		
+	}
 	
 	
 	

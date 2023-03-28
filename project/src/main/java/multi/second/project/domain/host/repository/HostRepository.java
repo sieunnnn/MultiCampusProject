@@ -9,5 +9,5 @@ import multi.second.project.domain.member.domain.Member;
 
 @Repository
 public interface HostRepository extends JpaRepository<Host, Long>{
-	Host findByMemberUserId(String UserId);
+	//Host findByMemberUserId(String UserId);
 }

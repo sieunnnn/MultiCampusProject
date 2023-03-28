@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,7 @@ import multi.second.project.domain.gallery.dto.request.GalleryRegistRequest;
 import multi.second.project.domain.gallery.dto.response.GalleryDetailResponse;
 import multi.second.project.domain.member.UserPrincipal;
 import multi.second.project.domain.member.dto.Principal;
+import multi.second.project.domain.todo.dto.request.TodoModifyRequest;
 import multi.second.project.domain.todo.dto.request.TodoRegistRequest;
 import multi.second.project.domain.todolist.dto.request.TodoListModifyRequest;
 import multi.second.project.domain.todolist.dto.request.TodoListRegistRequest;
@@ -42,43 +44,120 @@ import multi.second.project.infra.util.file.dto.FilePathDto;
 public class TodoController {
 	
 	private final TodoService todoService;
-//
-//	@MessageMapping("upload-accomodation/{tgIdx}")
-//	public String uploadAccomodation(
-//			@DestinationVariable("tgIdx") Long tgIdx,
-//			TodoRegistRequest dto,
-//			Long tpIdx,
-//			Long tlIdx
-//			) {
-//		
-//		todoService.createTodo(dto, tpIdx, tlIdx);
-//		
-//		return "redirect:/planner/detail?tpIdx="+tpIdx;
-//	}
-//	
-//	@PostMapping("modify")
-//	public String modify(
-//			TodoListModifyRequest dto,
-//			Long tpIdx
-//			) {
-//
-//		todoListService.updateTodoList(dto);
-//		
-//		return "redirect:/planner/detail?tpIdx="+tpIdx;
-//	}
-//	
-//	@PostMapping("remove")
-//	public String remove(
-//			Long tlIdx, 
-//			Long tpIdx
-//			) {
-//		
-//		todoListService.deleteTodoList(tlIdx, tpIdx);
-//		
-//		return "redirect:/gallery/detail?postIdx="+tpIdx;
-//	}
-//	
-//	
+	private final SimpMessagingTemplate simpMessagingTemplate;
+
+	//생성은 따로따로 만드나
+	//그럼 수정은? 삭제는?
+	
+	@MessageMapping("upload-accomodation/{tpIdx}")
+	public void uploadAccomodation(
+			@DestinationVariable("tpIdx") Long tpIdx,
+			TodoRegistRequest dto,
+			Long tlIdx
+			) throws Exception {
+		simpMessagingTemplate.convertAndSend("/topic/upload-accomodation/" + tpIdx, todoService.createAccomodationTodo(dto, tpIdx, tlIdx));
+		
+	}
+	
+	@MessageMapping("upload-attractions/{tpIdx}")
+	public void uploadAttractions(
+			@DestinationVariable("tpIdx") Long tpIdx,
+			TodoRegistRequest dto,
+			Long tlIdx
+			) throws Exception {
+		simpMessagingTemplate.convertAndSend("/topic/upload-attractions/" + tpIdx, todoService.createAttractionsTodo(dto, tpIdx, tlIdx));
+		
+	}
+	
+	@MessageMapping("upload-budget/{tpIdx}")
+	public void uploadBudget(
+			@DestinationVariable("tpIdx") Long tpIdx,
+			TodoRegistRequest dto,
+			Long tlIdx
+			) throws Exception {
+		simpMessagingTemplate.convertAndSend("/topic/upload-budget/" + tpIdx, todoService.createBudgetTodo(dto, tpIdx, tlIdx));
+		
+	}
+	
+	@MessageMapping("upload-general/{tpIdx}")
+	public void uploadGeneral(
+			@DestinationVariable("tpIdx") Long tpIdx,
+			TodoRegistRequest dto,
+			Long tlIdx
+			) throws Exception {
+		simpMessagingTemplate.convertAndSend("/topic/upload-general/" + tpIdx, todoService.createGeneralTodo(dto, tpIdx, tlIdx));
+		
+	}
+	
+	@MessageMapping("upload-transport/{tpIdx}")
+	public void uploadTransport(
+			@DestinationVariable("tpIdx") Long tpIdx,
+			TodoRegistRequest dto,
+			Long tlIdx
+			) throws Exception {
+		simpMessagingTemplate.convertAndSend("/topic/upload-transport/" + tpIdx, todoService.createTransportTodo(dto, tpIdx, tlIdx));
+		
+	}
+	
+	//////////////////////////
+	
+	
+	
+	@MessageMapping("modify-accomodation/{tpIdx}")
+	public void modifyAccomodation(
+			@DestinationVariable("tpIdx") Long tpIdx,
+			TodoModifyRequest dto
+			) throws Exception {
+		simpMessagingTemplate.convertAndSend("/topic/upload-accomodation/" + tpIdx, todoService.modifyAccomodationTodo(dto));
+		
+	}
+	@MessageMapping("modify-attractions/{tpIdx}")
+	public void modifyAttractions(
+			@DestinationVariable("tpIdx") Long tpIdx,
+			TodoModifyRequest dto
+			) throws Exception {
+		simpMessagingTemplate.convertAndSend("/topic/upload-attractions/" + tpIdx, todoService.modifyAttractionsTodo(dto));
+		
+	}
+	@MessageMapping("modify-budget/{tpIdx}")
+	public void modifyBudget(
+			@DestinationVariable("tpIdx") Long tpIdx,
+			TodoModifyRequest dto
+			) throws Exception {
+		simpMessagingTemplate.convertAndSend("/topic/upload-budget/" + tpIdx, todoService.modifyBudgetTodo(dto));
+		
+	}
+	@MessageMapping("modify-general/{tpIdx}")
+	public void modifyGeneral(
+			@DestinationVariable("tpIdx") Long tpIdx,
+			TodoModifyRequest dto
+			) throws Exception {
+		simpMessagingTemplate.convertAndSend("/topic/upload-general/" + tpIdx, todoService.modifyGeneralTodo(dto));
+		
+	}
+	@MessageMapping("modify-transport/{tpIdx}")
+	public void modifyTransport(
+			@DestinationVariable("tpIdx") Long tpIdx,
+			TodoModifyRequest dto
+			) throws Exception {
+		simpMessagingTemplate.convertAndSend("/topic/upload-transport/" + tpIdx, todoService.modifyTransportTodo(dto));
+		
+	}
+	
+	///////////////////////
+	
+	@MessageMapping("remove-transport/{tpIdx}")
+	public void remove(
+			@DestinationVariable("tpIdx") Long tpIdx,
+			Long tlIdx,
+			Long tdIdx
+			) {
+		simpMessagingTemplate.convertAndSend("/topic/remove-transport/" + tpIdx, todoService.deleteTodo(tdIdx, tlIdx));
+		
+		
+	}
+	
+	
 	
 	
 }
