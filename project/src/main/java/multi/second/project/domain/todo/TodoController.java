@@ -146,13 +146,53 @@ public class TodoController {
 	
 	///////////////////////
 	
-	@MessageMapping("remove-transport/{tpIdx}")
-	public void remove(
+	@MessageMapping("remove-accomodation/{tpIdx}")
+	public void removeAccomodation(
 			@DestinationVariable("tpIdx") Long tpIdx,
 			Long tlIdx,
 			Long tdIdx
 			) {
-		simpMessagingTemplate.convertAndSend("/topic/remove-transport/" + tpIdx, todoService.deleteTodo(tdIdx, tlIdx));
+		simpMessagingTemplate.convertAndSend("/topic/remove-transport/" + tpIdx, todoService.AccomodationDeleteTodo(tdIdx, tlIdx));
+		
+		
+	}
+	@MessageMapping("remove-attractions/{tpIdx}")
+	public void removeAttractions(
+			@DestinationVariable("tpIdx") Long tpIdx,
+			Long tlIdx,
+			Long tdIdx
+			) {
+		simpMessagingTemplate.convertAndSend("/topic/remove-transport/" + tpIdx, todoService.AttractionsDeleteTodo(tdIdx, tlIdx));
+		
+		
+	}
+	@MessageMapping("remove-budget/{tpIdx}")
+	public void removeBudget(
+			@DestinationVariable("tpIdx") Long tpIdx,
+			Long tlIdx,
+			Long tdIdx
+			) {
+		simpMessagingTemplate.convertAndSend("/topic/remove-transport/" + tpIdx, todoService.BudgetDeleteTodo(tdIdx, tlIdx));
+		
+		
+	}
+	@MessageMapping("remove-general/{tpIdx}")
+	public void removeGeneral(
+			@DestinationVariable("tpIdx") Long tpIdx,
+			Long tlIdx,
+			Long tdIdx
+			) {
+		simpMessagingTemplate.convertAndSend("/topic/remove-transport/" + tpIdx, todoService.GeneralDeleteTodo(tdIdx, tlIdx));
+		
+		
+	}
+	@MessageMapping("remove-transport/{tpIdx}")
+	public void removeTransport(
+			@DestinationVariable("tpIdx") Long tpIdx,
+			Long tlIdx,
+			Long tdIdx
+			) {
+		simpMessagingTemplate.convertAndSend("/topic/remove-transport/" + tpIdx, todoService.TransportDeleteTodo(tdIdx, tlIdx));
 		
 		
 	}

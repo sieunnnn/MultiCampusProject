@@ -22,6 +22,7 @@ public class TransportTodoResponse {
 	private String title;
 	private String contents;
 	private LocalDateTime regDate;
+	private LocalDateTime todoDate;
 	private Boolean isPrivate;
 	private String time;
 	private TransportType transportType;
@@ -31,6 +32,7 @@ public class TransportTodoResponse {
 		this.title = entity.getTitle();
 		this.contents = entity.getContents();
 		this.regDate = entity.getRegDate();
+		this.todoDate = entity.getTodoDate();
 		this.isPrivate = entity.getIsPrivate();
 		this.time = entity.getTime();
 		this.transportType = entity.getTransportType();
@@ -39,8 +41,13 @@ public class TransportTodoResponse {
 	public String getRegDateAsDate() {
 		return regDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
-	
 	public String getRegDateAsTime() {
+		return regDate.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+	}
+	public String getTodoDateAsDate() {
+		return regDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+	}
+	public String getTodoDateAsTime() {
 		return regDate.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
 	}
 	

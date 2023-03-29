@@ -21,6 +21,7 @@ public class GeneralTodoResponse {
 	private String title;
 	private String contents;
 	private LocalDateTime regDate;
+	private LocalDateTime todoDate;
 	private Boolean isPrivate;
 	private String address;
 
@@ -29,6 +30,7 @@ public class GeneralTodoResponse {
 		this.title = entity.getTitle();
 		this.contents = entity.getContents();
 		this.regDate = entity.getRegDate();
+		this.todoDate = entity.getTodoDate();
 		this.isPrivate = entity.getIsPrivate();
 		this.address  = entity.getAddress();
 	}
@@ -36,8 +38,13 @@ public class GeneralTodoResponse {
 	public String getRegDateAsDate() {
 		return regDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
-	
 	public String getRegDateAsTime() {
+		return regDate.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+	}
+	public String getTodoDateAsDate() {
+		return regDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+	}
+	public String getTodoDateAsTime() {
 		return regDate.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
 	}
 	

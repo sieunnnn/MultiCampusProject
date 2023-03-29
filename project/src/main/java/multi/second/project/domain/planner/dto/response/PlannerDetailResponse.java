@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import multi.second.project.domain.comment.dto.response.CommentResponse;
 import multi.second.project.domain.gallery.domain.Gallery;
+import multi.second.project.domain.group.domain.TravelGroup;
 import multi.second.project.domain.host.domain.Host;
 import multi.second.project.domain.planner.domain.Planner;
 import multi.second.project.domain.todolist.dto.response.TodoListResponse;
@@ -23,6 +24,7 @@ public class PlannerDetailResponse {
 	private String title;
 	private LocalDateTime regDate;
 //	private String userId;
+	private TravelGroup travelGroup;
 	private Host host;
 	private Boolean isPrivate;
 	private List<TodoListResponse> todolistResponses = new ArrayList<TodoListResponse>();
@@ -33,6 +35,7 @@ public class PlannerDetailResponse {
 		this.title = planner.getTitle();
 		this.regDate = planner.getRegDate();
 //		this.userId = planner.getMember().getUserId();
+		this.travelGroup = planner.getTravelGroup();
 		this.host = planner.getHost();
 		this.todolistResponses = TodoListResponse.toDtoList(planner.getTodolists());
 	}

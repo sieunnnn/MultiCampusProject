@@ -81,7 +81,7 @@ public class TodoServiceTest {
 		TodoList todoList = TodoList.builder().title("더미데이터 인천 3월 27일")
 								.build();
 	
-		todoList.addTodo(accomodationTodo);
+		todoList.accomodationAddTodo(accomodationTodo);
 		
 		Member group1A = memberRepository.findById("group1A").get();
 		//host는 회원가입시에 hostDB도 만들어지도록 하고 플래너 만들때는 userId로 호스트를 찾아 플래너에 매핑하려 한다.

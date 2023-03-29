@@ -22,6 +22,7 @@ public class BudgetTodoResponse {
 	private String title;
 	private String contents;
 	private LocalDateTime regDate;
+	private LocalDateTime todoDate;
 	private Boolean isPrivate;
 	private BudgetType budgetType;
 	private Integer budget;
@@ -31,6 +32,7 @@ public class BudgetTodoResponse {
 		this.title = entity.getTitle();
 		this.contents = entity.getContents();
 		this.regDate = entity.getRegDate();
+		this.todoDate = entity.getTodoDate();
 		this.isPrivate = entity.getIsPrivate();
 		this.budgetType = entity.getBudgetType();
 		this.budget = entity.getBudget();
@@ -39,8 +41,13 @@ public class BudgetTodoResponse {
 	public String getRegDateAsDate() {
 		return regDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 	}
-	
 	public String getRegDateAsTime() {
+		return regDate.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+	}
+	public String getTodoDateAsDate() {
+		return regDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+	}
+	public String getTodoDateAsTime() {
 		return regDate.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
 	}
 	

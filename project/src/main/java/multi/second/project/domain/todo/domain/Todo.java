@@ -63,52 +63,67 @@ public class Todo {
 	@ColumnDefault("false")
 	protected Boolean isDel;
 
-	public static Todo createAccomodationTodo(TodoRegistRequest dto) {//리퀘스트는 하나로 해도 되나?
-		
-		return AccomodationTodo.builder()
-				.contents(dto.getContents())
-				.title(dto.getTitle())
-				.todoDate(dto.getTodoDate())
-				.address(dto.getAcAddress())
-				.build();
-	}
-
-	public static Todo createAttractionsTodo(TodoRegistRequest dto) {
-		return AttractionsTodo.builder()
-				.contents(dto.getContents())
-				.title(dto.getTitle())
-				.todoDate(dto.getTodoDate())
-				.attractions(dto.getAttractions())
-				.build();
-	}
-
-	public static Todo createBudgetTodo(TodoRegistRequest dto) {
-		return BudgetTodo.builder()
-				.contents(dto.getContents())
-				.title(dto.getTitle())
-				.todoDate(dto.getTodoDate())
-				.budget(dto.getBudget())
-				.budgetType(dto.getBudgetType())
-				.build();
-	}
-
-	public static Todo createGeneralTodo(TodoRegistRequest dto) {
-		return GeneralTodo.builder()
-				.contents(dto.getContents())
-				.title(dto.getTitle())
-				.todoDate(dto.getTodoDate())
-				.address(dto.getGnAddress())
-				.build();
-	}
-
-	public static Todo createTransportTodo(TodoRegistRequest dto) {
-		return TransportTodo.builder()
-				.contents(dto.getContents())
-				.title(dto.getTitle())
-				.todoDate(dto.getTodoDate())
-				.transportType(dto.getTransportType())
-				.build();
-	}
+//	public static Todo createAccomodationTodo(TodoRegistRequest dto) {//리퀘스트는 하나로 해도 되나?
+//		
+//		return AccomodationTodo.builder()
+//				.contents(dto.getContents())
+//				.title(dto.getTitle())
+//				.todoDate(dto.getTodoDate())
+//				.address(dto.getAcAddress())
+//				.build();
+//	}
+//
+//	public static Todo createAttractionsTodo(TodoRegistRequest dto) {
+//		return AttractionsTodo.builder()
+//				.contents(dto.getContents())
+//				.title(dto.getTitle())
+//				.todoDate(dto.getTodoDate())
+//				.attractions(dto.getAttractions())
+//				.build();
+//	}
+//
+//	public static Todo createBudgetTodo(TodoRegistRequest dto) {
+//		return BudgetTodo.builder()
+//				.contents(dto.getContents())
+//				.title(dto.getTitle())
+//				.todoDate(dto.getTodoDate())
+//				.budget(dto.getBudget())
+//				.budgetType(dto.getBudgetType())
+//				.build();
+//	}
+//
+//	public static Todo createGeneralTodo(TodoRegistRequest dto) {
+//		return GeneralTodo.builder()
+//				.contents(dto.getContents())
+//				.title(dto.getTitle())
+//				.todoDate(dto.getTodoDate())
+//				.address(dto.getGnAddress())
+//				.build();
+//	}
+//
+//	public static Todo createTransportTodo(TodoRegistRequest dto) {
+//		return TransportTodo.builder()
+//				.contents(dto.getContents())
+//				.title(dto.getTitle())
+//				.todoDate(dto.getTodoDate())
+//				.transportType(dto.getTransportType())
+//				.build();
+//	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//아 이거 todo 업데이트는 어케하냐...
 //	public void updateAccomodationTodo(TodoModifyRequest dto) {

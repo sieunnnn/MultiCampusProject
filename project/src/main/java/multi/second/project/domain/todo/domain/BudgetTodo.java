@@ -23,6 +23,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import multi.second.project.domain.todo.dto.request.TodoModifyRequest;
+import multi.second.project.domain.todo.dto.request.TodoRegistRequest;
 
 @Entity
 @DynamicInsert // insert 쿼리를 생성할 때 null인 필드는 쿼리에서 생략
@@ -35,6 +36,16 @@ public class BudgetTodo extends Todo{
 	
 	//예산비
 	private Integer budget;
+	
+	public static BudgetTodo createBudgetTodo(TodoRegistRequest dto) {
+		return BudgetTodo.builder()
+				.contents(dto.getContents())
+				.title(dto.getTitle())
+				.todoDate(dto.getTodoDate())
+				.budget(dto.getBudget())
+				.budgetType(dto.getBudgetType())
+				.build();
+	}
 
 	public void updateBudgetTodo(TodoModifyRequest dto) {
 		this.title = dto.getTitle();

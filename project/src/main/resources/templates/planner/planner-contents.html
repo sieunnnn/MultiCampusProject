@@ -17,22 +17,23 @@
           <span >번호 : [[${planner.tpIdx}]]</span>
           <span>제목 : [[${planner.title}]]</span>
           <span>등록일 : [[${planner.regDateAsDate}]]</span>
-          <span>호스트 : [[${planner.host}]]</span>
+          <span>호스트 : [[${planner.host.participant.member.userId}]]</span>
       </div>
+      
       <div class="info file_info">
       	<ol>
-      		<li th:each="group : ${planner.travelGroup}">
-				<a th:text="${group.participants.member.userId}"></a> 
-				<form th:action="@{/planner/add-group}" method="post" >
-				<input type="text" th:value="group1B" name="newUserName"/> 
+      		<li th:each="group : ${planner.travelGroup.participants}">
+				<p th:text="${group.member.userId}"> 
+				
+      	 	</li>
+      	 	<form th:action="@{/planner/add-group}" method="post" >
+				<input type="text" th:value="group1B" name="newUserId"/> 
 	          	<input type="hidden" th:value="${planner.tpIdx}" name="tpIdx"/> 
 	          	<button><span>공유 인원 추가</span></button>
-	          </form>
-				
-				
-      	 	</li>	     
+	          </form>	     
       	</ol>
       </div>
+      
       <div class="article_content">
       	<pre>[[${planner.title}]]</pre>
       </div>
@@ -40,30 +41,15 @@
       
           <button onclick="location.href='/planner/list'"><span>목록</span></button>
           
-          <!--  
-          <th:block sec:authorize="isAuthenticated()" th:if="${gallery.userId eq #authentication.name}">
-	          <form th:action="@{/gallery/remove}" method="post" >
-	          	<input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/> 
-	          	<button id="btnDel"><span>삭제</span></button>
-	          </form>
-	          <form action="/gallery/modify" method="get">
-	          	<input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/> 
-	          	<button id="btnModify"><span>수정</span></button>
-	          </form>	
-          </th:block>
-
-          -->
+          
       </div>
-      
 	  <input type="text" th:value="제목없음" name="title" id="title"/> 
 	  <button onclick="addTodoList()"><span>todolist 등록</span></button>
 	 
-      
       <div>
       	<ol>
       		<li th:each="todolist : ${planner.todolistResponses}">  
       	 		<p th:text="${todolist.title}">
-      	 		
 	          	<button id="btnDel" onclick="delTodoList()"><span>todolist 삭제</span></button>
 	          	
 	          	<input type="hidden" th:value="${todolist.tlIdx}" name="tlIdx" id="tlIdx"/> 
@@ -74,41 +60,51 @@
 	          	<button onclick="addAccomodationTodo()"><span>Accomodation todo 등록</span></button>
 	          	<button onclick="addAttractionsTodo()"><span>Attractions todo 등록</span></button>
 	          	<button onclick="addBudgetTodo()"><span>Budget todo 등록</span></button>
-	          	<button onclick="addGeneralTodo()"><span>eneral todo 등록</span></button>
+	          	<button onclick="addGeneralTodo()"><span>General todo 등록</span></button>
 	          	<button onclick="addTransportTodo()"><span>Transport todo 등록</span></button>
-	          	<!--
+	          	
 	          	<ol>
-	          		<li th:each="todo : ${todolist.todoResponses}">
-	          			<p th:text="${todo.title}">
-	          			<p th:text="${todo.contents}">
-	          			<p th:text="${todo.todoDate}">
-	          			<p th:text="${todo.isPrivate}">
-	          			-->
-	          			<!-- if문을 써서 무슨 todo인지 확인해야하나..어떻게? dtype?-->
-	          			<!--
-	          			<p th:text="${todo.acAddress}">
-	          			
-	          			<p th:text="${todo.attractions}">
-	          			
-	          			<p th:text="${todo.budgetType}">
-	          			<p th:text="${todo.budget}">
-	          			
-	          			<p th:text="${todo.gnAddress}">
-	          			
-	          			<p th:text="${todo.transportType}">
-	          			-->
-	          			<!--
+	          		<li th:each="todo : ${todolist.accomodationTodoResponses}">
+	          			<p th:text="${todo.title}"><p th:text="${todo.contents}"><p th:text="${todo.todoDate}"><p th:text="${todo.isPrivate}">
+	          			<p th:text="${todo.address}">
 	          			<button onclick="modAccomodationTodo()"><span>Accomodation todo 수정</span></button>
-	          			<button onclick="modAttractionsTodo()"><span>Attractions todo 수정</span></button>
-	          			<button onclick="modBudgetTodo()"><span>Budget todo 수정</span></button>
-	          			<button onclick="modGeneralTodo()"><span>eneral todo 수정</span></button>
-	          			<button onclick="modTransportTodo()"><span>Transport todo 수정</span></button>
-	          
-	         			<button id="btnDel" onclick="delTodoList()"><span>todo 삭제</span></button>
-	          
+	         			<button id="btnDel" onclick="delAccomodationTodo()"><span>Accomodation todo 삭제</span></button>
 	          		</li>	
 	          	</ol>
-	          	-->
+	          	<ol>
+	          		<li th:each="todo : ${todolist.attractionsTodoResponses}">
+	          			<p th:text="${todo.title}"><p th:text="${todo.contents}"><p th:text="${todo.todoDate}"><p th:text="${todo.isPrivate}">
+	          			<p th:text="${todo.attractions}">
+	          			<button onclick="modAttractionsTodo()"><span>attractions todo 수정</span></button>
+	         			<button id="btnDel" onclick="delAttractionsTodo()"><span>attractions todo 삭제</span></button>
+	          		</li>	
+	          	</ol>
+	          	<ol>
+	          		<li th:each="todo : ${todolist.budgetTodoResponses}">
+	          			<p th:text="${todo.title}"><p th:text="${todo.contents}"><p th:text="${todo.todoDate}"><p th:text="${todo.isPrivate}">
+	          			<p th:text="${todo.budgetType}"><p th:text="${todo.budget}">
+	          			<button onclick="modBudgetTodo()"><span>budget todo 수정</span></button>
+	         			<button id="btnDel" onclick="delBudgetTodo()"><span>budget todo 삭제</span></button>
+	          		</li>	
+	          	</ol>
+	          	<ol>
+	          		<li th:each="todo : ${todolist.generalTodoResponses}">
+	          			<p th:text="${todo.title}"><p th:text="${todo.contents}"><p th:text="${todo.todoDate}"><p th:text="${todo.isPrivate}">
+	          			<p th:text="${todo.address}">
+	          			<button onclick="modGeneralTodo()"><span>general todo 수정</span></button>
+	         			<button id="btnDel" onclick="delGeneralTodo()"><span>general todo 삭제</span></button>
+	          		</li>	
+	          	</ol>
+	          	<ol>
+	          		<li th:each="todo : ${todolist.transportTodoResponses}">
+	          			<p th:text="${todo.title}"><p th:text="${todo.contents}"><p th:text="${todo.todoDate}"><p th:text="${todo.isPrivate}">
+	          			<p th:text="${todo.transportType}">
+	          			<button onclick="modTransportTodo()"><span>transport todo 수정</span></button>
+	         			<button id="btnDel" onclick="delTransportTodo()"><span>transport todo 삭제</span></button>
+	          		</li>	
+	          	</ol>
+	         
+	         
       	 	</li>	     
       	</ol>
       </div>
@@ -144,7 +140,6 @@
       
    </div>
 </div>
-
 <script type="text/javascript" layout:fragment="script" th:inline="javascript">
 
 	function addTodoList() {

@@ -21,7 +21,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import multi.second.project.domain.comment.dto.request.CommentModifyRequest;
+import multi.second.project.domain.todo.domain.AccomodationTodo;
+import multi.second.project.domain.todo.domain.AttractionsTodo;
+import multi.second.project.domain.todo.domain.BudgetTodo;
+import multi.second.project.domain.todo.domain.GeneralTodo;
 import multi.second.project.domain.todo.domain.Todo;
+import multi.second.project.domain.todo.domain.TransportTodo;
 import multi.second.project.domain.todolist.dto.request.TodoListModifyRequest;
 import multi.second.project.domain.todolist.dto.request.TodoListRegistRequest;
 
@@ -35,9 +40,31 @@ public class TodoList {
 	@GeneratedValue
 	private Long tlIdx;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL)
 	@Builder.Default
 	private List<Todo> todos = new ArrayList<>();
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Builder.Default
+	private List<AccomodationTodo> accomodationTodos = new ArrayList<>();
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@Builder.Default
+	private List<AttractionsTodo> attractionsTodos = new ArrayList<>();
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@Builder.Default
+	private List<BudgetTodo> budgetTodos = new ArrayList<>();
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@Builder.Default
+	private List<GeneralTodo> generalTodos = new ArrayList<>();
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@Builder.Default
+	private List<TransportTodo> transportTodos = new ArrayList<>();
+	
+	
 	
 //	//플래너 번호
 //	@ManyToOne
@@ -55,9 +82,7 @@ public class TodoList {
 	@ColumnDefault("false")
 	private Boolean isDel;
 	
-	public void addTodo(Todo todo) {
-		todos.add(todo);
-	}
+	
 
 	public static TodoList createTodoList(TodoListRegistRequest dto) {
 		return TodoList.builder()
@@ -68,8 +93,46 @@ public class TodoList {
 		this.title = dto.getTitle();
 	}
 
+	public void addTodo(Todo todo) {
+		todos.add(todo);
+	}
+	public void accomodationAddTodo(AccomodationTodo todo) {
+		accomodationTodos.add(todo);
+	}
+	public void attractionsAddTodo(AttractionsTodo todo) {
+		attractionsTodos.add(todo);
+	}
+	public void budgetAddTodo(BudgetTodo todo) {
+		budgetTodos.add(todo);
+	}
+	public void generalAddTodo(GeneralTodo todo) {
+		generalTodos.add(todo);
+	}
+	public void transportAddTodo(TransportTodo todo) {
+		transportTodos.add(todo);
+	}
+	//////////////////////////////
+	
 	public void removeTodo(Todo todo) {
 		todos.remove(todo);
-		
 	}
+	public void accomodationRemoveTodo(AccomodationTodo todo) {
+		accomodationTodos.remove(todo);
+	}
+	public void attractionsTodoRemoveTodo(AttractionsTodo todo) {
+		attractionsTodos.remove(todo);
+	}
+	public void budgetTodoRemoveTodo(BudgetTodo todo) {
+		budgetTodos.remove(todo);
+	}
+	public void generalTodoRemoveTodo(GeneralTodo todo) {
+		generalTodos.remove(todo);
+	}
+	public void transportTodoRemoveTodo(TransportTodo todo) {
+		transportTodos.remove(todo);
+	}
+	
+	
+	
+
 }
