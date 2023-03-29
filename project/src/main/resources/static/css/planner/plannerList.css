@@ -1,0 +1,266 @@
+
+/* 웹폰트 */
+@font-face {
+
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+::-webkit-scrollbar {
+
+    display: none;
+}
+
+.container__planner_list {
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content:flex-start;
+
+    background-color: orange;
+
+    width: 100%;
+    height: 100%;
+}
+
+.title__planner {
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    width: 100%;
+    height: 39px;
+
+    background: #FFFFFF;
+    box-shadow: 0px 0.5px 0px rgba(0, 0, 0, 0.15), inset 0px -0.5px 0px rgba(0, 0, 0, 0.05);
+    border-radius: 0 10px 0 0;
+
+    font-family: 'Pretendard';
+    font-size: 20px;
+    font-weight: 600;
+    color: #1C1C1E;
+}
+
+.container__head {
+
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: flex-start;
+
+    width: 100%;
+    height: 350px;
+    /*background-color: #0A84FF;*/
+}
+
+.planner__profile {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+
+    width: 200px;
+    height: 100%;
+
+}
+
+/*.wrapper__profile {*/
+
+/*    width: 170px;*/
+/*    height: 170px;*/
+
+/*    border-radius: 50%;*/
+/*    background: #D9D9D9;*/
+/*    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);*/
+/*}*/
+
+.recommend {
+
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: 100%;
+
+    /*background-color: #0bd5e8;*/
+}
+
+.wrapper__planner_list {
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: #34C759;
+}
+
+.wrapper__cards {
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+
+    margin-left: 18px;
+
+    background-color: #1A71CC;
+}
+
+.btn__add__planner , .btn__add__planner:focus {
+
+    width: 336px;
+    height: 218px;
+    margin: 25px 20px 25px 20px;
+
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(24px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 16px;
+    outline: none;
+    cursor: grab;
+}
+
+.card {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+
+    width: 336px;
+    height: 218px;
+    margin: 25px 20px 25px 20px;
+
+    background: rgba(255, 255, 255, 0.9);
+    opacity: 0.9;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(24px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 16px;
+
+    cursor: grab;
+}
+
+/* toggle ============================================================*/
+
+.wrapper__planner__toggle {
+
+    margin: 15px 0 15px 265px;
+}
+
+.toggle__switch__planner {
+
+    width: 57px;
+    height: 26px;
+
+    display: block;
+    position: relative;
+
+    border-radius: 30px;
+    background: rgba(0, 122, 255, 1);
+    /*box-shadow: 0 0 8px 3px rgba(0 0 0 / 15%);*/
+
+    cursor: pointer;
+}
+
+
+.toggle__switch__planner .toggle__button {
+
+    width: 20px;
+    height: 20.5px;
+    position: absolute;
+    top: 50%;
+    left: 34px;
+    transform: translateY(-50%);
+
+    border-radius: 50%;
+
+    background: #fff;
+}
+
+.toggle__switch__planner.active {
+
+    background: rgba(120, 120, 128, 32%);
+}
+
+.toggle__switch__planner.active .toggle__button {
+
+    left: calc(100% - 54px);
+    background: #fff !important;
+}
+
+.toggle__switch__planner, .toggle__button {
+
+    transition: all 0.2s ease-in;
+}
+
+
+/* ===================================================================*/
+
+.container__travel__friends {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+
+    width: auto;
+    height: auto;
+}
+
+.wrapper__friends {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+
+    margin-left: 20px;
+
+    width: auto;
+    height: 50px;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    border-radius: 50px;
+
+}
+
+.profile {
+
+    margin: 5px 5px 6px 5px;
+    width: 40px;
+    height: 40px;
+
+    background-color: rgba(0, 0, 0, 0.32);
+    border-radius: 50%;
+}
+
+.card__title {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: center;
+
+    margin: 10px 20px 20px 20px;
+
+    font-family: 'Pretendard';
+    font-size: 34px;
+    font-weight: 500;
+    color: #1C1C1E;
+}

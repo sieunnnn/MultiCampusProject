@@ -292,3 +292,58 @@
 
     border-radius: 16px;
 }
+
+/* toggle ============================================================*/
+
+.wrapper__planner__toggle {
+
+}
+
+.toggle__switch__planner {
+
+    width: 57px;
+    height: 26px;
+
+    display: block;
+    position: relative;
+
+    border-radius: 30px;
+    background: rgba(0, 122, 255, 1);
+    /*box-shadow: 0 0 8px 3px rgba(0 0 0 / 15%);*/
+
+    cursor: pointer;
+}
+
+
+.toggle__switch__planner .toggle__button {
+
+    width: 20px;
+    height: 20.5px;
+    position: absolute;
+    top: 50%;
+    left: 34px;
+    transform: translateY(-50%);
+
+    border-radius: 50%;
+
+    background: #fff;
+}
+
+.toggle__switch__planner.active {
+
+    background: rgba(120, 120, 128, 32%);
+}
+
+.toggle__switch__planner.active .toggle__button {
+
+    left: calc(100% - 54px);
+    background: #fff !important;
+}
+
+.toggle__switch__planner, .toggle__button {
+
+    transition: all 0.2s ease-in;
+}
+
+
+/* ===================================================================*/

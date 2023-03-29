@@ -25,38 +25,61 @@ html {
 
 }
 
-body {
+input {
+
+    width: 300px;
+    height: 28px;
+
+    margin:  30px 13px 13px 13px;
+
+    padding: 0 10px 0 10px;
+
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+
+    background-color: transparent;
+
+    font-family: 'Pretendard';
+    font-size: 18px;
+    font-weight: 400;
+    color: #1C1C1E;
+}
+
+input:focus {
+
+    outline: solid 2.5px rgba(58, 108, 217, 0.5);
+}
+
+button {
+
+    width: 100px;
+    height: 25px;
+    margin-top: 3px;
+    margin-left: 37%;
+
+    background: linear-gradient(180deg, #1568E5 0%, #155CCC 100%);
+    box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.5), inset 0px 0.5px 0px rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
+
+    border: none;
+
+    font-family: 'Pretendard';
+    font-size: 14px;
+    font-weight: 400;
+    color: white;
+
+    cursor: grab;
+}
+
+.container__add__planner {
 
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-content: center;
-}
 
-::-webkit-scrollbar {
-
-    display: none;
-}
-
-button, button:focus {
-
-    outline: none;
-    border:none;
-    background-color: transparent;
-
-    cursor: grab;
-}
-
-.container__content {
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-content: flex-start;
-
-    width: 500px;
-    height: 500px;
-    margin-bottom: 60px;
+    width: 350px;
+    height: 150px;
 
     background: rgba(255, 255, 255, 0.75);
     border: 0.5px solid rgba(0, 0, 0, 0.12);
@@ -67,72 +90,29 @@ button, button:focus {
     filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.15)) drop-shadow(0px 25px 30px rgba(0, 0, 0, 0.35));
 }
 
+.wrapper__input {
 
-/* ==============================================================*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
 
-/* 공통 */
-
-.title {
+.title__add__planner {
 
     display: flex;
     justify-content: center;
     align-content: center;
 
-    position: fixed;
-
-    width: 500px;
-    height: 30px;
+    width: 100%;
+    height: 28px;
 
     background: #FFFFFF;
     box-shadow: 0px 0.5px 0px rgba(0, 0, 0, 0.15), inset 0px -0.5px 0px rgba(0, 0, 0, 0.05);
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 10px 10px 0 0;
 
     font-family: 'Pretendard';
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 600;
     color: #1C1C1E;
 }
-
-.container{
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-content: flex-start;
-
-    position: fixed;
-    top: 30px;
-
-    width: 500px;
-    height: 470px;
-
-    overflow-y: scroll;
-}
-
-/* 투두 */
-
-
-/* ==============================================================*/
-
-.wrapper__bar {
-
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-content: center;
-
-    width: 450px;
-    height: auto;
-    margin-left: 25px;
-
-    background: rgba(0, 0, 0, 0.35);
-    border-radius: 10px;
-}
-
-.wrapper__bar img {
-
-    width: 70px;
-    height: 70px;
-    margin: 4px 0 4px 0;
-}
-
