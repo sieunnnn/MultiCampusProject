@@ -47,7 +47,7 @@
                 <div class="wrapper__cards">
 
                     <!-- 카드 클릭 시, 세부내용 화면으로 이동 처리 해야함 -->
-                    <div class="card" id="card" th:onclick="|location.href='@{/planner/planner}'|">
+                    <div class="card" id="card">
 
                         <!-- 공개 여부를 결정하는 토글 -->
                         <div class="wrapper__planner__toggle">
@@ -57,7 +57,7 @@
                         </div>
 
                         <!-- 플래너 제목 -->
-                        <div class="card__title">
+                        <div class="card__title" th:onclick="|location.href='@{/planner/planner}'|">
                             <div>플래너 제목입니당</div>
                         </div>
 

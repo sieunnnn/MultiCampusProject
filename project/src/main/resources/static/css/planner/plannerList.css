@@ -199,7 +199,7 @@
 
 .toggle__switch__planner.active .toggle__button {
 
-    left: calc(100% - 55px);
+    left: calc(100% - 54px);
     background: #fff !important;
 }
 
