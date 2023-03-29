@@ -28,13 +28,13 @@ public class FriendController {
         return "index";
     }
 
-    @GetMapping("/addFriend")
+    @GetMapping("/add/friend")
     public String addFriendForm(Model model) {
         model.addAttribute("friend", new Friend());
         return "addFriendForm";
     }
 
-    @PostMapping("/addFriend")
+    @PostMapping("/add/Friend")
     public String addFriendSubmit(@ModelAttribute Friend friend) {
         friendService.saveFriend(friend);
         return "redirect:/";
@@ -54,7 +54,7 @@ public class FriendController {
         return "redirect:/";
     }
 
-    @GetMapping("/deleteFriend/{id}")
+    @GetMapping("/delete/Friend/{id}")
     public String deleteFriend(@PathVariable Long id) {
         friendService.deleteFriendById(id);
         return "redirect:/";
