@@ -19,6 +19,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import multi.second.project.domain.todo.dto.request.AccomodationTodoModifyRequest;
+import multi.second.project.domain.todo.dto.request.AccomodationTodoRegistRequest;
 import multi.second.project.domain.todo.dto.request.TodoModifyRequest;
 import multi.second.project.domain.todo.dto.request.TodoRegistRequest;
 
@@ -50,21 +52,21 @@ public class AccomodationTodo extends Todo{
 //	@ManyToOne
 //	@JoinColumn(name = "todoType")
 //	private Todo todo;
-	public static AccomodationTodo createAccomodationTodo(TodoRegistRequest dto) {//리퀘스트는 하나로 해도 되나?
+	public static AccomodationTodo createAccomodationTodo(AccomodationTodoRegistRequest dto) {//리퀘스트는 하나로 해도 되나?
 		
 		return AccomodationTodo.builder()
 				.contents(dto.getContents())
 				.title(dto.getTitle())
 				.todoDate(dto.getTodoDate())
-				.address(dto.getAcAddress())
+				.address(dto.getAddress())
 				.build();
 	}
 	
-	public void updateAccomodationTodo(TodoModifyRequest dto) {
+	public void updateAccomodationTodo(AccomodationTodoModifyRequest dto) {
 		this.title = dto.getTitle();
 		this.contents = dto.getContents();
 		this.todoDate = dto.getTodoDate();
 		this.isPrivate = dto.getIsPrivate();
-		this.address = dto.getAcAddress();
+		this.address = dto.getAddress();
 	}
 }

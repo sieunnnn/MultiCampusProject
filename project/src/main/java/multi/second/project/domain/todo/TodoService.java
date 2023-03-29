@@ -34,6 +34,8 @@ import multi.second.project.domain.todo.domain.BudgetTodo;
 import multi.second.project.domain.todo.domain.GeneralTodo;
 import multi.second.project.domain.todo.domain.Todo;
 import multi.second.project.domain.todo.domain.TransportTodo;
+import multi.second.project.domain.todo.dto.request.AccomodationTodoModifyRequest;
+import multi.second.project.domain.todo.dto.request.AccomodationTodoRegistRequest;
 import multi.second.project.domain.todo.dto.request.TodoModifyRequest;
 import multi.second.project.domain.todo.dto.request.TodoRegistRequest;
 import multi.second.project.domain.todo.dto.response.AccomodationTodoResponse;
@@ -78,12 +80,11 @@ public class TodoService {
 	private final TransportRepository transportRepository;
 
 	@Transactional
-	public AccomodationTodoResponse createAccomodationTodo(TodoRegistRequest dto, Long tpIdx, Long tlIdx) {//AccomodationTodoResponse 로 해야되나?
+	public AccomodationTodoResponse createAccomodationTodo(AccomodationTodoRegistRequest dto, Long tpIdx) {//AccomodationTodoResponse 로 해야되나?
 		//어떻게 
 		AccomodationTodo todo =AccomodationTodo.createAccomodationTodo(dto);//AccomodationTodo로 해야되나?
 		
-		TodoList todoList = todoListRepository.findById(tlIdx)
-				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		TodoList todoList = todoListRepository.findByTodosTdIdx(todo.getTdIdx());
 		
 		todoList.accomodationAddTodo(todo);
 		
@@ -147,7 +148,7 @@ public class TodoService {
 	//////////////////////////////////////
 	
 	@Transactional
-	public AccomodationTodoResponse modifyAccomodationTodo(TodoModifyRequest dto) {
+	public AccomodationTodoResponse modifyAccomodationTodo(AccomodationTodoModifyRequest dto) {
 		AccomodationTodo todo = accomodationRepository.findById(dto.getTdIdx()).orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
 		todo.updateAccomodationTodo(dto);

@@ -44,11 +44,11 @@ public class TodoList {
 	@Builder.Default
 	private List<Todo> todos = new ArrayList<>();
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL)
 	@Builder.Default
 	private List<AccomodationTodo> accomodationTodos = new ArrayList<>();
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@Builder.Default
 	private List<AttractionsTodo> attractionsTodos = new ArrayList<>();
 	

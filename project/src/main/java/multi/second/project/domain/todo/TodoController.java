@@ -32,6 +32,8 @@ import multi.second.project.domain.gallery.dto.request.GalleryRegistRequest;
 import multi.second.project.domain.gallery.dto.response.GalleryDetailResponse;
 import multi.second.project.domain.member.UserPrincipal;
 import multi.second.project.domain.member.dto.Principal;
+import multi.second.project.domain.todo.dto.request.AccomodationTodoModifyRequest;
+import multi.second.project.domain.todo.dto.request.AccomodationTodoRegistRequest;
 import multi.second.project.domain.todo.dto.request.TodoModifyRequest;
 import multi.second.project.domain.todo.dto.request.TodoRegistRequest;
 import multi.second.project.domain.todolist.dto.request.TodoListModifyRequest;
@@ -52,10 +54,9 @@ public class TodoController {
 	@MessageMapping("upload-accomodation/{tpIdx}")
 	public void uploadAccomodation(
 			@DestinationVariable("tpIdx") Long tpIdx,
-			TodoRegistRequest dto,
-			Long tlIdx
+			AccomodationTodoRegistRequest dto
 			) throws Exception {
-		simpMessagingTemplate.convertAndSend("/topic/upload-accomodation/" + tpIdx, todoService.createAccomodationTodo(dto, tpIdx, tlIdx));
+		simpMessagingTemplate.convertAndSend("/topic/upload-accomodation/" + tpIdx, todoService.createAccomodationTodo(dto, tpIdx));
 		
 	}
 	
@@ -106,7 +107,7 @@ public class TodoController {
 	@MessageMapping("modify-accomodation/{tpIdx}")
 	public void modifyAccomodation(
 			@DestinationVariable("tpIdx") Long tpIdx,
-			TodoModifyRequest dto
+			AccomodationTodoModifyRequest dto
 			) throws Exception {
 		simpMessagingTemplate.convertAndSend("/topic/upload-accomodation/" + tpIdx, todoService.modifyAccomodationTodo(dto));
 		

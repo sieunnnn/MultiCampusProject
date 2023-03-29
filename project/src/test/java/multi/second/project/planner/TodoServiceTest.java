@@ -31,10 +31,16 @@ import multi.second.project.domain.planner.dto.request.PlannerGroupModifyRequest
 import multi.second.project.domain.planner.repository.ParticipantRepository;
 import multi.second.project.domain.planner.repository.PlannerRepository;
 import multi.second.project.domain.todo.domain.AccomodationTodo;
+import multi.second.project.domain.todo.domain.AttractionsTodo;
+import multi.second.project.domain.todo.domain.BudgetTodo;
+import multi.second.project.domain.todo.domain.BudgetType;
+import multi.second.project.domain.todo.domain.GeneralTodo;
 import multi.second.project.domain.todo.domain.Todo;
 import multi.second.project.domain.todo.domain.TransportTodo;
+import multi.second.project.domain.todo.domain.TransportType;
 import multi.second.project.domain.todo.repository.AccomodationRepository;
 import multi.second.project.domain.todolist.domain.TodoList;
+import multi.second.project.domain.todolist.repository.TodoListRepository;
 import multi.second.project.infra.code.ErrorCode;
 import multi.second.project.infra.exception.HandlableException;
 
@@ -65,24 +71,31 @@ public class TodoServiceTest {
 	private PlannerService plannerService;
 	
 	@Autowired
+	private TodoListRepository todoListRepository;
+	
+	@Autowired
 	MockMvc mockMvc;
 	
 
-	@Test
+	@Test//플랜 생성 테스트(사전에 유저가 있어야됨)
 	public void testCreateFull() {
 		
-		AccomodationTodo accomodationTodo = AccomodationTodo.builder().address("더미데이터 숙박todo 주소 인천숙소")
-								.contents("더미데이터 숙박todo 내용 인천 어쩌구")
-								.title("더미데이터 숙박todo 제목 인천숙소는여기")
+		//숙박 todo DB 저장
+		AccomodationTodo accomodationTodo = AccomodationTodo.builder().address("더미데이터 숙박todo 주소 삼척숙소")
+								.contents("더미데이터 숙박todo 내용 삼척 어쩌구")
+								.title("더미데이터 숙박todo 제목 삼척숙소는여기")
 								.build();
-		
 		
 //		accomadationRepository.save(entity);
-		TodoList todoList = TodoList.builder().title("더미데이터 인천 3월 27일")
+		
+		//todolist DB 저장
+		TodoList todoList = TodoList.builder().title("더미데이터 삼척 3월 30일")
 								.build();
 	
+		//todolist에 위의 숙박todo 넣기
 		todoList.accomodationAddTodo(accomodationTodo);
 		
+		//자신의 로그인 아이디 불러오기(아이디 수동 입력,해당아이디가 Member DB에 있어야됨)
 		Member group1A = memberRepository.findById("group1A").get();
 		//host는 회원가입시에 hostDB도 만들어지도록 하고 플래너 만들때는 userId로 호스트를 찾아 플래너에 매핑하려 한다.
 //		Host host = hostRepository.findByMemberUserId("group1A");
@@ -90,32 +103,105 @@ public class TodoServiceTest {
 		//여행 그룹은 플래너 만들때 그룹을 생성시켜서 그룹인덱스도 만들어지고 그룹에 기본으로 플래너 만든 자신을 넣으려고 한다.
 		//근데 유저가 기존 그룹에 포함되어있으면 다른그룹에 속할 수 없는것 같다? -> manytomany로 교체
 		
+		//플래너에 들어갈 호스트 정보 넣기(기본-자신)
 		Participant hostParticipant =  Participant.builder().member(group1A).build();
 		participantRepository.save(hostParticipant);
 		Host host = Host.builder().participant(hostParticipant).build();
 		hostRepository.save(host);
 		
+		//플래너에 들어갈 그룹 정보 넣기(기본-자신)
 		Participant groupParticipant =  Participant.builder().member(group1A).build();
 		participantRepository.save(groupParticipant);
 		TravelGroup group = new TravelGroup();
 		group.addParticipant(groupParticipant);
 		travelGroupRepository.save(group);
 		
+		//호스트와 그룹정보를 넣은 플래너 만들기
 		Planner planner = Planner.builder()
 								.title("더미데이터 플래너 제목 인천여행계획")
 								.host(host)
 								.travelGroup(group)
 								.build();
 		
+		//플래너에 위의 todolist 넣기
 		planner.addTodoList(todoList);
 		
 		plannerRepository.save(planner);
 		
 	}
 	
+	//todolist 추가
+	@Test
+	public void testAddTodolist() throws Exception {
+		
+		//todolist 추가 할 플래너 찾기(인덱스 수동 입력)
+		Planner planner = plannerRepository.findById(5L).get();
+		
+		//todolist DB 저장
+		TodoList todoList = TodoList.builder()
+									.title("더미데이터 todolist 테스트 1")
+									.build();
+		
+		//플래너에 위의 todolist 넣기
+		planner.addTodoList(todoList);
+		plannerRepository.save(planner);
+	}
+	
+	//todo추가
+	//todolist 자바에서 추가하고자 하는 종류의 todo 매핑에 fetch = FetchType.EAGER를 추가하고 다른곳은 삭제해야함)
+	@Test
+	public void testAddTodo() throws Exception {
+		
+		//todolist DB 저장
+		TodoList todoList = todoListRepository.findById(18L).get();
+		
+		//숙박 todo DB 저장
+//		AccomodationTodo accomodationTodo = AccomodationTodo.builder().address("더미데이터 숙박 todo 주소 1")
+//				.contents("더미데이터 숙박 todo 내용 1")
+//				.title("더미데이터 숙박 todo 제목 1")
+//				.build();
+		//관광지 todo DB 저장
+		AttractionsTodo attractionsTodo = AttractionsTodo.builder().attractions("더미데이터 관광지 todo 주소 1")
+				.contents("더미데이터 관광지 todo 내용 1")
+				.title("더미데이터 관광지 todo 제목 1")
+				.build();
+//		//예산 todo DB 저장
+//		BudgetTodo budgetTodo = BudgetTodo.builder().budget(10000)
+//				.budgetType(BudgetType.FOOD)
+//				.contents("더미데이터 예산 todo 내용 1")
+//				.title("더미데이터 예산 todo 제목 1")
+//				.build();
+//		//일반 todo DB 저장
+//		GeneralTodo generalTodo = GeneralTodo.builder().address("더미데이터 일반 todo 주소 1")
+//				.contents("더미데이터 일반 todo 내용 1")
+//				.title("더미데이터 일반 todo 제목 1")
+//				.build();
+//		//교통 todo DB 저장
+//		TransportTodo transportTodo = TransportTodo.builder().transportType(TransportType.AIRPLANE)
+//				.contents("더미데이터 교통 todo 내용 1")
+//				.title("더미데이터 교통 todo 제목 1")
+//				.build();
+
+		
+//		//todolist에 위의 숙박todo 넣기
+//		todoList.accomodationAddTodo(accomodationTodo);
+		//todolist에 위의 관광지todo 넣기
+		todoList.attractionsAddTodo(attractionsTodo);
+//		//todolist에 위의 예산todo 넣기
+//		todoList.budgetAddTodo(budgetTodo);
+//		//todolist에 위의 일반todo 넣기
+//		todoList.generalAddTodo(generalTodo);
+//		//todolist에 위의 교통todo 넣기
+//		todoList.transportAddTodo(transportTodo);
+		
+		todoListRepository.save(todoList);
+		
+	}
 	
 	
-	//왜 remove가 안되지...
+	
+	
+	//플래너 제거
 	@Test
 	public void testDeletePlnner() {
 		
@@ -169,6 +255,7 @@ public class TodoServiceTest {
 //	}
 	
 	//fetch = FetchType.EAGER 설정하면되는데 다른데 설정된거 지워야함..
+	//플래너 그룹에 인원 추가
 	@Test
 	public void testAddGroupMember() {
 		
@@ -178,20 +265,19 @@ public class TodoServiceTest {
 //		plannerService.addPlannerGroup(dto);
 //		//이거 안되네
 		
-		
+		//추가할 멤버
 		Member group1B = memberRepository.findById("group1B").get();
-		
-		Planner planner = plannerRepository.findById(5L).get();
-
 		Participant participant =  Participant.builder().member(group1B).build();
 		participantRepository.save(participant);
 		
+		//멤버를 추가할 플래너
+		Planner planner = plannerRepository.findById(5L).get();
+
+		//그룹에 멤버 추가
 		TravelGroup group = travelGroupRepository.findById(planner.getTravelGroup().getTgIdx()).get();
 		group.addParticipant(participant);
 		travelGroupRepository.save(group);
 		
-		
-	
 	}
 	
 	
