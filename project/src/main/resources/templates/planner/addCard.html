@@ -1,13 +1,13 @@
 
-<!-- 추가 공통 레이 아웃 -->
+<!-- 카드 추가 공통 레이 아웃 -->
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Main</title>
+    <title>addCard</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="/css/planner/addCommon.css"/>
+    <link rel="stylesheet" href="/css/planner/addCard.css"/>
 </head>
 
 <body>
@@ -21,12 +21,24 @@
 
                 <!-- 타이틀 -->
                 <div class="title">
-                    <div style="margin-top: 5px">오늘은 무엇을 하실건가요?</div>
+                    <div style="margin-top: 5px">Todo</div>
                 </div>
 
                 <!-- 내용 (스크롤 테스트 완)-->
                 <div class="container">
-                    투두 내용이 들어갈 공간입니당
+
+                    <!-- 타이틀 -->
+                    <input type="text" placeholder="제목을 입력해주세요">
+
+                    <!-- 날짜 -->
+                    <input type="datetime-local">
+
+                    <!-- 지도 추가 부분 -->
+
+                    <!-- 내용 -->
+                    <textarea placeholder="내용을 입력해주세요"></textarea>
+
+                    <input type="submit" value="전송">
                 </div>
             </div>
 
@@ -35,12 +47,35 @@
 
                 <!-- 타이틀 -->
                 <div class="title">
-                    <div style="margin-top: 5px">무엇을 타고 여행을 가시나요?</div>
+                    <div style="margin-top: 5px">교통</div>
                 </div>
 
                 <!-- 내용 (스크롤 테스트 완)-->
                 <div class="container">
-                    교통 내용이 들어갈 공간 입니당
+
+                    <!-- 타이틀 -->
+                    <input type="text" placeholder="제목을 입력해주세요">
+
+                    <!-- 대중교통 선택 -->
+                    <label for="transport-select">교통편 선택</label>
+                    <select name="transports" id="transport-select">
+                        <option>버스</option>
+                        <option>지하철</option>
+                        <option>고속철도</option>
+                        <option>기차</option>
+                        <option>택시</option>
+                        <option>배</option>
+                        <option>항공</option>
+                    </select>
+
+                    <!-- 날짜 -->
+                    <input type="datetime-local">
+
+
+                    <!-- 내용 -->
+                    <textarea placeholder="내용을 입력해주세요"></textarea>
+
+                    <input type="submit" value="전송">
                 </div>
 
 
@@ -51,26 +86,51 @@
 
                 <!-- 타이틀 -->
                 <div class="title">
-                    <div style="margin-top: 5px">어디서 묵으시나요?</div>
+                    <div style="margin-top: 5px">숙박</div>
                 </div>
 
                 <!-- 내용 (스크롤 테스트 완)-->
                 <div class="container">
-                    숙박 내용이 들어갈 공간 입니당
+
+                    <!-- 타이틀 -->
+                    <input type="text" placeholder="제목을 입력해주세요">
+
+                    <!-- 날짜 -->
+                    <input type="datetime-local">
+
+                    <!-- 지도 추가 부분 -->
+
+                    <!-- 내용 -->
+                    <textarea placeholder="내용을 입력해주세요"></textarea>
+
+                    <input type="submit" value="전송">
                 </div>
             </div>
 
-            <!-- 지도-->
+            <!-- 관광지-->
             <div id="containerMap">
 
                 <!-- 타이틀 -->
                 <div class="title">
-                    <div style="margin-top: 5px">장소는 확실하게</div>
+                    <div style="margin-top: 5px">관광지</div>
                 </div>
 
                 <!-- 내용 (스크롤 테스트 완)-->
                 <div class="container">
-                    카카오맵 내용이 들어갈 공간 입니당
+
+                    <!-- 타이틀 -->
+                    <input type="text" placeholder="제목을 입력해주세요">
+
+                    <!-- 날짜 -->
+                    <input type="datetime-local">
+
+                    <!-- 관광지 추가 부분 -->
+                    <!-- 지도 추가 부분 -->
+
+                    <!-- 내용 -->
+                    <textarea placeholder="내용을 입력해주세요"></textarea>
+
+                    <input type="submit" value="전송">
                 </div>
             </div>
 
@@ -79,12 +139,38 @@
 
                 <!-- 타이틀 -->
                 <div class="title">
-                    <div style="margin-top: 5px">예산은 꼼꼼히 세울수록 좋죠</div>
+                    <div style="margin-top: 5px">예산</div>
                 </div>
 
                 <!-- 내용 (스크롤 테스트 완)-->
                 <div class="container">
-                    예산 내용이 들어갈 공간 입니당
+
+                    <!-- 타이틀 -->
+                    <input type="text" placeholder="제목을 입력해주세요">
+
+                    <!-- 날짜 -->
+                    <input type="datetime-local">
+
+                    <!-- 선택란 -->
+                    <label for="budget-select">지출 종류</label>
+                    <select name="budgets" id="budget-select">
+                        <option>식사</option>
+                        <option>간식</option>
+                        <option>쇼핑</option>
+                        <option>기념품</option>
+                        <option>입장료</option>
+                        <option>문화</option>
+                        <option>팁</option>
+                    </select>
+
+                    <!-- 금액 -->
+                    <input type="text" placeholder="금액을 입력하세요">
+
+                    <!-- 지도 추가 부분 -->
+
+                    <!-- 내용 -->
+                    <textarea placeholder="내용을 입력해주세요"></textarea>
+                    <input type="submit" value="전송">
                 </div>
             </div>
         </div>
@@ -101,7 +187,7 @@
             <hr>
 
             <button onclick="showAddAccommodation()">
-                <img src="/img/btn_board.png">
+                <img src="/img/btn_accommodation.png">
             </button>
             <button onclick="showAddMap()">
                 <img src="/img/img_maps.png">
@@ -170,6 +256,15 @@
                 document.getElementById("containerBudget").style.display="none";
                 document.getElementById("containerAccommodation").style.display="none";
             }
+
+            // 토글
+            const toggleList = document.querySelectorAll(".toggle__switch__planner");
+
+            toggleList.forEach(($toggle) => {
+                $toggle.onclick = () => {
+                    $toggle.classList.toggle('active');
+                }
+            });
 
         </script>
     </div>

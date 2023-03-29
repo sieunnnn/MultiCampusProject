@@ -47,6 +47,12 @@ button, button:focus {
     cursor: grab;
 }
 
+hr {
+
+    border: 0.5px solid;
+    color: rgba(255, 255, 255, 0.3)
+}
+
 .container__content {
 
     display: flex;
@@ -135,4 +141,3 @@ button, button:focus {
     height: 70px;
     margin: 4px 0 4px 0;
 }
-
