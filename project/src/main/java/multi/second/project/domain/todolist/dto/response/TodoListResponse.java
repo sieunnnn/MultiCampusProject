@@ -23,7 +23,7 @@ public class TodoListResponse {
 
 	private Long tlIdx;
 	private String title;
-	private LocalDateTime regDate;
+//	private LocalDateTime regDate;
 //	private List<TodoResponse> todoResponses = new ArrayList<TodoResponse>();
 	
 	private List<AccomodationTodoResponse> accomodationTodoResponses = new ArrayList<AccomodationTodoResponse>();
@@ -35,7 +35,7 @@ public class TodoListResponse {
 	public TodoListResponse(TodoList entity) {
 		this.tlIdx = entity.getTlIdx();
 		this.title = entity.getTitle();
-		this.regDate = entity.getRegDate();
+//		this.regDate = entity.getRegDate();
 //		this.todoResponses = TodoResponse.toDtoList(entity.getTodos());
 		
 		this.accomodationTodoResponses = AccomodationTodoResponse.toDtoList(entity.getAccomodationTodos());
@@ -45,13 +45,13 @@ public class TodoListResponse {
 		this.transportTodoResponses = TransportTodoResponse.toDtoList(entity.getTransportTodos());
 	}
 	
-	public String getRegDateAsDate() {
-		return regDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-	}
-	
-	public String getRegDateAsTime() {
-		return regDate.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
-	}
+//	public String getRegDateAsDate() {
+//		return regDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+//	}
+//	
+//	public String getRegDateAsTime() {
+//		return regDate.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+//	}
 	
 	public static List<TodoListResponse> toDtoList(List<TodoList> entityList){
 		return entityList.stream().map(e -> new TodoListResponse(e)).collect(Collectors.toList());

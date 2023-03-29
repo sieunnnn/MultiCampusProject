@@ -43,7 +43,7 @@
           
           
       </div>
-	  <input type="text" th:value="제목없음" name="title" id="title"/> 
+	  <input type="text" th:value="제목없음" name="todolist-title-add" id="todolistTitleAdd"/> 
 	  <button onclick="addTodoList()"><span>todolist 등록</span></button>
 	 
       <div>
@@ -108,56 +108,31 @@
       	 	</li>	     
       	</ol>
       </div>
-      <!--  
-      <th:block sec:authorize="isAuthenticated()" th:if="${gallery.userId eq #authentication.name}">
-	  	<form th:action="@{/comment/upload}" method="post" >
-	  		<input type="text" id="context" name="context" required="required">
-	  		<input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/> 
-	  		<button><span>댓글 등록</span></button>
-	  	</form>
-      </th:block>
-     
-      <div>
-      	<ol>
-      		<li th:each="comment : ${gallery.commentResponses}">  
-      	 		<p th:text="${comment.context}">
-      	 		<form th:action="@{/comment/remove}" method="post" >
-      	 		<input type="hidden" th:value="${comment.cmIdx}" name="cmIdx"/> 
-	          	<input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/> 
-	          	<button id="btnDel"><span>댓글 삭제</span></button>
-	          	</form>
-      	 		<form th:action="@{/comment/modify}" method="post" >
-	          	<input type="text" id="context" name="context" required="required">
-	          	<input type="hidden" th:value="${comment.cmIdx}" name="cmIdx"/> 
-	          	<input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/> 
-	          	<button><span>댓글 수정</span></button>
-	          </form>
-      	 	</li>	     
-      	</ol>
-      </div>
-       -->
-      
+      <div id="response"></div>
+ 
       
    </div>
 </div>
 <script type="text/javascript" layout:fragment="script" th:inline="javascript">
 
+	var stompClient_addTodoList = null;
+
 	function addTodoList() {
-		let title = title.value;
+		let title = todolistTitleAdd.value;
 		
-	    stompClient.send("/app/upload-todolist/" + [[${tpIdx}]], {}, JSON.stringify({'title':title}));
+		stompClient_addTodoList.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
 	}
 	
 	function addTodoListConnect() {
 	    var socket = new SockJS('/gs-guide-websocket');
-	    stompClient = Stomp.over(socket);
+	    stompClient_addTodoList = Stomp.over(socket);
 	    
-	    stompClient.connect({}, function (frame) {
+	    stompClient_addTodoList.connect({}, function (frame) {
 	        console.log('Connected: ' + frame);
-	        stompClient.subscribe('/topic/upload-todolist/' + [[${tpIdx}]], function (recommand) {
+	        stompClient_addTodoList.subscribe('/topic/upload-todolist/' + [[${planner.tpIdx}]], function (recommand) {
 	        	res = JSON.parse(recommand.body);
 	          	console.dir(res)
-	          	response.innerHTML += '<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.Title + '<br>'+'</span>';
+	          	response.innerHTML += '<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
 	        }    
 	        );
 	    });
@@ -166,8 +141,8 @@
 	
 	
 	function addTodoListDisconnect() {
-	    if (stompClient !== null) {
-	        stompClient.disconnect();
+	    if (stompClient_addTodoList !== null) {
+	    	stompClient_addTodoList.disconnect();
 	    }
 	    console.log("Disconnected");
 	}
