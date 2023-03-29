@@ -88,7 +88,15 @@
 
                         <!-- 그동한 생성한 카드가 있다면 여기에 넣기-->
                         <div id="card">
-                            <div class="txt__card__title">제목</div>
+                            <div class="txt__card__title">
+
+                                <!-- 공개 여부를 결정하는 토글 -->
+                                <div class="wrapper__planner__toggle">
+                                    <button class="toggle__switch__planner">
+                                        <span class="toggle__button"></span>
+                                    </button>
+                                </div>
+                            </div>
 
                             <!-- 화면에 뿌릴 내용 받아오기 -->
                             <div></div>
@@ -103,15 +111,30 @@
 
                     <!-- 날짜 카드 생성 (row) -->
                     <div>
-                        <button id="addDate"></button>
+                        <button id="addDate" onclick="popup2();"></button>
                     </div>
 
                     <script type="text/javascript">
                         function popup(){
                             let options = "scrollbars=no, resizable=no, width=600, height=800, top=50px, left=50px";
 
-                            window.open("planner/add","add", options);
+                            window.open("/planner/add/card","add", options);
                         }
+
+                        function popup2(){
+                            let options = "scrollbars=no, resizable=no, width=400, height=200, top=50px, left=50px";
+
+                            window.open("/planner/add/date","add", options);
+                        }
+
+                        const toggleList = document.querySelectorAll(".toggle__switch__planner");
+
+                        // 이 상태를 DB 에 어떻게 전송할 것인가 고민하기
+                        toggleList.forEach(($toggle) => {
+                            $toggle.onclick = () => {
+                                $toggle.classList.toggle('active');
+                            }
+                        });
                     </script>
                 </div>
             </div>
