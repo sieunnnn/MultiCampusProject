@@ -16,7 +16,7 @@
     <div layout:fragment="content">
         <div class="container__planner_list">
             <div class="title__planner">
-                <div style="margin: 6px 0 6px 0">시은 님의 여행 기록</div>
+                <div style="margin: 6px 0 6px 0">[[${#authentication.name}]] 님의 여행 기록</div>
             </div>
 
             <!-- 플래너 상단부분 -->
@@ -47,7 +47,7 @@
                 <div class="wrapper__cards">
 
                     <!-- 카드 클릭 시, 세부내용 화면으로 이동 처리 해야함 -->
-                    <div class="card" id="card">
+                    <div th:each="planner, status : ${plannerList}" class="card" id="card">
 
                         <!-- 공개 여부를 결정하는 토글 -->
                         <div class="wrapper__planner__toggle">
@@ -57,8 +57,8 @@
                         </div>
 
                         <!-- 플래너 제목 -->
-                        <div class="card__title" th:onclick="|location.href='@{/planner/planner}'|">
-                            <div>플래너 제목입니당</div>
+                        <div class="card__title">
+                            <a th:href="@{|/planner/detail?tpIdx=${planner.tpIdx}|}" th:text="${planner.title}"></a>
                         </div>
 
                         <div class="container__travel__friends">
@@ -76,17 +76,25 @@
                     </div>
 
                     <!-- 플래너 생성 버튼 -->
-                    <button class="btn__add__planner" onclick="popup()"></button>
+                    <div class="btn__add__planner" onclick="popup()">
+                        <div class="add__planner">
+                            <form th:action="@{/planner/create}" method="post" >
+                                <input type="hidden" th:value="${#authentication.name}" name="userId"/>
+                                <input type="text" name="title" placeholder="제목을 입력해주세요"/>
+                                <button>생성</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <script type="text/javascript">
 
-            function popup(){
-                let options = "scrollbars=no, resizable=no, width=400, height=200, top=50px, left=50px";
+            document.querySelector('.add__planner').style.display = 'none';
 
-                window.open("/planner/add","add", options);
+            function popup(){
+                document.querySelector('.add__planner').style.display = '';
             }
 
             const toggleList = document.querySelectorAll(".toggle__switch__planner");

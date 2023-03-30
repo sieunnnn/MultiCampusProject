@@ -144,18 +144,17 @@
 
     position: fixed;
 
-    width: 389px;
+    width: 359px;
     height: 665px;
 }
 
 .money__title {
 
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-content: center;
 
-    width: 320px;
+    width: 290px;
     height: 57px;
     margin: 26px 0 27px 33px;
 
@@ -171,7 +170,6 @@
 
 .txt__money__title {
 
-    margin-left: 107px;
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 600;
@@ -186,7 +184,7 @@
     justify-content: flex-start;
 
     margin: 0 0 28px 33px;
-    width: 320px;
+    width: 290px;
     height: 527px;
 
     background: rgba(255, 255, 255, 0.9);
@@ -205,20 +203,26 @@
 .container__kanban {
 
     display: flex;
-    flex-direction: row;
-    align-content: flex-start;
-    justify-content: flex-start;
+
+    flex-flow: nowrap;
+    overflow: auto;
 
     position: fixed;
 
-    left: 533px;
+    left: 503px;
 
-    width: 737px;
+    width: 767px;
     height: 665px;
 
-    overflow-x: scroll;
-
     background-color: blue;
+}
+
+.wrapper__planner__list {
+
+    display: flex;
+    flex-direction: row;
+
+    flex-shrink: 0;
 }
 
 .wrapper__date__box {
@@ -228,7 +232,7 @@
     align-content: flex-start;
     justify-content: flex-start;
 
-    width: auto;
+    width: 300px;
     height: 100%;
 
     overflow-y: scroll;
@@ -359,7 +363,7 @@
     align-content: flex-start;
     justify-content: flex-start;
 
-    margin: 26px 0 28px 33px;
+    margin: 26px 0 28px 20px;
     width: 320px;
     height: 610px;
 
@@ -441,7 +445,7 @@
     align-content: flex-start;
     justify-content: flex-start;
 
-    margin: 26px 0 28px 33px;
+    margin: 26px 0 28px 20px;
     width: 320px;
     height: 610px;
 

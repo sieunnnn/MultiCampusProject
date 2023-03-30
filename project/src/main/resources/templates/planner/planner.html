@@ -3,38 +3,19 @@
 <!-- 플래너 계획 부분 -->
 
 <!DOCTYPE html>
-<!-- 메인 레이 아웃 -->
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="main_layout">
+
 
 <head>
-
     <title>Planner</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="/css/main_layout.css"/>
-
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="/css/planner/planner.css"/>
 </head>
 
 <body>
-<div class="container__common">
-    <nav>
-        <div class="wrapper__btn__profile">
-            <button onclick="location.href=&#39;/profile&#39;"><img src="/img/btn_profile.png"></button>
-        </div>
-        <div class="wrapper__btn">
-            <button onclick="location.href=&#39;/dashboard&#39;"><img src="/img/btn_dashboard.png"></button>
-            <button onclick="location.href=&#39;/friends&#39;"><img src="/img/btn_message.png"></button>
-            <button onclick="location.href=&#39;/planner/list&#39;"><img src="/img/btn_planner.png"></button>
-            <button onclick="location.href=&#39;/gallery/list&#39;"><img src="/img/btn_gallery.png"></button>
-            <button><img src="/img/btn_board.png"></button>
-        </div>
-
-        <button class="toggle__switch__login" onclick="location.href=&#39;/member/login&#39;">
-            <span class="toggle__button"></span>
-        </button>
-    </nav>
-
+<div layout:fragment="content">
     <div class="container__contents">
 
         <div class="container__planner">
@@ -42,7 +23,7 @@
             <!-- 타이틀 -->
             <div class="wrapper__title">
                 <div class="txt__title">
-                    제주도 감귤여행
+                    [[${planner.title}]]
                 </div>
             </div>
 
@@ -198,17 +179,18 @@
                                         <div class="container">
 
                                             <!-- 타이틀 -->
-                                            <input type="text" placeholder="제목을 입력해주세요">
+                                            <input type="text" name="accomodationTodoTitleAdd" id="accomodationTodoTitleAdd" placeholder="제목을 입력해주세요">
 
                                             <!-- 날짜 -->
-                                            <input type="datetime-local">
+                                            <input name="accomodationTodoTododateAdd" id="accomodationTodoTododateAdd" type="datetime-local">
 
                                             <!-- 지도 추가 부분 -->
+                                            <input type="text" name="accomodationTodoAddressAdd" id="accomodationTodoAddressAdd"/>
 
                                             <!-- 내용 -->
-                                            <textarea placeholder="내용을 입력해주세요"></textarea>
+                                            <textarea name="accomodationTodoContentsAdd" id="accomodationTodoContentsAdd" placeholder="내용을 입력해주세요"></textarea>
 
-                                            <input type="submit" value="전송">
+                                            <button onclick="addAttractionsTodo()">전송</button>
                                         </div>
                                     </div>
 
@@ -303,11 +285,11 @@
                                 </div>
 
                                 <div>
-                                    <input type="text">
+                                    <input type="text" name="todolistTitleAdd" id="todolistTitleAdd">
                                 </div>
 
                                 <div>
-                                    <input type="submit" value="전송">
+                                    <button onclick="addTodoList()">전송</button>
                                 </div>
 
                             </div>
@@ -318,7 +300,7 @@
 
 
                         <div class="money__title">
-                            <div class="txt__money__title">
+                            <div class="txt__money__title" style="margin-top: 10px">
                                 예산 요약
                             </div>
                         </div>
@@ -338,26 +320,29 @@
                     <!-- 계획 박스 -->
                     <div class="container__kanban">
 
+                        <div class="wrapper__planner__list">
+
                         <!-- 공통적으로 계속 생기는 박스 -->
-                        <div class="wrapper__date__box">
+                        <div th:each="todolist : ${planner.todolistResponses}" class="wrapper__date__box">
 
                             <!-- 날짜 -->
-                            <div id="date"></div>
+                            <div id="date">[[${todolist.title}]]</div>
 
                             <!-- 그동한 생성한 카드가 있다면 여기에 넣기-->
-                            <div id="card">
+                            <div th:each="todo : ${todolist.accomodationTodoResponses}" id="card">
                                 <div class="txt__card__title">
-
                                     <!--                                &lt;!&ndash; 공개 여부를 결정하는 토글 &ndash;&gt;-->
                                     <!--                                <div class="wrapper__planner__toggle">-->
                                     <!--                                    <button class="toggle__switch__planner">-->
                                     <!--                                        <span class="toggle__button"></span>-->
                                     <!--                                    </button>-->
                                     <!--                                </div>-->
+                                    [[${todo.title}]]
                                 </div>
-
                                 <!-- 화면에 뿌릴 내용 받아오기 -->
-                                <div></div>
+                                <div>
+                                    [[${todo.contents}]]
+                                </div>
                             </div>
 
                             <!-- 버튼 클릭하면 하위에 카드 생성 (column) -->
@@ -365,6 +350,7 @@
 
                             <!-- 하루 총 예산 -->
                             <div id="costPerDay"></div>
+
                         </div>
 
                         <!-- 날짜 카드 생성 (row) -->
@@ -372,6 +358,7 @@
                             <button id="addDate" class="open__date"></button>
                         </div>
 
+                        </div>
 
                         <script type="text/javascript">
 
@@ -494,6 +481,54 @@
                                 document.querySelector('.wrapper__summary').style.display = '';
                             })
 
+                            //==================================================//
+
+                            // 웹소켓
+
+                            var stompClient_addGroup = null;
+
+                            var stompClient_addTodoList = null;
+                            var stompClient_modTodoList = null;
+                            var stompClient_delTodoList = null;
+
+                            var stompClient_addAccomodationTodo = null;
+                            var stompClient_addAttractionsTodo = null;
+                            var stompClient_addBudgetTodo = null;
+                            var stompClient_addGeneralTodo = null;
+                            var stompClient_addTransportTodo = null;
+
+                            var stompClient_modAccomodationTodo = null;
+                            var stompClient_modAttractionsTodo = null;
+                            var stompClient_modBudgetTodo = null;
+                            var stompClient_modGeneralTodo = null;
+                            var stompClient_modTransportTodo = null;
+
+                            var stompClient_delAccomodationTodo = null;
+                            var stompClient_delAttractionsTodo = null;
+                            var stompClient_delBudgetTodo = null;
+                            var stompClient_delGeneralTodo = null;
+                            var stompClient_delTransportTodo = null;
+
+
+                            // 날짜 ============================================//
+
+                            // 추가
+                            function addTodoList() {
+                                let title = todolistTitleAdd.value;
+
+                                stompClient_addTodoList.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
+                            }
+
+                            // 숙박 ============================================//
+
+                            // 추가
+                            function addAccomodationTodo() {
+                                let title = todolistTitleAdd.value;
+
+                                stompClient_addAccomodationTodo.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
+                            }
+
+
                         </script>
                     </div>
                 </div>
@@ -501,20 +536,6 @@
         </div>
     </div>
 </div>
-
 </body>
 
-
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="/js/jQuery-2.1.4.min.js"></script>
-<script>
-    const toggleList = document.querySelectorAll(".toggle__switch__login");
-
-    toggleList.forEach(($toggle) => {
-        $toggle.onclick = () => {
-            $toggle.classList.toggle('active');
-            window.location.href = '/member/login';
-        }
-    });
-</script>
 </html>
