@@ -77,19 +77,19 @@ public class TodoServiceTest {
 	MockMvc mockMvc;
 	
 
-	@Test//플랜 생성 테스트(사전에 유저가 있어야됨)
+	@Test//플랜 생성 테스트(사전에 유저가 있어야됨)//planner.java 의 todolist에 fetch = FetchType.EAGER옵션이 있어야됨
 	public void testCreateFull() {
 		
 		//숙박 todo DB 저장
-		AccomodationTodo accomodationTodo = AccomodationTodo.builder().address("더미데이터 숙박todo 주소 삼척숙소")
-								.contents("더미데이터 숙박todo 내용 삼척 어쩌구")
-								.title("더미데이터 숙박todo 제목 삼척숙소는여기")
+		AccomodationTodo accomodationTodo = AccomodationTodo.builder().address("더미데이터 숙박 todo 주소 1")
+								.contents("더미데이터 숙박 todo 내용 1")
+								.title("더미데이터 숙박 todo 제목 1")
 								.build();
 		
 //		accomadationRepository.save(entity);
 		
 		//todolist DB 저장
-		TodoList todoList = TodoList.builder().title("더미데이터 삼척 3월 30일")
+		TodoList todoList = TodoList.builder().title("더미데이터 todolist 제목 1")
 								.build();
 	
 		//todolist에 위의 숙박todo 넣기
@@ -118,7 +118,7 @@ public class TodoServiceTest {
 		
 		//호스트와 그룹정보를 넣은 플래너 만들기
 		Planner planner = Planner.builder()
-								.title("더미데이터 플래너 제목 인천여행계획")
+								.title("더미데이터 플래너 제목 1")
 								.host(host)
 								.travelGroup(group)
 								.build();
@@ -152,7 +152,7 @@ public class TodoServiceTest {
 	@Test
 	public void testAddTodo() throws Exception {
 		
-		//todolist DB 저장
+		//todolist 찾기
 		TodoList todoList = todoListRepository.findById(18L).get();
 		
 		//숙박 todo DB 저장
@@ -201,22 +201,28 @@ public class TodoServiceTest {
 	
 	
 	
-	//플래너 제거
+	//플래너 제거 혹은 공유인원 제거
+	//테스트하려면 planner.java 에 있는 fetch = FetchType.EAGER 을 제거하고, TravelGroup의 participants에 fetch = FetchType.EAGER 옵션을 넣어야함
 	@Test
 	public void testDeletePlnner() {
 		
+		//플래너를 제거하려는 인원
+		String userId = "group1B";
+		
+		//제거하려는 플래너
 		Planner planner = plannerRepository.findById(5L).get();
 		System.out.println("planner.getHost().getParticipant().getMember().getUserId() : " + planner.getHost().getParticipant().getMember().getUserId());
 		
-		if(!planner.getHost().getParticipant().getMember().getUserId().equals("group1A")) {
+		//플래너를 제거하려는 인원이 호스트가 아니면 그룹에서 그 인원을 제거
+		if(!planner.getHost().getParticipant().getMember().getUserId().equals(userId)) {
 			System.out.println("host != member");
-			Member member = memberRepository.findById("group1A").get();
+			Member member = memberRepository.findById(userId).get();
 			TravelGroup travelGroup = travelGroupRepository.findById(planner.getTravelGroup().getTgIdx()).get();
 			System.out.println("travelGroup.getParticipants() : " + travelGroup.getParticipants());
 			List<Participant> participants = travelGroup.getParticipants();
 			for (Participant participant : participants) {
 				System.out.println("participant.getMember().getUserId() : " + participant.getMember().getUserId());
-				if(participant.getMember().getUserId().equals("group1A")) {
+				if(participant.getMember().getUserId().equals(userId)) {
 					System.out.println("제거전 - " + participant.getMember().getUserId());
 					travelGroup.removeParticipant(participant);
 					System.out.println("제거후 - " + participant.getMember().getUserId());

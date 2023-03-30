@@ -12,7 +12,7 @@ import multi.second.project.domain.host.domain.Host;
 @NoArgsConstructor
 public class PlannerGroupModifyRequest {
 
-	private Long tpIdx;
+//	private Long tpIdx;
 //	private String userId;
 	private String newUserId;
 //	private String host;

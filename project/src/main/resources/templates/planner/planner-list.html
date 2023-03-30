@@ -10,6 +10,13 @@
 <div class="container" layout:fragment="content">
 <div class="row">
  <h2 class="tit">* 게시판</h2>
+ <div>
+ 	<form th:action="@{/planner/create}" method="post" >
+		  <input type="hidden" th:value="${#authentication.name}" name="userId"/> 
+	    <input type="text" th:value="플래너제목" name="title"/>
+	    <button><span>플래너 추가</span></button>
+	</form>
+ </div>
  	   
  	   <table style="text-align: center" border="1">
        <thead>

@@ -26,12 +26,17 @@
 				<p th:text="${group.member.userId}"> 
 				
       	 	</li>
-      	 	<form th:action="@{/planner/add-group}" method="post" >
+      	 		
+      	 	<!--  <form th:action="@{/planner/add-group}" method="post" >
 				<input type="text" th:value="group1B" name="newUserId"/> 
 	          	<input type="hidden" th:value="${planner.tpIdx}" name="tpIdx"/> 
 	          	<button><span>공유 인원 추가</span></button>
-	          </form>	     
+	          </form>	
+	          -->     
       	</ol>
+      			<div id="addGroupResponse"></div>
+      			<input type="text" th:value="group1B" name="newUserId" id ="newUser"/> 
+	          	<button onclick="addGroup()"><span>공유 인원 추가</span></button>
       </div>
       
       <div class="article_content">
@@ -121,12 +126,14 @@
       	 	</li>	     
       	</ol>
       </div>
-      <div id="response"></div>
+      <div id="addTodoListResponse"></div>
  
       
    </div>
 </div>
 <script type="text/javascript" layout:fragment="script" th:inline="javascript">
+
+	var stompClient_addGroup = null;
 
 	var stompClient_addTodoList = null;
 	var stompClient_modTodoList = null;
@@ -151,7 +158,34 @@
 	var stompClient_delTransportTodo = null;
 	
 	
+	//공유 인원 추가
+	function addGroup() {
+		let newUserId = newUser.value;
+		
+		stompClient_addGroup.send("/app/add-group/" + [[${planner.tpIdx}]], {}, JSON.stringify({'newUserId':newUserId}));
+	}
 	
+	function addGroupConnect() {
+	    var socket = new SockJS('/gs-guide-websocket');
+	    stompClient_addGroup = Stomp.over(socket);
+	    
+	    stompClient_addGroup.connect({}, function (frame) {
+	        console.log('Connected: ' + frame);
+	        stompClient_addGroup.subscribe('/topic/add-group/' + [[${planner.tpIdx}]], function (addGroupRecommand) {
+	        	res = JSON.parse(addGroupRecommand.body);
+	          	console.dir(res)
+	          	addGroupResponse.innerHTML += '<span style="background:yellow">'+ res.userId + '<br>'+'</span>';
+	        }    
+	        );
+	    });
+	}
+	
+	function addGroupDisconnect() {
+	    if (stompClient_addGroup !== null) {
+	    	stompClient_addGroup.disconnect();
+	    }
+	    console.log("Disconnected");
+	}
 
 	
 	//투두리스트 추가
@@ -170,7 +204,8 @@
 	        stompClient_addTodoList.subscribe('/topic/upload-todolist/' + [[${planner.tpIdx}]], function (recommand) {
 	        	res = JSON.parse(recommand.body);
 	          	console.dir(res)
-	          	response.innerHTML += '<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
+	          	addTodoListResponse.innerHTML += 
+	          		'<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
 	        }    
 	        );
 	    });
@@ -661,7 +696,7 @@
 	}
 	
 	
-	
+	addGroupConnect();
 	
 	addTodoListConnect();
 	modTodoListConnect();
