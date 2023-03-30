@@ -1,141 +1,501 @@
 
+
 <!-- 플래너 계획 부분 -->
 
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="main_layout">
+<!-- 메인 레이 아웃 -->
+<html>
 
 <head>
+
     <title>Planner</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="../../static/css/planner/planner.css" th:href="@{/css/planner/planner.css}"/>
+    <link rel="stylesheet" href="/css/main_layout.css"/>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/planner/planner.css"/>
 </head>
 
 <body>
-<div layout:fragment="content">
-    <div class="container__planner">
-
-        <!-- 타이틀 -->
-        <div class="wrapper__title">
-            <div class="txt__title">
-                제주도 감귤여행
-            </div>
+<div class="container__common">
+    <nav>
+        <div class="wrapper__btn__profile">
+            <button onclick="location.href=&#39;/profile&#39;"><img src="/img/btn_profile.png"></button>
+        </div>
+        <div class="wrapper__btn">
+            <button onclick="location.href=&#39;/dashboard&#39;"><img src="/img/btn_dashboard.png"></button>
+            <button onclick="location.href=&#39;/friends&#39;"><img src="/img/btn_message.png"></button>
+            <button onclick="location.href=&#39;/planner/list&#39;"><img src="/img/btn_planner.png"></button>
+            <button onclick="location.href=&#39;/gallery/list&#39;"><img src="/img/btn_gallery.png"></button>
+            <button><img src="/img/btn_board.png"></button>
         </div>
 
-        <!-- 독바 -->
-        <div class="container__menu">
+        <button class="toggle__switch__login" onclick="location.href=&#39;/member/login&#39;">
+            <span class="toggle__button"></span>
+        </button>
+    </nav>
 
-            <!-- 같이 여행가는 친구들 -->
-            <div class="wrapper__friends">
+    <div class="container__contents">
 
-                <div class="profile">
-                    <img style="width:60px; height: 60px" src="/img/btn_profile.png">
+        <div class="container__planner">
+
+            <!-- 타이틀 -->
+            <div class="wrapper__title">
+                <div class="txt__title">
+                    제주도 감귤여행
                 </div>
-
-                <div class="profile">
-                    <img style="width:60px; height: 60px" src="/img/btn_profile.png">
-                </div>
-
             </div>
 
-            <!-- 메뉴 -->
-            <div class="wrapper__menu">
-                <!-- 나중에 주소 넣을때 사용 th:onclick="|location.href='@{/컨트롤러 주소}'|" -->
-                <button><img src="/img/btn_weather.png"></button>
-                <button><img src="/img/btn_live_chat.png"></button>
-                <button><img src="/img/btn_recommendation.png"></button>
-                <button><img src="/img/btn_planner.png"></button>
-                <button><img src="/img/btn_chatGPT.png"></button>
-                <button><img src="/img/btn_help.png"></button>
-            </div>
-        </div>
+            <!-- 독바 -->
+            <div class="container__menu">
 
-        <!-- 내용 -->
-        <div class="container__plan">
+                <!-- 같이 여행가는 친구들 -->
+                <div class="wrapper__friends">
 
-            <!-- 계획 들어가는 박스 -->
-            <div class="wrapper__plan">
-
-                <!-- 예산 박스 (고정) -->
-                <div class="wrapper__money">
-                    <div class="money__title">
-                        <div class="txt__money__title">
-                            예산 요약
-                        </div>
+                    <div class="profile">
+                        <img style="width:60px; height: 60px" src="/img/btn_profile.png">
                     </div>
 
-                    <div class="wrapper__summary">
-
-                        <!-- 총 예산 내역 (table)-->
-                        <div class="summary">
-                        </div>
-
-                        <!-- 세부 내역 (table)-->
-                        <div class="details">
-                        </div>
+                    <div class="profile">
+                        <img style="width:60px; height: 60px" src="/img/btn_profile.png">
                     </div>
+
                 </div>
 
-                <!-- 계획 박스 -->
-                <div th:fragment="kanban" class="container__kanban">
+                <!-- 메뉴 -->
+                <div class="wrapper__menu">
+                    <!-- 나중에 주소 넣을때 사용 th:onclick="|location.href='@{/컨트롤러 주소}'|" -->
+                    <button><img src="/img/btn_weather.png"></button>
+                    <button><img src="/img/btn_live_chat.png"></button>
+                    <button><img src="/img/btn_recommendation.png"></button>
+                    <button><img src="/img/btn_planner.png"></button>
+                    <button><img src="/img/btn_chatGPT.png"></button>
+                    <button><img src="/img/btn_help.png"></button>
+                </div>
+            </div>
 
-                    <!-- 공통적으로 계속 생기는 박스 -->
-                    <div class="wrapper__date__box">
+            <!-- 내용 -->
+            <div class="container__plan">
 
-                        <!-- 날짜 -->
-                        <div id="date"></div>
+                <!-- 계획 들어가는 박스 -->
+                <div class="wrapper__plan">
 
-                        <!-- 그동한 생성한 카드가 있다면 여기에 넣기-->
-                        <div id="card">
-                            <div class="txt__card__title">
+                    <!-- 예산 박스 (고정) -->
+                    <div class="wrapper__money">
 
-                                <!-- 공개 여부를 결정하는 토글 -->
-                                <div class="wrapper__planner__toggle">
-                                    <button class="toggle__switch__planner">
-                                        <span class="toggle__button"></span>
+
+                        <!-- 모달 ------------------------------------------>
+
+                        <!-- 카드 추가 -->
+
+                        <div class="modal__add__card">
+                            <div class="container__add__card">
+
+                                <div>
+                                    <button class="close">닫기</button>
+                                </div>
+
+                                <div>
+                                    <div class="title__add__card">Add Card</div>
+                                </div>
+
+                                <!-- 독바 -->
+                                <div class="wrapper__bar">
+                                    <button onclick="showAddTodo()" style="margin-left: 4px">
+                                        <img src="/img/btn_todo.png">
+                                    </button>
+                                    <button onclick="showAddTransport()">
+                                        <img src="/img/btn_transport.png">
+                                    </button>
+                                    <button onclick="showAddAccommodation()">
+                                        <img src="/img/btn_accommodation.png">
+                                    </button>
+                                    <button onclick="showAddMap()">
+                                        <img src="/img/img_maps.png">
+                                    </button>
+                                    <button onclick="showAddBudget()">
+                                        <img src="/img/btn_calculator.png">
                                     </button>
                                 </div>
-                            </div>
 
-                            <!-- 화면에 뿌릴 내용 받아오기 -->
-                            <div></div>
+                                <!-- 내용 -->
+
+                                <div class="wrapper__contents">
+                                    <!-- 투두 리스트 -->
+                                    <div id="containerTodo">
+
+                                        <!-- 타이틀 -->
+                                        <div class="title">
+                                            <div style="margin-top: 5px">Todo</div>
+                                        </div>
+
+                                        <!-- 내용 (스크롤 테스트 완)-->
+                                        <div class="container">
+
+                                            <!-- 타이틀 -->
+                                            <input type="text" placeholder="제목을 입력해주세요">
+
+                                            <!-- 날짜 -->
+                                            <input type="datetime-local">
+
+                                            <!-- 지도 추가 부분 -->
+
+                                            <!-- 내용 -->
+                                            <textarea placeholder="내용을 입력해주세요"></textarea>
+
+                                            <input type="submit" value="전송">
+                                        </div>
+                                    </div>
+
+                                    <!-- 교통-->
+                                    <div id="containerTransport">
+
+                                        <!-- 타이틀 -->
+                                        <div class="title">
+                                            <div style="margin-top: 5px">교통</div>
+                                        </div>
+
+                                        <!-- 내용 (스크롤 테스트 완)-->
+                                        <div class="container">
+
+                                            <!-- 타이틀 -->
+                                            <input type="text" placeholder="제목을 입력해주세요">
+
+                                            <!-- 대중교통 선택 -->
+                                            <label for="transport-select">교통편 선택</label>
+                                            <select name="transports" id="transport-select">
+                                                <option>버스</option>
+                                                <option>지하철</option>
+                                                <option>고속철도</option>
+                                                <option>기차</option>
+                                                <option>택시</option>
+                                                <option>배</option>
+                                                <option>항공</option>
+                                            </select>
+
+                                            <!-- 날짜 -->
+                                            <input type="datetime-local">
+
+
+                                            <!-- 내용 -->
+                                            <textarea placeholder="내용을 입력해주세요"></textarea>
+
+                                            <input type="submit" value="전송">
+                                        </div>
+
+
+                                    </div>
+
+                                    <!-- 숙박-->
+                                    <div id="containerAccommodation">
+
+                                        <!-- 타이틀 -->
+                                        <div class="title">
+                                            <div style="margin-top: 5px">숙박</div>
+                                        </div>
+
+                                        <!-- 내용 (스크롤 테스트 완)-->
+                                        <div class="container">
+
+                                            <!-- 타이틀 -->
+                                            <input type="text" placeholder="제목을 입력해주세요">
+
+                                            <!-- 날짜 -->
+                                            <input type="datetime-local">
+
+                                            <!-- 지도 추가 부분 -->
+
+                                            <!-- 내용 -->
+                                            <textarea placeholder="내용을 입력해주세요"></textarea>
+
+                                            <input type="submit" value="전송">
+                                        </div>
+                                    </div>
+
+                                    <!-- 관광지-->
+                                    <div id="containerMap">
+
+                                        <!-- 타이틀 -->
+                                        <div class="title">
+                                            <div style="margin-top: 5px">관광지</div>
+                                        </div>
+
+                                        <!-- 내용 (스크롤 테스트 완)-->
+                                        <div class="container">
+
+                                            <!-- 타이틀 -->
+                                            <input type="text" placeholder="제목을 입력해주세요">
+
+                                            <!-- 날짜 -->
+                                            <input type="datetime-local">
+
+                                            <!-- 관광지 추가 부분 -->
+                                            <!-- 지도 추가 부분 -->
+
+                                            <!-- 내용 -->
+                                            <textarea placeholder="내용을 입력해주세요"></textarea>
+
+                                            <input type="submit" value="전송">
+                                        </div>
+                                    </div>
+
+                                    <!-- 예산 -->
+                                    <div id="containerBudget">
+
+                                        <!-- 타이틀 -->
+                                        <div class="title">
+                                            <div style="margin-top: 5px">예산</div>
+                                        </div>
+
+                                        <!-- 내용 (스크롤 테스트 완)-->
+                                        <div class="container">
+
+                                            <!-- 타이틀 -->
+                                            <input type="text" placeholder="제목을 입력해주세요">
+
+                                            <!-- 날짜 -->
+                                            <input type="datetime-local">
+
+                                            <!-- 선택란 -->
+                                            <label for="budget-select">지출 종류</label>
+                                            <select name="budgets" id="budget-select">
+                                                <option>식사</option>
+                                                <option>간식</option>
+                                                <option>쇼핑</option>
+                                                <option>기념품</option>
+                                                <option>입장료</option>
+                                                <option>문화</option>
+                                                <option>팁</option>
+                                            </select>
+
+                                            <!-- 금액 -->
+                                            <input type="text" placeholder="금액을 입력하세요">
+
+                                            <!-- 지도 추가 부분 -->
+
+                                            <!-- 내용 -->
+                                            <textarea placeholder="내용을 입력해주세요"></textarea>
+                                            <input type="submit" value="전송">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
 
-                        <!-- 버튼 클릭하면 하위에 카드 생성 (column) -->
-                        <button id="addCard" onclick="popup();"></button>
+                        <!------------------------------------------------>
 
-                        <!-- 하루 총 예산 -->
-                        <div id="costPerDay"></div>
+
+                        <!-- 모달 ------------------------------------------>
+
+                        <!-- 날짜 추가 -->
+
+                        <div class="modal__add__date">
+                            <div class="container__add__date">
+
+                                <div>
+                                    <button class="close__date">닫기</button>
+                                </div>
+
+                                <div>
+                                    <div class="title__add__date">Add Date</div>
+                                </div>
+
+                                <div>
+                                    <input type="text">
+                                </div>
+
+                                <div>
+                                    <input type="submit" value="전송">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!------------------------------------------------>
+
+
+                        <div class="money__title">
+                            <div class="txt__money__title">
+                                예산 요약
+                            </div>
+                        </div>
+
+                        <div class="wrapper__summary">
+
+                            <!-- 총 예산 내역 (table)-->
+                            <div class="summary">
+                            </div>
+
+                            <!-- 세부 내역 (table)-->
+                            <div class="details">
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- 날짜 카드 생성 (row) -->
-                    <div>
-                        <button id="addDate" onclick="popup2();"></button>
-                    </div>
+                    <!-- 계획 박스 -->
+                    <div class="container__kanban">
 
-                    <script type="text/javascript">
-                        function popup(){
-                            let options = "scrollbars=no, resizable=no, width=600, height=800, top=50px, left=50px";
+                        <!-- 공통적으로 계속 생기는 박스 -->
+                        <div class="wrapper__date__box">
 
-                            window.open("/planner/add/card","add", options);
-                        }
+                            <!-- 날짜 -->
+                            <div id="date"></div>
 
-                        function popup2(){
-                            let options = "scrollbars=no, resizable=no, width=400, height=200, top=50px, left=50px";
+                            <!-- 그동한 생성한 카드가 있다면 여기에 넣기-->
+                            <div id="card">
+                                <div class="txt__card__title">
 
-                            window.open("/planner/add/date","add", options);
-                        }
+                                    <!--                                &lt;!&ndash; 공개 여부를 결정하는 토글 &ndash;&gt;-->
+                                    <!--                                <div class="wrapper__planner__toggle">-->
+                                    <!--                                    <button class="toggle__switch__planner">-->
+                                    <!--                                        <span class="toggle__button"></span>-->
+                                    <!--                                    </button>-->
+                                    <!--                                </div>-->
+                                </div>
 
-                        const toggleList = document.querySelectorAll(".toggle__switch__planner");
+                                <!-- 화면에 뿌릴 내용 받아오기 -->
+                                <div></div>
+                            </div>
 
-                        // 이 상태를 DB 에 어떻게 전송할 것인가 고민하기
-                        toggleList.forEach(($toggle) => {
-                            $toggle.onclick = () => {
-                                $toggle.classList.toggle('active');
+                            <!-- 버튼 클릭하면 하위에 카드 생성 (column) -->
+                            <button id="addCard" class="open"></button>
+
+                            <!-- 하루 총 예산 -->
+                            <div id="costPerDay"></div>
+                        </div>
+
+                        <!-- 날짜 카드 생성 (row) -->
+                        <div>
+                            <button id="addDate" class="open__date"></button>
+                        </div>
+
+
+                        <script type="text/javascript">
+
+                            const toggleList = document.querySelectorAll(".toggle__switch__planner");
+
+                            // 이 상태를 DB 에 어떻게 전송할 것인가 고민하기
+                            toggleList.forEach(($toggle) => {
+                                $toggle.onclick = () => {
+                                    $toggle.classList.toggle('active');
+                                }
+                            });
+
+                            // 모달(카드 생성) 창 =================================//
+
+                            document.querySelector('.modal__add__card').style.display = 'none';
+
+                            const openButton = document.querySelector('.open');
+                            const containerAddCard = document.querySelector('.modal__add__card');
+                            const closeButton = document.querySelector('.close');
+
+                            openButton.addEventListener('click', () => {
+                                containerAddCard.style.display = 'flex';
+                                document.querySelector('.money__title').style.display = 'none';
+                                document.querySelector('.wrapper__summary').style.display = 'none';
+                                document.querySelector('.modal__add__date').style.display = 'none';
+                            })
+
+                            closeButton.addEventListener('click', () => {
+                                containerAddCard.style.display = 'none';
+                                openButton.style.display = 'block';
+                                document.querySelector('.modal__add__date').style.display = 'none';
+
+                                document.querySelector('.money__title').style.display = '';
+                                document.querySelector('.wrapper__summary').style.display = '';
+                            })
+
+
+                            // 카드 추가부분
+
+                            document.getElementById("containerTodo").style.display="none";
+                            document.getElementById("containerMap").style.display="none";
+                            document.getElementById("containerBudget").style.display="none";
+                            document.getElementById("containerAccommodation").style.display="none";
+                            document.getElementById("containerTransport").style.display="none";
+
+
+                            // 투두
+                            function showAddTodo() {
+
+                                document.getElementById("containerTodo").style.display="";
+                                document.getElementById("containerMap").style.display="none";
+                                document.getElementById("containerBudget").style.display="none";
+                                document.getElementById("containerAccommodation").style.display="none";
+                                document.getElementById("containerTransport").style.display="none";
                             }
-                        });
-                    </script>
+
+                            // 지도
+                            function showAddMap() {
+
+                                document.getElementById("containerMap").style.display="";
+                                document.getElementById("containerTodo").style.display="none";
+                                document.getElementById("containerBudget").style.display="none";
+                                document.getElementById("containerAccommodation").style.display="none";
+                                document.getElementById("containerTransport").style.display="none";
+                            }
+
+                            // 예산
+                            function showAddBudget() {
+
+                                document.getElementById("containerBudget").style.display="";
+                                document.getElementById("containerTodo").style.display="none";
+                                document.getElementById("containerMap").style.display="none";
+                                document.getElementById("containerAccommodation").style.display="none";
+                                document.getElementById("containerTransport").style.display="none";
+                            }
+
+                            // 숙박
+                            function showAddAccommodation() {
+
+                                document.getElementById("containerAccommodation").style.display="";
+                                document.getElementById("containerTodo").style.display="none";
+                                document.getElementById("containerMap").style.display="none";
+                                document.getElementById("containerBudget").style.display="none";
+                                document.getElementById("containerTransport").style.display="none";
+                            }
+
+                            // 교통
+                            function showAddTransport() {
+
+                                document.getElementById("containerTransport").style.display="";
+                                document.getElementById("containerTodo").style.display="none";
+                                document.getElementById("containerMap").style.display="none";
+                                document.getElementById("containerBudget").style.display="none";
+                                document.getElementById("containerAccommodation").style.display="none";
+                            }
+
+                            //==================================================//
+
+                            // 모달 (날짜 생성 창) =================================//
+
+                            document.querySelector('.modal__add__date').style.display = 'none';
+
+                            const openButton2 = document.querySelector('.open__date');
+                            const containerAddDate = document.querySelector('.modal__add__date');
+                            const closeButton2 = document.querySelector('.close__date');
+
+                            openButton2.addEventListener('click', () => {
+                                containerAddDate.style.display = 'flex';
+                                document.querySelector('.money__title').style.display = 'none';
+                                document.querySelector('.wrapper__summary').style.display = 'none';
+                                document.querySelector('.modal__add__card').style.display = 'none';
+                            })
+
+                            closeButton2.addEventListener('click', () => {
+                                containerAddDate.style.display = 'none';
+                                openButton.style.display = 'block';
+                                document.querySelector('.modal__add__card').style.display = 'none';
+
+                                document.querySelector('.money__title').style.display = '';
+                                document.querySelector('.wrapper__summary').style.display = '';
+                            })
+
+                        </script>
+                    </div>
                 </div>
             </div>
         </div>
@@ -143,4 +503,18 @@
 </div>
 
 </body>
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="/js/jQuery-2.1.4.min.js"></script>
+<script>
+    const toggleList = document.querySelectorAll(".toggle__switch__login");
+
+    toggleList.forEach(($toggle) => {
+        $toggle.onclick = () => {
+            $toggle.classList.toggle('active');
+            window.location.href = '/member/login';
+        }
+    });
+</script>
 </html>
