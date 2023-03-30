@@ -19,6 +19,7 @@ import multi.second.project.domain.gallery.dto.response.GalleryDetailResponse;
 import multi.second.project.domain.gallery.dto.response.GalleryListResponse;
 import multi.second.project.domain.gallery.repository.GalleryRepository;
 import multi.second.project.domain.group.domain.TravelGroup;
+import multi.second.project.domain.group.dto.response.GroupResponse;
 import multi.second.project.domain.group.repository.TravelGroupRepository;
 import multi.second.project.domain.host.domain.Host;
 import multi.second.project.domain.host.repository.HostRepository;
@@ -159,15 +160,36 @@ public class PlannerService {
 //		plannerRepository.flush();
 //	}
 
-	//플래너 그룹에 맴버 추가(한명씩)
+	//플래너 그룹에 맴버 추가(한명씩) post
+//	@Transactional
+//	public void addPlannerGroup(PlannerGroupModifyRequest dto) {
+//		
+//		//그룹에 추가할 멤버 아이디
+//		Member member = memberRepository.findById(dto.getNewUserId()).get();
+//		
+//		//그룹편집할 플래너
+//		Planner planner = plannerRepository.findById(dto.getTpIdx())
+//				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+//		
+//		//멤버를 플래너그룹에 추가
+//		Participant participant =  Participant.builder().member(member).build();
+//		participantRepository.save(participant);
+//		TravelGroup travelGroup = travelGroupRepository.findById(planner.getTravelGroup().getTgIdx())
+//				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+//		travelGroup.addParticipant(participant);
+//		travelGroupRepository.save(travelGroup);
+//		
+//		
+//	}
+	//플래너 그룹에 맴버 추가(한명씩) message
 	@Transactional
-	public void addPlannerGroup(PlannerGroupModifyRequest dto) {
+	public Member addPlannerGroup(PlannerGroupModifyRequest dto, Long tpIdx) {
 		
 		//그룹에 추가할 멤버 아이디
 		Member member = memberRepository.findById(dto.getNewUserId()).get();
 		
 		//그룹편집할 플래너
-		Planner planner = plannerRepository.findById(dto.getTpIdx())
+		Planner planner = plannerRepository.findById(tpIdx)
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
 		//멤버를 플래너그룹에 추가
@@ -178,10 +200,9 @@ public class PlannerService {
 		travelGroup.addParticipant(participant);
 		travelGroupRepository.save(travelGroup);
 		
+		return member;
 		
 	}
-
-	
 	
 	
 	

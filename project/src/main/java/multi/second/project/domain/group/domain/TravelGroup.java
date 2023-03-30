@@ -35,7 +35,7 @@ public class TravelGroup {
 	private Long tgIdx;
 	
 	//플래너 공유 인원
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	private List<Participant> participants = new ArrayList<>();
 	
 	public void addParticipant(Participant participant) {

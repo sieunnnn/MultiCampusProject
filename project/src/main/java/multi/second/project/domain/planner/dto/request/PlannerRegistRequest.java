@@ -12,7 +12,7 @@ public class PlannerRegistRequest {
 
 	private String userId;
 	
-	private Long tgIdx;
+//	private Long tgIdx;
 	
 	@NotEmpty
 	private String title;

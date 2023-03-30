@@ -23,6 +23,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import multi.second.project.domain.todo.dto.request.TodoModifyRequest;
+import multi.second.project.domain.todo.dto.request.TodoRegistRequest;
 
 @Entity
 @DynamicInsert // insert 쿼리를 생성할 때 null인 필드는 쿼리에서 생략
@@ -35,6 +36,15 @@ public class TransportTodo extends Todo {
 
 	@Enumerated(EnumType.STRING)
 	private TransportType transportType;
+	
+	public static TransportTodo createTransportTodo(TodoRegistRequest dto) {
+		return TransportTodo.builder()
+				.contents(dto.getContents())
+				.title(dto.getTitle())
+				.todoDate(dto.getTodoDate())
+				.transportType(dto.getTransportType())
+				.build();
+	}
 
 	public void updateTransportTodo(TodoModifyRequest dto) {
 		this.title = dto.getTitle();

@@ -15,6 +15,6 @@ import multi.second.project.domain.todolist.domain.TodoList;
 @Repository
 public interface TodoListRepository extends JpaRepository<TodoList, Long>{
 
-	
+	TodoList findByTodosTdIdx(Long tdIdx);
 	
 }

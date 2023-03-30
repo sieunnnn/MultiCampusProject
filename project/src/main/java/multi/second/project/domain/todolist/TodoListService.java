@@ -77,6 +77,7 @@ public class TodoListService {
 		
 		planner.addTodoList(todoList);
 		todoListRepository.saveAndFlush(todoList);
+	
 		//TodoListResponse res = new TodoListResponse();
 		return new TodoListResponse(todoList);//굳이 response에 담을 필요없이 이렇게 받아도 되지 않나?
 	}

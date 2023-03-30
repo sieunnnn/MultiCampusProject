@@ -12,6 +12,9 @@ import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,6 +47,7 @@ import multi.second.project.infra.util.file.dto.FilePathDto;
 public class PlannerController {
 	
 	private final PlannerService plannerService;
+	private final SimpMessagingTemplate simpMessagingTemplate;
 
 	//테스트용?
 	@GetMapping("planner")
@@ -120,13 +124,21 @@ public class PlannerController {
 //		return "redirect:/planner/detail?tpIdx="+dto.getTpIdx();
 //	}
 	
-	//planner 공유인원 한명추가
-	@PostMapping("add-group")
-	public String addGroup(PlannerGroupModifyRequest dto) {
-	plannerService.addPlannerGroup(dto);
-	
-	return "redirect:/planner/detail?tpIdx="+dto.getTpIdx();
-}
+	//planner 공유인원 한명추가 Post 
+//	@PostMapping("add-group")
+//	public String addGroup(PlannerGroupModifyRequest dto) {
+//	plannerService.addPlannerGroup(dto);
+//	
+//	return "redirect:/planner/detail?tpIdx="+dto.getTpIdx();
+//}
+	//planner 공유인원 한명추가 Message 
+		@MessageMapping("/add-group/{tpIdx}")
+		public void addGroup(
+				@DestinationVariable("tpIdx") Long tpIdx,
+				PlannerGroupModifyRequest dto) {
+			simpMessagingTemplate.convertAndSend("/topic/add-group/" + tpIdx, plannerService.addPlannerGroup(dto, tpIdx));
+		
+	}
 	
 	//planner 공유인원 추방? 필요한가?
 	

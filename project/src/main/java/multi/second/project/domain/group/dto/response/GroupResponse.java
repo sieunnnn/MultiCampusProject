@@ -10,36 +10,21 @@ import lombok.NoArgsConstructor;
 import multi.second.project.domain.comment.domain.Comment;
 import multi.second.project.domain.comment.dto.response.CommentResponse;
 import multi.second.project.domain.gallery.domain.Gallery;
+import multi.second.project.domain.group.domain.TravelGroup;
+import multi.second.project.domain.planner.domain.Participant;
+import multi.second.project.domain.planner.dto.response.ParticipantResponse;
 import multi.second.project.infra.util.file.dto.FilePathDto;
 
 @Data
 @NoArgsConstructor
 public class GroupResponse {
 	
-	private Long postIdx;
-	private String title;
-	private LocalDateTime regDate;
-	private String userId;
-	private String content;
-	private List<FilePathDto> filePathDtos = new ArrayList<FilePathDto>();
-	private List<CommentResponse> commentResponses = new ArrayList<CommentResponse>();
+	private Long tgIdx;
+	private List<ParticipantResponse> participantResponses = new ArrayList<ParticipantResponse>();
 	
-	public GroupResponse(Gallery gallery) {
-		this.postIdx = gallery.getPostIdx();
-		this.title = gallery.getTitle();
-		this.regDate = gallery.getRegDate();
-		this.userId = gallery.getMember().getUserId();
-		this.content = gallery.getContent();
-		this.filePathDtos = FilePathDto.toDtoList(gallery.getFiles());
-		this.commentResponses = CommentResponse.toDtoList(gallery.getComments());
-	}
-	
-	public String getRegDateAsDate() {
-		return regDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-	}
-	
-	public String getRegDateAsTime() {
-		return regDate.format(DateTimeFormatter.ofPattern("HH:mm:ss"));
+	public GroupResponse(TravelGroup travelGroup) {
+		this.tgIdx = travelGroup.getTgIdx();
+		this.participantResponses = ParticipantResponse.toDtoList(travelGroup.getParticipants());
 	}
 	
 	
