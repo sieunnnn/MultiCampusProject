@@ -3,7 +3,7 @@ package multi.second.project.domain.note;
 import multi.second.project.domain.member.MemberRepository;
 import multi.second.project.domain.member.domain.Member;
 import multi.second.project.domain.note.domain.Note;
-import multi.second.project.domain.note.dto.request.NoteRequest;
+import multi.second.project.domain.note.dto.request.NoteRegistRequest;
 import multi.second.project.domain.note.repository.NoteRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class NoteService {
         this.memberRepository = memberRepository;
     }
 
-    public void createNote(NoteRequest noteRequest) throws Exception {
+    public void createNote(NoteRegistRequest noteRequest) throws Exception {
         List<Member> members = new ArrayList<>();
         for (String memberId : noteRequest.getMemberIds()) {
             Optional<Member> optionalMember = memberRepository.findById(memberId);

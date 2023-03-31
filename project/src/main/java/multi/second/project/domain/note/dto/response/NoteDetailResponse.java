@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class NoteResponse {
+public class NoteDetailResponse {
     private Long ntIdx;
     private List<Member> members;
     private List<Message> messages;
