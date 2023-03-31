@@ -1,5 +1,7 @@
 package multi.second.project.domain.todolist.repository;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,8 +15,10 @@ import multi.second.project.domain.todolist.domain.TodoList;
 
 
 @Repository
-public interface TodoListRepository extends JpaRepository<TodoList, Long>{
+public interface TodoListRepository extends JpaRepository<TodoList, Long>, TodoListRepositoryExtension{
 
 	TodoList findByTodosTdIdx(Long tdIdx);
+	
+	TodoList findTodoListByTodosTdIdx(Long tdIdx);
 	
 }

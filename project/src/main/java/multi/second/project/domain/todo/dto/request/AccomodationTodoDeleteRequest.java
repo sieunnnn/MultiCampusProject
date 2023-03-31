@@ -12,17 +12,9 @@ import multi.second.project.domain.todo.domain.TransportType;
 
 @Data
 @NoArgsConstructor
-public class AccomodationTodoRegistRequest {
+public class AccomodationTodoDeleteRequest {
 
-	private Long tlIdx;
-	@NotEmpty
-	private String title;
-	
-	private String contents;
-	
-	private LocalDateTime todoDate;
-	
-	private String address;
+	private Long tdIdx;
 	
 
 }

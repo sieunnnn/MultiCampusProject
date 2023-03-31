@@ -32,6 +32,7 @@ import multi.second.project.domain.gallery.dto.request.GalleryRegistRequest;
 import multi.second.project.domain.gallery.dto.response.GalleryDetailResponse;
 import multi.second.project.domain.member.UserPrincipal;
 import multi.second.project.domain.member.dto.Principal;
+import multi.second.project.domain.todo.dto.request.AccomodationTodoDeleteRequest;
 import multi.second.project.domain.todo.dto.request.AccomodationTodoModifyRequest;
 import multi.second.project.domain.todo.dto.request.AccomodationTodoRegistRequest;
 import multi.second.project.domain.todo.dto.request.TodoModifyRequest;
@@ -51,12 +52,14 @@ public class TodoController {
 	//생성은 따로따로 만드나
 	//그럼 수정은? 삭제는?
 	
-	@MessageMapping("upload-accomodation/{tpIdx}")
+	@MessageMapping("upload-accomodation/{tpIdx}/{tlIdx}")
 	public void uploadAccomodation(
 			@DestinationVariable("tpIdx") Long tpIdx,
+			@DestinationVariable("tlIdx") Long tlIdx,
 			AccomodationTodoRegistRequest dto
 			) throws Exception {
-		simpMessagingTemplate.convertAndSend("/topic/upload-accomodation/" + tpIdx, todoService.createAccomodationTodo(dto, tpIdx));
+		simpMessagingTemplate.convertAndSend("/topic/planner-message/" + tpIdx, 
+				Map.of("type","upload-accomodation","msg",todoService.createAccomodationTodo(dto, tpIdx, tlIdx)));
 		
 	}
 	
@@ -109,7 +112,8 @@ public class TodoController {
 			@DestinationVariable("tpIdx") Long tpIdx,
 			AccomodationTodoModifyRequest dto
 			) throws Exception {
-		simpMessagingTemplate.convertAndSend("/topic/upload-accomodation/" + tpIdx, todoService.modifyAccomodationTodo(dto));
+		simpMessagingTemplate.convertAndSend("/topic/planner-message/" + tpIdx, 
+				Map.of("type","modify-accomodation","msg",todoService.modifyAccomodationTodo(dto)));
 		
 	}
 	@MessageMapping("modify-attractions/{tpIdx}")
@@ -147,13 +151,17 @@ public class TodoController {
 	
 	///////////////////////
 	
-	@MessageMapping("remove-accomodation/{tpIdx}")
+	@MessageMapping("remove-accomodation/{tpIdx}/{tlIdx}")
 	public void removeAccomodation(
 			@DestinationVariable("tpIdx") Long tpIdx,
-			Long tlIdx,
-			Long tdIdx
+			@DestinationVariable("tlIdx") Long tlIdx,
+			AccomodationTodoDeleteRequest dto
 			) {
-		simpMessagingTemplate.convertAndSend("/topic/remove-transport/" + tpIdx, todoService.AccomodationDeleteTodo(tdIdx, tlIdx));
+		
+		todoService.AccomodationDeleteTodo(dto, tlIdx);
+		
+		simpMessagingTemplate.convertAndSend("/topic/planner-message/" + tpIdx, 
+				Map.of("type","remove-accomodation","msg",dto.getTdIdx()));
 		
 		
 	}

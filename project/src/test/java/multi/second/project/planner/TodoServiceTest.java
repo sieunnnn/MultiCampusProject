@@ -335,10 +335,25 @@ public class TodoServiceTest {
 			
 		}
 		
+		
 	}
 	
-	
-	
+	//todorepository 시험
+//		@Test
+//		public void testTodoRepository() throws Exception {
+//			
+//			
+//			//todolist DB 저장
+//			List<TodoList> todoLists = todoListRepository.findByTodosTdIdx(7L);
+//			
+//			for (TodoList todoList : todoLists) {
+//				
+//				System.out.println(todoList.getTitle());
+//				
+//				
+//			}
+//		}
+//	
 	
 	
 	

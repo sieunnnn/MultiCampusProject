@@ -34,6 +34,7 @@ import multi.second.project.domain.todo.domain.BudgetTodo;
 import multi.second.project.domain.todo.domain.GeneralTodo;
 import multi.second.project.domain.todo.domain.Todo;
 import multi.second.project.domain.todo.domain.TransportTodo;
+import multi.second.project.domain.todo.dto.request.AccomodationTodoDeleteRequest;
 import multi.second.project.domain.todo.dto.request.AccomodationTodoModifyRequest;
 import multi.second.project.domain.todo.dto.request.AccomodationTodoRegistRequest;
 import multi.second.project.domain.todo.dto.request.TodoModifyRequest;
@@ -80,17 +81,33 @@ public class TodoService {
 	private final TransportRepository transportRepository;
 
 	@Transactional
-	public AccomodationTodoResponse createAccomodationTodo(AccomodationTodoRegistRequest dto, Long tpIdx) {//AccomodationTodoResponse 로 해야되나?
+	public AccomodationTodo createAccomodationTodo(AccomodationTodoRegistRequest dto, Long tpIdx, Long tlIdx) {//AccomodationTodoResponse 로 해야되나?
 		//어떻게 
 		AccomodationTodo todo =AccomodationTodo.createAccomodationTodo(dto);//AccomodationTodo로 해야되나?
-		
-		TodoList todoList = todoListRepository.findByTodosTdIdx(todo.getTdIdx());
-		
-		todoList.accomodationAddTodo(todo);
+		System.out.println("todo.getTdIdx()1 : " + todo.getTdIdx());
 		
 		todoRepository.saveAndFlush(todo);
 		
-		return new AccomodationTodoResponse(todo);
+		System.out.println("todo.getTdIdx()2 : " + todo.getTdIdx());
+		
+//		TodoList todoList = todoListRepository.findTodoListByTodosTdIdx(todo.getTdIdx());
+//		List<TodoList> todoLists = todoListRepository.findByTodosTdIdx(todo.getTdIdx());
+//		System.out.println(todoList.getTitle());
+//		for (TodoList todoList : todoLists) {
+//			System.out.println(todoList.getTitle());
+//		}
+//		System.out.println("dto.getTlIdx()"+dto.getTlIdx());
+		
+		TodoList todoList = todoListRepository.findById(tlIdx)
+				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		
+		System.out.println(todoList.getTitle());
+		
+		todoList.accomodationAddTodo(todo);
+		todoListRepository.save(todoList);
+		
+		
+		return todo;
 	}
 	@Transactional
 	public AttractionsTodoResponse createAttractionsTodo(TodoRegistRequest dto, Long tpIdx, Long tlIdx) {
@@ -148,14 +165,14 @@ public class TodoService {
 	//////////////////////////////////////
 	
 	@Transactional
-	public AccomodationTodoResponse modifyAccomodationTodo(AccomodationTodoModifyRequest dto) {
+	public AccomodationTodo modifyAccomodationTodo(AccomodationTodoModifyRequest dto) {
 		AccomodationTodo todo = accomodationRepository.findById(dto.getTdIdx()).orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
 		todo.updateAccomodationTodo(dto);
 		
 		accomodationRepository.flush();
 		
-		return new AccomodationTodoResponse(todo);
+		return todo;
 	}
 	@Transactional
 	public AttractionsTodoResponse modifyAttractionsTodo(TodoModifyRequest dto) {
@@ -217,18 +234,20 @@ public class TodoService {
 //		return true;
 //	}
 	@Transactional
-	public Boolean AccomodationDeleteTodo(Long tdIdx, Long tlIdx) {
+	public void AccomodationDeleteTodo(AccomodationTodoDeleteRequest dto, Long tlIdx) {
 		
-		AccomodationTodo todo = accomodationRepository.findById(tdIdx)
+		AccomodationTodo todo = accomodationRepository.findById(dto.getTdIdx())
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
+		System.out.println("todo.getTdIdx()"+todo.getTdIdx());
+//		TodoList todoList = todoListRepository.findByTodosTdIdx(tdIdx);
 		TodoList todoList = todoListRepository.findById(tlIdx)
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		System.out.println("todoList.getTlIdx()"+todoList.getTlIdx());
 		
 		todoList.accomodationRemoveTodo(todo);
 		accomodationRepository.delete(todo);
 		
-		return true;
 	}
 	@Transactional
 	public Boolean AttractionsDeleteTodo(Long tdIdx, Long tlIdx) {
