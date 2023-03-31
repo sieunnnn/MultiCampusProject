@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +33,7 @@ import multi.second.project.domain.gallery.dto.request.GalleryRegistRequest;
 import multi.second.project.domain.gallery.dto.response.GalleryDetailResponse;
 import multi.second.project.domain.member.UserPrincipal;
 import multi.second.project.domain.member.dto.Principal;
+import multi.second.project.domain.todolist.dto.request.TodoListDeleteRequest;
 import multi.second.project.domain.todolist.dto.request.TodoListModifyRequest;
 import multi.second.project.domain.todolist.dto.request.TodoListRegistRequest;
 import multi.second.project.infra.util.file.dto.FilePathDto;
@@ -99,13 +101,24 @@ public class TodoListController {
 //	}
 	
 	@MessageMapping("remove-todolist/{tpIdx}")
-	public void remove( 
+	@SendTo("/topic/remove-todolist/{tpIdx}")
+	public Map<String,Long> remove( 
 			@DestinationVariable("tpIdx") Long tpIdx,
-			Long tlIdx
-			) {
-		simpMessagingTemplate.convertAndSend("/topic/remove-todolist/" + tpIdx, todoListService.deleteTodoList(tlIdx, tpIdx));
+			TodoListDeleteRequest dto
+			) throws Exception {
+		todoListService.deleteTodoList(dto.getTlIdx(), tpIdx);
+		
+		return Map.of("message",dto.getTlIdx());
 		
 	}
+//	@MessageMapping("remove-todolist/{tpIdx}")
+//	public void remove( 
+//			@DestinationVariable("tpIdx") Long tpIdx,
+//			Long tlIdx
+//			) {
+//		simpMessagingTemplate.convertAndSend("/topic/remove-todolist/" + tpIdx, todoListService.deleteTodoList(tlIdx, tpIdx));
+//		
+//	}
 	
 	
 	

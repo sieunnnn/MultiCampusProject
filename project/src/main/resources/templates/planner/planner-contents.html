@@ -62,16 +62,16 @@
       	<ol>
       		<li th:each="todolist, status : ${planner.todolistResponses}" th:id="|f${todolist.tlIdx}|">  
       	 		<p th:text="${todolist.title}"/>
-			    <button th:attr="data-idx=|f${todolist.tlIdx}|" class="btnCloseTodolist">x</button>
+			    <button th:attr="data-idx=|${todolist.tlIdx}|" class="btnCloseTodolist">x</button>
 			   
 	          	<input type="text" th:value="${todolist.tlIdx}" th:id="|tlidx${todolist.tlIdx}|"/>
 	          	<input type="text" th:value="${todolist.title}" th:id="|tltitle${todolist.tlIdx}|"/>  
-	          	<button th:attr="data-tlidx=|f${todolist.tlIdx}|" class="todolistmod">todolist 제목 수정</button>
-	          	
+	          	<button th:attr="data-tlidx=|${todolist.tlIdx}|" class="todolistmod">todolist 제목 수정</button>
+	          	<button th:attr="data-tlidx=|${todolist.tlIdx}|" class="todolistdel">todolist 삭제</button>
 	          	
 	          	<!--<button th:tlIdxParam="${todolist.tlIdx}" th:titleParam="${todolist.title}" onclick="modTodoList(this.getAttribute('tlIdxParam','titleParam'))"><span>todolist 제목 수정</span></button>-->
 	          	
-	          	<button th:attr="data-tlidx=|f${todolist.tlIdx}|" class="todolistdel"><span>todolist 삭제</span></button>
+	          	
 	          	
 	          	<!--  each문 돌면서 똑같은 name, id가 여러개 생기게 되는거 아닌가?-->
 	          	
@@ -275,8 +275,6 @@
 			let tlIdx = ev.target.dataset.tlidx;
 			console.log('tlIdx: '+tlIdx);
 			
-			tlIdx = tlIdx.replace('f','');
-			
 			let todolistIdx = document.getElementById('tlidx'+tlIdx).value;
 			let todolistTitle = document.getElementById('tltitle'+tlIdx).value;
 			
@@ -295,12 +293,6 @@
 	    console.log("Disconnected");
 	}
 	//투두리스트 삭제
-	function delTodoList() {
-		let tlIdx = tlIdx.value;
-		
-		stompClient_delTodoList.send("/app/remove-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'tlIdx':tlIdx}));
-	}
-	
 	function delTodoListConnect() {
 	    var socket = new SockJS('/gs-guide-websocket');
 	    stompClient_delTodoList = Stomp.over(socket);
@@ -308,13 +300,35 @@
 	    stompClient_delTodoList.connect({}, function (frame) {
 	        console.log('Connected: ' + frame);
 	        stompClient_delTodoList.subscribe('/topic/remove-todolist/' + [[${planner.tpIdx}]], function (recommand) {
-	        	//res = JSON.parse(recommand.body);
+	        	//res = recommand;
+	        	res = JSON.parse(recommand.body);
+	        	console.log('res: '+res);
+	        	console.log('res.message: '+res.message);
+	        	document.querySelector('#f'+res.message).style.display='none';
+	        	
 	          	//console.dir(res)
+	          	
 	          	//response.innerHTML += '<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
 	        }    
 	        );
 	    });
 	}
+	
+	document.querySelectorAll('.todolistdel').forEach(e => {
+		
+		e.addEventListener('click', ev => {
+			
+			let tlIdx = ev.target.dataset.tlidx;
+			console.log('tlIdx: '+tlIdx);
+			
+			let todolistIdx = document.getElementById('tlidx'+tlIdx).value;
+			
+			console.log('todolistIdx: '+todolistIdx);
+			
+			stompClient_modTodoList.send("/app/remove-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'tlIdx':todolistIdx}));
+			
+		});
+	})
 	
 	function delTodoListDisconnect() {
 	    if (stompClient_delTodoList !== null) {
@@ -322,6 +336,8 @@
 	    }
 	    console.log("Disconnected");
 	}
+
+	
 	//Accomodation todo 등록
 	function addAccomodationTodo() {
 		let title = accomodationTodoTitleAdd.value;
@@ -758,7 +774,7 @@
 	
 	addTodoListConnect();
 	modTodoListConnect();
-
+	delTodoListConnect();
 		
 	
 	document.querySelectorAll('.btnCloseTodolist').forEach(e => {
@@ -767,7 +783,7 @@
 			
 			let todolistId = ev.target.dataset.idx;
 			console.log('todolistId: '+todolistId);
-			document.querySelector('#'+todolistId).style.display='none';
+			document.querySelector('#f'+todolistId).style.display='none';
 			
 			//todolistId = todolistId.replace('f','');
 			
@@ -783,7 +799,7 @@
 			
 			let todoId = ev.target.dataset.idx;
 			console.log('todoId: '+todoId);
-			document.querySelector('#'+todoId).style.display='none';
+			document.querySelector('#f'+todoId).style.display='none';
 			
 			//todoId = todoId.replace('f','');
 			

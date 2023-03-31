@@ -97,7 +97,7 @@ public class TodoListService {
 	
 	//투두리스트 삭제
 	@Transactional
-	public Boolean deleteTodoList(Long tlIdx, Long tpIdx) {//삭제는 뭘보내야하지?
+	public void deleteTodoList(Long tlIdx, Long tpIdx) {//삭제는 뭘보내야하지?
 		
 		TodoList todoList = todoListRepository.findById(tlIdx)
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
@@ -108,7 +108,6 @@ public class TodoListService {
 		planner.removeTodoList(todoList);
 		todoListRepository.delete(todoList);
 		
-		return true;
 	}
 	
 	
