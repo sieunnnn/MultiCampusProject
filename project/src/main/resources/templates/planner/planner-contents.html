@@ -21,7 +21,10 @@
       </div>
       
       <div class="info file_info">
+      <br>
+      <span>공유 인원 목록</span>
       	<ol>
+      	
       		<li th:each="group : ${planner.travelGroup.participants}">
 				<p th:text="${group.member.userId}"> 
 				
@@ -44,79 +47,108 @@
       </div>
       <div class="btn_section">
       
-          <button onclick="location.href='/planner/list'"><span>목록</span></button>
+          <button onclick="location.href='/planner/list'"><span>목록으로 돌아가기</span></button>
           
           
       </div>
+      <br>
+      <br>
+      
 	  <input type="text" th:value="제목없음" name="todolistTitleAdd" id="todolistTitleAdd"/> 
 	  <button onclick="addTodoList()"><span>todolist 등록</span></button>
-	 
+	  
       <div>
+   
       	<ol>
-      		<li th:each="todolist : ${planner.todolistResponses}">  
-      	 		<p th:text="${todolist.title}">
+      		<li th:each="todolist : ${planner.todolistResponses}" th:id="|f${todolist.tlIdx}|">  
+      	 		<p th:text="${todolist.title}"/>
+			    <b th:attr="data-idx=|f${todolist.tlIdx}|" class="btnCloseTodolist">x</b></span>
+			   
+	          	<input type="text" th:value="${todolist.tlIdx}" name="tlIdx" id="tlIdxMod"/> 
+	          	<input type="text" th:value="${todolist.title}" name="todolistTitleMod" id="todolistTitleMod"/>  
+	          	<button th:attr="data-idx=|f${todolist.tlIdx}|" class="todolistmod" onclick="modTodoList()"><span>todolist 제목 수정</span></button>
 	          	
-	          	<input type="hidden" th:value="${todolist.tlIdx}" name="tlIdx" id="tlIdx"/> 
-	          	<input type="hidden" th:value="${todolist.title}" name="todolistTitleMod" id="todolistTitleMod"/> 
-	          	<button onclick="modTodoList()"><span>todolist 제목 수정</span></button>
+	          	<!--<button th:tlIdxParam="${todolist.tlIdx}" th:titleParam="${todolist.title}" onclick="modTodoList(this.getAttribute('tlIdxParam','titleParam'))"><span>todolist 제목 수정</span></button>-->
+	          	
 	          	<button id="btnDel" onclick="delTodoList()"><span>todolist 삭제</span></button>
-	          	<!-- form으로 안묶여 있는데.. each문 돌면서 똑같은 name, id가 여러개 생기게 되는거 아닌가?-->
 	          	
+	          	<!--  each문 돌면서 똑같은 name, id가 여러개 생기게 되는거 아닌가?-->
+	          	
+	          	<br>
 	          	<!-- request에  있는 속성을 다 넣어야 되나. tlIdx를 어떻게 주나..-->
-	          	<input type="text" th:value="제목없음" name="accomodationTodoTitleAdd" id="accomodationTodoTitleAdd"/>
-	          	<input type="text" th:value="제목없음" name="accomodationTodoContentsAdd" id="accomodationTodoContentsAdd"/> 
-	          	<input type="text" th:value="제목없음" name="accomodationTodoTododateAdd" id="accomodationTodoTododateAdd"/> 
-	          	<input type="text" th:value="제목없음" name="accomodationTodoAddressAdd" id="accomodationTodoAddressAdd"/> 
+	          	<input type="text" th:value="숙박제목1" name="accomodationTodoTitleAdd" id="accomodationTodoTitleAdd"/>
+	          	<input type="text" th:value="숙박내용1" name="accomodationTodoContentsAdd" id="accomodationTodoContentsAdd"/> 
+	          	<input type="text" th:value="숙박날짜1" name="accomodationTodoTododateAdd" id="accomodationTodoTododateAdd"/> 
+	          	<input type="text" th:value="숙박주소1" name="accomodationTodoAddressAdd" id="accomodationTodoAddressAdd"/> 
 	          	<button onclick="addAccomodationTodo()"><span>Accomodation todo 등록</span></button>
-	          	
-	          	
+	          	<br>
+	          	<!-- request에  있는 속성을 다 넣어야 되나. tlIdx를 어떻게 주나..-->
+	          	<input type="text" th:value="관광지제목1" name="attractionsTodoTitleAdd" id="attractionsTodoTitleAdd"/>
+	          	<input type="text" th:value="관광지내용1" name="attractionsTodoContentsAdd" id="attractionsTodoContentsAdd"/> 
+	          	<input type="text" th:value="관광지날짜1" name="attractionsTodoTododateAdd" id="attractionsTodoTododateAdd"/> 
+	          	<input type="text" th:value="관광지정보1" name="attractionsTodoAttractionsAdd" id="acttractionsTodoAttractionsAdd"/> 
 	          	<button onclick="addAttractionsTodo()"><span>Attractions todo 등록</span></button>
-	          	
-	          	
+	          	<br>
+	          	<!-- request에  있는 속성을 다 넣어야 되나. tlIdx를 어떻게 주나..-->
+	          	<input type="text" th:value="예산제목1" name="budgetTodoTitleAdd" id="budgetTodoTitleAdd"/>
+	          	<input type="text" th:value="예산내용1" name="budgetTodoContentsAdd" id="budgetTodoContentsAdd"/> 
+	          	<input type="text" th:value="예산날짜1" name="budgetTodoTododateAdd" id="budgetTodoTododateAdd"/> 
+	          	<input type="text" th:value="예산금액1" name="budgetTodoBudgetAdd" id="budgetTodoBudgetAdd"/> 
+	          	<input type="text" th:value="예산종류1" name="budgetTodoTypeAdd" id="budgetTodoTypeAdd"/> 
 	          	<button onclick="addBudgetTodo()"><span>Budget todo 등록</span></button>
-	          	
-	          	
+	          	<br>
+	          	<!-- request에  있는 속성을 다 넣어야 되나. tlIdx를 어떻게 주나..-->
+	          	<input type="text" th:value="일반제목1" name="generalTodoTitleAdd" id="generalTodoTitleAdd"/>
+	          	<input type="text" th:value="일반내용1" name="generalTodoContentsAdd" id="generalTodoContentsAdd"/> 
+	          	<input type="text" th:value="일반날짜1" name="ageneralTodoTododateAdd" id="ageneralTodoTododateAdd"/> 
+	          	<input type="text" th:value="일반주소1" name="generalTodoAddressAdd" id="generalTodoAddressAdd"/> 
 	          	<button onclick="addGeneralTodo()"><span>General todo 등록</span></button>
-	          	
-	          	
+	          	<br>
+	          	<!-- request에  있는 속성을 다 넣어야 되나. tlIdx를 어떻게 주나..-->
+	          	<input type="text" th:value="교통제목1" name="transportTodoTitleAdd" id="transportTodoTitleAdd"/>
+	          	<input type="text" th:value="교통내용1" name="transportTodoContentsAdd" id="transportTodoContentsAdd"/> 
+	          	<input type="text" th:value="교통날짜1" name="transportTodoTododateAdd" id="transportTodoTododateAdd"/> 
+	          	<input type="text" th:value="교통타입1" name="transportTodoTypeAdd" id="transportTodoTypeAdd"/> 
 	          	<button onclick="addTransportTodo()"><span>Transport todo 등록</span></button>
 	          	
 	          	<ol>
-	          		<li th:each="todo : ${todolist.accomodationTodoResponses}">
-	          			<p th:text="${todo.title}"><p th:text="${todo.contents}"><p th:text="${todo.todoDate}"><p th:text="${todo.isPrivate}">
-	          			<p th:text="${todo.address}">
+	          		<li th:each="todo : ${todolist.accomodationTodoResponses}" th:id="|f${todo.tdIdx}|">
+	          			<p th:text="${todo.title}"/>
+	          			<b th:attr="data-idx=|f${todo.tdIdx}|" class="btnCloseTodo">x</b></span>
+	          			<p th:text="${todo.contents}"/><p th:text="${todo.todoDate}"/><p th:text="${todo.isPrivate}"/>
+	          			<p th:text="${todo.address}"/>
 	          			<button onclick="modAccomodationTodo()"><span>Accomodation todo 수정</span></button>
 	         			<button id="btnDel" onclick="delAccomodationTodo()"><span>Accomodation todo 삭제</span></button>
 	          		</li>	
 	          	</ol>
 	          	<ol>
 	          		<li th:each="todo : ${todolist.attractionsTodoResponses}">
-	          			<p th:text="${todo.title}"><p th:text="${todo.contents}"><p th:text="${todo.todoDate}"><p th:text="${todo.isPrivate}">
-	          			<p th:text="${todo.attractions}">
+	          			<p th:text="${todo.title}"/><p th:text="${todo.contents}"/><p th:text="${todo.todoDate}"/><p th:text="${todo.isPrivate}"/>
+	          			<p th:text="${todo.attractions}"/>
 	          			<button onclick="modAttractionsTodo()"><span>attractions todo 수정</span></button>
 	         			<button id="btnDel" onclick="delAttractionsTodo()"><span>attractions todo 삭제</span></button>
 	          		</li>	
 	          	</ol>
 	          	<ol>
 	          		<li th:each="todo : ${todolist.budgetTodoResponses}">
-	          			<p th:text="${todo.title}"><p th:text="${todo.contents}"><p th:text="${todo.todoDate}"><p th:text="${todo.isPrivate}">
-	          			<p th:text="${todo.budgetType}"><p th:text="${todo.budget}">
+	          			<p th:text="${todo.title}"/><p th:text="${todo.contents}"/><p th:text="${todo.todoDate}"/><p th:text="${todo.isPrivate}"/>
+	          			<p th:text="${todo.budgetType}"/><p th:text="${todo.budget}"/>
 	          			<button onclick="modBudgetTodo()"><span>budget todo 수정</span></button>
 	         			<button id="btnDel" onclick="delBudgetTodo()"><span>budget todo 삭제</span></button>
 	          		</li>	
 	          	</ol>
 	          	<ol>
 	          		<li th:each="todo : ${todolist.generalTodoResponses}">
-	          			<p th:text="${todo.title}"><p th:text="${todo.contents}"><p th:text="${todo.todoDate}"><p th:text="${todo.isPrivate}">
-	          			<p th:text="${todo.address}">
+	          			<p th:text="${todo.title}"/><p th:text="${todo.contents}"/><p th:text="${todo.todoDate}"/><p th:text="${todo.isPrivate}"/>
+	          			<p th:text="${todo.address}"/>
 	          			<button onclick="modGeneralTodo()"><span>general todo 수정</span></button>
 	         			<button id="btnDel" onclick="delGeneralTodo()"><span>general todo 삭제</span></button>
 	          		</li>	
 	          	</ol>
 	          	<ol>
 	          		<li th:each="todo : ${todolist.transportTodoResponses}">
-	          			<p th:text="${todo.title}"><p th:text="${todo.contents}"><p th:text="${todo.todoDate}"><p th:text="${todo.isPrivate}">
-	          			<p th:text="${todo.transportType}">
+	          			<p th:text="${todo.title}"/><p th:text="${todo.contents}"/><p th:text="${todo.todoDate}"/><p th:text="${todo.isPrivate}"/>
+	          			<p th:text="${todo.transportType}"/>
 	          			<button onclick="modTransportTodo()"><span>transport todo 수정</span></button>
 	         			<button id="btnDel" onclick="delTransportTodo()"><span>transport todo 삭제</span></button>
 	          		</li>	
@@ -127,6 +159,7 @@
       	</ol>
       </div>
       <div id="addTodoListResponse"></div>
+      <div id="accomodationResponse"></div>
  
       
    </div>
@@ -191,7 +224,7 @@
 	//투두리스트 추가
 	function addTodoList() {
 		let title = todolistTitleAdd.value;
-		
+		console.dir(title);
 		stompClient_addTodoList.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
 	}
 	
@@ -219,9 +252,10 @@
 	}
 	//투두리스트 수정
 	function modTodoList() {
-		let title = todolistTitleAdd.value;
-		let tlIdx = tlIdx.value;
-		
+		let title = todolistTitleMod.value;
+		let tlIdx = tlIdxMod.value;
+		console.dir(title);
+		console.dir(tlIdx);
 		stompClient_modTodoList.send("/app/modify-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title, 'tlIdx':tlIdx}));
 	}
 	
@@ -276,9 +310,18 @@
 	}
 	//Accomodation todo 등록
 	function addAccomodationTodo() {
-		let title = todolistTitleAdd.value;
+		let title = accomodationTodoTitleAdd.value;
+		let contents = accomodationTodoContentsAdd.value;
+		let todoDate = accomodationTodoTododateAdd.value;
+		let address = accomodationTodoAddressAdd.value;
 		
-		stompClient_addAccomodationTodo.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
+		console.log('title: ' + title);
+		console.log('contents: ' + contents);
+		console.log('todoDate: ' + todoDate);
+		console.log('address: ' + address);
+		
+		stompClient_addAccomodationTodo.send("/app/upload-accomodation/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title, 'contents':contents
+			, 'todoDate':todoDate, 'address':address}));
 	}
 	
 	function addAccomodationTodoConnect() {
@@ -287,10 +330,11 @@
 	    
 	    stompClient_addAccomodationTodo.connect({}, function (frame) {
 	        console.log('Connected: ' + frame);
-	        stompClient_addAccomodationTodo.subscribe('/topic/upload-todolist/' + [[${planner.tpIdx}]], function (recommand) {
-	        	res = JSON.parse(recommand.body);
+	        stompClient_addAccomodationTodo.subscribe('/topic/upload-accomodation/' + [[${planner.tpIdx}]], function (AccomodationRecommand) {
+	        	res = JSON.parse(AccomodationRecommand.body);
 	          	console.dir(res)
-	          	response.innerHTML += '<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
+	          	accomodationResponse.innerHTML += '<span style="background:yellow">'+ "accomodation todo idx, 제목, 내용, : " + res.tdIdx + " ,  " +res.title 
+	          	 + " ,  " +res.contents  + " ,  " +res.todoDate + " ,  " +res.address + '<br>'+'</span>';
 	        }    
 	        );
 	    });
@@ -306,7 +350,7 @@
 	function addAttractionsTodo() {
 		let title = todolistTitleAdd.value;
 		
-		stompClient_addAttractionsTodo.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
+		stompClient_addAttractionsTodo.send("/app/upload-attractions/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
 	}
 	
 	function addAttractionsTodoConnect() {
@@ -315,7 +359,7 @@
 	    
 	    stompClient_addAttractionsTodo.connect({}, function (frame) {
 	        console.log('Connected: ' + frame);
-	        stompClient_addAttractionsTodo.subscribe('/topic/upload-todolist/' + [[${planner.tpIdx}]], function (recommand) {
+	        stompClient_addAttractionsTodo.subscribe('/topic/upload-attractions/' + [[${planner.tpIdx}]], function (recommand) {
 	        	res = JSON.parse(recommand.body);
 	          	console.dir(res)
 	          	response.innerHTML += '<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
@@ -334,7 +378,7 @@
 	function addBudgetTodo() {
 		let title = todolistTitleAdd.value;
 		
-		stompClient_addBudgetTodo.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
+		stompClient_addBudgetTodo.send("/app/upload-budget/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
 	}
 	
 	function addBudgetTodoConnect() {
@@ -343,7 +387,7 @@
 	    
 	    stompClient_addBudgetTodo.connect({}, function (frame) {
 	        console.log('Connected: ' + frame);
-	        stompClient_addBudgetTodo.subscribe('/topic/upload-todolist/' + [[${planner.tpIdx}]], function (recommand) {
+	        stompClient_addBudgetTodo.subscribe('/topic/upload-budget/' + [[${planner.tpIdx}]], function (recommand) {
 	        	res = JSON.parse(recommand.body);
 	          	console.dir(res)
 	          	response.innerHTML += '<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
@@ -362,7 +406,7 @@
 	function addGeneralTodo() {
 		let title = todolistTitleAdd.value;
 		
-		stompClient_addGeneralTodo.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
+		stompClient_addGeneralTodo.send("/app/upload-general/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
 	}
 	
 	function addGeneralTodoConnect() {
@@ -371,7 +415,7 @@
 	    
 	    stompClient_addGeneralTodo.connect({}, function (frame) {
 	        console.log('Connected: ' + frame);
-	        stompClient_addGeneralTodo.subscribe('/topic/upload-todolist/' + [[${planner.tpIdx}]], function (recommand) {
+	        stompClient_addGeneralTodo.subscribe('/topic/upload-general/' + [[${planner.tpIdx}]], function (recommand) {
 	        	res = JSON.parse(recommand.body);
 	          	console.dir(res)
 	          	response.innerHTML += '<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
@@ -390,7 +434,7 @@
 	function addTransportTodo() {
 		let title = todolistTitleAdd.value;
 		
-		stompClient_addTransportTodo.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
+		stompClient_addTransportTodo.send("/app/upload-transport/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
 	}
 	
 	function addTransportTodoConnect() {
@@ -399,7 +443,7 @@
 	    
 	    stompClient_addTransportTodo.connect({}, function (frame) {
 	        console.log('Connected: ' + frame);
-	        stompClient_addTransportTodo.subscribe('/topic/upload-todolist/' + [[${planner.tpIdx}]], function (recommand) {
+	        stompClient_addTransportTodo.subscribe('/topic/upload-transport/' + [[${planner.tpIdx}]], function (recommand) {
 	        	res = JSON.parse(recommand.body);
 	          	console.dir(res)
 	          	response.innerHTML += '<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
@@ -418,7 +462,7 @@
 	function modAccomodationTodo() {
 		let title = todolistTitleAdd.value;
 		
-		stompClient_modAccomodationTodo.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
+		stompClient_modAccomodationTodo.send("/app/modify-accomodation/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
 	}
 	
 	function modAccomodationTodoConnect() {
@@ -427,7 +471,7 @@
 	    
 	    stompClient_modAccomodationTodo.connect({}, function (frame) {
 	        console.log('Connected: ' + frame);
-	        stompClient_modAccomodationTodo.subscribe('/topic/upload-todolist/' + [[${planner.tpIdx}]], function (recommand) {
+	        stompClient_modAccomodationTodo.subscribe('/topic/modify-accomodation/' + [[${planner.tpIdx}]], function (recommand) {
 	        	res = JSON.parse(recommand.body);
 	          	console.dir(res)
 	          	response.innerHTML += '<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
@@ -446,7 +490,7 @@
 	function modAttractionsTodo() {
 		let title = todolistTitleAdd.value;
 		
-		stompClient_modAttractionsTodo.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
+		stompClient_modAttractionsTodo.send("/app/modify-attractions/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
 	}
 	
 	function modAttractionsTodoConnect() {
@@ -455,7 +499,7 @@
 	    
 	    stompClient_modAttractionsTodo.connect({}, function (frame) {
 	        console.log('Connected: ' + frame);
-	        stompClient_modAttractionsTodo.subscribe('/topic/upload-todolist/' + [[${planner.tpIdx}]], function (recommand) {
+	        stompClient_modAttractionsTodo.subscribe('/topic/modify-attractions/' + [[${planner.tpIdx}]], function (recommand) {
 	        	res = JSON.parse(recommand.body);
 	          	console.dir(res)
 	          	response.innerHTML += '<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
@@ -474,7 +518,7 @@
 	function modBudgetTodoList() {
 		let title = todolistTitleAdd.value;
 		
-		stompClient_modBudgetTodo.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
+		stompClient_modBudgetTodo.send("/app/modify-budget/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
 	}
 	
 	function modBudgetTodoConnect() {
@@ -483,7 +527,7 @@
 	    
 	    stompClient_modBudgetTodo.connect({}, function (frame) {
 	        console.log('Connected: ' + frame);
-	        stompClient_modBudgetTodo.subscribe('/topic/upload-todolist/' + [[${planner.tpIdx}]], function (recommand) {
+	        stompClient_modBudgetTodo.subscribe('/topic/modify-budget/' + [[${planner.tpIdx}]], function (recommand) {
 	        	res = JSON.parse(recommand.body);
 	          	console.dir(res)
 	          	response.innerHTML += '<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
@@ -502,7 +546,7 @@
 	function modGeneralTodo() {
 		let title = todolistTitleAdd.value;
 		
-		stompClient_modGeneralTodo.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
+		stompClient_modGeneralTodo.send("/app/modify-general/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
 	}
 	
 	function modGeneralTodoConnect() {
@@ -511,7 +555,7 @@
 	    
 	    stompClient_modGeneralTodo.connect({}, function (frame) {
 	        console.log('Connected: ' + frame);
-	        stompClient_modGeneralTodo.subscribe('/topic/upload-todolist/' + [[${planner.tpIdx}]], function (recommand) {
+	        stompClient_modGeneralTodo.subscribe('/topic/modify-general/' + [[${planner.tpIdx}]], function (recommand) {
 	        	res = JSON.parse(recommand.body);
 	          	console.dir(res)
 	          	response.innerHTML += '<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
@@ -530,7 +574,7 @@
 	function modTransportTodo() {
 		let title = todolistTitleAdd.value;
 		
-		stompClient_modTransportTodo.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
+		stompClient_modTransportTodo.send("/app/modify-transport/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
 	}
 	
 	function modTransportTodoConnect() {
@@ -539,7 +583,7 @@
 	    
 	    stompClient_modTransportTodo.connect({}, function (frame) {
 	        console.log('Connected: ' + frame);
-	        stompClient_modTransportTodo.subscribe('/topic/upload-todolist/' + [[${planner.tpIdx}]], function (recommand) {
+	        stompClient_modTransportTodo.subscribe('/topic/modify-transport/' + [[${planner.tpIdx}]], function (recommand) {
 	        	res = JSON.parse(recommand.body);
 	          	console.dir(res)
 	          	response.innerHTML += '<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
@@ -558,7 +602,7 @@
 	function delAccomodationTodo() {
 		let title = todolistTitleAdd.value;
 		
-		stompClient_delAccomodationTodo.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
+		stompClient_delAccomodationTodo.send("/app/remove-accomodation/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
 	}
 	
 	function delAccomodationTodoConnect() {
@@ -567,7 +611,7 @@
 	    
 	    stompClient_delAccomodationTodo.connect({}, function (frame) {
 	        console.log('Connected: ' + frame);
-	        stompClient_delAccomodationTodo.subscribe('/topic/upload-todolist/' + [[${planner.tpIdx}]], function (recommand) {
+	        stompClient_delAccomodationTodo.subscribe('/topic/remove-accomodation/' + [[${planner.tpIdx}]], function (recommand) {
 	        	res = JSON.parse(recommand.body);
 	          	console.dir(res)
 	          	response.innerHTML += '<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
@@ -586,7 +630,7 @@
 	function delAttractionsTodo() {
 		let title = todolistTitleAdd.value;
 		
-		stompClient_delAttractionsTodo.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
+		stompClient_delAttractionsTodo.send("/app/remove-attractions/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
 	}
 	
 	function delAttractionsTodoConnect() {
@@ -595,7 +639,7 @@
 	    
 	    stompClient_delAttractionsTodo.connect({}, function (frame) {
 	        console.log('Connected: ' + frame);
-	        stompClient_delAttractionsTodo.subscribe('/topic/upload-todolist/' + [[${planner.tpIdx}]], function (recommand) {
+	        stompClient_delAttractionsTodo.subscribe('/topic/remove-attractions/' + [[${planner.tpIdx}]], function (recommand) {
 	        	res = JSON.parse(recommand.body);
 	          	console.dir(res)
 	          	response.innerHTML += '<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
@@ -614,7 +658,7 @@
 	function delBudgetTodo() {
 		let title = todolistTitleAdd.value;
 		
-		stompClient_delBudgetTodo.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
+		stompClient_delBudgetTodo.send("/app/remove-budget/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
 	}
 	
 	function delBudgetTodoConnect() {
@@ -623,7 +667,7 @@
 	    
 	    stompClient_delBudgetTodo.connect({}, function (frame) {
 	        console.log('Connected: ' + frame);
-	        stompClient_delBudgetTodo.subscribe('/topic/upload-todolist/' + [[${planner.tpIdx}]], function (recommand) {
+	        stompClient_delBudgetTodo.subscribe('/topic/remove-budget/' + [[${planner.tpIdx}]], function (recommand) {
 	        	res = JSON.parse(recommand.body);
 	          	console.dir(res)
 	          	response.innerHTML += '<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
@@ -642,7 +686,7 @@
 	function delGeneralTodo() {
 		let title = todolistTitleAdd.value;
 		
-		stompClient_delGeneralTodo.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
+		stompClient_delGeneralTodo.send("/app/remove-general/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
 	}
 	
 	function delGeneralTodoConnect() {
@@ -651,7 +695,7 @@
 	    
 	    stompClient_delGeneralTodo.connect({}, function (frame) {
 	        console.log('Connected: ' + frame);
-	        stompClient_delGeneralTodo.subscribe('/topic/upload-todolist/' + [[${planner.tpIdx}]], function (recommand) {
+	        stompClient_delGeneralTodo.subscribe('/topic/remove-general/' + [[${planner.tpIdx}]], function (recommand) {
 	        	res = JSON.parse(recommand.body);
 	          	console.dir(res)
 	          	response.innerHTML += '<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
@@ -670,7 +714,7 @@
 	function delTransportTodo() {
 		let title = todolistTitleAdd.value;
 		
-		stompClient_delTransportTodo.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
+		stompClient_delTransportTodo.send("/app/remove-transport/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
 	}
 	
 	function delTransportTodoConnect() {
@@ -679,7 +723,7 @@
 	    
 	    stompClient_delTransportTodo.connect({}, function (frame) {
 	        console.log('Connected: ' + frame);
-	        stompClient_delTransportTodo.subscribe('/topic/upload-todolist/' + [[${planner.tpIdx}]], function (recommand) {
+	        stompClient_delTransportTodo.subscribe('/topic/remove-transport/' + [[${planner.tpIdx}]], function (recommand) {
 	        	res = JSON.parse(recommand.body);
 	          	console.dir(res)
 	          	response.innerHTML += '<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
@@ -700,32 +744,51 @@
 	
 	addTodoListConnect();
 	modTodoListConnect();
-	delTodoListConnect();
+
+		document.querySelectorAll('.todolistmod').forEach(e => {
+		
+		e.addEventListener('click', ev => {
+			
+			let todolistId = ev.target.dataset.idx;
+			document.querySelector('#'+todolistId).style.display='';
+			
+			todolistId = todolistId.replace('f','');
+			
+			inpmodtodolist = createElement("input",{prop:{"value":fileId,"name":"delTodolist"}});
+			frmModify.append(inpmodtodolist);
+			
+		});
+	})
 	
-	addAccomodationTodoConnect();
-	addAttractionsTodoConnect();
-	addBudgetTodoConnect();
-	addGeneralTodoConnect();
-	addTransportTodoConnect();
+	document.querySelectorAll('.btnCloseTodolist').forEach(e => {
+		
+		e.addEventListener('click', ev => {
+			
+			let todolistId = ev.target.dataset.idx;
+			document.querySelector('#'+todolistId).style.display='none';
+			
+			todolistId = todolistId.replace('f','');
+			
+			inpDeltodolist = createElement("input",{prop:{"type":"hidden","value":fileId,"name":"delTodolist"}});
+			frmModify.append(inpDeltodolist);
+			
+		});
+	})
 	
-	modAccomodationTodoConnect();
-	modAttractionsTodoConnect();
-	modBudgetTodoConnect();
-	modGeneralTodoConnect();
-	modTransportTodoConnect();
-	
-	delAccomodationTodoConnect();
-	delAttractionsTodoConnect();
-	delBudgetTodoConnect();
-	delGeneralTodoConnect();
-	delTransportTodoConnect();
-	
-	
-	
-	
-	
-	
-	
+	document.querySelectorAll('.btnCloseTodo').forEach(e => {
+		
+		e.addEventListener('click', ev => {
+			
+			let todoId = ev.target.dataset.idx;
+			document.querySelector('#'+todoId).style.display='none';
+			
+			todoId = todoId.replace('f','');
+			
+			inpDeltodo = createElement("input",{prop:{"type":"hidden","value":fileId,"name":"delTodo"}});
+			frmModify.append(inpDeltodo);
+			
+		});
+	})
 	
 	
 	

@@ -147,6 +147,22 @@ public class TodoServiceTest {
 		plannerRepository.save(planner);
 	}
 	
+	//todolist 삭제
+		@Test
+		public void testDelTodolist() throws Exception {
+			
+			//todolist 추가 할 플래너 찾기(인덱스 수동 입력)
+			Planner planner = plannerRepository.findById(5L).get();
+			
+			//todolist DB 삭제
+			TodoList todoList = todoListRepository.findById(28L).get();
+			
+			//플래너에 위의 todolist 넣기
+			planner.removeTodoList(todoList);
+			plannerRepository.save(planner);
+		}
+	
+	
 	//todo추가
 	//todolist 자바에서 추가하고자 하는 종류의 todo 매핑에 fetch = FetchType.EAGER를 추가하고 다른곳은 삭제해야함)
 	@Test
@@ -262,6 +278,16 @@ public class TodoServiceTest {
 	
 	//fetch = FetchType.EAGER 설정하면되는데 다른데 설정된거 지워야함..
 	//플래너 그룹에 인원 추가
+	@Test
+	public void testAddGroupMember2() {
+		
+		PlannerGroupModifyRequest dto = new PlannerGroupModifyRequest();
+				
+		dto.setNewUserId("group1D");
+		
+		plannerService.addPlannerGroup(dto, 5L);
+	}
+	
 	@Test
 	public void testAddGroupMember() {
 		
