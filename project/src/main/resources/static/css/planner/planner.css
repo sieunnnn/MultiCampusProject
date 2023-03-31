@@ -144,18 +144,17 @@
 
     position: fixed;
 
-    width: 389px;
+    width: 359px;
     height: 665px;
 }
 
 .money__title {
 
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-content: center;
 
-    width: 320px;
+    width: 290px;
     height: 57px;
     margin: 26px 0 27px 33px;
 
@@ -171,14 +170,13 @@
 
 .txt__money__title {
 
-    margin-left: 107px;
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 600;
     font-size: 28px;
 }
 
-.wrapper__summary {
+.wrapper__summary{
 
     display: flex;
     flex-direction: column;
@@ -186,7 +184,7 @@
     justify-content: flex-start;
 
     margin: 0 0 28px 33px;
-    width: 320px;
+    width: 290px;
     height: 527px;
 
     background: rgba(255, 255, 255, 0.9);
@@ -200,25 +198,31 @@
 
 /* ============================================================ */
 
-/* 칸반보드 */
+/* ì¹¸ë°˜ë³´ë“œ */
 
 .container__kanban {
 
     display: flex;
-    flex-direction: row;
-    align-content: flex-start;
-    justify-content: flex-start;
+
+    flex-flow: nowrap;
+    overflow: auto;
 
     position: fixed;
 
-    left: 533px;
+    left: 503px;
 
-    width: 737px;
+    width: 767px;
     height: 665px;
 
-    overflow-x: scroll;
-
     background-color: blue;
+}
+
+.wrapper__planner__list {
+
+    display: flex;
+    flex-direction: row;
+
+    flex-shrink: 0;
 }
 
 .wrapper__date__box {
@@ -228,7 +232,7 @@
     align-content: flex-start;
     justify-content: flex-start;
 
-    width: auto;
+    width: 300px;
     height: 100%;
 
     overflow-y: scroll;
@@ -347,3 +351,122 @@
 
 
 /* ===================================================================*/
+
+/* modal */
+
+/* add card */
+
+.container__add__card {
+
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
+
+    margin: 26px 0 28px 20px;
+    width: 320px;
+    height: 610px;
+
+    background: white;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(40px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 16px;
+}
+
+.wrapper__bar {
+
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+    justify-content: flex-start;
+
+    margin-bottom: 20px;
+}
+
+.wrapper__bar img {
+
+    width: 50px;
+    height: 50px;
+}
+
+.close, .close__date {
+
+    width: 60px;
+    height: 24px;
+    margin: 20px 0 20px 240px;
+
+    background: #FFFFFF;
+    border: 0.5px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    color: #1E1E1C;
+}
+
+.title__add__card {
+
+    margin: 0 0 20px 15px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    /* identical to box height, or 38% */
+
+    letter-spacing: 0.02em;
+
+    color: #1C1C1E;
+}
+
+.wrapper__contents {
+
+    background-color: orange;
+}
+
+/* ===================================================================*/
+
+/* modal */
+
+/* add date */
+
+/* modal */
+
+/* add card */
+
+.container__add__date {
+
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
+
+    margin: 26px 0 28px 20px;
+    width: 320px;
+    height: 610px;
+
+    background: white;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(40px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 16px;
+}
+
+.title__add__date {
+
+    margin: 0 0 20px 15px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    /* identical to box height, or 38% */
+
+    letter-spacing: 0.02em;
+
+    color: #1C1C1E;
+}
