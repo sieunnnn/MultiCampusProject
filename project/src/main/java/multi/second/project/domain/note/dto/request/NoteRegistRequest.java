@@ -19,4 +19,8 @@ public class NoteRegistRequest {
     private List<Member> members = new ArrayList<>();
 
     private List<Message> messages = new ArrayList<>();
+
+    public String[] getMemberIds() {
+        return new String[0];
+    }
 }
