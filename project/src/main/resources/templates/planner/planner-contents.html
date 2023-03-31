@@ -166,6 +166,8 @@
 </div>
 <script type="text/javascript" layout:fragment="script" th:inline="javascript">
 
+	var stompClient = null;
+
 	var stompClient_addGroup = null;
 
 	var stompClient_addTodoList = null;
@@ -189,6 +191,88 @@
 	var stompClient_delBudgetTodo = null;
 	var stompClient_delGeneralTodo = null;
 	var stompClient_delTransportTodo = null;
+	
+	//모듈화
+	function connect() {
+	    var socket = new SockJS('/gs-guide-websocket');
+	    stompClient= Stomp.over(socket);
+	    
+	    stompClient.connect({}, function (frame) {
+	        console.log('Connected: ' + frame);
+	        stompClient.subscribe('/topic/planner-message/' + [[${planner.tpIdx}]], function (recommand) {
+	        	res = JSON.parse(recommand.body);
+	          	console.log('res: '+res);
+	          	console.log('res.msg.tlIdx: '+res.msg.tlIdx);
+	          	if(res.type === 'upload-todolist'){
+	          		
+	          		
+	          		addTodoListResponse.innerHTML += 
+		          		'<span style="background:yellow">'+ "todolist idx, 제목 : " + res.msg.tlIdx + " ,  " +res.msg.title + '<br>'+'</span>';
+	          	}else if(res.type === 'modify-todolist'){
+	          		console.log('res.msg.tlIdx: '+res.msg.tlIdx);
+	          		
+	          		document.querySelector('#f'+res.msg.tlIdx).style.display='none';
+		          	modTodoListresponse.innerHTML += '<span style="background:yellow">'+ 
+		          	"todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
+	          	}else if(res.type === 'remove-todolist'){
+	          		console.log('res.tlIdx: '+res.tlIdx);
+	          		console.log('res.title: '+res.title);
+	          		
+	          		document.querySelector('#f'+res.msg).style.display='none';
+	          	}
+	        }    
+	        );
+	    });
+	}
+	
+	function modTodoListDisconnect() {
+	    if (stompClient !== null) {
+	    	stompClient.disconnect();
+	    }
+	    console.log("Disconnected");
+	}
+	
+	//투두리스트 추가
+	function addTodoList() {
+		let title = todolistTitleAdd.value;
+		console.dir(title);
+		stompClient.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
+	}
+	
+	//투두리스트 수정
+	document.querySelectorAll('.todolistmod').forEach(e => {
+		
+		e.addEventListener('click', ev => {
+			
+			let tlIdx = ev.target.dataset.tlidx;
+			console.log('tlIdx: '+tlIdx);
+			
+			let todolistIdx = document.getElementById('tlidx'+tlIdx).value;
+			let todolistTitle = document.getElementById('tltitle'+tlIdx).value;
+			
+			console.log('todolistIdx: '+todolistIdx);
+			console.log('todolistTitle: '+todolistTitle);
+			
+			stompClient.send("/app/modify-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':todolistTitle, 'tlIdx':todolistIdx}));
+			
+		});
+	})
+	
+	document.querySelectorAll('.todolistdel').forEach(e => {
+		
+		e.addEventListener('click', ev => {
+			
+			let tlIdx = ev.target.dataset.tlidx;
+			console.log('tlIdx: '+tlIdx);
+			
+			let todolistIdx = document.getElementById('tlidx'+tlIdx).value;
+			
+			console.log('todolistIdx: '+todolistIdx);
+			
+			stompClient.send("/app/remove-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'tlIdx':todolistIdx}));
+			
+		});
+	})
 	
 	
 	//공유 인원 추가
@@ -221,77 +305,6 @@
 	}
 
 	
-	//투두리스트 추가
-	function addTodoList() {
-		let title = todolistTitleAdd.value;
-		console.dir(title);
-		stompClient_addTodoList.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
-	}
-	
-	function addTodoListConnect() {
-	    var socket = new SockJS('/gs-guide-websocket');
-	    stompClient_addTodoList = Stomp.over(socket);
-	    
-	    stompClient_addTodoList.connect({}, function (frame) {
-	        console.log('Connected: ' + frame);
-	        stompClient_addTodoList.subscribe('/topic/upload-todolist/' + [[${planner.tpIdx}]], function (recommand) {
-	        	res = JSON.parse(recommand.body);
-	          	console.dir(res)
-	          	addTodoListResponse.innerHTML += 
-	          		'<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
-	        }    
-	        );
-	    });
-	}
-	
-	function addTodoListDisconnect() {
-	    if (stompClient_addTodoList !== null) {
-	    	stompClient_addTodoList.disconnect();
-	    }
-	    console.log("Disconnected");
-	}
-	
-	//투두리스트 수정
-	
-	function modTodoListConnect() {
-	    var socket = new SockJS('/gs-guide-websocket');
-	    stompClient_modTodoList = Stomp.over(socket);
-	    
-	    stompClient_modTodoList.connect({}, function (frame) {
-	        console.log('Connected: ' + frame);
-	        stompClient_modTodoList.subscribe('/topic/modify-todolist/' + [[${planner.tpIdx}]], function (recommand) {
-	        	res = JSON.parse(recommand.body);
-	          	console.dir(res)
-	          	modTodoListresponse.innerHTML += '<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
-	        }    
-	        );
-	    });
-	}
-	
-	document.querySelectorAll('.todolistmod').forEach(e => {
-		
-		e.addEventListener('click', ev => {
-			
-			let tlIdx = ev.target.dataset.tlidx;
-			console.log('tlIdx: '+tlIdx);
-			
-			let todolistIdx = document.getElementById('tlidx'+tlIdx).value;
-			let todolistTitle = document.getElementById('tltitle'+tlIdx).value;
-			
-			console.log('todolistIdx: '+todolistIdx);
-			console.log('todolistTitle: '+todolistTitle);
-			
-			stompClient_modTodoList.send("/app/modify-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':todolistTitle, 'tlIdx':todolistIdx}));
-			
-		});
-	})
-	
-	function modTodoListDisconnect() {
-	    if (stompClient_modTodoList !== null) {
-	    	stompClient_modTodoList.disconnect();
-	    }
-	    console.log("Disconnected");
-	}
 	//투두리스트 삭제
 	function delTodoListConnect() {
 	    var socket = new SockJS('/gs-guide-websocket');
@@ -314,21 +327,7 @@
 	    });
 	}
 	
-	document.querySelectorAll('.todolistdel').forEach(e => {
-		
-		e.addEventListener('click', ev => {
-			
-			let tlIdx = ev.target.dataset.tlidx;
-			console.log('tlIdx: '+tlIdx);
-			
-			let todolistIdx = document.getElementById('tlidx'+tlIdx).value;
-			
-			console.log('todolistIdx: '+todolistIdx);
-			
-			stompClient_modTodoList.send("/app/remove-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'tlIdx':todolistIdx}));
-			
-		});
-	})
+	
 	
 	function delTodoListDisconnect() {
 	    if (stompClient_delTodoList !== null) {
@@ -769,12 +768,12 @@
 	    console.log("Disconnected");
 	}
 	
-	
+	connect();
 	addGroupConnect();
 	
-	addTodoListConnect();
-	modTodoListConnect();
-	delTodoListConnect();
+	//addTodoListConnect();
+	//modTodoListConnect();
+	//delTodoListConnect();
 		
 	
 	document.querySelectorAll('.btnCloseTodolist').forEach(e => {
