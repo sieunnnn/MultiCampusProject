@@ -66,12 +66,12 @@
 			   
 	          	<input type="text" th:value="${todolist.tlIdx}" th:id="|tlidx${todolist.tlIdx}|"/>
 	          	<input type="text" th:value="${todolist.title}" th:id="|tltitle${todolist.tlIdx}|"/>  
-	          	<button th:attr="data-tlidx=|f${todolist.tlIdx}|, data-tltitle=|f${todolist.title}|" class="todolistmod">todolist 제목 수정</button>
+	          	<button th:attr="data-tlidx=|f${todolist.tlIdx}|" class="todolistmod">todolist 제목 수정</button>
 	          	
 	          	
 	          	<!--<button th:tlIdxParam="${todolist.tlIdx}" th:titleParam="${todolist.title}" onclick="modTodoList(this.getAttribute('tlIdxParam','titleParam'))"><span>todolist 제목 수정</span></button>-->
 	          	
-	          	<button id="btnDel" onclick="delTodoList()"><span>todolist 삭제</span></button>
+	          	<button th:attr="data-tlidx=|f${todolist.tlIdx}|" class="todolistdel"><span>todolist 삭제</span></button>
 	          	
 	          	<!--  each문 돌면서 똑같은 name, id가 여러개 생기게 되는거 아닌가?-->
 	          	
@@ -222,6 +222,11 @@
 
 	
 	//투두리스트 추가
+	function addTodoList() {
+		let title = todolistTitleAdd.value;
+		console.dir(title);
+		stompClient_addTodoList.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
+	}
 	
 	function addTodoListConnect() {
 	    var socket = new SockJS('/gs-guide-websocket');
@@ -247,13 +252,7 @@
 	}
 	
 	//투두리스트 수정
-	function modTodoList() {
-		let title = todolistTitleMod.value;
-		let tlIdx = tlIdxMod.value;
-		console.dir(title);
-		console.dir(tlIdx);
-		stompClient_modTodoList.send("/app/modify-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title, 'tlIdx':tlIdx}));
-	}
+	
 	function modTodoListConnect() {
 	    var socket = new SockJS('/gs-guide-websocket');
 	    stompClient_modTodoList = Stomp.over(socket);
@@ -268,7 +267,6 @@
 	        );
 	    });
 	}
-	
 	
 	document.querySelectorAll('.todolistmod').forEach(e => {
 		
