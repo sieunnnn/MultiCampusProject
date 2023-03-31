@@ -60,13 +60,14 @@
       <div>
    
       	<ol>
-      		<li th:each="todolist : ${planner.todolistResponses}" th:id="|f${todolist.tlIdx}|">  
+      		<li th:each="todolist, status : ${planner.todolistResponses}" th:id="|f${todolist.tlIdx}|">  
       	 		<p th:text="${todolist.title}"/>
-			    <b th:attr="data-idx=|f${todolist.tlIdx}|" class="btnCloseTodolist">x</b></span>
+			    <button th:attr="data-idx=|f${todolist.tlIdx}|" class="btnCloseTodolist">x</button>
 			   
-	          	<input type="text" th:value="${todolist.tlIdx}" name="tlIdx" id="tlIdxMod"/> 
-	          	<input type="text" th:value="${todolist.title}" name="todolistTitleMod" id="todolistTitleMod"/>  
-	          	<button th:attr="data-idx=|f${todolist.tlIdx}|" class="todolistmod" onclick="modTodoList()"><span>todolist 제목 수정</span></button>
+	          	<input type="text" th:value="${todolist.tlIdx}" th:id="|tlidx${todolist.tlIdx}|"/>
+	          	<input type="text" th:value="${todolist.title}" th:id="|tltitle${todolist.tlIdx}|"/>  
+	          	<button th:attr="data-tlidx=|f${todolist.tlIdx}|, data-tltitle=|f${todolist.title}|" class="todolistmod">todolist 제목 수정</button>
+	          	
 	          	
 	          	<!--<button th:tlIdxParam="${todolist.tlIdx}" th:titleParam="${todolist.title}" onclick="modTodoList(this.getAttribute('tlIdxParam','titleParam'))"><span>todolist 제목 수정</span></button>-->
 	          	
@@ -160,8 +161,7 @@
       </div>
       <div id="addTodoListResponse"></div>
       <div id="accomodationResponse"></div>
- 
-      
+      <div id="modTodoListresponse"></div>
    </div>
 </div>
 <script type="text/javascript" layout:fragment="script" th:inline="javascript">
@@ -222,11 +222,6 @@
 
 	
 	//투두리스트 추가
-	function addTodoList() {
-		let title = todolistTitleAdd.value;
-		console.dir(title);
-		stompClient_addTodoList.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
-	}
 	
 	function addTodoListConnect() {
 	    var socket = new SockJS('/gs-guide-websocket');
@@ -250,6 +245,7 @@
 	    }
 	    console.log("Disconnected");
 	}
+	
 	//투두리스트 수정
 	function modTodoList() {
 		let title = todolistTitleMod.value;
@@ -258,7 +254,6 @@
 		console.dir(tlIdx);
 		stompClient_modTodoList.send("/app/modify-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title, 'tlIdx':tlIdx}));
 	}
-	
 	function modTodoListConnect() {
 	    var socket = new SockJS('/gs-guide-websocket');
 	    stompClient_modTodoList = Stomp.over(socket);
@@ -268,11 +263,32 @@
 	        stompClient_modTodoList.subscribe('/topic/modify-todolist/' + [[${planner.tpIdx}]], function (recommand) {
 	        	res = JSON.parse(recommand.body);
 	          	console.dir(res)
-	          	response.innerHTML += '<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
+	          	modTodoListresponse.innerHTML += '<span style="background:yellow">'+ "todolist idx, 제목 : " + res.tlIdx + " ,  " +res.title + '<br>'+'</span>';
 	        }    
 	        );
 	    });
 	}
+	
+	
+	document.querySelectorAll('.todolistmod').forEach(e => {
+		
+		e.addEventListener('click', ev => {
+			
+			let tlIdx = ev.target.dataset.tlidx;
+			console.log('tlIdx: '+tlIdx);
+			
+			tlIdx = tlIdx.replace('f','');
+			
+			let todolistIdx = document.getElementById('tlidx'+tlIdx).value;
+			let todolistTitle = document.getElementById('tltitle'+tlIdx).value;
+			
+			console.log('todolistIdx: '+todolistIdx);
+			console.log('todolistTitle: '+todolistTitle);
+			
+			stompClient_modTodoList.send("/app/modify-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':todolistTitle, 'tlIdx':todolistIdx}));
+			
+		});
+	})
 	
 	function modTodoListDisconnect() {
 	    if (stompClient_modTodoList !== null) {
@@ -745,32 +761,20 @@
 	addTodoListConnect();
 	modTodoListConnect();
 
-		document.querySelectorAll('.todolistmod').forEach(e => {
 		
-		e.addEventListener('click', ev => {
-			
-			let todolistId = ev.target.dataset.idx;
-			document.querySelector('#'+todolistId).style.display='';
-			
-			todolistId = todolistId.replace('f','');
-			
-			inpmodtodolist = createElement("input",{prop:{"value":fileId,"name":"delTodolist"}});
-			frmModify.append(inpmodtodolist);
-			
-		});
-	})
 	
 	document.querySelectorAll('.btnCloseTodolist').forEach(e => {
 		
 		e.addEventListener('click', ev => {
 			
 			let todolistId = ev.target.dataset.idx;
+			console.log('todolistId: '+todolistId);
 			document.querySelector('#'+todolistId).style.display='none';
 			
-			todolistId = todolistId.replace('f','');
+			//todolistId = todolistId.replace('f','');
 			
-			inpDeltodolist = createElement("input",{prop:{"type":"hidden","value":fileId,"name":"delTodolist"}});
-			frmModify.append(inpDeltodolist);
+			//inpDeltodolist = createElement("input",{prop:{"type":"hidden","value":fileId,"name":"delTodolist"}});
+			//frmModify.append(inpDeltodolist);
 			
 		});
 	})
@@ -780,12 +784,13 @@
 		e.addEventListener('click', ev => {
 			
 			let todoId = ev.target.dataset.idx;
+			console.log('todoId: '+todoId);
 			document.querySelector('#'+todoId).style.display='none';
 			
-			todoId = todoId.replace('f','');
+			//todoId = todoId.replace('f','');
 			
-			inpDeltodo = createElement("input",{prop:{"type":"hidden","value":fileId,"name":"delTodo"}});
-			frmModify.append(inpDeltodo);
+			//inpDeltodo = createElement("input",{prop:{"type":"hidden","value":fileId,"name":"delTodo"}});
+			//frmModify.append(inpDeltodo);
 			
 		});
 	})
