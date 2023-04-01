@@ -18,6 +18,7 @@ public enum Code {
 	public String toString() {
 		return desc;
 	}
+
 	// 위 코드에서 DOMAIN과 SMTP_FROM은 열거형 상수입니다.
 	// DOMAIN 상수는 "http://localhost:8080" 문자열을,
 	// SMTP_FROM 상수는 "example@example.com" 문자열을 desc 필드에 할당합니다.
