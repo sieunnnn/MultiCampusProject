@@ -20,4 +20,7 @@ public class NoteRegistRequest {
 
     private List<Message> messages = new ArrayList<>();
 
+    public String[] getMemberIds() {
+        return new String[0];
+    }
 }
