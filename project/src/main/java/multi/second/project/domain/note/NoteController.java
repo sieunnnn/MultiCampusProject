@@ -8,18 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/notes")
+@RequestMapping("/note")
 public class NoteController {
 
-    private final NoteService noteService;
 
-    public NoteController(NoteService noteService) {
-        this.noteService = noteService;
-    }
 
-    @PostMapping("")
-    public ResponseEntity<Void> createNote(@RequestBody NoteRegistRequest noteRequest) throws Exception {
-        noteService.createNote(noteRequest);
-        return ResponseEntity.ok().build();
-    }
 }

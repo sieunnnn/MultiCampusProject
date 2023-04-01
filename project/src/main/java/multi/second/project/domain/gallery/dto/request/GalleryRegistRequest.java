@@ -16,5 +16,5 @@ public class GalleryRegistRequest {
 	
 	@NotEmpty
 	private String content;
-	
+
 }
