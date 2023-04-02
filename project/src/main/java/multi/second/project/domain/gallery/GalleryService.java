@@ -185,5 +185,14 @@ public class GalleryService {
 		
 	}
 
+	//해당 서비스 클래스는 Spring Framework에서 제공하는 @Service 어노테이션을 이용하여 Service Layer에 해당하는 코드를 구현한 클래스입니다.
+	// 해당 클래스는 Gallery와 관련된 비즈니스 로직을 담고 있으며, Gallery와 관련된 DB CRUD 기능을 수행합니다.
+	// 또한, 파일 업로드와 관련된 기능을 처리하는 FileUtil과 같은 유틸리티 클래스와도 연동하여 파일 업로드와 관련된 작업도 수행합니다.
+	// 이 클래스에는 @Transactional 어노테이션을 사용하여 메소드 실행 도중에 예외가 발생할 경우, 롤백을 수행합니다.
+	// 이 클래스는 Spring의 IoC/DI 개념에 의해 객체 생성과 관리가 이루어집니다.
+
+
+
+
 
 }
