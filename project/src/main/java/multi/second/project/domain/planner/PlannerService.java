@@ -109,7 +109,7 @@ public class PlannerService {
 					.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 			List<Participant> participants = travelGroup.getParticipants();
 			for (Participant participant : participants) {
-				if(participant.getMember().getUserId().equals("group1A")) {
+				if(participant.getMember().getUserId().equals(principal.getUserId())) {
 					travelGroup.removeParticipant(participant);
 					break;
 				}
