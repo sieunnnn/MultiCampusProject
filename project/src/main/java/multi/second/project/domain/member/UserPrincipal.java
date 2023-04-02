@@ -53,7 +53,13 @@ public class UserPrincipal extends User{
 
 
 	
-	
+	//Spring Security에서는 인증된 사용자와 관련된 정보를 저장하고 관리하는 SecurityContext라는 객체를 제공합니다.
+	// SecurityContext는 ThreadLocal을 이용하여 현재 스레드와 관련된 보안 정보를 저장합니다.
+	// SecurityContextHolder는 이러한 SecurityContext 객체를 제공하는 유틸리티 클래스입니다.
+	//
+	//예를 들어, 사용자가 로그인하여 인증되면 SecurityContext 객체가 생성됩니다.
+	// 이 객체는 인증된 사용자 정보를 담고 있으며, 요청이 처리되는 동안 해당 정보를 유지하고 관리합니다.
+	// 따라서, 다른 클래스에서 현재 인증된 사용자 정보에 접근해야 할 때, SecurityContextHolder를 사용하여 해당 정보를 가져올 수 있습니다.
 	
 	
 	
