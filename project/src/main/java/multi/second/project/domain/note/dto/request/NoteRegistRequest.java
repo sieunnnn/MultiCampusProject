@@ -7,6 +7,7 @@ import lombok.Setter;
 import multi.second.project.domain.member.domain.Member;
 import multi.second.project.domain.message.domain.Message;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +17,10 @@ public class NoteRegistRequest {
 
     private Long ntIdx;
 
-    private List<Member> members = new ArrayList<>();
+    private String userId;
 
-    private List<Message> messages = new ArrayList<>();
+//    @NotEmpty
+//    private String sendId;
 
-    public String[] getMemberIds() {
-        return new String[0];
-    }
+
 }

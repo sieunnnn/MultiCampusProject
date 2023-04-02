@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import multi.second.project.domain.message.dto.request.MessageRegistRequest;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -50,5 +51,33 @@ public class Message {
 	//메시지 내용 삭제여부
 	@ColumnDefault("false")
 	private Boolean isDel;
-	
+
+	public static Message createMessage(MessageRegistRequest dto, Member member) {
+		return Message.builder()
+				.member(member)
+				.content(dto.getContent())
+				.build();
+	}
+
+//	public void addFile(FilePath filePath) {
+//		this.files.add(filePath);
+//	}
+//
+//	public void removeFile(FilePath filePath) {
+//		this.files.remove(filePath);
+//	}
+//
+//	public void updateGallery(GalleryModifyRequest dto) {
+//		this.title = dto.getTitle();
+//		this.content = dto.getContent();
+//	}
+
+//	public void addComment(Comment comment) {
+//		this.comments.add(comment);
+//	}
+//
+//	public void removeComment(Comment comment) {
+//		this.comments.remove(comment);
+//	}
+
 }
