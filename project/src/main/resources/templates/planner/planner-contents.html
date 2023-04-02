@@ -106,6 +106,14 @@
 	          	<button th:attr="data-tlidx=|${todolist.tlIdx}|" class="trtodoadd">General todo 등록</button>
 	          	
 	          	<ol>
+	          		<li th:each="todo : ${todolist.todoResponses}" >
+	          			<p th:text="${todo.title}"/>
+	          			<span>todolist 등록</span>
+	          		</li>	
+	          	</ol>
+	          	
+	          	
+	          	<ol>
 	          		<li th:each="todo : ${todolist.accomodationTodoResponses}" th:id="|d${todo.tdIdx}|">
 	          			<p th:text="${todo.title}"/>
 	          			<b th:attr="data-idx=|f${todo.tdIdx}|" class="btnCloseTodo">x</b>
@@ -203,7 +211,10 @@
 	        	res = JSON.parse(recommand.body);
 	          	console.log('res: '+res);
 	          	
-	          	if(res.type === 'upload-todolist'){
+	          	if(res.type === 'add-group'){
+	          		addGroupResponse.innerHTML += '<span style="background:yellow">'+ res.msg.userId + '<br>'+'</span>';
+		          		
+	          	}else if(res.type === 'upload-todolist'){
 	          		addTodoListResponse.innerHTML += 
 		          		'<span style="background:yellow">'+ "todolist idx, 제목 : " + res.msg.tlIdx + " ,  " +res.msg.title + '<br>'+'</span>';
 		          		
@@ -336,7 +347,7 @@
 			let actodocontent = document.getElementById('actodocontentmod'+tdIdx).value;
 			let actododate = document.getElementById('actododatemod'+tdIdx).value;
 			let actodoaddress = document.getElementById('actodoaddressmod'+tdIdx).value;
-			let actodoprivate = document.getElementById('actodopvmod'+tdIdx).value;
+			let actodoprivate = document.getElementById('actodopvmod'+tdIdx).checked;
 			
 			console.log('actodoIdx: '+actodoIdx);
 			console.log('actodotitle: '+actodotitle);
@@ -372,36 +383,15 @@
 		});
 	})
 	
-	
 	//공유 인원 추가
 	function addGroup() {
 		let newUserId = newUser.value;
 		
-		stompClient_addGroup.send("/app/add-group/" + [[${planner.tpIdx}]], {}, JSON.stringify({'newUserId':newUserId}));
+		stompClient.send("/app/add-group/" + [[${planner.tpIdx}]], {}, JSON.stringify({'newUserId':newUserId}));
 	}
 	
-	function addGroupConnect() {
-	    var socket = new SockJS('/gs-guide-websocket');
-	    stompClient_addGroup = Stomp.over(socket);
-	    
-	    stompClient_addGroup.connect({}, function (frame) {
-	        console.log('Connected: ' + frame);
-	        stompClient_addGroup.subscribe('/topic/add-group/' + [[${planner.tpIdx}]], function (addGroupRecommand) {
-	        	res = JSON.parse(addGroupRecommand.body);
-	          	console.dir(res)
-	          	addGroupResponse.innerHTML += '<span style="background:yellow">'+ res.userId + '<br>'+'</span>';
-	        }    
-	        );
-	    });
-	}
-	
-	function addGroupDisconnect() {
-	    if (stompClient_addGroup !== null) {
-	    	stompClient_addGroup.disconnect();
-	    }
-	    console.log("Disconnected");
-	}
-
+	///////////////////////////////////////////////////////
+	//모듈화 아직 안된 부분
 	//Attractions todo 등록
 	function addAttractionsTodo() {
 		let title = todolistTitleAdd.value;
@@ -796,7 +786,7 @@
 	}
 	
 	connect();
-	addGroupConnect();
+	//addGroupConnect();
 	
 	//addTodoListConnect();
 	//modTodoListConnect();

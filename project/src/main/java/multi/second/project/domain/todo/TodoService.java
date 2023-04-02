@@ -97,6 +97,12 @@ public class TodoService {
 //			System.out.println(todoList.getTitle());
 //		}
 //		System.out.println("dto.getTlIdx()"+dto.getTlIdx());
+		//왜 못불러오는걸까?
+//		TodoList todoList1 = todoListRepository.findByTodosTdIdx(todo.getTdIdx());
+//		System.out.println("todoList1.getTitle() : "+todoList1.getTitle());
+//		TodoList todoList2 = todoListRepository.findTodoListByTodosTdIdx(todo.getTdIdx());
+//		System.out.println("todoList2.getTitle() : "+todoList2.getTitle());
+		
 		
 		TodoList todoList = todoListRepository.findById(tlIdx)
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
