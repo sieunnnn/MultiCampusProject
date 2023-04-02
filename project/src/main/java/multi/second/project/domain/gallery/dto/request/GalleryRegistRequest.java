@@ -17,4 +17,5 @@ public class GalleryRegistRequest {
 	@NotEmpty
 	private String content;
 
+// 제목, 내용 프론트에서 input으로 받아온다
 }
