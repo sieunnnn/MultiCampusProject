@@ -11,6 +11,15 @@
     display: none;
 }
 
+button {
+
+    cursor: grab;
+}
+
+a {
+
+    text-decoration-line: none;
+}
 
 .wrapper__button {
 
@@ -55,11 +64,9 @@
     overflow: auto;
 }
 
-/* 레이아웃 확인용 코드입니다 나중에 지워주세요 */
-/*input {*/
+.image {
 
-/*    width: 170px;*/
-/*    height: 170px;*/
-/*    margin-bottom: 7px;*/
-/*    background-color: blue;*/
-/*}*/
+    width: 170px;
+    height: 170px;
+    margin-bottom: 7px;
+}
