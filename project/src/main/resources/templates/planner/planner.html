@@ -12,6 +12,8 @@
     <title>Planner</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="/css/planner/planner.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 </head>
 
 <body>
@@ -102,7 +104,8 @@
                                 <!-- 내용 -->
 
                                 <div class="wrapper__contents">
-                                    <!-- 투두 리스트 -->
+
+                                    <!-- 일반 -->
                                     <div id="containerTodo">
 
                                         <!-- 타이틀 -->
@@ -114,17 +117,19 @@
                                         <div class="container">
 
                                             <!-- 타이틀 -->
-                                            <input type="text" placeholder="제목을 입력해주세요">
+                                            <input type="text" th:id="|gntodotitleadd${todolist.tlIdx}|" placeholder="제목을 입력해주세요">
 
                                             <!-- 날짜 -->
-                                            <input type="datetime-local">
+                                            <input type="datetime-local" th:id="|gntododateadd${todolist.tlIdx}|">
 
                                             <!-- 지도 추가 부분 -->
+                                            <input type="text" th:id="|gntodoaddressadd${todolist.tlIdx}|"/>
 
                                             <!-- 내용 -->
-                                            <textarea placeholder="내용을 입력해주세요"></textarea>
+                                            <textarea placeholder="내용을 입력해주세요" th:id="|gntodocontentadd${todolist.tlIdx}|"></textarea>
 
-                                            <input type="submit" value="전송">
+                                            <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="gntodoadd">등록</button>
+
                                         </div>
                                     </div>
 
@@ -140,11 +145,11 @@
                                         <div class="container">
 
                                             <!-- 타이틀 -->
-                                            <input type="text" placeholder="제목을 입력해주세요">
+                                            <input type="text" placeholder="제목을 입력해주세요" th:id="|trtodotitleadd${todolist.tlIdx}|">
 
                                             <!-- 대중교통 선택 -->
                                             <label for="transport-select">교통편 선택</label>
-                                            <select name="transports" id="transport-select">
+                                            <select name="transports" id="transport-select" th:id="|trtodotypeadd${todolist.tlIdx}|">
                                                 <option>버스</option>
                                                 <option>지하철</option>
                                                 <option>고속철도</option>
@@ -155,13 +160,13 @@
                                             </select>
 
                                             <!-- 날짜 -->
-                                            <input type="datetime-local">
+                                            <input type="datetime-local" th:id="|trtododateadd${todolist.tlIdx}|">
 
 
                                             <!-- 내용 -->
-                                            <textarea placeholder="내용을 입력해주세요"></textarea>
+                                            <textarea placeholder="내용을 입력해주세요" th:id="|trtodocontentadd${todolist.tlIdx}|"></textarea>
 
-                                            <input type="submit" value="전송">
+                                            <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="trtodoadd">등록</button>
                                         </div>
 
 
@@ -179,18 +184,18 @@
                                         <div class="container">
 
                                             <!-- 타이틀 -->
-                                            <input type="text" name="accomodationTodoTitleAdd" id="accomodationTodoTitleAdd" placeholder="제목을 입력해주세요">
+                                            <input type="text" th:id="|actodotitleadd${todolist.tlIdx}|" placeholder="제목을 입력해주세요">
 
                                             <!-- 날짜 -->
-                                            <input name="accomodationTodoTododateAdd" id="accomodationTodoTododateAdd" type="datetime-local">
+                                            <input type="datetime-local" th:id="|actododateadd${todolist.tlIdx}|"/>
 
                                             <!-- 지도 추가 부분 -->
-                                            <input type="text" name="accomodationTodoAddressAdd" id="accomodationTodoAddressAdd"/>
+                                            <input type="text" th:id="|actodoaddressadd${todolist.tlIdx}|"/>
 
                                             <!-- 내용 -->
-                                            <textarea name="accomodationTodoContentsAdd" id="accomodationTodoContentsAdd" placeholder="내용을 입력해주세요"></textarea>
+                                            <textarea th:id="|actodocontentadd${todolist.tlIdx}|"></textarea>
 
-                                            <button onclick="addAttractionsTodo()">전송</button>
+                                            <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="actodoadd">등록</button>
                                         </div>
                                     </div>
 
@@ -206,18 +211,20 @@
                                         <div class="container">
 
                                             <!-- 타이틀 -->
-                                            <input type="text" placeholder="제목을 입력해주세요">
+                                            <input type="text" th:id="|attodotitleadd${todolist.tlIdx}|" placeholder="제목을 입력해주세요">
 
                                             <!-- 날짜 -->
-                                            <input type="datetime-local">
+                                            <input type="datetime-local" th:id="|attododateadd${todolist.tlIdx}|">
 
                                             <!-- 관광지 추가 부분 -->
+                                            <input type="text" th:id="|attodoinfoadd${todolist.tlIdx}|"/>
+
                                             <!-- 지도 추가 부분 -->
 
                                             <!-- 내용 -->
-                                            <textarea placeholder="내용을 입력해주세요"></textarea>
+                                            <textarea placeholder="내용을 입력해주세요" th:id="|attodocontentadd${todolist.tlIdx}|"></textarea>
 
-                                            <input type="submit" value="전송">
+                                            <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="attodoadd">Attractions todo 등록</button>
                                         </div>
                                     </div>
 
@@ -233,14 +240,14 @@
                                         <div class="container">
 
                                             <!-- 타이틀 -->
-                                            <input type="text" placeholder="제목을 입력해주세요">
+                                            <input type="text" placeholder="제목을 입력해주세요" th:value="예산제목1" th:id="|bgtodotitleadd${todolist.tlIdx}|">
 
                                             <!-- 날짜 -->
-                                            <input type="datetime-local">
+                                            <input type="datetime-local" th:id="|bgtododateadd${todolist.tlIdx}|">
 
                                             <!-- 선택란 -->
-                                            <label for="budget-select">지출 종류</label>
-                                            <select name="budgets" id="budget-select">
+                                            <label for="budget-select" >지출 종류</label>
+                                            <select name="budgets" th:id="|bgtodotypeadd${todolist.tlIdx}|" id="budget-select">
                                                 <option>식사</option>
                                                 <option>간식</option>
                                                 <option>쇼핑</option>
@@ -251,13 +258,14 @@
                                             </select>
 
                                             <!-- 금액 -->
-                                            <input type="text" placeholder="금액을 입력하세요">
+                                            <input type="text" placeholder="금액을 입력하세요" th:id="|bgtodomoneyadd${todolist.tlIdx}|">
 
                                             <!-- 지도 추가 부분 -->
 
                                             <!-- 내용 -->
-                                            <textarea placeholder="내용을 입력해주세요"></textarea>
-                                            <input type="submit" value="전송">
+                                            <textarea placeholder="내용을 입력해주세요" th:id="|bgtodocontentadd${todolist.tlIdx}|"></textarea>
+
+                                            <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="bgtodoadd">등록</button>
 
                                         </div>
                                     </div>
@@ -281,23 +289,19 @@
                                 </div>
 
                                 <div>
-                                    <div class="title__add__date">Add Date</div>
+                                    <div class="title__add__date">Date</div>
                                 </div>
 
                                 <div>
-                                    <input type="text" name="todolistTitleAdd" id="todolistTitleAdd">
-                                </div>
-
-                                <div>
-                                    <button onclick="addTodoList()">전송</button>
+                                    <input type="text" name="todolistTitleAdd" id="todolistTitleAdd" onkeypress="addTodoList(event)" placeholder="날짜 입력 후 엔터">
                                 </div>
 
                             </div>
 
                         </div>
 
-                        <!------------------------------------------------>
 
+                        <!------------------------------------------------>
 
                         <div class="money__title">
                             <div class="txt__money__title" style="margin-top: 10px">
@@ -322,220 +326,358 @@
 
                         <div class="wrapper__planner__list">
 
-                        <!-- 공통적으로 계속 생기는 박스 -->
-                        <div th:each="todolist : ${planner.todolistResponses}" class="wrapper__date__box">
+                            <!-- 공통적으로 계속 생기는 박스 -->
+                            <div th:each="todolist : ${planner.todolistResponses}" th:id="'s'+${todolist.tlIdx}" class="wrapper__date__box">
 
-                            <!-- 날짜 -->
-                            <div id="date">[[${todolist.title}]]</div>
+                                <!-- 날짜 -->
+                                <div id="date" class="date" th:onclick="onClickModifyDate([[${todolist.tlIdx}]])">
+                                    <div th:id="'i'+${todolist.tlIdx}">[[${todolist.title}]]</div>
+                                    <div th:id="'l'+${todolist.tlIdx}"></div>
 
-                            <!-- 그동한 생성한 카드가 있다면 여기에 넣기-->
-                            <div th:each="todo : ${todolist.accomodationTodoResponses}" id="card">
-                                <div class="txt__card__title">
-                                    <!--                                &lt;!&ndash; 공개 여부를 결정하는 토글 &ndash;&gt;-->
-                                    <!--                                <div class="wrapper__planner__toggle">-->
-                                    <!--                                    <button class="toggle__switch__planner">-->
-                                    <!--                                        <span class="toggle__button"></span>-->
-                                    <!--                                    </button>-->
-                                    <!--                                </div>-->
-                                    [[${todo.title}]]
+                                    <input style="display: none" type="text" th:id="'k'+${todolist.tlIdx}"/>
+                                    <button style="display: none" th:id="'j'+${todolist.tlIdx}"  th:attr="data-tlIdx=|${todolist.tlIdx}|" class="todolistdel">삭제</button>
                                 </div>
-                                <!-- 화면에 뿌릴 내용 받아오기 -->
-                                <div>
-                                    [[${todo.contents}]]
+
+                                <!-- 그동한 생성한 카드가 있다면 여기에 넣기-->
+                                <div th:each="todo : ${todolist}" th:id="|d${todo.tdIdx}|" id="card" class="card">
+
+                                    <div class="txt__card__title">
+                                        <!-- 공개 여부를 결정하는 토글 -->
+                                        <div class="wrapper__planner__toggle">
+                                            <button class="toggle__switch__planner">
+                                                <span class="toggle__button"></span>
+                                            </button>
+                                        </div>
+
+                                        [[${todo.title}]]
+                                    </div>
+
+                                    <!-- 화면에 뿌릴 내용 받아오기 -->
+                                    <div>
+                                        [[${todo.contents}]]
+                                    </div>
                                 </div>
+
+                                <!-- 새로 생성될 화면 -->
+
+                                <!-- 버튼 클릭하면 카드 생성 (column) -->
+                                <button id="addCard" class="open" th:onclick="onClickAddCard([[${todolist.tlIdx}]])"></button>
+
+                                <!-- 하루 총 예산 -->
+                                <div id="costPerDay"></div>
+
                             </div>
 
-                            <!-- 버튼 클릭하면 하위에 카드 생성 (column) -->
-                            <button id="addCard" class="open"></button>
+                            <div id="addTodoListResponse"></div>
 
-                            <!-- 하루 총 예산 -->
-                            <div id="costPerDay"></div>
-
+                            <!-- 날짜 카드 생성 (row) -->
+                            <div>
+                                <button id="addDate" class="open__date"></button>
+                            </div>
                         </div>
-
-                        <!-- 날짜 카드 생성 (row) -->
-                        <div>
-                            <button id="addDate" class="open__date"></button>
-                        </div>
-
-                        </div>
-
-                        <script type="text/javascript">
-
-                            const toggleList = document.querySelectorAll(".toggle__switch__planner");
-
-                            // 이 상태를 DB 에 어떻게 전송할 것인가 고민하기
-                            toggleList.forEach(($toggle) => {
-                                $toggle.onclick = () => {
-                                    $toggle.classList.toggle('active');
-                                }
-                            });
-
-                            // 모달(카드 생성) 창 =================================//
-
-                            document.querySelector('.modal__add__card').style.display = 'none';
-
-                            const openButton = document.querySelector('.open');
-                            const containerAddCard = document.querySelector('.modal__add__card');
-                            const closeButton = document.querySelector('.close');
-
-                            openButton.addEventListener('click', () => {
-                                containerAddCard.style.display = 'flex';
-                                document.querySelector('.money__title').style.display = 'none';
-                                document.querySelector('.wrapper__summary').style.display = 'none';
-                                document.querySelector('.modal__add__date').style.display = 'none';
-                            })
-
-                            closeButton.addEventListener('click', () => {
-                                containerAddCard.style.display = 'none';
-                                openButton.style.display = 'block';
-                                document.querySelector('.modal__add__date').style.display = 'none';
-
-                                document.querySelector('.money__title').style.display = '';
-                                document.querySelector('.wrapper__summary').style.display = '';
-                            })
-
-
-                            // 카드 추가부분
-
-                            document.getElementById("containerTodo").style.display="none";
-                            document.getElementById("containerMap").style.display="none";
-                            document.getElementById("containerBudget").style.display="none";
-                            document.getElementById("containerAccommodation").style.display="none";
-                            document.getElementById("containerTransport").style.display="none";
-
-
-                            // 투두
-                            function showAddTodo() {
-
-                                document.getElementById("containerTodo").style.display="";
-                                document.getElementById("containerMap").style.display="none";
-                                document.getElementById("containerBudget").style.display="none";
-                                document.getElementById("containerAccommodation").style.display="none";
-                                document.getElementById("containerTransport").style.display="none";
-                            }
-
-                            // 지도
-                            function showAddMap() {
-
-                                document.getElementById("containerMap").style.display="";
-                                document.getElementById("containerTodo").style.display="none";
-                                document.getElementById("containerBudget").style.display="none";
-                                document.getElementById("containerAccommodation").style.display="none";
-                                document.getElementById("containerTransport").style.display="none";
-                            }
-
-                            // 예산
-                            function showAddBudget() {
-
-                                document.getElementById("containerBudget").style.display="";
-                                document.getElementById("containerTodo").style.display="none";
-                                document.getElementById("containerMap").style.display="none";
-                                document.getElementById("containerAccommodation").style.display="none";
-                                document.getElementById("containerTransport").style.display="none";
-                            }
-
-                            // 숙박
-                            function showAddAccommodation() {
-
-                                document.getElementById("containerAccommodation").style.display="";
-                                document.getElementById("containerTodo").style.display="none";
-                                document.getElementById("containerMap").style.display="none";
-                                document.getElementById("containerBudget").style.display="none";
-                                document.getElementById("containerTransport").style.display="none";
-                            }
-
-                            // 교통
-                            function showAddTransport() {
-
-                                document.getElementById("containerTransport").style.display="";
-                                document.getElementById("containerTodo").style.display="none";
-                                document.getElementById("containerMap").style.display="none";
-                                document.getElementById("containerBudget").style.display="none";
-                                document.getElementById("containerAccommodation").style.display="none";
-                            }
-
-                            //==================================================//
-
-                            // 모달 (날짜 생성 창) =================================//
-
-                            document.querySelector('.modal__add__date').style.display = 'none';
-
-                            const openButton2 = document.querySelector('.open__date');
-                            const containerAddDate = document.querySelector('.modal__add__date');
-                            const closeButton2 = document.querySelector('.close__date');
-
-                            openButton2.addEventListener('click', () => {
-                                containerAddDate.style.display = 'flex';
-                                document.querySelector('.money__title').style.display = 'none';
-                                document.querySelector('.wrapper__summary').style.display = 'none';
-                                document.querySelector('.modal__add__card').style.display = 'none';
-                            })
-
-                            closeButton2.addEventListener('click', () => {
-                                containerAddDate.style.display = 'none';
-                                openButton.style.display = 'block';
-                                document.querySelector('.modal__add__card').style.display = 'none';
-
-                                document.querySelector('.money__title').style.display = '';
-                                document.querySelector('.wrapper__summary').style.display = '';
-                            })
-
-                            //==================================================//
-
-                            // 웹소켓
-
-                            var stompClient_addGroup = null;
-
-                            var stompClient_addTodoList = null;
-                            var stompClient_modTodoList = null;
-                            var stompClient_delTodoList = null;
-
-                            var stompClient_addAccomodationTodo = null;
-                            var stompClient_addAttractionsTodo = null;
-                            var stompClient_addBudgetTodo = null;
-                            var stompClient_addGeneralTodo = null;
-                            var stompClient_addTransportTodo = null;
-
-                            var stompClient_modAccomodationTodo = null;
-                            var stompClient_modAttractionsTodo = null;
-                            var stompClient_modBudgetTodo = null;
-                            var stompClient_modGeneralTodo = null;
-                            var stompClient_modTransportTodo = null;
-
-                            var stompClient_delAccomodationTodo = null;
-                            var stompClient_delAttractionsTodo = null;
-                            var stompClient_delBudgetTodo = null;
-                            var stompClient_delGeneralTodo = null;
-                            var stompClient_delTransportTodo = null;
-
-
-                            // 날짜 ============================================//
-
-                            // 추가
-                            function addTodoList() {
-                                let title = todolistTitleAdd.value;
-
-                                stompClient_addTodoList.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
-                            }
-
-                            // 숙박 ============================================//
-
-                            // 추가
-                            function addAccomodationTodo() {
-                                let title = todolistTitleAdd.value;
-
-                                stompClient_addAccomodationTodo.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
-                            }
-
-
-                        </script>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script type="text/javascript" th:inline="javascript">
+
+        const toggleList = document.querySelectorAll(".toggle__switch__planner");
+
+        // 이 상태를 DB 에 어떻게 전송할 것인가 고민하기
+        toggleList.forEach(($toggle) => {
+            $toggle.onclick = () => {
+                $toggle.classList.toggle('active');
+            }
+        });
+
+
+        // 모달(카드 생성) 창 ============================================//
+
+
+        document.querySelector('.modal__add__card').style.display = 'none';
+
+        const openAddCard = document.querySelector('.open');
+        const containerAddCard = document.querySelector('.modal__add__card');
+        const closeAddCard = document.querySelector('.close');
+
+        function onClickAddCard (str) {
+            console.log('tlIdx', str)
+
+            containerAddCard.style.display = 'flex';
+            document.querySelector('.money__title').style.display = 'none';
+            document.querySelector('.wrapper__summary').style.display = 'none';
+            document.querySelector('.modal__add__date').style.display = 'none';
+        }
+
+        closeAddCard.addEventListener('click', () => {
+            containerAddCard.style.display = 'none';
+            openAddCard.style.display = 'block';
+            document.querySelector('.modal__add__date').style.display = 'none';
+
+            document.querySelector('.money__title').style.display = '';
+            document.querySelector('.wrapper__summary').style.display = '';
+        })
+
+        // 카드 추가부분
+
+        document.getElementById("containerTodo").style.display="none";
+        document.getElementById("containerMap").style.display="none";
+        document.getElementById("containerBudget").style.display="none";
+        document.getElementById("containerAccommodation").style.display="none";
+        document.getElementById("containerTransport").style.display="none";
+
+
+        // 투두
+        function showAddTodo() {
+
+            document.getElementById("containerTodo").style.display="";
+            document.getElementById("containerMap").style.display="none";
+            document.getElementById("containerBudget").style.display="none";
+            document.getElementById("containerAccommodation").style.display="none";
+            document.getElementById("containerTransport").style.display="none";
+        }
+
+        // 지도
+        function showAddMap() {
+
+            document.getElementById("containerMap").style.display="";
+            document.getElementById("containerTodo").style.display="none";
+            document.getElementById("containerBudget").style.display="none";
+            document.getElementById("containerAccommodation").style.display="none";
+            document.getElementById("containerTransport").style.display="none";
+        }
+
+        // 예산
+        function showAddBudget() {
+
+            document.getElementById("containerBudget").style.display="";
+            document.getElementById("containerTodo").style.display="none";
+            document.getElementById("containerMap").style.display="none";
+            document.getElementById("containerAccommodation").style.display="none";
+            document.getElementById("containerTransport").style.display="none";
+        }
+
+        // 숙박
+        function showAddAccommodation() {
+
+            document.getElementById("containerAccommodation").style.display="";
+            document.getElementById("containerTodo").style.display="none";
+            document.getElementById("containerMap").style.display="none";
+            document.getElementById("containerBudget").style.display="none";
+            document.getElementById("containerTransport").style.display="none";
+        }
+
+        // 교통
+        function showAddTransport() {
+
+            document.getElementById("containerTransport").style.display="";
+            document.getElementById("containerTodo").style.display="none";
+            document.getElementById("containerMap").style.display="none";
+            document.getElementById("containerBudget").style.display="none";
+            document.getElementById("containerAccommodation").style.display="none";
+        }
+
+
+        //===========================================================//
+
+        // 모달 (날짜 생성 창) ============================================//
+
+        document.querySelector('.modal__add__date').style.display = 'none';
+
+        const openAddDate = document.querySelector('.open__date');
+        const containerAddDate = document.querySelector('.modal__add__date');
+        const closeAddDate = document.querySelector('.close__date');
+
+        openAddDate.addEventListener('click', () => {
+            containerAddDate.style.display = 'flex';
+            document.querySelector('.money__title').style.display = 'none';
+            document.querySelector('.wrapper__summary').style.display = 'none';
+            document.querySelector('.modal__add__card').style.display = 'none';
+            document.querySelector('.modal__modify__date').style.display = 'none';
+        })
+
+        closeAddDate.addEventListener('click', () => {
+            containerAddDate.style.display = 'none';
+            openAddDate.style.display = 'block';
+
+            document.querySelector('.modal__add__card').style.display = 'none';
+            document.querySelector('.modal__add__date').style.display = 'none';
+            document.querySelector('.modal__modify__date').style.display = 'none';
+
+            document.querySelector('.money__title').style.display = '';
+            document.querySelector('.wrapper__summary').style.display = '';
+        })
+
+
+        // 새로고침 ===================================================//
+
+
+        function reload() {
+
+            location.reload();
+        }
+
+
+        // ===========================================================//
+
+        // 웹소켓
+
+        var stompClient = null;
+
+        // 연결
+        function Connect() {
+
+            var socket = new SockJS('/planner');
+
+            stompClient = Stomp.over(socket);
+
+            stompClient.connect({}, function (frame) {
+
+                console.log('Connected: ' + frame);
+
+                stompClient.subscribe('/topic/planner/' + [[${planner.tpIdx}]], function (response) {
+
+                    res = JSON.parse(response.body);
+
+                    console.dir(res)
+
+                    // 날짜 추가
+
+                    if (res.type === 'upload-todolist') {
+
+                        console.log('addTodoListResponse', addTodoListResponse);
+
+                        addTodoListResponse.innerHTML +=
+                            '<div class="wrapper__date__box">'
+                            + '<div class="date">'+ res.msg.title +'</div>'
+                            + '<button class="open" onclick="reload()">'+'</button>'
+                            + '<div id="costPerDay">'+'</div>'
+                            + '</div>'
+
+                        Disconnect();
+
+                    } else if(res.type === 'modify-todolist') {
+
+                        // 날짜 수정
+
+                        var modifyTodoListResponse = document.getElementById('l' + res.msg.tlIdx);
+                        var oriTitle = document.getElementById('i' + res.msg.tlIdx);
+
+                        console.log('modify',res.msg.title);
+
+                        modifyTodoListResponse.innerHTML += res.msg.title;
+
+                        oriTitle.style.display = 'none';
+
+                        Disconnect();
+
+                    } else if (res.type === 'remove-todolist') {
+
+                        // 날짜 삭제
+                        console.log('res.msg: ' + res.msg);
+
+                        var dateBox = document.getElementById('s' + res.msg);
+
+                        dateBox.style.display = 'none';
+
+                    }
+                })
+            })
+        }
+
+        // 연결해제
+        function Disconnect() {
+
+            if (stompClient !== null) {
+                stompClient.disconnect();
+            }
+            console.log("Disconnected");
+        }
+
+
+        // 추가 =======================================================//
+
+        // 날짜
+        function addTodoList(e) {
+
+            let title = todolistTitleAdd.value;
+
+            if(e.keyCode == 13){
+
+                console.dir(title);
+                stompClient.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title' : title}));
+            }
+        }
+
+        // 수정 =======================================================//
+
+        // 날짜
+
+        function onClickModifyDate(tlIdx) {
+
+            // 원래 제목
+            var oriTitle = document.getElementById('i' + tlIdx);
+
+            // id 로 input 객체 가져오기
+            var input = document.getElementById('k' + tlIdx);
+
+            var newTitle = document.getElementById('l' + tlIdx);
+
+            var delBtn = document.getElementById('j' + tlIdx);
+
+
+            oriTitle.style.display = 'none';
+            input.style.display = '';
+            newTitle.style.display = 'none';
+            delBtn.style.display = '';
+
+            // 가져온 객체에 EventListener 를 추가한다.
+            input.addEventListener('keypress', function (key) {
+
+                var title = input.value;
+
+                if(key.key == 'Enter'){
+
+                    modifyTodoList(title, tlIdx);
+
+                    input.style.display = 'none';
+                    newTitle.style.display = '';
+                }
+            })
+
+        }
+
+        function modifyTodoList(title,tlIdx) {
+
+            console.log(title);
+            console.log(tlIdx);
+
+            stompClient.send("/app/modify-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title, 'tlIdx':tlIdx}));
+        }
+
+        // 삭제 =======================================================//
+
+        // 날짜
+
+        document.querySelectorAll('.todolistdel').forEach(e => {
+
+            e.addEventListener('click', ev => {
+
+                let tlIdx = ev.target.dataset.tlidx;
+                console.log('tlIdx: '+ tlIdx);
+
+                stompClient.send("/app/remove-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'tlIdx':tlIdx}));
+
+            });
+        })
+
+        Connect();
+
+    </script>
 </div>
+
 </body>
 
 </html>
