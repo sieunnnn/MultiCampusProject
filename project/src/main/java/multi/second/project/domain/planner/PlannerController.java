@@ -135,8 +135,9 @@ public class PlannerController {
 		@MessageMapping("/add-group/{tpIdx}")
 		public void addGroup(
 				@DestinationVariable("tpIdx") Long tpIdx,
-				PlannerGroupModifyRequest dto) {
-			simpMessagingTemplate.convertAndSend("/topic/add-group/" + tpIdx, plannerService.addPlannerGroup(dto, tpIdx));
+				PlannerGroupModifyRequest dto) throws Exception {
+			simpMessagingTemplate.convertAndSend("/topic/planner-message/" + tpIdx, 
+					Map.of("type","add-group","msg",plannerService.addPlannerGroup(dto, tpIdx)));
 		
 	}
 	

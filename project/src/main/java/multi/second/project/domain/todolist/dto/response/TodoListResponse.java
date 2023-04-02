@@ -24,7 +24,7 @@ public class TodoListResponse {
 	private Long tlIdx;
 	private String title;
 //	private LocalDateTime regDate;
-//	private List<TodoResponse> todoResponses = new ArrayList<TodoResponse>();
+	private List<TodoResponse> todoResponses = new ArrayList<TodoResponse>();
 	
 	private List<AccomodationTodoResponse> accomodationTodoResponses = new ArrayList<AccomodationTodoResponse>();
 	private List<AttractionsTodoResponse> attractionsTodoResponses = new ArrayList<AttractionsTodoResponse>();
@@ -36,7 +36,7 @@ public class TodoListResponse {
 		this.tlIdx = entity.getTlIdx();
 		this.title = entity.getTitle();
 //		this.regDate = entity.getRegDate();
-//		this.todoResponses = TodoResponse.toDtoList(entity.getTodos());
+		this.todoResponses = TodoResponse.toDtoList(entity.getTodos());
 		
 		this.accomodationTodoResponses = AccomodationTodoResponse.toDtoList(entity.getAccomodationTodos());
 		this.attractionsTodoResponses = AttractionsTodoResponse.toDtoList(entity.getAttractionsTodos());

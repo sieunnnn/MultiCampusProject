@@ -81,19 +81,21 @@ public class TodoServiceTest {
 	public void testCreateFull() {
 		
 		//숙박 todo DB 저장
-		AccomodationTodo accomodationTodo = AccomodationTodo.builder().address("더미데이터 숙박 todo 주소 1")
-								.contents("더미데이터 숙박 todo 내용 1")
-								.title("더미데이터 숙박 todo 제목 1")
+		AccomodationTodo accomodationTodo = AccomodationTodo.builder().address("더미데이터 숙박 todo 주소 3")
+								.contents("더미데이터 숙박 todo 내용 3")
+								.title("더미데이터 숙박 todo 제목 3")
 								.build();
 		
 //		accomadationRepository.save(entity);
 		
 		//todolist DB 저장
-		TodoList todoList = TodoList.builder().title("더미데이터 todolist 제목 1")
+		TodoList todoList = TodoList.builder().title("더미데이터 todolist 제목 3")
 								.build();
 	
 		//todolist에 위의 숙박todo 넣기
 		todoList.accomodationAddTodo(accomodationTodo);
+		
+		todoListRepository.save(todoList);
 		
 		//자신의 로그인 아이디 불러오기(아이디 수동 입력,해당아이디가 Member DB에 있어야됨)
 		Member group1A = memberRepository.findById("group1A").get();
@@ -118,7 +120,7 @@ public class TodoServiceTest {
 		
 		//호스트와 그룹정보를 넣은 플래너 만들기
 		Planner planner = Planner.builder()
-								.title("더미데이터 플래너 제목 1")
+								.title("더미데이터 플래너 제목 3")
 								.host(host)
 								.travelGroup(group)
 								.build();

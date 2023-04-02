@@ -50,7 +50,7 @@ public class Planner {
 	@JoinColumn(name = "tgIdx")
 	private TravelGroup travelGroup;
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	@Builder.Default
 	private List<TodoList> todolists = new ArrayList<>();
 	
