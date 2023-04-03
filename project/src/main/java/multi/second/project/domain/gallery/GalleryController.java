@@ -47,10 +47,8 @@ public class GalleryController {
 	public String upload(//업로드 했을때 사진이 보이게 해야될것 같은데 어떻게 해야 할까?
 						 @RequestParam List<MultipartFile> files,
 						 //@SessionAttribute(name="auth", required=false) Principal principal,
-						 GalleryRegistRequest dto
-	) {
-
-		//dto.setUserId(principal.getUserId());
+						 GalleryRegistRequest dto)
+	{ //dto.setUserId(principal.getUserId());
 		dto.setUserId(UserPrincipal.getUserPrincipal().getUserId()); //로그인한 본인 아이디를 가져온다
 		galleryService.createGallery(dto, files);
 
