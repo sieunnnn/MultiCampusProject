@@ -24,20 +24,20 @@ public class NoteService {
         this.memberRepository = memberRepository;
     }
 
-    public void createNote(NoteRegistRequest noteRequest) throws Exception {
-        List<Member> members = new ArrayList<>();
-        for (String memberId : noteRequest.getMemberIds()) {
-            Optional<Member> optionalMember = memberRepository.findById(memberId);
-            if (optionalMember.isPresent()) {
-                members.add(optionalMember.get());
-            } else {
-                throw new Exception(memberId);
-            }
-        }
-        Note note = Note.builder()
-                .members(members)
-                .isDel(false)
-                .build();
-        noteRepository.save(note);
-    }
+//    public void createNote(NoteRegistRequest noteRequest) throws Exception {
+//        List<Member> members = new ArrayList<>();
+//        for (String memberId : noteRequest.getMemberIds()) {
+//            Optional<Member> optionalMember = memberRepository.findById(memberId);
+//            if (optionalMember.isPresent()) {
+//                members.add(optionalMember.get());
+//            } else {
+//                throw new Exception(memberId);
+//            }
+//        }
+//        Note note = Note.builder()
+//                .members(members)
+//                .isDel(false)
+//                .build();
+//        noteRepository.save(note);
+//    }
 }
