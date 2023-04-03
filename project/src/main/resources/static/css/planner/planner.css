@@ -239,7 +239,7 @@
     background-color: orange;
 }
 
-#date {
+#date, .date {
 
     width: 280px;
     height: 57px;
@@ -252,7 +252,7 @@
     border-radius: 16px;
 }
 
-#addDate, #addCard {
+#addDate, .open {
 
     width: 280px;
     height: 57px;
@@ -265,12 +265,13 @@
     border-radius: 16px;
 }
 
-#addDate:focus, #addCard:focus {
+#addDate:focus, #addCard:focus .open:focus{
 
+    border: solid 3.5px rgba(58, 108, 217, 0.5);
     outline: solid 3.5px rgba(58, 108, 217, 0.5);
 }
 
-#card {
+#card, .card{
 
     width: 280px;
     height: auto;
@@ -432,13 +433,9 @@
 
 /* modal */
 
-/* add date */
+/* add date, modify date*/
 
-/* modal */
-
-/* add card */
-
-.container__add__date {
+.container__add__date, .container__modify__date {
 
     display: flex;
     flex-direction: column;
@@ -447,7 +444,7 @@
 
     margin: 26px 0 28px 20px;
     width: 320px;
-    height: 610px;
+    height: 300px;
 
     background: white;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
@@ -457,7 +454,7 @@
     border-radius: 16px;
 }
 
-.title__add__date {
+.title__add__date, .title__modify__date {
 
     margin: 0 0 20px 15px;
     font-family: 'Pretendard';
