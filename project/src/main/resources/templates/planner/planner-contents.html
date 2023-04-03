@@ -114,7 +114,8 @@
 	          		<li th:each="todo : ${todolist.todoResponses}" th:switch="${#strings.toString(todo.todoType)}" th:id="|d${todo.tdIdx}|">
 	          			
 	          			<div th:case="Accomodation">
-							<p th:text="${todo.contents}"/><p th:text="${todo.todoDate}"/><p th:text="${todo.isPrivate}"/><p th:text="${todo.acAddress}"/>
+							<p th:text="${todo.title}"/><p th:text="${todo.contents}"/><p th:text="${todo.todoDate}"/><p th:text="${todo.isPrivate}"/>
+							<p th:text="${todo.acAddress}"/>
 						
 		          			<input type="text" readonly th:value="${todo.tdIdx}" th:id="|tdidx${todo.tdIdx}|"/>  
 		          			<input type="text" th:value="${todo.title}" th:id="|actodotitlemod${todo.tdIdx}|"/>  
@@ -234,10 +235,20 @@
 	          		console.log('res.msg.todoDate: '+res.msg.todoDate);
 	          		console.log('res.msg.address: '+res.msg.address);
 	          		console.log('res.msg.isPrivate: '+res.msg.isPrivate);
-	          		document.querySelector('#d'+res.msg.tdIdx).style.display='none';
-	          		response.innerHTML += 
-		          		'<span style="background:yellow">'+ "숙박todo 제목, 내용, 날짜, 주소, 비밀: " + res.msg.title + " ,  " +res.msg.contents + 
-		          		res.msg.todoDate + " ,  " +res.msg.address + " ,  " +res.msg.isPrivate+ '<br>'+'</span>';
+	          		//document.querySelector('#d'+res.msg.tdIdx).style.display='none';
+	          		
+	          		let id = 'd'+res.msg.tdIdx;
+	          		document.getElementById(id).innerHTML = 
+	          			'<span style="background:yellow">'+ "숙박todo 제목, 내용, 날짜, 주소, 비밀: " + res.msg.title + " ,  " +res.msg.contents + 
+		          		res.msg.todoDate + " ,  " +res.msg.address + " ,  " +res.msg.isPrivate+ '<br>'+'</span>'
+		          		//+"<p th:text="+ res.msg.title +"/>"+"<p th:text="+ res.msg.contents +"/>"+"<p th:text="+ res.msg.todoDate +"/>"
+		          		//+"<p th:text="+ res.msg.address +"/>"+"<p th:text="+ res.msg.contents +"/>";
+		          		
+		          		//inpDelfile = createElement("input",{prop:{"type":"text","value":fileId,"name":"delFiles"}});
+		          		//id.append(inpDelfile);
+	          		//response.innerHTML += 
+		          		//'<span style="background:yellow">'+ "숙박todo 제목, 내용, 날짜, 주소, 비밀: " + res.msg.title + " ,  " +res.msg.contents + 
+		          		//res.msg.todoDate + " ,  " +res.msg.address + " ,  " +res.msg.isPrivate+ '<br>'+'</span>';
 	          	}else if(res.type === 'remove-accomodation'){
 	          		console.log('res.msg: '+res.msg);
 	          		document.querySelector('#d'+res.msg).style.display='none';
@@ -258,8 +269,10 @@
 	          		console.log('res.msg.todoDate: '+res.msg.todoDate);
 	          		console.log('res.msg.attractions: '+res.msg.attractions);
 	          		console.log('res.msg.isPrivate: '+res.msg.isPrivate);
-	          		document.querySelector('#d'+res.msg.tdIdx).style.display='none';
-	          		response.innerHTML += 
+	          		//document.querySelector('#d'+res.msg.tdIdx).style.display='none';
+	          		//response.innerHTML += 
+	          		let id = 'd'+res.msg.tdIdx;
+	          		document.getElementById(id).innerHTML = 
 		          		'<span style="background:yellow">'+ "관광지todo 제목, 내용, 날짜, 주소, 비밀: " + res.msg.title + " ,  " +res.msg.contents + 
 		          		res.msg.todoDate + " ,  " +res.msg.attractions + " ,  " +res.msg.isPrivate+ '<br>'+'</span>';
 	          	}else if(res.type === 'remove-attractions'){
@@ -283,8 +296,10 @@
 	          		console.log('res.msg.todoDate: '+res.msg.todoDate);
 	          		console.log('res.msg.address: '+res.msg.address);
 	          		console.log('res.msg.isPrivate: '+res.msg.isPrivate);
-	          		document.querySelector('#d'+res.msg.tdIdx).style.display='none';
-	          		response.innerHTML += 
+	          		//document.querySelector('#d'+res.msg.tdIdx).style.display='none';
+	          		//response.innerHTML += 
+	          		let id = 'd'+res.msg.tdIdx;
+	          		document.getElementById(id).innerHTML = 
 		          		'<span style="background:yellow">'+ "예산todo 제목, 내용, 날짜, 주소, 비밀: " + res.msg.title + " ,  " +res.msg.contents + 
 		          		res.msg.todoDate + " ,  " +res.msg.address + " ,  " +res.msg.isPrivate+ '<br>'+'</span>';
 	          	}else if(res.type === 'remove-budget'){
@@ -307,8 +322,10 @@
 	          		console.log('res.msg.todoDate: '+res.msg.todoDate);
 	          		console.log('res.msg.address: '+res.msg.address);
 	          		console.log('res.msg.isPrivate: '+res.msg.isPrivate);
-	          		document.querySelector('#d'+res.msg.tdIdx).style.display='none';
-	          		response.innerHTML += 
+	          		//document.querySelector('#d'+res.msg.tdIdx).style.display='none';
+	          		//response.innerHTML += 
+	          		let id = 'd'+res.msg.tdIdx;
+	          		document.getElementById(id).innerHTML = 
 		          		'<span style="background:yellow">'+ "일반todo 제목, 내용, 날짜, 주소, 비밀: " + res.msg.title + " ,  " +res.msg.contents + 
 		          		res.msg.todoDate + " ,  " +res.msg.address + " ,  " +res.msg.isPrivate+ '<br>'+'</span>';
 	          	}else if(res.type === 'remove-general'){
@@ -331,8 +348,10 @@
 	          		console.log('res.msg.todoDate: '+res.msg.todoDate);
 	          		console.log('res.msg.transportType: '+res.msg.transportType);
 	          		console.log('res.msg.isPrivate: '+res.msg.isPrivate);
-	          		document.querySelector('#d'+res.msg.tdIdx).style.display='none';
-	          		response.innerHTML += 
+	          		//document.querySelector('#d'+res.msg.tdIdx).style.display='none';
+	          		//response.innerHTML += 
+	          		let id = 'd'+res.msg.tdIdx;
+	          		document.getElementById(id).innerHTML = 
 		          		'<span style="background:yellow">'+ "교통todo 제목, 내용, 날짜, 종류, 비밀: " + res.msg.title + " ,  " +res.msg.contents + 
 		          		res.msg.todoDate + " ,  " +res.msg.transportType + " ,  " +res.msg.isPrivate+ '<br>'+'</span>';
 	          	}else if(res.type === 'remove-transport'){
