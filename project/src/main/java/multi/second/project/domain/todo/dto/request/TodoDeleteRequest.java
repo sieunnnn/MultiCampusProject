@@ -12,7 +12,7 @@ import multi.second.project.domain.todo.domain.TransportType;
 
 @Data
 @NoArgsConstructor
-public class AccomodationTodoDeleteRequest {
+public class TodoDeleteRequest {
 
 	private Long tdIdx;
 	

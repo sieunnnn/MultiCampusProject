@@ -1,32 +1,9 @@
 package multi.second.project.domain.todo;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
-import multi.second.project.domain.comment.domain.Comment;
-import multi.second.project.domain.comment.dto.request.CommentModifyRequest;
-import multi.second.project.domain.comment.dto.request.CommentRegistRequest;
-import multi.second.project.domain.comment.dto.response.CommentResponse;
-import multi.second.project.domain.comment.repository.CommentRepository;
-import multi.second.project.domain.gallery.domain.Gallery;
-import multi.second.project.domain.gallery.dto.request.GalleryModifyRequest;
-import multi.second.project.domain.gallery.dto.request.GalleryRegistRequest;
-import multi.second.project.domain.gallery.dto.response.GalleryDetailResponse;
-import multi.second.project.domain.gallery.dto.response.GalleryListResponse;
-import multi.second.project.domain.gallery.repository.GalleryRepository;
-import multi.second.project.domain.member.MemberRepository;
-import multi.second.project.domain.member.domain.Member;
-import multi.second.project.domain.member.dto.Principal;
-import multi.second.project.domain.planner.domain.Planner;
 import multi.second.project.domain.planner.repository.PlannerRepository;
 import multi.second.project.domain.todo.domain.AccomodationTodo;
 import multi.second.project.domain.todo.domain.AttractionsTodo;
@@ -34,16 +11,20 @@ import multi.second.project.domain.todo.domain.BudgetTodo;
 import multi.second.project.domain.todo.domain.GeneralTodo;
 import multi.second.project.domain.todo.domain.Todo;
 import multi.second.project.domain.todo.domain.TransportTodo;
-import multi.second.project.domain.todo.dto.request.AccomodationTodoDeleteRequest;
 import multi.second.project.domain.todo.dto.request.AccomodationTodoModifyRequest;
 import multi.second.project.domain.todo.dto.request.AccomodationTodoRegistRequest;
-import multi.second.project.domain.todo.dto.request.TodoModifyRequest;
-import multi.second.project.domain.todo.dto.request.TodoRegistRequest;
-import multi.second.project.domain.todo.dto.response.AccomodationTodoResponse;
+import multi.second.project.domain.todo.dto.request.AttractionsTodoModifyRequest;
+import multi.second.project.domain.todo.dto.request.AttractionsTodoRegistRequest;
+import multi.second.project.domain.todo.dto.request.BudgetTodoModifyRequest;
+import multi.second.project.domain.todo.dto.request.BudgetTodoRegistRequest;
+import multi.second.project.domain.todo.dto.request.GeneralTodoModifyRequest;
+import multi.second.project.domain.todo.dto.request.GeneralTodoRegistRequest;
+import multi.second.project.domain.todo.dto.request.TodoDeleteRequest;
+import multi.second.project.domain.todo.dto.request.TransportTodoModifyRequest;
+import multi.second.project.domain.todo.dto.request.TransportTodoRegistRequest;
 import multi.second.project.domain.todo.dto.response.AttractionsTodoResponse;
 import multi.second.project.domain.todo.dto.response.BudgetTodoResponse;
 import multi.second.project.domain.todo.dto.response.GeneralTodoResponse;
-import multi.second.project.domain.todo.dto.response.TodoResponse;
 import multi.second.project.domain.todo.dto.response.TransportTodoResponse;
 import multi.second.project.domain.todo.repository.AccomodationRepository;
 import multi.second.project.domain.todo.repository.AttractionsRepository;
@@ -52,18 +33,9 @@ import multi.second.project.domain.todo.repository.GeneralRepository;
 import multi.second.project.domain.todo.repository.TodoRepository;
 import multi.second.project.domain.todo.repository.TransportRepository;
 import multi.second.project.domain.todolist.domain.TodoList;
-import multi.second.project.domain.todolist.dto.request.TodoListModifyRequest;
-import multi.second.project.domain.todolist.dto.request.TodoListRegistRequest;
 import multi.second.project.domain.todolist.repository.TodoListRepository;
 import multi.second.project.infra.code.ErrorCode;
-import multi.second.project.infra.exception.AuthException;
 import multi.second.project.infra.exception.HandlableException;
-import multi.second.project.infra.util.file.FilePath;
-import multi.second.project.infra.util.file.FileRepository;
-import multi.second.project.infra.util.file.FileUtil;
-import multi.second.project.infra.util.file.dto.FilePathDto;
-import multi.second.project.infra.util.file.dto.FileUploadDto;
-import multi.second.project.infra.util.paging.Paging;
 
 @Service
 @Transactional(readOnly = true)
@@ -81,9 +53,9 @@ public class TodoService {
 	private final TransportRepository transportRepository;
 
 	@Transactional
-	public AccomodationTodo createAccomodationTodo(AccomodationTodoRegistRequest dto, Long tpIdx, Long tlIdx) {//AccomodationTodoResponse 로 해야되나?
+	public Todo createAccomodationTodo(AccomodationTodoRegistRequest dto, Long tpIdx, Long tlIdx) {//AccomodationTodoResponse 로 해야되나?
 		//어떻게 
-		AccomodationTodo todo =AccomodationTodo.createAccomodationTodo(dto);//AccomodationTodo로 해야되나?
+		Todo todo =AccomodationTodo.createAccomodationTodo(dto);//AccomodationTodo로 해야되나?
 		System.out.println("todo.getTdIdx()1 : " + todo.getTdIdx());
 		
 		todoRepository.saveAndFlush(todo);
@@ -109,63 +81,60 @@ public class TodoService {
 		
 		System.out.println(todoList.getTitle());
 		
-		todoList.accomodationAddTodo(todo);
+		todoList.addTodo(todo);
 		todoListRepository.save(todoList);
-		
 		
 		return todo;
 	}
 	@Transactional
-	public AttractionsTodoResponse createAttractionsTodo(TodoRegistRequest dto, Long tpIdx, Long tlIdx) {
-		AttractionsTodo todo =AttractionsTodo.createAttractionsTodo(dto);
-
-		TodoList todoList = todoListRepository.findById(tlIdx)
-				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
-		
-		todoList.attractionsAddTodo(todo);
-		
+	public Todo createAttractionsTodo(AttractionsTodoRegistRequest dto, Long tpIdx, Long tlIdx) {
+		Todo todo =AttractionsTodo.createAttractionsTodo(dto);
 		todoRepository.saveAndFlush(todo);
 		
-		return new AttractionsTodoResponse(todo);
+		TodoList todoList = todoListRepository.findById(tlIdx)
+				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		todoList.addTodo(todo);
+		todoRepository.saveAndFlush(todo);
+		
+		return todo;
 	}
 	@Transactional
-	public BudgetTodoResponse createBudgetTodo(TodoRegistRequest dto, Long tpIdx, Long tlIdx) {
-		BudgetTodo todo =BudgetTodo.createBudgetTodo(dto);
-
-		TodoList todoList = todoListRepository.findById(tlIdx)
-				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
-		
-		todoList.budgetAddTodo(todo);
-		
+	public Todo createBudgetTodo(BudgetTodoRegistRequest dto, Long tpIdx, Long tlIdx) {
+		Todo todo =BudgetTodo.createBudgetTodo(dto);
 		todoRepository.saveAndFlush(todo);
 		
-		return new BudgetTodoResponse(todo);
+		TodoList todoList = todoListRepository.findById(tlIdx)
+				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		todoList.addTodo(todo);
+		todoRepository.saveAndFlush(todo);
+		
+		return todo;
 	}
 	@Transactional
-	public GeneralTodoResponse createGeneralTodo(TodoRegistRequest dto, Long tpIdx, Long tlIdx) {
-		GeneralTodo todo =GeneralTodo.createGeneralTodo(dto);
-
+	public Todo createGeneralTodo(GeneralTodoRegistRequest dto, Long tpIdx, Long tlIdx) {
+		Todo todo =GeneralTodo.createGeneralTodo(dto);
+		todoRepository.saveAndFlush(todo);
 		TodoList todoList = todoListRepository.findById(tlIdx)
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
-		todoList.generalAddTodo(todo);
+		todoList.addTodo(todo);
 		
 		todoRepository.saveAndFlush(todo);
 		
-		return new GeneralTodoResponse(todo);
+		return todo;
 	}
 	@Transactional
-	public TransportTodoResponse createTransportTodo(TodoRegistRequest dto, Long tpIdx, Long tlIdx) {
-		TransportTodo todo =TransportTodo.createTransportTodo(dto);
-
+	public Todo createTransportTodo(TransportTodoRegistRequest dto, Long tpIdx, Long tlIdx) {
+		Todo todo =TransportTodo.createTransportTodo(dto);
+		todoRepository.saveAndFlush(todo);
 		TodoList todoList = todoListRepository.findById(tlIdx)
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
-		todoList.transportAddTodo(todo);
+		todoList.addTodo(todo);
 		
 		todoRepository.saveAndFlush(todo);
 		
-		return new TransportTodoResponse(todo);
+		return todo;
 	}
 	
 	//////////////////////////////////////
@@ -181,44 +150,44 @@ public class TodoService {
 		return todo;
 	}
 	@Transactional
-	public AttractionsTodoResponse modifyAttractionsTodo(TodoModifyRequest dto) {
+	public AttractionsTodo modifyAttractionsTodo(AttractionsTodoModifyRequest dto) {
 		AttractionsTodo todo = attractionsRepository.findById(dto.getTdIdx()).orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
 		todo.updateAttractionsTodo(dto);
 		
 		attractionsRepository.flush();
 		
-		return new AttractionsTodoResponse(todo);
+		return todo;
 	}
 	@Transactional
-	public BudgetTodoResponse modifyBudgetTodo(TodoModifyRequest dto) {
+	public BudgetTodo modifyBudgetTodo(BudgetTodoModifyRequest dto) {
 		BudgetTodo todo = budgetRepository.findById(dto.getTdIdx()).orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
 		todo.updateBudgetTodo(dto);
 		
 		budgetRepository.flush();
 		
-		return new BudgetTodoResponse(todo);
+		return todo;
 	}
 	@Transactional
-	public GeneralTodoResponse modifyGeneralTodo(TodoModifyRequest dto) {
+	public GeneralTodo modifyGeneralTodo(GeneralTodoModifyRequest dto) {
 		GeneralTodo todo = generalRepository.findById(dto.getTdIdx()).orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
 		todo.updateGeneralTodo(dto);
 		
 		generalRepository.flush();
 		
-		return new GeneralTodoResponse(todo);
+		return todo;
 	}
 	@Transactional
-	public TransportTodoResponse modifyTransportTodo(TodoModifyRequest dto) {
+	public TransportTodo modifyTransportTodo(TransportTodoModifyRequest dto) {
 		TransportTodo todo = transportRepository.findById(dto.getTdIdx()).orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
 		todo.updateTransportTodo(dto);
 		
 		transportRepository.flush();
 		
-		return new TransportTodoResponse(todo);
+		return todo;
 	}
 
 	////////////////////
@@ -240,9 +209,9 @@ public class TodoService {
 //		return true;
 //	}
 	@Transactional
-	public void AccomodationDeleteTodo(AccomodationTodoDeleteRequest dto, Long tlIdx) {
+	public void AccomodationDeleteTodo(TodoDeleteRequest dto, Long tlIdx) {
 		
-		AccomodationTodo todo = accomodationRepository.findById(dto.getTdIdx())
+		Todo todo = accomodationRepository.findById(dto.getTdIdx())
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
 		System.out.println("todo.getTdIdx()"+todo.getTdIdx());
@@ -251,65 +220,61 @@ public class TodoService {
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		System.out.println("todoList.getTlIdx()"+todoList.getTlIdx());
 		
-		todoList.accomodationRemoveTodo(todo);
-		accomodationRepository.delete(todo);
+		todoList.removeTodo(todo);
+		accomodationRepository.delete((AccomodationTodo) todo);
 		
 	}
 	@Transactional
-	public Boolean AttractionsDeleteTodo(Long tdIdx, Long tlIdx) {
+	public void AttractionsDeleteTodo(TodoDeleteRequest dto, Long tlIdx) {
 		
-		AttractionsTodo todo = attractionsRepository.findById(tdIdx)
+		Todo todo = attractionsRepository.findById(dto.getTdIdx())
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
 		TodoList todoList = todoListRepository.findById(tlIdx)
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
-		todoList.attractionsTodoRemoveTodo(todo);
-		attractionsRepository.delete(todo);
+		todoList.removeTodo(todo);
+		attractionsRepository.delete((AttractionsTodo) todo);
 		
-		return true;
 	}
 	@Transactional
-	public Boolean BudgetDeleteTodo(Long tdIdx, Long tlIdx) {
+	public void BudgetDeleteTodo(TodoDeleteRequest dto, Long tlIdx) {
 		
-		BudgetTodo todo = budgetRepository.findById(tdIdx)
+		Todo todo = budgetRepository.findById(dto.getTdIdx())
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
 		TodoList todoList = todoListRepository.findById(tlIdx)
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
-		todoList.budgetTodoRemoveTodo(todo);
-		budgetRepository.delete(todo);
+		todoList.removeTodo(todo);
+		budgetRepository.delete((BudgetTodo) todo);
 		
-		return true;
 	}
 	@Transactional
-	public Boolean GeneralDeleteTodo(Long tdIdx, Long tlIdx) {
+	public void GeneralDeleteTodo(TodoDeleteRequest dto, Long tlIdx) {
 		
-		GeneralTodo todo = generalRepository.findById(tdIdx)
+		Todo todo = generalRepository.findById(dto.getTdIdx())
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
 		TodoList todoList = todoListRepository.findById(tlIdx)
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
-		todoList.generalTodoRemoveTodo(todo);
-		generalRepository.delete(todo);
+		todoList.removeTodo(todo);
+		generalRepository.delete((GeneralTodo) todo);
 		
-		return true;
 	}
 	@Transactional
-	public Boolean TransportDeleteTodo(Long tdIdx, Long tlIdx) {
+	public void TransportDeleteTodo(TodoDeleteRequest dto, Long tlIdx) {
 		
-		TransportTodo todo = transportRepository.findById(tdIdx)
+		Todo todo = transportRepository.findById(dto.getTdIdx())
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
 		TodoList todoList = todoListRepository.findById(tlIdx)
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
-		todoList.transportTodoRemoveTodo(todo);
-		transportRepository.delete(todo);
+		todoList.removeTodo(todo);
+		transportRepository.delete((TransportTodo) todo);
 		
-		return true;
 	}
 	
 

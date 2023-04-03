@@ -26,5 +26,6 @@ public class TransportTodoRegistRequest {
 	
 	private TransportType transportType;
 	
+	private Boolean isPrivate;
 	
 }

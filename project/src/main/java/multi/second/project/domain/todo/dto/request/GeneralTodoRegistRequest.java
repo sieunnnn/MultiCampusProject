@@ -24,5 +24,5 @@ public class GeneralTodoRegistRequest {
 	
 	private String address;
 	
-	
+	private Boolean isPrivate;
 }

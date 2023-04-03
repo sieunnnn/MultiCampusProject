@@ -23,4 +23,6 @@ public class AttractionsTodoRegistRequest {
 	private LocalDateTime todoDate;
 	
 	private String attractions;
+	
+	private Boolean isPrivate;
 }

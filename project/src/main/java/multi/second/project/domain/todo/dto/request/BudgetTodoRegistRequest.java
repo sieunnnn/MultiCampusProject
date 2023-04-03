@@ -26,7 +26,7 @@ public class BudgetTodoRegistRequest {
 	
 	private Integer budget;
 	
-	
+	private Boolean isPrivate;
 	
 	
 }

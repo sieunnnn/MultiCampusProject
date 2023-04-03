@@ -1,29 +1,18 @@
 package multi.second.project.domain.todo.domain;
 
-import java.time.LocalDateTime;
-
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import multi.second.project.domain.todo.dto.request.TodoModifyRequest;
-import multi.second.project.domain.todo.dto.request.TodoRegistRequest;
+import multi.second.project.domain.todo.dto.request.TransportTodoModifyRequest;
+import multi.second.project.domain.todo.dto.request.TransportTodoRegistRequest;
 
 @Entity
 @DynamicInsert // insert 쿼리를 생성할 때 null인 필드는 쿼리에서 생략
@@ -37,16 +26,18 @@ public class TransportTodo extends Todo {
 	@Enumerated(EnumType.STRING)
 	private TransportType transportType;
 	
-	public static TransportTodo createTransportTodo(TodoRegistRequest dto) {
+	public static TransportTodo createTransportTodo(TransportTodoRegistRequest dto) {
 		return TransportTodo.builder()
 				.contents(dto.getContents())
 				.title(dto.getTitle())
 				.todoDate(dto.getTodoDate())
+				.isPrivate(dto.getIsPrivate())
+				.todoType(TodoType.Transport)
 				.transportType(dto.getTransportType())
 				.build();
 	}
 
-	public void updateTransportTodo(TodoModifyRequest dto) {
+	public void updateTransportTodo(TransportTodoModifyRequest dto) {
 		this.title = dto.getTitle();
 		this.contents = dto.getContents();
 		this.todoDate = dto.getTodoDate();

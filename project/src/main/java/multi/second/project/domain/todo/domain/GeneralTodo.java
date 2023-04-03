@@ -1,27 +1,16 @@
 package multi.second.project.domain.todo.domain;
 
-import java.time.LocalDateTime;
-
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import multi.second.project.domain.todo.dto.request.TodoModifyRequest;
-import multi.second.project.domain.todo.dto.request.TodoRegistRequest;
+import multi.second.project.domain.todo.dto.request.GeneralTodoModifyRequest;
+import multi.second.project.domain.todo.dto.request.GeneralTodoRegistRequest;
 
 @Entity
 @DynamicInsert // insert 쿼리를 생성할 때 null인 필드는 쿼리에서 생략
@@ -36,21 +25,23 @@ public class GeneralTodo extends Todo{
 //	@GeneratedValue
 //	private Long gtIdx;
 	
-	public static GeneralTodo createGeneralTodo(TodoRegistRequest dto) {
+	public static GeneralTodo createGeneralTodo(GeneralTodoRegistRequest dto) {
 		return GeneralTodo.builder()
 				.contents(dto.getContents())
 				.title(dto.getTitle())
 				.todoDate(dto.getTodoDate())
-				.address(dto.getGnAddress())
+				.isPrivate(dto.getIsPrivate())
+				.todoType(TodoType.General)
+				.address(dto.getAddress())
 				.build();
 	}
 
-	public void updateGeneralTodo(TodoModifyRequest dto) {
+	public void updateGeneralTodo(GeneralTodoModifyRequest dto) {
 		this.title = dto.getTitle();
 		this.contents = dto.getContents();
 		this.todoDate = dto.getTodoDate();
 		this.isPrivate = dto.getIsPrivate();
-		this.address = dto.getGnAddress();
+		this.address = dto.getAddress();
 		
 	}
 	

@@ -24,5 +24,7 @@ public class AccomodationTodoRegistRequest {
 	
 	private String address;
 	
+	private Boolean isPrivate;
+	
 
 }

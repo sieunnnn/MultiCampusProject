@@ -4,28 +4,22 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import multi.second.project.domain.todo.dto.request.TodoModifyRequest;
-import multi.second.project.domain.todo.dto.request.TodoRegistRequest;
-import multi.second.project.domain.todolist.domain.TodoList;
-import multi.second.project.domain.todolist.dto.request.TodoListModifyRequest;
 
 @Entity
 @DynamicInsert // insert 쿼리를 생성할 때 null인 필드는 쿼리에서 생략
@@ -40,6 +34,8 @@ public class Todo {
 	private Long tdIdx;
 	
 //	private String dType;
+	@Enumerated(EnumType.STRING)
+	private TodoType todoType;
 	
 	//투두카드 생성 일자
 	@Column(columnDefinition = "timestamp default now()")

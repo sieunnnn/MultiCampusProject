@@ -21,8 +21,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import multi.second.project.domain.todo.dto.request.AccomodationTodoModifyRequest;
 import multi.second.project.domain.todo.dto.request.AccomodationTodoRegistRequest;
-import multi.second.project.domain.todo.dto.request.TodoModifyRequest;
-import multi.second.project.domain.todo.dto.request.TodoRegistRequest;
 
 @Entity
 @DynamicInsert // insert 쿼리를 생성할 때 null인 필드는 쿼리에서 생략
@@ -58,6 +56,8 @@ public class AccomodationTodo extends Todo{
 				.contents(dto.getContents())
 				.title(dto.getTitle())
 				.todoDate(dto.getTodoDate())
+				.isPrivate(dto.getIsPrivate())
+				.todoType(TodoType.Accomodation)
 				.address(dto.getAddress())
 				.build();
 	}

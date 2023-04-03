@@ -15,6 +15,7 @@ import multi.second.project.domain.todo.domain.BudgetTodo;
 import multi.second.project.domain.todo.domain.BudgetType;
 import multi.second.project.domain.todo.domain.GeneralTodo;
 import multi.second.project.domain.todo.domain.Todo;
+import multi.second.project.domain.todo.domain.TodoType;
 import multi.second.project.domain.todo.domain.TransportTodo;
 import multi.second.project.domain.todo.domain.TransportType;
 import multi.second.project.domain.todolist.domain.TodoList;
@@ -29,6 +30,7 @@ public class TodoResponse {
 	private LocalDateTime regDate;
 	private LocalDateTime todoDate;
 	private Boolean isPrivate;
+	private TodoType todoType;
 	
 	private String acAddress;
 	
@@ -43,20 +45,76 @@ public class TodoResponse {
 	private TransportType transportType;
 	
 	
-	public TodoResponse(Todo entity) {
+	private TodoResponse(AccomodationTodo entity) {
 		this.tdIdx = entity.getTdIdx();
 		this.title = entity.getTitle();
 		this.contents = entity.getContents();
 		this.regDate = entity.getRegDate();
 		this.todoDate = entity.getTodoDate();
 		this.isPrivate = entity.getIsPrivate();
-		this.acAddress = ((AccomodationTodo) entity).getAddress();
-		this.attractions = ((AttractionsTodo) entity).getAttractions();
-		this.budgetType = ((BudgetTodo) entity).getBudgetType();
-		this.budget = ((BudgetTodo) entity).getBudget();
-		this.gnAddress = ((GeneralTodo) entity).getAddress();
-		this.time = ((TransportTodo) entity).getTime();
-		this.transportType = ((TransportTodo) entity).getTransportType();
+		this.todoType = entity.getTodoType();
+		this.acAddress = entity.getAddress();
+	}
+	
+	private TodoResponse(AttractionsTodo entity) {
+		this.tdIdx = entity.getTdIdx();
+		this.title = entity.getTitle();
+		this.contents = entity.getContents();
+		this.regDate = entity.getRegDate();
+		this.todoDate = entity.getTodoDate();
+		this.isPrivate = entity.getIsPrivate();
+		this.todoType = entity.getTodoType();
+		this.attractions = entity.getAttractions();
+	}
+	
+	private TodoResponse(BudgetTodo entity) {
+		this.tdIdx = entity.getTdIdx();
+		this.title = entity.getTitle();
+		this.contents = entity.getContents();
+		this.regDate = entity.getRegDate();
+		this.todoDate = entity.getTodoDate();
+		this.isPrivate = entity.getIsPrivate();
+		this.todoType = entity.getTodoType();
+		this.budgetType = entity.getBudgetType();
+		this.budget = entity.getBudget();
+	}
+	
+	private TodoResponse(GeneralTodo entity) {
+		this.tdIdx = entity.getTdIdx();
+		this.title = entity.getTitle();
+		this.contents = entity.getContents();
+		this.regDate = entity.getRegDate();
+		this.todoDate = entity.getTodoDate();
+		this.isPrivate = entity.getIsPrivate();
+		this.todoType = entity.getTodoType();
+		this.gnAddress = entity.getAddress();
+	}
+	
+	private TodoResponse(TransportTodo entity) {
+		this.tdIdx = entity.getTdIdx();
+		this.title = entity.getTitle();
+		this.contents = entity.getContents();
+		this.regDate = entity.getRegDate();
+		this.todoDate = entity.getTodoDate();
+		this.isPrivate = entity.getIsPrivate();
+		this.todoType = entity.getTodoType();
+		this.time = entity.getTime();
+		this.transportType = entity.getTransportType();
+	}
+	
+	public static TodoResponse createTodoResponse(Todo todo) {
+		if(todo instanceof AccomodationTodo) {
+			return new TodoResponse((AccomodationTodo) todo);
+		}else if(todo instanceof AttractionsTodo) {
+			return new TodoResponse((AttractionsTodo) todo);
+		}else if(todo instanceof BudgetTodo) {
+			return new TodoResponse((BudgetTodo) todo);
+		}else if(todo instanceof GeneralTodo) {
+			return new TodoResponse((GeneralTodo) todo);
+		}else if(todo instanceof TransportTodo) {
+			return new TodoResponse((TransportTodo) todo);
+		}
+		return null;
 	}
 	
 	public String getRegDateAsDate() {
@@ -76,7 +134,24 @@ public class TodoResponse {
 	}
 	
 	public static List<TodoResponse> toDtoList(List<Todo> entityList){
-		return entityList.stream().map(e -> new TodoResponse(e)).collect(Collectors.toList());
+		return entityList.stream().map(e -> createTodoResponse(e)).collect(Collectors.toList());
 	}
+//	
+//	
+//	public static List<TodoResponse> toDtoListAccomodation(List<AccomodationTodo> entityList){
+//		return entityList.stream().map(e -> new TodoResponse(e)).collect(Collectors.toList());
+//	}
+//	public static List<TodoResponse> toDtoListAttractions(List<AttractionsTodo> entityList){
+//		return entityList.stream().map(e -> new TodoResponse(e)).collect(Collectors.toList());
+//	}
+//	public static List<TodoResponse> toDtoListBudget(List<BudgetTodo> entityList){
+//		return entityList.stream().map(e -> new TodoResponse(e)).collect(Collectors.toList());
+//	}
+//	public static List<TodoResponse> toDtoListGeneral(List<GeneralTodo> entityList){
+//		return entityList.stream().map(e -> new TodoResponse(e)).collect(Collectors.toList());
+//	}
+//	public static List<TodoResponse> toDtoListTransport(List<TransportTodo> entityList){
+//		return entityList.stream().map(e -> new TodoResponse(e)).collect(Collectors.toList());
+//	}
 
 }

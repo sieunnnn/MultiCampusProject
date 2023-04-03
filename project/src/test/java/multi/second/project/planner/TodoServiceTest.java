@@ -36,6 +36,7 @@ import multi.second.project.domain.todo.domain.BudgetTodo;
 import multi.second.project.domain.todo.domain.BudgetType;
 import multi.second.project.domain.todo.domain.GeneralTodo;
 import multi.second.project.domain.todo.domain.Todo;
+import multi.second.project.domain.todo.domain.TodoType;
 import multi.second.project.domain.todo.domain.TransportTodo;
 import multi.second.project.domain.todo.domain.TransportType;
 import multi.second.project.domain.todo.repository.AccomodationRepository;
@@ -81,9 +82,10 @@ public class TodoServiceTest {
 	public void testCreateFull() {
 		
 		//숙박 todo DB 저장
-		AccomodationTodo accomodationTodo = AccomodationTodo.builder().address("더미데이터 숙박 todo 주소 3")
+		Todo accomodationTodo = AccomodationTodo.builder().address("더미데이터 숙박 todo 주소 3")
 								.contents("더미데이터 숙박 todo 내용 3")
 								.title("더미데이터 숙박 todo 제목 3")
+								.todoType(TodoType.Accomodation)
 								.build();
 		
 //		accomadationRepository.save(entity);
@@ -93,7 +95,7 @@ public class TodoServiceTest {
 								.build();
 	
 		//todolist에 위의 숙박todo 넣기
-		todoList.accomodationAddTodo(accomodationTodo);
+		todoList.addTodo(accomodationTodo);
 		
 		todoListRepository.save(todoList);
 		
