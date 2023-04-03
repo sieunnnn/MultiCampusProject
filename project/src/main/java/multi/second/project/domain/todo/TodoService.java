@@ -152,7 +152,7 @@ public class TodoService {
 	@Transactional
 	public AttractionsTodo modifyAttractionsTodo(AttractionsTodoModifyRequest dto) {
 		AttractionsTodo todo = attractionsRepository.findById(dto.getTdIdx()).orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
-		
+		System.out.println("dto.getAttractions() : " +dto.getAttractions());
 		todo.updateAttractionsTodo(dto);
 		
 		attractionsRepository.flush();

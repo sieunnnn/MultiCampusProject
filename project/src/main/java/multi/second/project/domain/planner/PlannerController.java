@@ -36,6 +36,7 @@ import multi.second.project.domain.member.dto.Principal;
 import multi.second.project.domain.planner.domain.Planner;
 import multi.second.project.domain.planner.dto.request.PlannerGroupModifyRequest;
 import multi.second.project.domain.planner.dto.request.PlannerHostModifyRequest;
+import multi.second.project.domain.planner.dto.request.PlannerPrivateModifyRequest;
 import multi.second.project.domain.planner.dto.request.PlannerRegistRequest;
 import multi.second.project.domain.planner.dto.request.PlannerTitleModifyRequest;
 import multi.second.project.domain.planner.dto.response.PlannerDetailResponse;
@@ -105,7 +106,14 @@ public class PlannerController {
 	public String modifyTitle(PlannerTitleModifyRequest dto) {
 		plannerService.updatePlannerTitle(dto, UserPrincipal.getUserPrincipal().getPrincipal());
 		
-		return "redirect:/planner/detail?tpIdx="+dto.getTpIdx();
+		return "redirect:/planner/list";
+	}
+	
+	@PostMapping("modify-private")
+	public String modifyTitle(PlannerPrivateModifyRequest dto) {
+		plannerService.updatePlannerPrivate(dto, UserPrincipal.getUserPrincipal().getPrincipal());
+		
+		return "redirect:/planner/list";
 	}
 	
 //	//planner host 변경(기본 만든사람)//host변경기능은 중요기능이 아니기 때문에 빼도 될듯

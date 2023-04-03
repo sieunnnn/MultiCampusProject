@@ -554,7 +554,7 @@
 			
 			stompClient.send("/app/modify-attractions/" + [[${planner.tpIdx}]], {}, 
 					JSON.stringify({'tdIdx':attodoIdx, 'title':attodotitle, 'contents':attodocontent, 'todoDate':attododate, 
-						'address':attodoinfo, 'isPrivate':attodoprivate}));
+						'attractions':attodoinfo, 'isPrivate':attodoprivate}));
 			
 		});
 	})

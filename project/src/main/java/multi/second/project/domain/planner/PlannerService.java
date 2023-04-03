@@ -30,6 +30,7 @@ import multi.second.project.domain.planner.domain.Participant;
 import multi.second.project.domain.planner.domain.Planner;
 import multi.second.project.domain.planner.dto.request.PlannerGroupModifyRequest;
 import multi.second.project.domain.planner.dto.request.PlannerHostModifyRequest;
+import multi.second.project.domain.planner.dto.request.PlannerPrivateModifyRequest;
 import multi.second.project.domain.planner.dto.request.PlannerRegistRequest;
 import multi.second.project.domain.planner.dto.request.PlannerTitleModifyRequest;
 import multi.second.project.domain.planner.dto.response.PlannerDetailResponse;
@@ -141,11 +142,28 @@ public class PlannerService {
 		
 		if(!planner.getHost().getParticipant().getMember().getUserId().equals(principal.getUserId())) throw new AuthException(ErrorCode.HOST_UNAUTHORIZED_REQUEST);
 		
+		System.out.println("dto.getTitle() : " + dto.getTitle());
+		
 		planner.updatePlannerTitle(dto);
 		
 		plannerRepository.flush();
 		
 	}
+	
+	//플래너 제한 변경
+		@Transactional
+		public void updatePlannerPrivate(PlannerPrivateModifyRequest dto, Principal principal) {
+			// TODO Auto-generated method stub
+			Planner planner = plannerRepository.findById(dto.getTpIdx())
+					.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+			
+			if(!planner.getHost().getParticipant().getMember().getUserId().equals(principal.getUserId())) throw new AuthException(ErrorCode.HOST_UNAUTHORIZED_REQUEST);
+			
+			planner.updatePlannerPrivate(dto);
+			
+			plannerRepository.flush();
+			
+		}
 
 	//플래너 호스트 변경
 //	@Transactional

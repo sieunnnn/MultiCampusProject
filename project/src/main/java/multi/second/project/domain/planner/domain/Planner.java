@@ -26,6 +26,7 @@ import multi.second.project.domain.group.domain.TravelGroup;
 import multi.second.project.domain.host.domain.Host;
 import multi.second.project.domain.member.domain.Member;
 import multi.second.project.domain.planner.dto.request.PlannerHostModifyRequest;
+import multi.second.project.domain.planner.dto.request.PlannerPrivateModifyRequest;
 import multi.second.project.domain.planner.dto.request.PlannerRegistRequest;
 import multi.second.project.domain.planner.dto.request.PlannerTitleModifyRequest;
 import multi.second.project.domain.todolist.domain.TodoList;
@@ -79,6 +80,7 @@ public class Planner {
 				.travelGroup(travelGroup)
 				.title(dto.getTitle())
 				.host(host)
+				.isPrivate(dto.getIsPrivate())
 				.build();
 		
 	}
@@ -95,6 +97,10 @@ public class Planner {
 
 	public void updatePlannerTitle(PlannerTitleModifyRequest dto) {
 		this.title = dto.getTitle();
+	}
+	
+	public void updatePlannerPrivate(PlannerPrivateModifyRequest dto) {
+		this.isPrivate = dto.getIsPrivate();
 	}
 
 
