@@ -170,6 +170,9 @@
                                     </div>
                                 </div>
 
+                                <!-- 투두 카드 생기는 곳 -->
+                                <div id="response"></div>
+
                                 <!-- 버튼 클릭하면 카드 생성 (column) -->
                                 <button class="open" th:onclick="addCard([[${todolist.tlIdx}]])" th:id="'addCardBtn' + ${todolist.tlIdx}"></button>
 
@@ -246,9 +249,6 @@
                                 <div id="costPerDay"></div>
 
                             </div>
-
-                            <!-- 투두 카드 생기는 곳 -->
-                            <div id="response"></div>
 
                             <div id="addDateResponse"></div>
 
@@ -382,7 +382,7 @@
 
                         }else if(res.type === 'upload-accomodation'){
 
-                            console.log(res.msg.tlIdx);
+                            console.log('tlIdx', res.msg.tlIdx);
 
                             // 숙박 추가
                             console.log('res.msg.title: '+res.msg.title);
@@ -391,9 +391,13 @@
                             console.log('res.msg.address: '+res.msg.address);
                             console.log('res.msg.isPrivate: '+res.msg.isPrivate);
 
-                            response.innerHTML +=
-                                '<div style="background:yellow">'+ "숙박todo 제목, 내용, 날짜, 주소, 비밀 : " + res.msg.title + " ,  " +res.msg.contents +
-                                res.msg.todoDate + " ,  " +res.msg.address + " ,  " +res.msg.isPrivate+'<br>'+'</>';
+                            var accomoResponse = document.getElementById('response');
+
+                            console.log('어디냐: ' + res.msg.tdIdx);
+                            console.log('어디냐: ' + res.msg.tdIdx);
+
+                            accomoResponse.innerHTML +=
+                                '<div class="card">' + res.msg.title + '</div>'
 
                         }else if(res.type === 'modify-accomodation'){
 
@@ -433,9 +437,14 @@
                             console.log('res.msg.todoDate: '+res.msg.todoDate);
                             console.log('res.msg.attractions: '+res.msg.attractions);
                             console.log('res.msg.isPrivate: '+res.msg.isPrivate);
-                            response.innerHTML +=
-                                '<span style="background:yellow">'+ "관광지todo 제목, 내용, 날짜, 정보, 비밀 : " + res.msg.title + " ,  " +res.msg.contents +
-                                res.msg.todoDate + " ,  " +res.msg.attractions + " ,  " +res.msg.isPrivate+'<br>'+'</span>';
+
+                            var attrResponse = document.getElementById('response');
+
+                            console.log('어디냐: ' + res.msg.tdIdx);
+                            console.log('어디냐: ' + res.msg.tdIdx);
+
+                            attrResponse.innerHTML +=
+                                '<div class="card">' + res.msg.title + '</div>'
 
                         }else if(res.type === 'modify-attractions'){
 
@@ -467,9 +476,14 @@
                             console.log('res.msg.budget: '+res.msg.budget);
                             console.log('res.msg.budgetType: '+res.msg.budgetType);
                             console.log('res.msg.isPrivate: '+res.msg.isPrivate);
-                            response.innerHTML +=
-                                '<span style="background:yellow">'+ "예산todo 제목, 내용, 날짜, 예산, 종류, 비밀 : " + res.msg.title + " ,  " +res.msg.contents +
-                                res.msg.todoDate + " ,  " +res.msg.budget +" ,  " +res.msg.budgetType +" ,  " + res.msg.isPrivate+'<br>'+'</span>';
+
+                            var budgetResponse = document.getElementById('response');
+
+                            console.log('어디냐: ' + res.msg.tdIdx);
+                            console.log('어디냐: ' + res.msg.tdIdx);
+
+                            budgetResponse.innerHTML +=
+                                '<div class="card">' + res.msg.title + '</div>'
 
                         }else if(res.type === 'modify-budget'){
 
@@ -500,9 +514,14 @@
                             console.log('res.msg.todoDate: '+res.msg.todoDate);
                             console.log('res.msg.address: '+res.msg.address);
                             console.log('res.msg.isPrivate: '+res.msg.isPrivate);
-                            response.innerHTML +=
-                                '<span style="background:yellow">'+ "일반todo 제목, 내용, 날짜, 주소, 비밀 : " + res.msg.title + " ,  " +res.msg.contents +
-                                res.msg.todoDate + " ,  " +res.msg.address + " ,  " +res.msg.isPrivate+'<br>'+'</span>';
+
+                            var generalResponse = document.getElementById('response');
+
+                            console.log('어디냐: ' + res.msg.tdIdx);
+                            console.log('어디냐: ' + res.msg.tdIdx);
+
+                            generalResponse.innerHTML +=
+                                '<div class="card">' + res.msg.title + '</div>'
 
                         }else if(res.type === 'modify-general'){
 
@@ -534,9 +553,14 @@
                             console.log('res.msg.todoDate: '+res.msg.todoDate);
                             console.log('res.msg.transportType: '+res.msg.transportType);
                             console.log('res.msg.isPrivate: '+res.msg.isPrivate);
-                            response.innerHTML +=
-                                '<span style="background:yellow">'+ "교통todo 제목, 내용, 날짜, 종류, 비밀 : " + res.msg.title + " ,  " +res.msg.contents +
-                                res.msg.todoDate + " ,  " +res.msg.transportType + " ,  " +res.msg.isPrivate+'<br>'+'</span>';
+
+                            var transResponse = document.getElementById('response');
+
+                            console.log('어디냐: ' + res.msg.tdIdx);
+                            console.log('어디냐: ' + res.msg.tdIdx);
+
+                            transResponse.innerHTML +=
+                                '<div class="card">' + res.msg.title + '</div>'
 
                         }else if(res.type === 'modify-transport'){
 
