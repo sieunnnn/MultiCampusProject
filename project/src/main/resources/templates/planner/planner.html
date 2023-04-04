@@ -20,6 +20,10 @@
 
         <div class="container__planner">
 
+            <div style="display:none;" th:each="group : ${planner.travelGroup.participants}">
+                <p th:text="${group.member.userId}">
+            </div>
+
             <!-- 타이틀 -->
             <div class="wrapper__title">
                 <div class="txt__title">
@@ -263,7 +267,41 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="/js/jQuery-2.1.4.min.js"></script>
     <script type="text/javascript" layout:fragment="script" th:inline="javascript">
+
+        // 그룹 인원외 읽기만 ===============================================================================================//
+
+        window.onload = function() {
+
+            notGroupReadOnly();
+        }
+
+        function notGroupReadOnly() {
+
+            const group = [[${planner.travelGroup.participants}]]
+            const myId = [[${#authentication.name}]]
+
+            console.log('myId', myId)
+            console.log(group)
+
+            // !! => true, false 변환 위해 사용
+            const isTravelGroup = !!(group || []) // 1
+                .find((obj) => {
+                    const userId = (obj.member || {}).userId || '' // 2
+                    if (!userId) return false // 3
+                    return userId === myId // 4
+                })
+
+            console.log('isTravelGroup', isTravelGroup)
+
+            // 여행그룹이 아닌 사람은 읽기전용
+            if (!isTravelGroup) {
+
+                $('input').prop('readonly', true);
+            }
+        }
 
         // 카드 추가창 ===============================================================================================//
 
@@ -1043,10 +1081,6 @@
             });
         })
 
-        function checkTlIdx(str) {
-
-            console.log(str);
-        }
         connect();
     </script>
     <!--<span>공유 인원 목록</span>
