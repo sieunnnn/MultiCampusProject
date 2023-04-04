@@ -1,12 +1,8 @@
-
-
-<!-- 플래너 계획 부분 -->
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="main_layout">
-
+      layout:decorate="main_layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <title>Planner</title>
@@ -16,8 +12,10 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 </head>
 
+
 <body>
 <div layout:fragment="content">
+
     <div class="container__contents">
 
         <div class="container__planner">
@@ -66,243 +64,6 @@
                     <!-- 예산 박스 (고정) -->
                     <div class="wrapper__money">
 
-
-                        <!-- 모달 ------------------------------------------>
-
-                        <!-- 카드 추가 -->
-
-                        <div class="modal__add__card">
-                            <div class="container__add__card">
-
-                                <div>
-                                    <button class="close">닫기</button>
-                                </div>
-
-                                <div>
-                                    <div class="title__add__card">Add Card</div>
-                                </div>
-
-                                <!-- 독바 -->
-                                <div class="wrapper__bar">
-                                    <button onclick="showAddTodo()" style="margin-left: 4px">
-                                        <img src="/img/btn_todo.png">
-                                    </button>
-                                    <button onclick="showAddTransport()">
-                                        <img src="/img/btn_transport.png">
-                                    </button>
-                                    <button onclick="showAddAccommodation()">
-                                        <img src="/img/btn_accommodation.png">
-                                    </button>
-                                    <button onclick="showAddMap()">
-                                        <img src="/img/img_maps.png">
-                                    </button>
-                                    <button onclick="showAddBudget()">
-                                        <img src="/img/btn_calculator.png">
-                                    </button>
-                                </div>
-
-                                <!-- 내용 -->
-
-                                <div class="wrapper__contents">
-
-                                    <!-- 일반 -->
-                                    <div id="containerTodo">
-
-                                        <!-- 타이틀 -->
-                                        <div class="title">
-                                            <div style="margin-top: 5px">Todo</div>
-                                        </div>
-
-                                        <!-- 내용 (스크롤 테스트 완)-->
-                                        <div class="container">
-
-                                            <!-- 타이틀 -->
-                                            <input type="text" th:id="|gntodotitleadd${todolist.tlIdx}|" placeholder="제목을 입력해주세요">
-
-                                            <!-- 날짜 -->
-                                            <input type="datetime-local" th:id="|gntododateadd${todolist.tlIdx}|">
-
-                                            <!-- 지도 추가 부분 -->
-                                            <input type="text" th:id="|gntodoaddressadd${todolist.tlIdx}|"/>
-
-                                            <!-- 내용 -->
-                                            <textarea placeholder="내용을 입력해주세요" th:id="|gntodocontentadd${todolist.tlIdx}|"></textarea>
-
-                                            <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="gntodoadd">등록</button>
-
-                                        </div>
-                                    </div>
-
-                                    <!-- 교통-->
-                                    <div id="containerTransport">
-
-                                        <!-- 타이틀 -->
-                                        <div class="title">
-                                            <div style="margin-top: 5px">교통</div>
-                                        </div>
-
-                                        <!-- 내용 (스크롤 테스트 완)-->
-                                        <div class="container">
-
-                                            <!-- 타이틀 -->
-                                            <input type="text" placeholder="제목을 입력해주세요" th:id="|trtodotitleadd${todolist.tlIdx}|">
-
-                                            <!-- 대중교통 선택 -->
-                                            <label for="transport-select">교통편 선택</label>
-                                            <select name="transports" id="transport-select" th:id="|trtodotypeadd${todolist.tlIdx}|">
-                                                <option>버스</option>
-                                                <option>지하철</option>
-                                                <option>고속철도</option>
-                                                <option>기차</option>
-                                                <option>택시</option>
-                                                <option>배</option>
-                                                <option>항공</option>
-                                            </select>
-
-                                            <!-- 날짜 -->
-                                            <input type="datetime-local" th:id="|trtododateadd${todolist.tlIdx}|">
-
-
-                                            <!-- 내용 -->
-                                            <textarea placeholder="내용을 입력해주세요" th:id="|trtodocontentadd${todolist.tlIdx}|"></textarea>
-
-                                            <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="trtodoadd">등록</button>
-                                        </div>
-
-
-                                    </div>
-
-                                    <!-- 숙박-->
-                                    <div id="containerAccommodation">
-
-                                        <!-- 타이틀 -->
-                                        <div class="title">
-                                            <div style="margin-top: 5px">숙박</div>
-                                        </div>
-
-                                        <!-- 내용 (스크롤 테스트 완)-->
-                                        <div class="container">
-
-                                            <!-- 타이틀 -->
-                                            <input type="text" th:id="|actodotitleadd${todolist.tlIdx}|" placeholder="제목을 입력해주세요">
-
-                                            <!-- 날짜 -->
-                                            <input type="datetime-local" th:id="|actododateadd${todolist.tlIdx}|"/>
-
-                                            <!-- 지도 추가 부분 -->
-                                            <input type="text" th:id="|actodoaddressadd${todolist.tlIdx}|"/>
-
-                                            <!-- 내용 -->
-                                            <textarea th:id="|actodocontentadd${todolist.tlIdx}|"></textarea>
-
-                                            <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="actodoadd">등록</button>
-                                        </div>
-                                    </div>
-
-                                    <!-- 관광지-->
-                                    <div id="containerMap">
-
-                                        <!-- 타이틀 -->
-                                        <div class="title">
-                                            <div style="margin-top: 5px">관광지</div>
-                                        </div>
-
-                                        <!-- 내용 (스크롤 테스트 완)-->
-                                        <div class="container">
-
-                                            <!-- 타이틀 -->
-                                            <input type="text" th:id="|attodotitleadd${todolist.tlIdx}|" placeholder="제목을 입력해주세요">
-
-                                            <!-- 날짜 -->
-                                            <input type="datetime-local" th:id="|attododateadd${todolist.tlIdx}|">
-
-                                            <!-- 관광지 추가 부분 -->
-                                            <input type="text" th:id="|attodoinfoadd${todolist.tlIdx}|"/>
-
-                                            <!-- 지도 추가 부분 -->
-
-                                            <!-- 내용 -->
-                                            <textarea placeholder="내용을 입력해주세요" th:id="|attodocontentadd${todolist.tlIdx}|"></textarea>
-
-                                            <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="attodoadd">Attractions todo 등록</button>
-                                        </div>
-                                    </div>
-
-                                    <!-- 예산 -->
-                                    <div id="containerBudget">
-
-                                        <!-- 타이틀 -->
-                                        <div class="title">
-                                            <div style="margin-top: 5px">예산</div>
-                                        </div>
-
-                                        <!-- 내용 (스크롤 테스트 완)-->
-                                        <div class="container">
-
-                                            <!-- 타이틀 -->
-                                            <input type="text" placeholder="제목을 입력해주세요" th:value="예산제목1" th:id="|bgtodotitleadd${todolist.tlIdx}|">
-
-                                            <!-- 날짜 -->
-                                            <input type="datetime-local" th:id="|bgtododateadd${todolist.tlIdx}|">
-
-                                            <!-- 선택란 -->
-                                            <label for="budget-select" >지출 종류</label>
-                                            <select name="budgets" th:id="|bgtodotypeadd${todolist.tlIdx}|" id="budget-select">
-                                                <option>식사</option>
-                                                <option>간식</option>
-                                                <option>쇼핑</option>
-                                                <option>기념품</option>
-                                                <option>입장료</option>
-                                                <option>문화</option>
-                                                <option>팁</option>
-                                            </select>
-
-                                            <!-- 금액 -->
-                                            <input type="text" placeholder="금액을 입력하세요" th:id="|bgtodomoneyadd${todolist.tlIdx}|">
-
-                                            <!-- 지도 추가 부분 -->
-
-                                            <!-- 내용 -->
-                                            <textarea placeholder="내용을 입력해주세요" th:id="|bgtodocontentadd${todolist.tlIdx}|"></textarea>
-
-                                            <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="bgtodoadd">등록</button>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <!------------------------------------------------>
-
-
-                        <!-- 모달 ------------------------------------------>
-
-                        <!-- 날짜 추가 -->
-
-                        <div class="modal__add__date">
-                            <div class="container__add__date">
-
-                                <div>
-                                    <button class="close__date">닫기</button>
-                                </div>
-
-                                <div>
-                                    <div class="title__add__date">Date</div>
-                                </div>
-
-                                <div>
-                                    <input type="text" name="todolistTitleAdd" id="todolistTitleAdd" onkeypress="addTodoList(event)" placeholder="날짜 입력 후 엔터">
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <!------------------------------------------------>
-
                         <div class="money__title">
                             <div class="txt__money__title" style="margin-top: 10px">
                                 예산 요약
@@ -326,53 +87,174 @@
 
                         <div class="wrapper__planner__list">
 
-                            <!-- 공통적으로 계속 생기는 박스 -->
-                            <div th:each="todolist : ${planner.todolistResponses}" th:id="'s'+${todolist.tlIdx}" class="wrapper__date__box">
-
-                                <!-- 날짜 -->
-                                <div id="date" class="date" th:onclick="onClickModifyDate([[${todolist.tlIdx}]])">
-                                    <div th:id="'i'+${todolist.tlIdx}">[[${todolist.title}]]</div>
-                                    <div th:id="'l'+${todolist.tlIdx}"></div>
-
-                                    <input style="display: none" type="text" th:id="'k'+${todolist.tlIdx}"/>
-                                    <button style="display: none" th:id="'j'+${todolist.tlIdx}"  th:attr="data-tlIdx=|${todolist.tlIdx}|" class="todolistdel">삭제</button>
+                            <div th:each="todolist, status : ${planner.todolistResponses}" th:id="|f${todolist.tlIdx}|" class="wrapper__date__box">
+                                <div class="date">
+                                    <div th:text="${todolist.title}"></div>
+                                    <div>
+                                        <input type="text" readonly th:value="${todolist.tlIdx}" th:id="|tlidx${todolist.tlIdx}|"/>
+                                        <input type="text" th:value="${todolist.title}" th:id="|tltitle${todolist.tlIdx}|"/>
+                                        <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="todolistmod">todolist 제목 수정</button>
+                                        <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="todolistdel">todolist 삭제</button>
+                                    </div>
                                 </div>
 
-                                <!-- 그동한 생성한 카드가 있다면 여기에 넣기-->
-                                <div th:each="todo : ${todolist}" th:id="|d${todo.tdIdx}|" id="card" class="card">
-
-                                    <div class="txt__card__title">
-                                        <!-- 공개 여부를 결정하는 토글 -->
-                                        <div class="wrapper__planner__toggle">
-                                            <button class="toggle__switch__planner">
-                                                <span class="toggle__button"></span>
-                                            </button>
+                                <div>
+                                    <div th:each="todo : ${todolist.todoResponses}" th:switch="${#strings.toString(todo.todoType)}" th:id="|d${todo.tdIdx}|" class="card">
+                                        <div th:case="Accomodation">
+                                            <div>
+                                                <p th:text="${todo.title}"/><p th:text="${todo.contents}"/><p th:text="${todo.todoDate}"/><p th:text="${todo.isPrivate}"/>
+                                                <p th:text="${todo.acAddress}"/>
+                                                <input type="text" readonly th:value="${todo.tdIdx}" th:id="|tdidx${todo.tdIdx}|"/>
+                                                <input type="text" th:value="${todo.title}" th:id="|actodotitlemod${todo.tdIdx}|"/>
+                                                <input type="text" th:value="${todo.contents}" th:id="|actodocontentmod${todo.tdIdx}|"/>
+                                                <input type="text" th:value="${todo.todoDate}" th:id="|actododatemod${todo.tdIdx}|"/>
+                                                <input type="text" th:value="${todo.acAddress}" th:id="|actodoaddressmod${todo.tdIdx}|"/>
+                                                <input type="checkbox" th:value="${todo.isPrivate}" th:id="|actodopvmod${todo.tdIdx}|"/>
+                                                <button th:attr="data-tdidx=|${todo.tdIdx}|" class="actodomod">수정</button>
+                                                <button th:attr="data-tdidx=|${todo.tdIdx}|, data-tlidx=|${todolist.tlIdx}|" class="actododel">삭제</button>
+                                            </div>
                                         </div>
 
-                                        [[${todo.title}]]
-                                    </div>
+                                        <div th:case="Attractions">
+                                            <p th:text="${todo.title}"/><p th:text="${todo.contents}"/><p th:text="${todo.todoDate}"/><p th:text="${todo.isPrivate}"/>
+                                            <p th:text="${todo.attractions}"/>
+                                            <input type="text" readonly th:value="${todo.tdIdx}" th:id="|tdidx${todo.tdIdx}|"/>
+                                            <input type="text" th:value="${todo.title}" th:id="|attodotitlemod${todo.tdIdx}|"/>
+                                            <input type="text" th:value="${todo.contents}" th:id="|attodocontentmod${todo.tdIdx}|"/>
+                                            <input type="text" th:value="${todo.todoDate}" th:id="|attododatemod${todo.tdIdx}|"/>
+                                            <input type="text" th:value="${todo.attractions}" th:id="|attodoinfomod${todo.tdIdx}|"/>
+                                            <input type="checkbox" th:value="${todo.isPrivate}" th:id="|attodopvmod${todo.tdIdx}|"/>
+                                            <button th:attr="data-tdidx=|${todo.tdIdx}|" class="attodomod">Attractions todo 수정</button>
+                                            <button th:attr="data-tdidx=|${todo.tdIdx}|, data-tlidx=|${todolist.tlIdx}|" class="attododel">삭제</button>
+                                        </div>
 
-                                    <!-- 화면에 뿌릴 내용 받아오기 -->
-                                    <div>
-                                        [[${todo.contents}]]
+                                        <div th:case="Budget">
+                                            <p th:text="${todo.title}"/><p th:text="${todo.contents}"/><p th:text="${todo.todoDate}"/><p th:text="${todo.isPrivate}"/>
+                                            <p th:text="${todo.budgetType}"/><p th:text="${todo.budget}"/>
+                                            <input type="text" readonly th:value="${todo.tdIdx}" th:id="|tdidx${todo.tdIdx}|"/>
+                                            <input type="text" th:value="${todo.title}" th:id="|bgtodotitlemod${todo.tdIdx}|"/>
+                                            <input type="text" th:value="${todo.contents}" th:id="|bgtodocontentmod${todo.tdIdx}|"/>
+                                            <input type="text" th:value="${todo.todoDate}" th:id="|bgtododatemod${todo.tdIdx}|"/>
+                                            <input type="text" th:value="${todo.budget}" th:id="|bgtodomoneymod${todo.tdIdx}|"/>
+                                            <input type="text" th:value="${todo.budgetType}" th:id="|bgtodotypemod${todo.tdIdx}|"/>
+                                            <input type="checkbox" th:value="${todo.isPrivate}" th:id="|bgtodopvmod${todo.tdIdx}|"/>
+                                            <button th:attr="data-tdidx=|${todo.tdIdx}|" class="bgtodomod">수정</button>
+                                            <button th:attr="data-tdidx=|${todo.tdIdx}|, data-tlidx=|${todolist.tlIdx}|" class="bgtododel">삭제</button>
+                                        </div>
+
+                                        <div th:case="General">
+                                            <p th:text="${todo.title}"/><p th:text="${todo.contents}"/><p th:text="${todo.todoDate}"/><p th:text="${todo.isPrivate}"/>
+                                            <p th:text="${todo.gnAddress}"/>
+                                            <input type="text" readonly th:value="${todo.tdIdx}" th:id="|tdidx${todo.tdIdx}|"/>
+                                            <input type="text" th:value="${todo.title}" th:id="|gntodotitlemod${todo.tdIdx}|"/>
+                                            <input type="text" th:value="${todo.contents}" th:id="|gntodocontentmod${todo.tdIdx}|"/>
+                                            <input type="text" th:value="${todo.todoDate}" th:id="|gntododatemod${todo.tdIdx}|"/>
+                                            <input type="text" th:value="${todo.gnAddress}" th:id="|gntodoaddressmod${todo.tdIdx}|"/>
+                                            <input type="checkbox" th:value="${todo.isPrivate}" th:id="|gntodopvmod${todo.tdIdx}|"/>
+                                            <button th:attr="data-tdidx=|${todo.tdIdx}|" class="gntodomod">General todo 수정</button>
+                                            <button th:attr="data-tdidx=|${todo.tdIdx}|, data-tlidx=|${todolist.tlIdx}|" class="gntododel">삭제</button>
+                                        </div>
+
+                                        <div th:case="Transport">
+                                            <p th:text="${todo.title}"/><p th:text="${todo.contents}"/><p th:text="${todo.todoDate}"/><p th:text="${todo.isPrivate}"/>
+                                            <p th:text="${todo.transportType}"/>
+                                            <input type="text" readonly th:value="${todo.tdIdx}" th:id="|tdidx${todo.tdIdx}|"/>
+                                            <input type="text" th:value="${todo.title}" th:id="|trtodotitlemod${todo.tdIdx}|"/>
+                                            <input type="text" th:value="${todo.contents}" th:id="|trtodocontentmod${todo.tdIdx}|"/>
+                                            <input type="text" th:value="${todo.todoDate}" th:id="|trtododatemod${todo.tdIdx}|"/>
+                                            <input type="text" th:value="${todo.transportType}" th:id="|trtodotypemod${todo.tdIdx}|"/>
+                                            <input type="checkbox" th:value="${todo.isPrivate}" th:id="|trtodopvmod${todo.tdIdx}|"/>
+                                            <button th:attr="data-tdidx=|${todo.tdIdx}|" class="trtodomod">Transport todo 수정</button>
+                                            <button th:attr="data-tdidx=|${todo.tdIdx}|, data-tlidx=|${todolist.tlIdx}|" class="trtododel">삭제</button>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <!-- 새로 생성될 화면 -->
-
                                 <!-- 버튼 클릭하면 카드 생성 (column) -->
-                                <button id="addCard" class="open" th:onclick="onClickAddCard([[${todolist.tlIdx}]])"></button>
+                                <button class="open" th:onclick="addCard([[${todolist.tlIdx}]])" th:id="'addCardBtn' + ${todolist.tlIdx}"></button>
+
+                                <!-- 등록 -->
+                                <div style="display: none; background-color: white" class="add__card" th:id="'addCard' + ${todolist.tlIdx}">
+
+                                    <!-- 독바 -->
+                                    <div class="wrapper__bar" th:id="'addWhat' + ${todolist.tlIdx}">
+                                        <button th:onclick="showAddTodo([[${todolist.tlIdx}]])">
+                                            <img src="/img/btn_todo.png">
+                                        </button>
+                                        <button th:onclick="showAddTransport([[${todolist.tlIdx}]])">
+                                            <img src="/img/btn_transport.png">
+                                        </button>
+                                        <button th:onclick="showAddAccommodation([[${todolist.tlIdx}]])">
+                                            <img src="/img/btn_accommodation.png">
+                                        </button>
+                                        <button th:onclick="showAddMap([[${todolist.tlIdx}]])">
+                                            <img src="/img/img_maps.png">
+                                        </button>
+                                        <button style="margin-right: 2px" th:onclick="showAddBudget([[${todolist.tlIdx}]])">
+                                            <img src="/img/btn_calculator.png">
+                                        </button>
+                                    </div>
+
+                                    <div th:id="'addAccommodation' + ${todolist.tlIdx}">
+                                        <input type="text" th:value="숙박제목1" th:id="|actodotitleadd${todolist.tlIdx}|"/>
+                                        <input type="text" th:value="숙박내용1" th:id="|actodocontentadd${todolist.tlIdx}|"/>
+                                        <input type="text" th:value="|2023-06-12T19:25|" th:id="|actododateadd${todolist.tlIdx}|"/>
+                                        <input type="text" th:value="숙박주소1" th:id="|actodoaddressadd${todolist.tlIdx}|"/>
+                                        <input type="checkbox" th:id="|actodopvadd${todolist.tlIdx}|"/>
+                                        <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="actodoadd">Accomodation todo 등록</button>
+                                    </div>
+
+                                    <div th:id="'addAttraction' + ${todolist.tlIdx}">
+                                        <input type="text" th:value="관광지내용1" th:id="|attodocontentadd${todolist.tlIdx}|"/>
+                                        <input type="text" th:value="|2023-06-12T19:25|" th:id="|attododateadd${todolist.tlIdx}|"/>
+                                        <input type="text" th:value="관광지제목1" th:id="|attodotitleadd${todolist.tlIdx}|"/>
+                                        <input type="text" th:value="관광지정보1" th:id="|attodoinfoadd${todolist.tlIdx}|"/>
+                                        <input type="checkbox" th:id="|attodopvadd${todolist.tlIdx}|"/>
+                                        <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="attodoadd">Attractions todo 등록</button>
+                                    </div>
+
+                                    <div th:id="'addBudget' + ${todolist.tlIdx}">
+                                        <input type="text" th:value="예산제목1" th:id="|bgtodotitleadd${todolist.tlIdx}|"/>
+                                        <input type="text" th:value="예산내용1" th:id="|bgtodocontentadd${todolist.tlIdx}|"/>
+                                        <input type="text" th:value="|2023-06-12T19:25|" th:id="|bgtododateadd${todolist.tlIdx}|"/>
+                                        <input type="text" th:value="10000" th:id="|bgtodomoneyadd${todolist.tlIdx}|"/>
+                                        <input type="text" th:value="FOOD" th:id="|bgtodotypeadd${todolist.tlIdx}|"/>
+                                        <input type="checkbox" th:id="|bgtodopvadd${todolist.tlIdx}|"/>
+                                        <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="bgtodoadd">Budget todo 등록</button>
+                                    </div>
+
+                                    <div th:id="'addGeneral' + ${todolist.tlIdx}">
+                                        <input type="text" th:value="일반제목1" th:id="|gntodotitleadd${todolist.tlIdx}|"/>
+                                        <input type="text" th:value="일반내용1" th:id="|gntodocontentadd${todolist.tlIdx}|"/>
+                                        <input type="text" th:value="|2023-06-12T19:25|" th:id="|gntododateadd${todolist.tlIdx}|"/>
+                                        <input type="text" th:value="일반주소1" th:id="|gntodoaddressadd${todolist.tlIdx}|"/>
+                                        <input type="checkbox" th:id="|gntodopvadd${todolist.tlIdx}|"/>
+                                        <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="gntodoadd">General todo 등록</button>
+                                    </div>
+
+                                    <div th:id="'addTrans' + ${todolist.tlIdx}">
+                                        <input type="text" th:value="교통제목1" th:id="|trtodotitleadd${todolist.tlIdx}|"/>
+                                        <input type="text" th:value="교통내용1" th:id="|trtodocontentadd${todolist.tlIdx}|"/>
+                                        <input type="text" th:value="|2023-06-12T19:25|" th:id="|trtododateadd${todolist.tlIdx}|"/>
+                                        <input type="text" th:value="AIRPLANE" th:id="|trtodotypeadd${todolist.tlIdx}|"/>
+                                        <input type="checkbox" th:id="|trtodopvadd${todolist.tlIdx}|"/>
+                                        <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="trtodoadd">General todo 등록</button>
+                                    </div>
+                                </div>
 
                                 <!-- 하루 총 예산 -->
                                 <div id="costPerDay"></div>
 
                             </div>
 
-                            <div id="addTodoListResponse"></div>
+                            <!-- 투두 카드 생기는 곳 -->
+                            <div id="response"></div>
 
-                            <!-- 날짜 카드 생성 (row) -->
-                            <div>
-                                <button id="addDate" class="open__date"></button>
+                            <div id="addDateResponse"></div>
+
+                            <div id="addDate">
+                                <input type="text" th:value="제목없음" name="todolistTitleAdd" id="todolistTitleAdd"/>
+                                <button onclick="addTodoList()"><span>todolist 등록</span></button>
                             </div>
                         </div>
                     </div>
@@ -381,303 +263,800 @@
         </div>
     </div>
 
-    <script type="text/javascript" th:inline="javascript">
+    <script type="text/javascript" layout:fragment="script" th:inline="javascript">
 
-        const toggleList = document.querySelectorAll(".toggle__switch__planner");
+        // 카드 추가창 ===============================================================================================//
 
-        // 이 상태를 DB 에 어떻게 전송할 것인가 고민하기
-        toggleList.forEach(($toggle) => {
-            $toggle.onclick = () => {
-                $toggle.classList.toggle('active');
-            }
-        });
+        function addCard(str) {
 
+            console.log(str);
+            document.getElementById('addCard' + str).style.display = '';
+            document.getElementById('addAccommodation' + str).style.display = 'none';
+            document.getElementById('addAttraction' + str).style.display = 'none';
+            document.getElementById('addBudget' + str).style.display = 'none';
+            document.getElementById('addGeneral' + str).style.display = 'none';
+            document.getElementById('addTrans' + str).style.display = 'none';
+            document.getElementById('addCardBtn' + str).style.display = 'none';
 
-        // 모달(카드 생성) 창 ============================================//
-
-
-        document.querySelector('.modal__add__card').style.display = 'none';
-
-        const openAddCard = document.querySelector('.open');
-        const containerAddCard = document.querySelector('.modal__add__card');
-        const closeAddCard = document.querySelector('.close');
-
-        function onClickAddCard (str) {
-            console.log('tlIdx', str)
-
-            containerAddCard.style.display = 'flex';
-            document.querySelector('.money__title').style.display = 'none';
-            document.querySelector('.wrapper__summary').style.display = 'none';
-            document.querySelector('.modal__add__date').style.display = 'none';
         }
 
-        closeAddCard.addEventListener('click', () => {
-            containerAddCard.style.display = 'none';
-            openAddCard.style.display = 'block';
-            document.querySelector('.modal__add__date').style.display = 'none';
+        function showAddTodo(str) {
 
-            document.querySelector('.money__title').style.display = '';
-            document.querySelector('.wrapper__summary').style.display = '';
-        })
-
-        // 카드 추가부분
-
-        document.getElementById("containerTodo").style.display="none";
-        document.getElementById("containerMap").style.display="none";
-        document.getElementById("containerBudget").style.display="none";
-        document.getElementById("containerAccommodation").style.display="none";
-        document.getElementById("containerTransport").style.display="none";
-
-
-        // 투두
-        function showAddTodo() {
-
-            document.getElementById("containerTodo").style.display="";
-            document.getElementById("containerMap").style.display="none";
-            document.getElementById("containerBudget").style.display="none";
-            document.getElementById("containerAccommodation").style.display="none";
-            document.getElementById("containerTransport").style.display="none";
+            document.getElementById('addAccommodation' + str).style.display = 'none';
+            document.getElementById('addAttraction' + str).style.display = 'none';
+            document.getElementById('addBudget' + str).style.display = 'none';
+            document.getElementById('addGeneral' + str).style.display = '';
+            document.getElementById('addTrans' + str).style.display = 'none';
+            document.getElementById('addCardBtn' + str).style.display = 'none';
         }
 
-        // 지도
-        function showAddMap() {
+        function showAddTransport(str) {
 
-            document.getElementById("containerMap").style.display="";
-            document.getElementById("containerTodo").style.display="none";
-            document.getElementById("containerBudget").style.display="none";
-            document.getElementById("containerAccommodation").style.display="none";
-            document.getElementById("containerTransport").style.display="none";
+            document.getElementById('addAccommodation' + str).style.display = 'none';
+            document.getElementById('addAttraction' + str).style.display = 'none';
+            document.getElementById('addBudget' + str).style.display = 'none';
+            document.getElementById('addGeneral' + str).style.display = 'none';
+            document.getElementById('addTrans' + str).style.display = '';
+            document.getElementById('addCardBtn' + str).style.display = 'none';
         }
 
-        // 예산
-        function showAddBudget() {
+        function showAddAccommodation(str) {
 
-            document.getElementById("containerBudget").style.display="";
-            document.getElementById("containerTodo").style.display="none";
-            document.getElementById("containerMap").style.display="none";
-            document.getElementById("containerAccommodation").style.display="none";
-            document.getElementById("containerTransport").style.display="none";
+            document.getElementById('addAccommodation' + str).style.display = '';
+            document.getElementById('addAttraction' + str).style.display = 'none';
+            document.getElementById('addBudget' + str).style.display = 'none';
+            document.getElementById('addGeneral' + str).style.display = 'none';
+            document.getElementById('addTrans' + str).style.display = 'none';
+            document.getElementById('addCardBtn' + str).style.display = 'none';
         }
 
-        // 숙박
-        function showAddAccommodation() {
+        function showAddMap(str) {
 
-            document.getElementById("containerAccommodation").style.display="";
-            document.getElementById("containerTodo").style.display="none";
-            document.getElementById("containerMap").style.display="none";
-            document.getElementById("containerBudget").style.display="none";
-            document.getElementById("containerTransport").style.display="none";
+            document.getElementById('addAccommodation' + str).style.display = 'none';
+            document.getElementById('addAttraction' + str).style.display = '';
+            document.getElementById('addBudget' + str).style.display = 'none';
+            document.getElementById('addGeneral' + str).style.display = 'none';
+            document.getElementById('addTrans' + str).style.display = 'none';
+            document.getElementById('addCardBtn' + str).style.display = 'none';
         }
 
-        // 교통
-        function showAddTransport() {
+        function showAddBudget(str) {
 
-            document.getElementById("containerTransport").style.display="";
-            document.getElementById("containerTodo").style.display="none";
-            document.getElementById("containerMap").style.display="none";
-            document.getElementById("containerBudget").style.display="none";
-            document.getElementById("containerAccommodation").style.display="none";
+            document.getElementById('addAccommodation' + str).style.display = 'none';
+            document.getElementById('addAttraction' + str).style.display = 'none';
+            document.getElementById('addBudget' + str).style.display = '';
+            document.getElementById('addGeneral' + str).style.display = 'none';
+            document.getElementById('addTrans' + str).style.display = 'none';
+            document.getElementById('addCardBtn' + str).style.display = 'none';
         }
-
-
-        //===========================================================//
-
-        // 모달 (날짜 생성 창) ============================================//
-
-        document.querySelector('.modal__add__date').style.display = 'none';
-
-        const openAddDate = document.querySelector('.open__date');
-        const containerAddDate = document.querySelector('.modal__add__date');
-        const closeAddDate = document.querySelector('.close__date');
-
-        openAddDate.addEventListener('click', () => {
-            containerAddDate.style.display = 'flex';
-            document.querySelector('.money__title').style.display = 'none';
-            document.querySelector('.wrapper__summary').style.display = 'none';
-            document.querySelector('.modal__add__card').style.display = 'none';
-            document.querySelector('.modal__modify__date').style.display = 'none';
-        })
-
-        closeAddDate.addEventListener('click', () => {
-            containerAddDate.style.display = 'none';
-            openAddDate.style.display = 'block';
-
-            document.querySelector('.modal__add__card').style.display = 'none';
-            document.querySelector('.modal__add__date').style.display = 'none';
-            document.querySelector('.modal__modify__date').style.display = 'none';
-
-            document.querySelector('.money__title').style.display = '';
-            document.querySelector('.wrapper__summary').style.display = '';
-        })
-
 
         // 새로고침 ===================================================//
-
 
         function reload() {
 
             location.reload();
         }
 
-
         // ===========================================================//
 
-        // 웹소켓
+        // 웹소켓 ==============================================================================================//
 
         var stompClient = null;
+        //모듈화
+        function connect() {
+            var socket = new SockJS('/gs-guide-websocket');
 
-        // 연결
-        function Connect() {
-
-            var socket = new SockJS('/planner');
-
-            stompClient = Stomp.over(socket);
-
+            stompClient= Stomp.over(socket);
             stompClient.connect({}, function (frame) {
-
                 console.log('Connected: ' + frame);
+                stompClient.subscribe('/topic/planner-message/' + [[${planner.tpIdx}]], function (recommand) {
+                        res = JSON.parse(recommand.body);
+                        console.log('res: '+res);
 
-                stompClient.subscribe('/topic/planner/' + [[${planner.tpIdx}]], function (response) {
+                        // 그룹추가
+                        if(res.type === 'add-group'){
+                            response.innerHTML += '<span style="background:yellow">'+ res.msg.userId + '<br>'+'</span>';
 
-                    res = JSON.parse(response.body);
+                        }else if(res.type === 'upload-todolist'){
 
-                    console.dir(res)
+                            // 날짜 추가
+                            addDateResponse.innerHTML +=
+                                '<div class="wrapper__date__box">'
+                                + '<div class="date">'+ res.msg.title +'</div>'
+                                + '<button class="open" onclick="reload()">'+'</button>'
+                                + '<div id="costPerDay">'+'</div>'
+                                + '</div>'
 
-                    // 날짜 추가
+                        }else if(res.type === 'modify-todolist'){
 
-                    if (res.type === 'upload-todolist') {
+                            // 날짜 수정
+                            console.log('res.msg.tlIdx: '+res.msg.tlIdx);
+                            // document.querySelector('#f'+res.msg.tlIdx).style.display='none';
+                            response.innerHTML += '<span style="background:yellow">'+ res.msg.title +'</span>';
 
-                        console.log('addTodoListResponse', addTodoListResponse);
+                        }else if(res.type === 'remove-todolist'){
 
-                        addTodoListResponse.innerHTML +=
-                            '<div class="wrapper__date__box">'
-                            + '<div class="date">'+ res.msg.title +'</div>'
-                            + '<button class="open" onclick="reload()">'+'</button>'
-                            + '<div id="costPerDay">'+'</div>'
-                            + '</div>'
+                            // 날짜 삭제
+                            console.log('res.msg: '+res.msg);
+                            document.querySelector('#f'+res.msg).style.display='none';
 
-                        Disconnect();
+                        }else if(res.type === 'upload-accomodation'){
 
-                    } else if(res.type === 'modify-todolist') {
+                            console.log(res.msg.tlIdx);
 
-                        // 날짜 수정
+                            // 숙박 추가
+                            console.log('res.msg.title: '+res.msg.title);
+                            console.log('res.msg.contents: '+res.msg.contents);
+                            console.log('res.msg.todoDate: '+res.msg.todoDate);
+                            console.log('res.msg.address: '+res.msg.address);
+                            console.log('res.msg.isPrivate: '+res.msg.isPrivate);
 
-                        var modifyTodoListResponse = document.getElementById('l' + res.msg.tlIdx);
-                        var oriTitle = document.getElementById('i' + res.msg.tlIdx);
+                            response.innerHTML +=
+                                '<div style="background:yellow">'+ "숙박todo 제목, 내용, 날짜, 주소, 비밀 : " + res.msg.title + " ,  " +res.msg.contents +
+                                res.msg.todoDate + " ,  " +res.msg.address + " ,  " +res.msg.isPrivate+'<br>'+'</>';
 
-                        console.log('modify',res.msg.title);
+                        }else if(res.type === 'modify-accomodation'){
 
-                        modifyTodoListResponse.innerHTML += res.msg.title;
+                            // 숙박 수정
+                            console.log('res.msg.title: '+res.msg.title);
+                            console.log('res.msg.contents: '+res.msg.contents);
+                            console.log('res.msg.todoDate: '+res.msg.todoDate);
+                            console.log('res.msg.address: '+res.msg.address);
+                            console.log('res.msg.isPrivate: '+res.msg.isPrivate);
+                            //document.querySelector('#d'+res.msg.tdIdx).style.display='none';
 
-                        oriTitle.style.display = 'none';
+                            let id = 'd'+res.msg.tdIdx;
+                            document.getElementById(id).innerHTML =
+                                '<span style="background:yellow">'+ "숙박todo 제목, 내용, 날짜, 주소, 비밀: " + res.msg.title + " ,  " +res.msg.contents +
+                                res.msg.todoDate + " ,  " +res.msg.address + " ,  " +res.msg.isPrivate+ '<br>'+'</span>'
+                            //+"<p th:text="+ res.msg.title +"/>"+"<p th:text="+ res.msg.contents +"/>"+"<p th:text="+ res.msg.todoDate +"/>"
+                            //+"<p th:text="+ res.msg.address +"/>"+"<p th:text="+ res.msg.contents +"/>";
 
-                        Disconnect();
+                            //inpDelfile = createElement("input",{prop:{"type":"text","value":fileId,"name":"delFiles"}});
+                            //id.append(inpDelfile);
+                            //response.innerHTML +=
+                            //'<span style="background:yellow">'+ "숙박todo 제목, 내용, 날짜, 주소, 비밀: " + res.msg.title + " ,  " +res.msg.contents +
+                            //res.msg.todoDate + " ,  " +res.msg.address + " ,  " +res.msg.isPrivate+ '<br>'+'</span>';
 
-                    } else if (res.type === 'remove-todolist') {
+                        }else if(res.type === 'remove-accomodation'){
 
-                        // 날짜 삭제
-                        console.log('res.msg: ' + res.msg);
+                            //숙박 삭제
+                            console.log('res.msg: '+res.msg);
+                            document.querySelector('#d'+res.msg).style.display='none';
 
-                        var dateBox = document.getElementById('s' + res.msg);
 
-                        dateBox.style.display = 'none';
+                        }else if(res.type === 'upload-attractions'){
+
+                            // 관광지 추가
+                            console.log('res.msg.title: '+res.msg.title);
+                            console.log('res.msg.contents: '+res.msg.contents);
+                            console.log('res.msg.todoDate: '+res.msg.todoDate);
+                            console.log('res.msg.attractions: '+res.msg.attractions);
+                            console.log('res.msg.isPrivate: '+res.msg.isPrivate);
+                            response.innerHTML +=
+                                '<span style="background:yellow">'+ "관광지todo 제목, 내용, 날짜, 정보, 비밀 : " + res.msg.title + " ,  " +res.msg.contents +
+                                res.msg.todoDate + " ,  " +res.msg.attractions + " ,  " +res.msg.isPrivate+'<br>'+'</span>';
+
+                        }else if(res.type === 'modify-attractions'){
+
+                            // 관광지 수정
+                            console.log('res.msg.title: '+res.msg.title);
+                            console.log('res.msg.contents: '+res.msg.contents);
+                            console.log('res.msg.todoDate: '+res.msg.todoDate);
+                            console.log('res.msg.attractions: '+res.msg.attractions);
+                            console.log('res.msg.isPrivate: '+res.msg.isPrivate);
+                            //document.querySelector('#d'+res.msg.tdIdx).style.display='none';
+                            //response.innerHTML +=
+                            let id = 'd'+res.msg.tdIdx;
+                            document.getElementById(id).innerHTML =
+                                '<span style="background:yellow">'+ "관광지todo 제목, 내용, 날짜, 주소, 비밀: " + res.msg.title + " ,  " +res.msg.contents +
+                                res.msg.todoDate + " ,  " +res.msg.attractions + " ,  " +res.msg.isPrivate+ '<br>'+'</span>';
+
+                        }else if(res.type === 'remove-attractions'){
+
+                            // 관광지 삭제
+                            console.log('res.msg: '+res.msg);
+                            document.querySelector('#d'+res.msg).style.display='none';
+
+                        }else if(res.type === 'upload-budget'){
+
+                            // 예산 추가
+                            console.log('res.msg.title: '+res.msg.title);
+                            console.log('res.msg.contents: '+res.msg.contents);
+                            console.log('res.msg.todoDate: '+res.msg.todoDate);
+                            console.log('res.msg.budget: '+res.msg.budget);
+                            console.log('res.msg.budgetType: '+res.msg.budgetType);
+                            console.log('res.msg.isPrivate: '+res.msg.isPrivate);
+                            response.innerHTML +=
+                                '<span style="background:yellow">'+ "예산todo 제목, 내용, 날짜, 예산, 종류, 비밀 : " + res.msg.title + " ,  " +res.msg.contents +
+                                res.msg.todoDate + " ,  " +res.msg.budget +" ,  " +res.msg.budgetType +" ,  " + res.msg.isPrivate+'<br>'+'</span>';
+
+                        }else if(res.type === 'modify-budget'){
+
+                            // 예산 수정
+                            console.log('res.msg.title: '+res.msg.title);
+                            console.log('res.msg.contents: '+res.msg.contents);
+                            console.log('res.msg.todoDate: '+res.msg.todoDate);
+                            console.log('res.msg.address: '+res.msg.address);
+                            console.log('res.msg.isPrivate: '+res.msg.isPrivate);
+                            //document.querySelector('#d'+res.msg.tdIdx).style.display='none';
+                            //response.innerHTML +=
+                            let id = 'd'+res.msg.tdIdx;
+                            document.getElementById(id).innerHTML =
+                                '<span style="background:yellow">'+ "예산todo 제목, 내용, 날짜, 주소, 비밀: " + res.msg.title + " ,  " +res.msg.contents +
+                                res.msg.todoDate + " ,  " +res.msg.address + " ,  " +res.msg.isPrivate+ '<br>'+'</span>';
+
+                        }else if(res.type === 'remove-budget'){
+
+                            // 예산 삭제
+                            console.log('res.msg: '+res.msg);
+                            document.querySelector('#d'+res.msg).style.display='none';
+
+                        }else if(res.type === 'upload-general'){
+
+                            // 일반 투두 추가
+                            console.log('res.msg.title: '+res.msg.title);
+                            console.log('res.msg.contents: '+res.msg.contents);
+                            console.log('res.msg.todoDate: '+res.msg.todoDate);
+                            console.log('res.msg.address: '+res.msg.address);
+                            console.log('res.msg.isPrivate: '+res.msg.isPrivate);
+                            response.innerHTML +=
+                                '<span style="background:yellow">'+ "일반todo 제목, 내용, 날짜, 주소, 비밀 : " + res.msg.title + " ,  " +res.msg.contents +
+                                res.msg.todoDate + " ,  " +res.msg.address + " ,  " +res.msg.isPrivate+'<br>'+'</span>';
+
+                        }else if(res.type === 'modify-general'){
+
+                            // 일반 투두 수정
+                            console.log('res.msg.title: '+res.msg.title);
+                            console.log('res.msg.contents: '+res.msg.contents);
+                            console.log('res.msg.todoDate: '+res.msg.todoDate);
+                            console.log('res.msg.address: '+res.msg.address);
+                            console.log('res.msg.isPrivate: '+res.msg.isPrivate);
+                            //document.querySelector('#d'+res.msg.tdIdx).style.display='none';
+                            //response.innerHTML +=
+                            let id = 'd'+res.msg.tdIdx;
+                            document.getElementById(id).innerHTML =
+                                '<span style="background:yellow">'+ "일반todo 제목, 내용, 날짜, 주소, 비밀: " + res.msg.title + " ,  " +res.msg.contents +
+                                res.msg.todoDate + " ,  " +res.msg.address + " ,  " +res.msg.isPrivate+ '<br>'+'</span>';
+
+                        }else if(res.type === 'remove-general'){
+
+                            // 일반 투두 제거
+                            console.log('res.msg: '+res.msg);
+                            document.querySelector('#d'+res.msg).style.display='none';
+
+
+                        }else if(res.type === 'upload-transport'){
+
+                            // 교통 추가
+                            console.log('res.msg.title: '+res.msg.title);
+                            console.log('res.msg.contents: '+res.msg.contents);
+                            console.log('res.msg.todoDate: '+res.msg.todoDate);
+                            console.log('res.msg.transportType: '+res.msg.transportType);
+                            console.log('res.msg.isPrivate: '+res.msg.isPrivate);
+                            response.innerHTML +=
+                                '<span style="background:yellow">'+ "교통todo 제목, 내용, 날짜, 종류, 비밀 : " + res.msg.title + " ,  " +res.msg.contents +
+                                res.msg.todoDate + " ,  " +res.msg.transportType + " ,  " +res.msg.isPrivate+'<br>'+'</span>';
+
+                        }else if(res.type === 'modify-transport'){
+
+                            // 교통 수정
+                            console.log('res.msg.title: '+res.msg.title);
+                            console.log('res.msg.contents: '+res.msg.contents);
+                            console.log('res.msg.todoDate: '+res.msg.todoDate);
+                            console.log('res.msg.transportType: '+res.msg.transportType);
+                            console.log('res.msg.isPrivate: '+res.msg.isPrivate);
+                            //document.querySelector('#d'+res.msg.tdIdx).style.display='none';
+                            //response.innerHTML +=
+                            let id = 'd'+res.msg.tdIdx;
+                            document.getElementById(id).innerHTML =
+                                '<span style="background:yellow">'+ "교통todo 제목, 내용, 날짜, 종류, 비밀: " + res.msg.title + " ,  " +res.msg.contents +
+                                res.msg.todoDate + " ,  " +res.msg.transportType + " ,  " +res.msg.isPrivate+ '<br>'+'</span>';
+
+                        }else if(res.type === 'remove-transport'){
+
+                            // 교통 삭제
+                            console.log('res.msg: '+res.msg);
+                            document.querySelector('#d'+res.msg).style.display='none';
+                        }
 
                     }
-                })
-            })
+                );
+            });
+
         }
-
-        // 연결해제
-        function Disconnect() {
-
+        function modTodoListDisconnect() {
             if (stompClient !== null) {
                 stompClient.disconnect();
             }
             console.log("Disconnected");
+
         }
+        //공유 인원 추가
+        function addGroup() {
 
+            let newUserId = newUser.value;
+            stompClient.send("/app/add-group/" + [[${planner.tpIdx}]], {}, JSON.stringify({'newUserId':newUserId}));
 
-        // 추가 =======================================================//
-
-        // 날짜
-        function addTodoList(e) {
-
+        }
+        //투두리스트 추가
+        function addTodoList() {
             let title = todolistTitleAdd.value;
-
-            if(e.keyCode == 13){
-
-                console.dir(title);
-                stompClient.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title' : title}));
-            }
-        }
-
-        // 수정 =======================================================//
-
-        // 날짜
-
-        function onClickModifyDate(tlIdx) {
-
-            // 원래 제목
-            var oriTitle = document.getElementById('i' + tlIdx);
-
-            // id 로 input 객체 가져오기
-            var input = document.getElementById('k' + tlIdx);
-
-            var newTitle = document.getElementById('l' + tlIdx);
-
-            var delBtn = document.getElementById('j' + tlIdx);
-
-
-            oriTitle.style.display = 'none';
-            input.style.display = '';
-            newTitle.style.display = 'none';
-            delBtn.style.display = '';
-
-            // 가져온 객체에 EventListener 를 추가한다.
-            input.addEventListener('keypress', function (key) {
-
-                var title = input.value;
-
-                if(key.key == 'Enter'){
-
-                    modifyTodoList(title, tlIdx);
-
-                    input.style.display = 'none';
-                    newTitle.style.display = '';
-                }
-            })
+            console.dir(title);
+            stompClient.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
 
         }
+        //투두리스트 수정
 
-        function modifyTodoList(title,tlIdx) {
+        document.querySelectorAll('.todolistmod').forEach(e => {
+            e.addEventListener('click', ev => {
 
-            console.log(title);
-            console.log(tlIdx);
+                let tlIdx = ev.target.dataset.tlidx;
+                console.log('tlIdx: '+tlIdx);
 
-            stompClient.send("/app/modify-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title, 'tlIdx':tlIdx}));
-        }
+                let todolistIdx = document.getElementById('tlidx'+tlIdx).value;
+                let todolistTitle = document.getElementById('tltitle'+tlIdx).value;
 
-        // 삭제 =======================================================//
+                console.log('todolistIdx: '+todolistIdx);
+                console.log('todolistTitle: '+todolistTitle);
 
-        // 날짜
+                stompClient.send("/app/modify-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':todolistTitle, 'tlIdx':todolistIdx}));
+
+            });
+
+        })
+        //투두리스트 삭제
 
         document.querySelectorAll('.todolistdel').forEach(e => {
+            e.addEventListener('click', ev => {
+
+                let tlIdx = ev.target.dataset.tlidx;
+                console.log('tlIdx: '+tlIdx);
+
+                let todolistIdx = document.getElementById('tlidx'+tlIdx).value;
+
+                console.log('todolistIdx: '+todolistIdx);
+
+                stompClient.send("/app/remove-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'tlIdx':todolistIdx}));
+
+            });
+
+        })
+        //숙박투두카드 추가
+
+        document.querySelectorAll('.actodoadd').forEach(e => {
+            e.addEventListener('click', ev => {
+
+                let tlIdx = ev.target.dataset.tlidx;
+                console.log('tlIdx: '+tlIdx);
+
+                let todolistIdx = document.getElementById('tlidx'+tlIdx).value;
+                let actodotitle = document.getElementById('actodotitleadd'+tlIdx).value;
+                let actodocontent = document.getElementById('actodocontentadd'+tlIdx).value;
+                let actododate = document.getElementById('actododateadd'+tlIdx).value;
+                let actodoaddress = document.getElementById('actodoaddressadd'+tlIdx).value;
+                let actodoprivate = document.getElementById('actodopvadd'+tlIdx).checked;
+
+                console.log('todolistIdx: '+todolistIdx);
+                console.log('actodotitle: '+actodotitle);
+                console.log('actodocontent: '+actodocontent);
+                console.log('actododate: '+actododate);
+                console.log('actodoaddress: '+actodoaddress);
+                console.log('actodoprivate: '+actodoprivate);
+
+                stompClient.send("/app/upload-accomodation/" + [[${planner.tpIdx}]]+"/"+tlIdx, {},
+                    JSON.stringify({'title':actodotitle, 'contents':actodocontent, 'todoDate':actododate,
+                        'address':actodoaddress, 'isPrivate':actodoprivate}));
+
+            });
+
+        })
+        //숙박투두카드 수정
+
+        document.querySelectorAll('.actodomod').forEach(e => {
+            e.addEventListener('click', ev => {
+
+                //let tlIdx = ev.target.dataset.tlidx;
+                //console.log('tlIdx: '+tlIdx);
+                let tdIdx = ev.target.dataset.tdidx;
+                console.log('tdIdx: '+tdIdx);
+
+                let actodoIdx = document.getElementById('tdidx'+tdIdx).value;
+                let actodotitle = document.getElementById('actodotitlemod'+tdIdx).value;
+                let actodocontent = document.getElementById('actodocontentmod'+tdIdx).value;
+                let actododate = document.getElementById('actododatemod'+tdIdx).value;
+                let actodoaddress = document.getElementById('actodoaddressmod'+tdIdx).value;
+                let actodoprivate = document.getElementById('actodopvmod'+tdIdx).checked;
+
+                console.log('actodoIdx: '+actodoIdx);
+                console.log('actodotitle: '+actodotitle);
+                console.log('actodocontent: '+actodocontent);
+                console.log('actododate: '+actododate);
+                console.log('actodoaddress: '+actodoaddress);
+                console.log('actodoprivate: '+actodoprivate);
+
+                stompClient.send("/app/modify-accomodation/" + [[${planner.tpIdx}]], {},
+                    JSON.stringify({'tdIdx':actodoIdx, 'title':actodotitle, 'contents':actodocontent, 'todoDate':actododate,
+                        'address':actodoaddress, 'isPrivate':actodoprivate}));
+
+            });
+
+        })
+        //숙박투두카드 삭제
+
+        document.querySelectorAll('.actododel').forEach(e => {
+            e.addEventListener('click', ev => {
+
+                let tlIdx = ev.target.dataset.tlidx;
+                let tdIdx = ev.target.dataset.tdidx;
+                console.log('tlIdx: '+tlIdx);
+                console.log('tdIdx: '+tdIdx);
+
+                let actodoIdx = document.getElementById('tdidx'+tdIdx).value;
+
+                console.log('actodoIdx: '+actodoIdx);
+
+                stompClient.send("/app/remove-accomodation/" + [[${planner.tpIdx}]]+"/"+tlIdx, {},
+                    JSON.stringify({'tdIdx':actodoIdx }));
+
+            });
+
+        })
+        //관광지투두카드 추가
+
+        document.querySelectorAll('.attodoadd').forEach(e => {
+            e.addEventListener('click', ev => {
+
+                let tlIdx = ev.target.dataset.tlidx;
+                console.log('tlIdx: '+tlIdx);
+
+                let todolistIdx = document.getElementById('tlidx'+tlIdx).value;
+                let attodotitle = document.getElementById('attodotitleadd'+tlIdx).value;
+                let attodocontent = document.getElementById('attodocontentadd'+tlIdx).value;
+                let attododate = document.getElementById('attododateadd'+tlIdx).value;
+                let attodoinfo = document.getElementById('attodoinfoadd'+tlIdx).value;
+                let attodoprivate = document.getElementById('attodopvadd'+tlIdx).checked;
+
+                console.log('todolistIdx: '+todolistIdx);
+                console.log('attodotitle: '+attodotitle);
+                console.log('attodocontent: '+attodocontent);
+                console.log('attododate: '+attododate);
+                console.log('attodoinfo: '+attodoinfo);
+                console.log('attodoprivate: '+attodoprivate);
+
+                stompClient.send("/app/upload-attractions/" + [[${planner.tpIdx}]]+"/"+tlIdx, {},
+                    JSON.stringify({'title':attodotitle, 'contents':attodocontent, 'todoDate':attododate,
+                        'attractions':attodoinfo, 'isPrivate':attodoprivate}));
+
+            });
+
+        })
+        //관광지투두카드 수정
+
+        document.querySelectorAll('.attodomod').forEach(e => {
+            e.addEventListener('click', ev => {
+
+                let tdIdx = ev.target.dataset.tdidx;
+                console.log('tdIdx: '+tdIdx);
+
+                let attodoIdx = document.getElementById('tdidx'+tdIdx).value;
+                let attodotitle = document.getElementById('attodotitlemod'+tdIdx).value;
+                let attodocontent = document.getElementById('attodocontentmod'+tdIdx).value;
+                let attododate = document.getElementById('attododatemod'+tdIdx).value;
+                let attodoinfo = document.getElementById('attodoinfomod'+tdIdx).value;
+                let attodoprivate = document.getElementById('attodopvmod'+tdIdx).checked;
+
+                console.log('attodoIdx: '+attodoIdx);
+                console.log('attodotitle: '+attodotitle);
+                console.log('attodocontent: '+attodocontent);
+                console.log('attododate: '+attododate);
+                console.log('attodoinfo: '+attodoinfo);
+                console.log('attodoprivate: '+attodoprivate);
+
+                stompClient.send("/app/modify-attractions/" + [[${planner.tpIdx}]], {},
+                    JSON.stringify({'tdIdx':attodoIdx, 'title':attodotitle, 'contents':attodocontent, 'todoDate':attododate,
+                        'attractions':attodoinfo, 'isPrivate':attodoprivate}));
+
+            });
+
+        })
+        //관광지투두카드 삭제
+
+        document.querySelectorAll('.attododel').forEach(e => {
+            e.addEventListener('click', ev => {
+
+                let tlIdx = ev.target.dataset.tlidx;
+                let tdIdx = ev.target.dataset.tdidx;
+                console.log('tlIdx: '+tlIdx);
+                console.log('tdIdx: '+tdIdx);
+
+                let attodoIdx = document.getElementById('tdidx'+tdIdx).value;
+
+                console.log('attodoIdx: '+attodoIdx);
+
+                stompClient.send("/app/remove-attractions/" + [[${planner.tpIdx}]]+"/"+tlIdx, {},
+                    JSON.stringify({'tdIdx':attodoIdx }));
+
+            });
+
+        })
+        //예산투두카드 추가
+
+        document.querySelectorAll('.bgtodoadd').forEach(e => {
+            e.addEventListener('click', ev => {
+
+                let tlIdx = ev.target.dataset.tlidx;
+                console.log('tlIdx: '+tlIdx);
+
+                let todolistIdx = document.getElementById('tlidx'+tlIdx).value;
+                let bgtodotitle = document.getElementById('bgtodotitleadd'+tlIdx).value;
+                let bgtodocontent = document.getElementById('bgtodocontentadd'+tlIdx).value;
+                let bgtododate = document.getElementById('bgtododateadd'+tlIdx).value;
+                let bgtodomoney = document.getElementById('bgtodomoneyadd'+tlIdx).value;
+                let bgtodotype = document.getElementById('bgtodotypeadd'+tlIdx).value;
+                let bgtodoprivate = document.getElementById('bgtodopvadd'+tlIdx).checked;
+
+                console.log('todolistIdx: '+todolistIdx);
+                console.log('bgtodotitle: '+bgtodotitle);
+                console.log('bgtodocontent: '+bgtodocontent);
+                console.log('bgtododate: '+bgtododate);
+                console.log('bgtodomoney: '+bgtodomoney);
+                console.log('bgtodotype: '+bgtodotype);
+                console.log('bgtodoprivate: '+bgtodoprivate);
+
+                stompClient.send("/app/upload-budget/" + [[${planner.tpIdx}]]+"/"+tlIdx, {},
+                    JSON.stringify({'title':bgtodotitle, 'contents':bgtodocontent, 'todoDate':bgtododate,
+                        'budget':bgtodomoney, 'budgetType':bgtodotype, 'isPrivate':bgtodoprivate}));
+
+            });
+
+        })
+        //예산투두카드 수정
+
+        document.querySelectorAll('.bgtodomod').forEach(e => {
+            e.addEventListener('click', ev => {
+
+                let tdIdx = ev.target.dataset.tdidx;
+                console.log('tdIdx: '+tdIdx);
+
+                let bgtodoIdx = document.getElementById('tdidx'+tdIdx).value;
+                let bgtodotitle = document.getElementById('bgtodotitlemod'+tdIdx).value;
+                let bgtodocontent = document.getElementById('bgtodocontentmod'+tdIdx).value;
+                let bgtododate = document.getElementById('bgtododatemod'+tdIdx).value;
+                let bgtodomoney = document.getElementById('bgtodomoneymod'+tdIdx).value;
+                let bgtodotype = document.getElementById('bgtodotypemod'+tdIdx).value;
+                let bgtodoprivate = document.getElementById('bgtodopvmod'+tdIdx).checked;
+
+                console.log('bgtodoIdx: '+bgtodoIdx);
+                console.log('bgtodotitle: '+bgtodotitle);
+                console.log('bgtodocontent: '+bgtodocontent);
+                console.log('bgtododate: '+bgtododate);
+                console.log('bgtodomoney: '+bgtodomoney);
+                console.log('bgtodotype: '+bgtodotype);
+                console.log('bgtodoprivate: '+bgtodoprivate);
+
+                stompClient.send("/app/modify-budget/" + [[${planner.tpIdx}]], {},
+                    JSON.stringify({'tdIdx':bgtodoIdx, 'title':bgtodotitle, 'contents':bgtodocontent, 'todoDate':bgtododate,
+                        'budget':bgtodomoney, 'budgetType':bgtodotype, 'isPrivate':bgtodoprivate}));
+
+            });
+
+        })
+        //예산투두카드 삭제
+
+        document.querySelectorAll('.bgtododel').forEach(e => {
+            e.addEventListener('click', ev => {
+
+                let tlIdx = ev.target.dataset.tlidx;
+                let tdIdx = ev.target.dataset.tdidx;
+                console.log('tlIdx: '+tlIdx);
+                console.log('tdIdx: '+tdIdx);
+
+                let bgtodoIdx = document.getElementById('tdidx'+tdIdx).value;
+
+                console.log('bgtodoIdx: '+bgtodoIdx);
+
+                stompClient.send("/app/remove-budget/" + [[${planner.tpIdx}]]+"/"+tlIdx, {},
+                    JSON.stringify({'tdIdx':bgtodoIdx }));
+
+            });
+
+
+        })
+        //일반투두카드 추가
+
+        document.querySelectorAll('.gntodoadd').forEach(e => {
+            e.addEventListener('click', ev => {
+
+                let tlIdx = ev.target.dataset.tlidx;
+                console.log('tlIdx: '+tlIdx);
+
+                let todolistIdx = document.getElementById('tlidx'+tlIdx).value;
+                let gntodotitle = document.getElementById('gntodotitleadd'+tlIdx).value;
+                let gntodocontent = document.getElementById('gntodocontentadd'+tlIdx).value;
+                let gntododate = document.getElementById('gntododateadd'+tlIdx).value;
+                let gntodoaddress = document.getElementById('gntodoaddressadd'+tlIdx).value;
+                let gntodoprivate = document.getElementById('gntodopvadd'+tlIdx).checked;
+
+                console.log('todolistIdx: '+todolistIdx);
+                console.log('gntodotitle: '+gntodotitle);
+                console.log('gntodocontent: '+gntodocontent);
+                console.log('gntododate: '+gntododate);
+                console.log('gntodoaddress: '+gntodoaddress);
+                console.log('gntodoprivate: '+gntodoprivate);
+
+                stompClient.send("/app/upload-general/" + [[${planner.tpIdx}]]+"/"+tlIdx, {},
+                    JSON.stringify({'title':gntodotitle, 'contents':gntodocontent, 'todoDate':gntododate,
+                        'address':gntodoaddress, 'isPrivate':gntodoprivate}));
+
+            });
+
+        })
+        //일반투두카드 수정
+
+        document.querySelectorAll('.gntodomod').forEach(e => {
+            e.addEventListener('click', ev => {
+
+                let tdIdx = ev.target.dataset.tdidx;
+                console.log('tdIdx: '+tdIdx);
+
+                let gntodoIdx = document.getElementById('tdidx'+tdIdx).value;
+                let gntodotitle = document.getElementById('gntodotitlemod'+tdIdx).value;
+                let gntodocontent = document.getElementById('gntodocontentmod'+tdIdx).value;
+                let gntododate = document.getElementById('gntododatemod'+tdIdx).value;
+                let gntodoaddress = document.getElementById('gntodoaddressmod'+tdIdx).value;
+                let gntodoprivate = document.getElementById('gntodopvmod'+tdIdx).checked;
+
+                console.log('gntodoIdx: '+gntodoIdx);
+                console.log('gntodotitle: '+gntodotitle);
+                console.log('gntodocontent: '+gntodocontent);
+                console.log('gntododate: '+gntododate);
+                console.log('gntodoaddress: '+gntodoaddress);
+                console.log('gntodoprivate: '+gntodoprivate);
+
+                stompClient.send("/app/modify-general/" + [[${planner.tpIdx}]], {},
+                    JSON.stringify({'tdIdx':gntodoIdx, 'title':gntodotitle, 'contents':gntodocontent, 'todoDate':gntododate,
+                        'address':gntodoaddress, 'isPrivate':gntodoprivate}));
+
+            });
+
+        })
+        //일반투두카드 삭제
+
+        document.querySelectorAll('.gntododel').forEach(e => {
+            e.addEventListener('click', ev => {
+
+                let tlIdx = ev.target.dataset.tlidx;
+                let tdIdx = ev.target.dataset.tdidx;
+                console.log('tlIdx: '+tlIdx);
+                console.log('tdIdx: '+tdIdx);
+
+                let gntodoIdx = document.getElementById('tdidx'+tdIdx).value;
+
+                console.log('gntodoIdx: '+gntodoIdx);
+
+                stompClient.send("/app/remove-general/" + [[${planner.tpIdx}]]+"/"+tlIdx, {},
+                    JSON.stringify({'tdIdx':gntodoIdx }));
+
+            });
+
+        })
+        //교통투두카드 추가
+
+        document.querySelectorAll('.trtodoadd').forEach(e => {
+            e.addEventListener('click', ev => {
+
+                let tlIdx = ev.target.dataset.tlidx;
+                console.log('tlIdx: '+tlIdx);
+
+                let todolistIdx = document.getElementById('tlidx'+tlIdx).value;
+                let trtodotitle = document.getElementById('trtodotitleadd'+tlIdx).value;
+                let trtodocontent = document.getElementById('trtodocontentadd'+tlIdx).value;
+                let trtododate = document.getElementById('trtododateadd'+tlIdx).value;
+                let trtodotype = document.getElementById('trtodotypeadd'+tlIdx).value;
+                let trtodoprivate = document.getElementById('trtodopvadd'+tlIdx).checked;
+
+                console.log('todolistIdx: '+todolistIdx);
+                console.log('trtodotitle: '+trtodotitle);
+                console.log('trtodocontent: '+trtodocontent);
+                console.log('trtododate: '+trtododate);
+                console.log('trtodotype: '+trtodotype);
+                console.log('trtodoprivate: '+trtodoprivate);
+
+                stompClient.send("/app/upload-transport/" + [[${planner.tpIdx}]]+"/"+tlIdx, {},
+                    JSON.stringify({'title':trtodotitle, 'contents':trtodocontent, 'todoDate':trtododate,
+                        'transportType':trtodotype, 'isPrivate':trtodoprivate}));
+
+            });
+
+        })
+        //교통투두카드 수정
+
+        document.querySelectorAll('.trtodomod').forEach(e => {
+            e.addEventListener('click', ev => {
+
+                let tdIdx = ev.target.dataset.tdidx;
+                console.log('tdIdx: '+tdIdx);
+
+                let trtodoIdx = document.getElementById('tdidx'+tdIdx).value;
+                let trtodotitle = document.getElementById('trtodotitlemod'+tdIdx).value;
+                let trtodocontent = document.getElementById('trtodocontentmod'+tdIdx).value;
+                let trtododate = document.getElementById('trtododatemod'+tdIdx).value;
+                let trtodotype = document.getElementById('trtodotypemod'+tdIdx).value;
+                let trtodoprivate = document.getElementById('trtodopvmod'+tdIdx).checked;
+
+                console.log('trtodoIdx: '+trtodoIdx);
+                console.log('trtodotitle: '+trtodotitle);
+                console.log('trtodocontent: '+trtodocontent);
+                console.log('trtododate: '+trtododate);
+                console.log('trtodotype: '+trtodotype);
+                console.log('trtodoprivate: '+trtodoprivate);
+
+                stompClient.send("/app/modify-transport/" + [[${planner.tpIdx}]], {},
+                    JSON.stringify({'tdIdx':trtodoIdx, 'title':trtodotitle, 'contents':trtodocontent, 'todoDate':trtododate,
+                        'transportType':trtodotype, 'isPrivate':trtodoprivate}));
+
+            });
+
+        })
+        //교통투두카드 삭제
+        document.querySelectorAll('.trtododel').forEach(e => {
 
             e.addEventListener('click', ev => {
 
                 let tlIdx = ev.target.dataset.tlidx;
-                console.log('tlIdx: '+ tlIdx);
+                let tdIdx = ev.target.dataset.tdidx;
+                console.log('tlIdx: '+tlIdx);
+                console.log('tdIdx: '+tdIdx);
 
-                stompClient.send("/app/remove-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'tlIdx':tlIdx}));
+                let trtodoIdx = document.getElementById('tdidx'+tdIdx).value;
+
+                console.log('trtodoIdx: '+trtodoIdx);
+
+                stompClient.send("/app/remove-transport/" + [[${planner.tpIdx}]]+"/"+tlIdx, {},
+                    JSON.stringify({'tdIdx':trtodoIdx }));
 
             });
         })
 
-        Connect();
+        function checkTlIdx(str) {
 
+            console.log(str);
+        }
+        connect();
     </script>
+    <!--<span>공유 인원 목록</span>
+        <ol>
+
+            <li th:each="group : ${planner.travelGroup.participants}">
+              <p th:text="${group.member.userId}">
+
+             </li>
+
+             &lt;!&ndash;  <form th:action="@{/planner/add-group}" method="post" >
+              <input type="text" th:value="group1B" name="newUserId"/>
+                <input type="hidden" th:value="${planner.tpIdx}" name="tpIdx"/>
+                <button><span>공유 인원 추가</span></button>
+            </form>
+            &ndash;&gt;
+        </ol>
+                <div id="addGroupResponse"></div>
+                <input type="text" th:value="group1B" name="newUserId" id ="newUser"/>
+                <button onclick="addGroup()"><span>공유 인원 추가</span></button>
+    </div>
+
+    <div class="article_content">
+        <pre>[[${planner.title}]]</pre>
+    </div>
+    <div class="btn_section">
+
+        <button onclick="location.href='/planner/list'"><span>목록으로 돌아가기</span></button>
+
+
+    </div>
+    <br>
+    <br>-->
+
 </div>
-
 </body>
-
 </html>
