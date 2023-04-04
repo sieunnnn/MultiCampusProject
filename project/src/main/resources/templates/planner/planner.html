@@ -95,7 +95,7 @@
                                 <div class="date">
                                     <div th:text="${todolist.title}"></div>
                                     <div>
-                                        <input type="text" readonly th:value="${todolist.tlIdx}" th:id="|tlidx${todolist.tlIdx}|"/>
+                                        <input type="text" style="display: none" readonly th:value="${todolist.tlIdx}" th:id="|tlidx${todolist.tlIdx}|"/>
                                         <input type="text" th:value="${todolist.title}" th:id="|tltitle${todolist.tlIdx}|"/>
                                         <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="todolistmod">todolist 제목 수정</button>
                                         <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="todolistdel">todolist 삭제</button>
@@ -299,7 +299,26 @@
             // 여행그룹이 아닌 사람은 읽기전용
             if (!isTravelGroup) {
 
-                $('input').prop('readonly', true);
+                // 읽기 전용
+                //$('input').prop('readonly', true);
+
+                // 안보이게
+                $('input').hide();
+                $('.todolistmod').hide();
+                $('.todolistdel').hide();
+                $('.actodomod').hide();
+                $('.actododel').hide();
+                $('.attodomod').hide();
+                $('.attododel').hide();
+                $('.bgtodomod').hide();
+                $('.bgtododel').hide();
+                $('.gntodomod').hide();
+                $('.gntododel').hide();
+                $('.trtodomod').hide();
+                $('.trtododel').hide();
+                $('.open').hide();
+                $('.add__card').hide();
+                $('#addDate').hide();
             }
         }
 
@@ -375,9 +394,7 @@
             location.reload();
         }
 
-        // ===========================================================//
-
-        // 웹소켓 ==============================================================================================//
+        /* [start] 웹소켓 ============================================================================================== */
 
         var stompClient = null;
         //모듈화
@@ -508,7 +525,7 @@
                         }else if(res.type === 'upload-budget'){
 
                             // 예산 추가
-                            console.log('res.msg.title: '+res.msg.title);
+                            console.log('res.msg.title:', res.msg.title);
                             console.log('res.msg.contents: '+res.msg.contents);
                             console.log('res.msg.todoDate: '+res.msg.todoDate);
                             console.log('res.msg.budget: '+res.msg.budget);
@@ -627,6 +644,7 @@
             });
 
         }
+
         function modTodoListDisconnect() {
             if (stompClient !== null) {
                 stompClient.disconnect();
@@ -634,6 +652,7 @@
             console.log("Disconnected");
 
         }
+
         //공유 인원 추가
         function addGroup() {
 
@@ -641,6 +660,7 @@
             stompClient.send("/app/add-group/" + [[${planner.tpIdx}]], {}, JSON.stringify({'newUserId':newUserId}));
 
         }
+
         //투두리스트 추가
         function addTodoList() {
             let title = todolistTitleAdd.value;
@@ -648,6 +668,7 @@
             stompClient.send("/app/upload-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':title}));
 
         }
+
         //투두리스트 수정
 
         document.querySelectorAll('.todolistmod').forEach(e => {
@@ -667,6 +688,7 @@
             });
 
         })
+
         //투두리스트 삭제
 
         document.querySelectorAll('.todolistdel').forEach(e => {
@@ -684,6 +706,7 @@
             });
 
         })
+
         //숙박투두카드 추가
 
         document.querySelectorAll('.actodoadd').forEach(e => {
@@ -713,6 +736,7 @@
             });
 
         })
+
         //숙박투두카드 수정
 
         document.querySelectorAll('.actodomod').forEach(e => {
@@ -744,6 +768,7 @@
             });
 
         })
+
         //숙박투두카드 삭제
 
         document.querySelectorAll('.actododel').forEach(e => {
@@ -764,6 +789,7 @@
             });
 
         })
+
         //관광지투두카드 추가
 
         document.querySelectorAll('.attodoadd').forEach(e => {
@@ -793,6 +819,7 @@
             });
 
         })
+
         //관광지투두카드 수정
 
         document.querySelectorAll('.attodomod').forEach(e => {
@@ -822,6 +849,7 @@
             });
 
         })
+
         //관광지투두카드 삭제
 
         document.querySelectorAll('.attododel').forEach(e => {
@@ -842,6 +870,7 @@
             });
 
         })
+
         //예산투두카드 추가
 
         document.querySelectorAll('.bgtodoadd').forEach(e => {
@@ -873,6 +902,7 @@
             });
 
         })
+
         //예산투두카드 수정
 
         document.querySelectorAll('.bgtodomod').forEach(e => {
@@ -904,6 +934,7 @@
             });
 
         })
+
         //예산투두카드 삭제
 
         document.querySelectorAll('.bgtododel').forEach(e => {
@@ -925,6 +956,7 @@
 
 
         })
+
         //일반투두카드 추가
 
         document.querySelectorAll('.gntodoadd').forEach(e => {
@@ -954,6 +986,7 @@
             });
 
         })
+
         //일반투두카드 수정
 
         document.querySelectorAll('.gntodomod').forEach(e => {
@@ -983,6 +1016,7 @@
             });
 
         })
+
         //일반투두카드 삭제
 
         document.querySelectorAll('.gntododel').forEach(e => {
@@ -1003,6 +1037,7 @@
             });
 
         })
+
         //교통투두카드 추가
 
         document.querySelectorAll('.trtodoadd').forEach(e => {
@@ -1032,6 +1067,7 @@
             });
 
         })
+
         //교통투두카드 수정
 
         document.querySelectorAll('.trtodomod').forEach(e => {
@@ -1061,6 +1097,7 @@
             });
 
         })
+
         //교통투두카드 삭제
         document.querySelectorAll('.trtododel').forEach(e => {
 
@@ -1080,6 +1117,8 @@
 
             });
         })
+
+        /* [end] 웹소켓 ============================================================================================== */
 
         connect();
     </script>
