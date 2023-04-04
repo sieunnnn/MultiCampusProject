@@ -47,9 +47,8 @@ public class Note {
 //	@JoinColumn(name = "userId")
 //	private Member member2;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@Builder.Default
-	private List<Member> members = new ArrayList<>();
+	@OneToMany
+	private List<Partner> partners = new ArrayList<>();
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@Builder.Default
