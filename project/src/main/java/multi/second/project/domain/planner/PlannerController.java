@@ -70,6 +70,24 @@ public class PlannerController {
 		return "/planner/list";
 	}
 	
+	//다른사람의 플래너를 볼 때
+	@GetMapping("other-list")
+	public String plannerOtherList(
+			@PageableDefault(size=10, sort="tpIdx", direction = Direction.DESC, page = 0)
+			Pageable pageable,
+			Model model,
+			String profileId//다른사람 프로필에서 플래너 보기를 누를때
+			//<a th:href="@{|/planner/other-list?profileId=${profile.member.userId}|}"></a>
+			) {
+		
+		//다른사람의 플래너를 볼 수 있지만 편집은 불가해야한다. 
+		//-> 어떻게 할까? 일단 백앤드에서 예외처리를하자 그룹인원이 아니면 권한없다고 하도록
+		Map<String, Object> commandMap = plannerService.findPlannerListByUserId(profileId,pageable);
+		model.addAllAttributes(commandMap);
+		
+		return "/planner/planner-list";
+	}
+	
 	//planner추가
 	@PostMapping("create")
 	public String create(
