@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout}"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<link href="/css/board/board.css" rel="stylesheet"> 
+</head>
+<body>
+
+<div class="content container" layout:fragment="content">   
+    <h2 class="tit">*게시판</h2>
+    <div class="desc_board">
+      <div class="info" >
+          <span >번호 : [[${board.bdIdx}]]</span>
+          <span>제목 : [[${board.title}]]</span>
+          <span>등록일 : [[${board.regDateAsDate}]]</span>
+          <span>작성자 : [[${board.userId}]]</span>
+      </div>
+      <div class="info file_info">
+      	<ol>
+      		<li th:each="file : ${board.filePathDtos}">  
+      	 		<a th:href="@{/board/download(fpIdx=${file.fpIdx})}" th:text="${file.originFileName}"></a> 
+      	 	</li>	     
+      	</ol>
+      </div>
+      <div class="article_content">
+      	<pre>[[${board.content}]]</pre>
+      </div>
+      <div class="btn_section">
+      
+          <button onclick="location.href='/board/list'"><span>목록</span></button>
+          
+          
+          <th:block sec:authorize="isAuthenticated()" th:if="${board.userId eq #authentication.name}">
+	          <form th:action="@{/board/remove}" method="post" >
+	          	<input type="hidden" th:value="${board.bdIdx}" name="bdIdx"/> 
+	          	<button id="btnDel"><span>삭제</span></button>
+	          </form>
+	          <form action="/board/modify" method="get">
+	          	<input type="hidden" th:value="${board.bdIdx}" name="bdIdx"/> 
+	          	<button id="btnModify"><span>수정</span></button>
+	          </form>	
+          </th:block>
+          
+      </div>
+   </div>
+</div>
+
+
+
+</body>
+</html>
