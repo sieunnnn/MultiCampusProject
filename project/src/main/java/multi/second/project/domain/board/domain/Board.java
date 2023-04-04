@@ -1,4 +1,4 @@
-package multi.second.project.domain.board;
+package multi.second.project.domain.board.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,10 +20,7 @@ import java.util.List;
 @Entity
 @DynamicInsert // insert 쿼리를 생성할 때 null인 필드는 쿼리에서 생략
 @DynamicUpdate // entity에서 변경이 발견되지 않은 값은 쿼리에서 생략
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
+@Builder @NoArgsConstructor @AllArgsConstructor @Getter
 public class Board {
 
     @Id

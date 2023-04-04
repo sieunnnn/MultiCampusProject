@@ -14,8 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 
-import multi.second.project.domain.comment.dto.request.CommentRegistRequest;
-import multi.second.project.domain.gallery.domain.Gallery;
+
 import multi.second.project.domain.group.repository.TravelGroupRepository;
 import multi.second.project.domain.member.MemberRepository;
 import multi.second.project.domain.member.dto.Principal;

@@ -66,15 +66,15 @@ public class MemberService implements UserDetailsService{
 		
 	}
 
-//	public Principal authenticateUser(LoginRequest loginRequest) {
-//		
-//		Member member = memberRepository.findByUserIdAndIsLeave(loginRequest.getUserId(), false);
-//		
-//		if(member == null) return null;
-//		if(!passwordEncoder.matches(loginRequest.getPassword(), member.getPassword())) return null;
-//		
-//		return new Principal(member);
-//	}
+	public Principal authenticateUser(LoginRequest loginRequest) {
+
+		Member member = memberRepository.findByUserIdAndIsLeave(loginRequest.getUserId(), false);
+
+		if(member == null) return null;
+		if(!passwordEncoder.matches(loginRequest.getPassword(), member.getPassword())) return null;
+
+		return new Principal(member);
+	}
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
