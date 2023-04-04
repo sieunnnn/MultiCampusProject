@@ -36,7 +36,7 @@ public class MemberControllerTest {
 	public void testSignUpImpl() throws Exception {
 		
 		SignUpRequest form = new SignUpRequest();
-		form.setUserId("guswnd1212");
+		form.setUserId("guswnd2050");
 		form.setPassword("123qwe!@#QWE");
 		form.setEmail("azimemory@gmail.com");
 		form.setGrade("ROLE_USER");

@@ -33,8 +33,18 @@
         <div class="wrapper__setting__friends">
             <div class="wrapper__setting__btn">
                 <!-- 경로는 나중에 알맞게 수정 해주세요 -->
+
+                <span th:each="note, status : ${noteList}">
+
+                    <span th:each="partner :${note.partnerResponse}">
+
+                        <p th:text="${partner.member.userId}"/>
+                    </span>
+
+                 </span>
                 <div th:onclick="|location.href='@{/add/note}'|">
                     <input type="button" class="btn__add__friends" value="친구 추가">
+
                 </div>
                 <span class="divider"></span>
                 <div th:onclick="|location.href='@{/delete/note}'|">
