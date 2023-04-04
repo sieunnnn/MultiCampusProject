@@ -67,7 +67,7 @@ public class PlannerController {
 		Map<String, Object> commandMap = plannerService.findPlannerListByUserId(UserPrincipal.getUserPrincipal().getPrincipal().getUserId(),pageable);
 		model.addAllAttributes(commandMap);
 		
-		return "/planner/planner-list";
+		return "/planner/list";
 	}
 	
 	//planner추가
