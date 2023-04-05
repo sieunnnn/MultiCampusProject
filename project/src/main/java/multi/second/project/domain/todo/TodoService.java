@@ -209,68 +209,74 @@ public class TodoService {
 //		return true;
 //	}
 	@Transactional
-	public void AccomodationDeleteTodo(TodoDeleteRequest dto, Long tlIdx) {
+	public void AccomodationDeleteTodo(TodoDeleteRequest dto) {
 		
 		Todo todo = accomodationRepository.findById(dto.getTdIdx())
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
 		System.out.println("todo.getTdIdx()"+todo.getTdIdx());
-//		TodoList todoList = todoListRepository.findByTodosTdIdx(tdIdx);
-		TodoList todoList = todoListRepository.findById(tlIdx)
-				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
-		System.out.println("todoList.getTlIdx()"+todoList.getTlIdx());
+		TodoList todoList = todoListRepository.findByTodosTdIdx(dto.getTdIdx());
+		System.out.println("todoList.getTlIdx() : " +todoList.getTlIdx());
+		
+//		TodoList todoList = todoListRepository.findById(tlIdx)
+//				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+//		System.out.println("todoList.getTlIdx()"+todoList.getTlIdx());
 		
 		todoList.removeTodo(todo);
 		accomodationRepository.delete((AccomodationTodo) todo);
 		
 	}
 	@Transactional
-	public void AttractionsDeleteTodo(TodoDeleteRequest dto, Long tlIdx) {
+	public void AttractionsDeleteTodo(TodoDeleteRequest dto) {
 		
 		Todo todo = attractionsRepository.findById(dto.getTdIdx())
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
-		TodoList todoList = todoListRepository.findById(tlIdx)
-				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+//		TodoList todoList = todoListRepository.findById(tlIdx)
+//				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		TodoList todoList = todoListRepository.findByTodosTdIdx(dto.getTdIdx());
 		
 		todoList.removeTodo(todo);
 		attractionsRepository.delete((AttractionsTodo) todo);
 		
 	}
 	@Transactional
-	public void BudgetDeleteTodo(TodoDeleteRequest dto, Long tlIdx) {
+	public void BudgetDeleteTodo(TodoDeleteRequest dto) {
 		
 		Todo todo = budgetRepository.findById(dto.getTdIdx())
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
-		TodoList todoList = todoListRepository.findById(tlIdx)
-				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+//		TodoList todoList = todoListRepository.findById(tlIdx)
+//				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		TodoList todoList = todoListRepository.findByTodosTdIdx(dto.getTdIdx());
 		
 		todoList.removeTodo(todo);
 		budgetRepository.delete((BudgetTodo) todo);
 		
 	}
 	@Transactional
-	public void GeneralDeleteTodo(TodoDeleteRequest dto, Long tlIdx) {
+	public void GeneralDeleteTodo(TodoDeleteRequest dto) {
 		
 		Todo todo = generalRepository.findById(dto.getTdIdx())
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
-		TodoList todoList = todoListRepository.findById(tlIdx)
-				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+//		TodoList todoList = todoListRepository.findById(tlIdx)
+//				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		TodoList todoList = todoListRepository.findByTodosTdIdx(dto.getTdIdx());
 		
 		todoList.removeTodo(todo);
 		generalRepository.delete((GeneralTodo) todo);
 		
 	}
 	@Transactional
-	public void TransportDeleteTodo(TodoDeleteRequest dto, Long tlIdx) {
+	public void TransportDeleteTodo(TodoDeleteRequest dto) {
 		
 		Todo todo = transportRepository.findById(dto.getTdIdx())
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 		
-		TodoList todoList = todoListRepository.findById(tlIdx)
-				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+//		TodoList todoList = todoListRepository.findById(tlIdx)
+//				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
+		TodoList todoList = todoListRepository.findByTodosTdIdx(dto.getTdIdx());
 		
 		todoList.removeTodo(todo);
 		transportRepository.delete((TransportTodo) todo);
