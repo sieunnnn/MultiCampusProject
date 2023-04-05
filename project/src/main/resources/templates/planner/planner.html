@@ -89,7 +89,7 @@
                     <!-- 계획 박스 -->
                     <div class="container__kanban">
 
-                        <div class="wrapper__planner__list">
+                        <div class="wrapper__planner__list" th:id= "wrapperPlannerList">
 
                             <div th:each="todolist, status : ${planner.todolistResponses}" th:id="|f${todolist.tlIdx}|" class="wrapper__date__box">
                                 <div class="date">
@@ -101,12 +101,13 @@
 
                                 </div>
 
-                                
+                                <div th:id= "|plannerTodo${todolist.tlIdx}|">
                                     <div th:each="todo : ${todolist.todoResponses}" th:switch="${#strings.toString(todo.todoType)}" th:id="|d${todo.tdIdx}|" class="card">
                                         <div th:case="Accomodation">
                                             
-                                                <p th:text="${todo.title}"/><p th:text="${todo.contents}"/><p th:text="${todo.todoDate}"/><p th:text="${todo.isPrivate}"/>
-                                                <p th:text="${todo.acAddress}"/>
+                                                <p th:text="${todo.title}" th:id="|actitle${todo.tdIdx}|"/><p th:text="${todo.contents}" th:id="|accontents${todo.tdIdx}|"/>
+                                                <p th:text="${todo.todoDate}" th:id="|actododate${todo.tdIdx}|"/><p th:text="${todo.isPrivate}" th:id="|acisPrivate${todo.tdIdx}|"/>
+                                                <p th:text="${todo.acAddress}" th:id="|acaddress${todo.tdIdx}|"/>
                                                 <input type="text" readonly th:value="${todo.tdIdx}" th:id="|tdidx${todo.tdIdx}|"/>
                                                 <input type="text" th:value="${todo.title}" th:id="|actodotitlemod${todo.tdIdx}|"/>
                                                 <input type="text" th:value="${todo.contents}" th:id="|actodocontentmod${todo.tdIdx}|"/>
@@ -174,31 +175,31 @@
                                         
                                     </div>
                                 
-
-                                <!-- 투두 카드 생기는 곳 -->
-                                <div th:id="response"></div>
+                                	<!-- 투두 카드 생기는 곳 -->
+                                	<div th:id="'response' + ${todolist.tlIdx}"></div>
+                                </div>
 
                                 <!-- 버튼 클릭하면 카드 생성 (column) -->
-                                <button class="open" th:onclick="addCard([[${todolist.tlIdx}]])" th:id="'addCardBtn' + ${todolist.tlIdx}"></button>
+                                <button class="open" th:onclick="addCard([[${todolist.tlIdx}]])" th:id="'addCardBtn' + ${todolist.tlIdx}" ></button>
 
                                 <!-- 등록 -->
                                 <div style="display: none; background-color: white" class="add__card" th:id="'addCard' + ${todolist.tlIdx}">
 
                                     <!-- 독바 -->
-                                    <div class="wrapper__bar" th:id="'addWhat' + ${todolist.tlIdx}">
-                                        <button th:onclick="showAddTodo([[${todolist.tlIdx}]])">
+                                    <div class="wrapper__bar" th:id="'addWhat' + ${todolist.tlIdx}" >
+                                        <button th:onclick="showAddTodo([[${todolist.tlIdx}]])" >
                                             <img src="/img/btn_todo.png">
                                         </button>
-                                        <button th:onclick="showAddTransport([[${todolist.tlIdx}]])">
+                                        <button th:onclick="showAddTransport([[${todolist.tlIdx}]])" >
                                             <img src="/img/btn_transport.png">
                                         </button>
-                                        <button th:onclick="showAddAccommodation([[${todolist.tlIdx}]])">
+                                        <button th:onclick="showAddAccommodation([[${todolist.tlIdx}]])" >
                                             <img src="/img/btn_accommodation.png">
                                         </button>
-                                        <button th:onclick="showAddMap([[${todolist.tlIdx}]])">
+                                        <button th:onclick="showAddMap([[${todolist.tlIdx}]])" >
                                             <img src="/img/img_maps.png">
                                         </button>
-                                        <button style="margin-right: 2px" th:onclick="showAddBudget([[${todolist.tlIdx}]])">
+                                        <button style="margin-right: 2px" th:onclick="showAddBudget([[${todolist.tlIdx}]])" >
                                             <img src="/img/btn_calculator.png">
                                         </button>
                                     </div>
@@ -251,11 +252,11 @@
                                 </div>
 
                                 <!-- 하루 총 예산 -->
-                                <div id="costPerDay"></div>
+                                <div th:id="|costPerDay${todolist.tlIdx}|"></div>
 
                             </div>
 
-                            <div th:id="addDateResponse"></div>
+                            <div id="addDateResponse" ></div>
 
                             <div id="addDate">
                                 <input type="text" th:value="제목없음" name="todolistTitleAdd" id="todolistTitleAdd"/>
@@ -412,15 +413,16 @@
                         console.log('res: '+res);
                         // 그룹추가
                         if(res.type === 'add-group'){
-                            response.innerHTML += '<span style="background:yellow">'+ res.msg.userId + '<br>'+'</span>';
+                           // response.innerHTML += '<span style="background:yellow">'+ res.msg.userId + '<br>'+'</span>';
 
                         }else if(res.type === 'upload-todolist'){
                         	
-                        	
+                            let dateResponse = document.getElementById("addDateResponse");
+                            let wpl = document.getElementById("wrapperPlannerList");
                         	let todolist = document.createElement("div");
                         	todolist.id='f'+res.msg.tlIdx;
                         	todolist.className = "wrapper__date__box";
-                        	addDateResponse.after(todolist);
+                        	wpl.insertBefore(todolist,dateResponse);
                         	
                         	let date = document.createElement("div");
                         	date.id ="date"+res.msg.tlIdx;
@@ -428,7 +430,7 @@
                         	document.querySelector('#f'+res.msg.tlIdx).appendChild(date);
                         	
                         	let tl = document.createElement("div");
-                        	tl.innerText= res.msg.title;
+                        	tl.innerText= res.msg.title+" "+res.msg.tlIdx;
                         	tl.id = "tl"+res.msg.tlIdx;
                         	document.querySelector('#date'+res.msg.tlIdx).appendChild(tl);
                         	
@@ -454,7 +456,7 @@
                                 console.log('todolistTitle: '+todolistTitle);
 								
                                 stompClient.send("/app/modify-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':todolistTitle, 'tlIdx':todolistIdx}));
-                                //tl.innerText = todolistTitle;//음..
+                                
                         	});
                         	
                         	let todolistdel = document.createElement("button");
@@ -474,52 +476,36 @@
                                 stompClient.send("/app/remove-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'tlIdx':todolistIdx}));
 
                         	});
+                        	
+                        	//////////////
+                        	let plannerTodo = document.createElement("div");
+                        	plannerTodo.id = "plannerTodo"+res.msg.tlIdx;
+                        	document.querySelector('#f'+res.msg.tlIdx).appendChild(plannerTodo);
                         	/////////////////
                         	
-                        	//let todo = document.createElement("div");
-                        	//todo.id='d'+res.msg.tlIdx;
-                        	//todo.className = "card";
-                        	//document.querySelector('#f'+res.msg.tlIdx).appendChild(todo);
                         	
-                        	//let actodo = document.createElement("div");
-                        	//actodo.id='ac'+res.msg.tlIdx;
-                        	//actodo.className = "actodo";
-                        	//document.querySelector('#d'+res.msg.tlIdx).appendChild(actodo);
-                        	
-                        	
-                        	//let attodo = document.createElement("div");
-                        	//attodo.id='at'+res.msg.tlIdx;
-                        	//attodo.className = "actodo";
-                        	//document.querySelector('#d'+res.msg.tlIdx).appendChild(attodo);
-                        	
-                        	
-                        	//let bgtodo = document.createElement("div");
-                        	//bgtodo.id='bg'+res.msg.tlIdx;
-                        	//bgtodo.className = "bgtodo";
-                        	//document.querySelector('#d'+res.msg.tlIdx).appendChild(bgtodo);
-                        	
-                        	
-                        	//let gntodo = document.createElement("div");
-                        	//gntodo.id='gn'+res.msg.tlIdx;
-                        	//gntodo.className = "gntodo";
-                        	//document.querySelector('#d'+res.msg.tlIdx).appendChild(gntodo);
-                        	
-
-                        	//let trtodo = document.createElement("div");
-                        	//trtodo.id='tr'+res.msg.tlIdx;
-                        	//trtodo.className = "trtodo";
-                        	//document.querySelector('#d'+res.msg.tlIdx).appendChild(trtodo);
-                        	
-                        	/////////////////
-                        	let tdresponse = document.createElement("div");
-                        	tdresponse.id="mresponse";
-                        	document.querySelector('#f'+res.msg.tlIdx).appendChild(tdresponse);
+                        	//let tdresponse = document.createElement("div");
+                        	//tdresponse.id="mresponse";
+                        	//document.querySelector('#f'+res.msg.tlIdx).appendChild(tdresponse);
                         	
                         	let addcardbtn = document.createElement("button");
                         	addcardbtn.id="addCardBtn"+ res.msg.tlIdx;
                         	addcardbtn.className = "open";
-                        	addcardbtn.onclick=function(){addCard(res.msg.tlIdx);};
+                        	//addcardbtn.onclick=function(){addCard(res.msg.tlIdx);};
+                        	addcardbtn.dataset.tlidx = res.msg.tlIdx;
                         	document.querySelector('#f'+res.msg.tlIdx).appendChild(addcardbtn);
+                        	addcardbtn.addEventListener('click', ev => {
+                        		let str = ev.target.dataset.tlidx;
+                        		console.log('str: '+str);
+                        		
+                        		document.getElementById('addCard' + str).style.display = '';
+                                document.getElementById('addAccommodation' + str).style.display = 'none';
+                              	//document.getElementById('addAttraction' + str).style.display = 'none';
+                                //document.getElementById('addBudget' + str).style.display = 'none';
+                                //document.getElementById('addGeneral' + str).style.display = 'none';
+                                //document.getElementById('addTrans' + str).style.display = 'none';
+                                document.getElementById('addCardBtn' + str).style.display = 'none';
+                        	});
                         	
                         	let addcard = document.createElement("div");
                         	addcard.id="addCard"+res.msg.tlIdx;
@@ -533,13 +519,31 @@
                         	addwhat.className = "wrapper__bar";
                         	document.querySelector('#addCard'+res.msg.tlIdx).appendChild(addwhat);
                         	
-                        	<!-- 독바 -->
+                        	
+                        	
                         	let showAddAc = document.createElement("button");
                         	showAddAc.id="showAddAccommodation"+ res.msg.tlIdx;
-                        	showAddAc.onclick=function(){showAddAccommodation(res.msg.tlIdx);};
-                        	showAddAc.innerHTML= '<img src="/img/btn_accommodation.png">';
+                        	//showAddAc.setAttribute("src", "/img/btn_accommodation.png");
+                        	//showAddAc.dataset.tlidx = res.msg.tlIdx;
+                        	//showAddAc.setAttribute("data-tlidx",res.msg.tlIdx);
                         	document.querySelector('#addWhat'+res.msg.tlIdx).appendChild(showAddAc);
                         	
+                        	
+                        	let acImg = document.createElement("img");
+                        	acImg.src = "/img/btn_accommodation.png"
+                        	document.querySelector('#showAddAccommodation'+res.msg.tlIdx).appendChild(acImg);
+                        	acImg.dataset.tlidx = res.msg.tlIdx;
+                        	acImg.addEventListener('click', ev => {
+                        		let str = ev.target.dataset.tlidx;//왜 못받아 오는건지 알 수가 없다.
+                        		console.log('aaaaaaaaaaaaastr: '+str);
+                        		
+                        		document.getElementById('addAccommodation' + str).style.display = '';
+                                //document.getElementById('addAttraction' + str).style.display = 'none';
+                                //document.getElementById('addBudget' + str).style.display = 'none';
+                                //document.getElementById('addGeneral' + str).style.display = 'none';
+                                //document.getElementById('addTrans' + str).style.display = 'none';
+                                document.getElementById('addCardBtn' + str).style.display = 'none';
+                        	});
                         	
                         	let addAc = document.createElement("div"); 
                         	addAc.id="addAccommodation"+res.msg.tlIdx;
@@ -620,63 +624,80 @@
 
                         }else if(res.type === 'upload-accomodation'){
 
-                           
+                        	// 숙박 추가
+                        	console.log('res.tlIdx: ' + res.tlIdx);
                             console.log('res.msg.tdIdx: ' + res.msg.tdIdx);
-                            // 숙박 추가
                             console.log('res.msg.title: '+res.msg.title);
                             console.log('res.msg.contents: '+res.msg.contents);
                             console.log('res.msg.todoDate: '+res.msg.todoDate);
                             console.log('res.msg.address: '+res.msg.address);
                             console.log('res.msg.isPrivate: '+res.msg.isPrivate);
-                            //console.log('res.msg.todoType: '+res.msg.todoType);
-
                             
+                            
+                        	let todoResponse = document.getElementById("response"+res.tlIdx);
+                            let wpt = document.getElementById("plannerTodo"+res.tlIdx);
                             let todo = document.createElement("div");
                             todo.id='d'+res.msg.tdIdx;
                             todo.className = "card";
-                            mresponse.append(todo);
+                            wpt.insertBefore(todo,todoResponse);
                                
                             let title = document.createElement("p"); 
+                            title.id = "actitle"+res.msg.tdIdx;
                             title.innerHTML = res.msg.title;
                             document.querySelector('#d'+res.msg.tdIdx).appendChild(title);
                             
                             let contents = document.createElement("p"); 
+                            contents.id = "accontents" + res.msg.tdIdx;
                             contents.innerHTML = res.msg.contents;
                             document.querySelector('#d'+res.msg.tdIdx).appendChild(contents);
                             
                             let todoDate = document.createElement("p"); 
+                            todoDate.id = "actododate" + res.msg.tdIdx;
                             todoDate.innerHTML = res.msg.todoDate;
                             document.querySelector('#d'+res.msg.tdIdx).appendChild(todoDate);
                             
-                            let address = document.createElement("p"); 
-                            address.innerHTML = res.msg.address;
-                            document.querySelector('#d'+res.msg.tdIdx).appendChild(address);
+                            let acaddress = document.createElement("p"); 
+                            acaddress.id = "acaddress" + res.msg.tdIdx;
+                            acaddress.innerHTML = res.msg.address;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(acaddress);
                             
                             let isPrivate = document.createElement("p"); 
+                            isPrivate.id = "acisPrivate"+ res.msg.tdIdx;
                             isPrivate.innerHTML = res.msg.isPrivate;
                             document.querySelector('#d'+res.msg.tdIdx).appendChild(isPrivate);
                             
                             let td = document.createElement("input");
+                            td.id = "tdidx"+ res.msg.tdIdx;
                             td.nodeType = "text";
                             td.value = res.msg.tdIdx;
                         	document.querySelector('#d'+res.msg.tdIdx).appendChild(td);
                             
                             let titlemod = document.createElement("input");
+                            titlemod.id = "actodotitlemod"+ res.msg.tdIdx;
                             titlemod.nodeType = "text";
                             titlemod.value = res.msg.title;
                             document.querySelector('#d'+res.msg.tdIdx).appendChild(titlemod);
                             
                             let contentsmod = document.createElement("input");
+                            contentsmod.id = "actodocontentmod"+ res.msg.tdIdx;
                             contentsmod.nodeType = "text";
                             contentsmod.value = res.msg.contents;
                             document.querySelector('#d'+res.msg.tdIdx).appendChild(contentsmod);
                             
                             let todoDatemod = document.createElement("input");
+                            todoDatemod.id = "actododatemod"+ res.msg.tdIdx;
                             todoDatemod.setAttribute("type", "datetime-local");
-                            //todoDatemod.value = res.msg.todoDate;
                             document.querySelector('#d'+res.msg.tdIdx).appendChild(todoDatemod);
                             
+                            let addressmod = document.createElement("input");
+                            addressmod.id = "actodoaddressmod"+ res.msg.tdIdx;
+                            addressmod.nodeType = "text";
+                            addressmod.value = res.msg.address;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(addressmod);
+                            
                             let isPrivatemod = document.createElement("input");
+                            isPrivatemod.id = "actodopvmod"+ res.msg.tdIdx;
+                            isPrivatemod.className = "check__box";
                             isPrivatemod.setAttribute("type", "checkbox");
                             if(res.msg.isPrivate){
                             	isPrivatemod.checked =true;
@@ -743,11 +764,32 @@
                             console.log('res.msg.todoDate: '+res.msg.todoDate);
                             console.log('res.msg.address: '+res.msg.address);
                             console.log('res.msg.isPrivate: '+res.msg.isPrivate);
+                            
+                            document.getElementById("actitle"+res.msg.tdIdx).innerHTML = res.msg.title;
+                            document.getElementById("accontents" + res.msg.tdIdx).innerHTML = res.msg.contents;
+                            document.getElementById("actododate"+res.msg.tdIdx).innerHTML = res.msg.todoDate;
+                            document.getElementById("acaddress"+res.msg.tdIdx).innerHTML = res.msg.address;
+                            if(res.msg.isPrivate){
+                            	document.getElementById("acisPrivate"+res.msg.tdIdx).checked =true;
+                            }else{
+                            	document.getElementById("acisPrivate"+res.msg.tdIdx).checked =false;
+                            }
+                            
+                            document.getElementById("tdidx"+res.msg.tdIdx).value = res.msg.tdIdx;
+                            document.getElementById("actodotitlemod"+res.msg.tdIdx).value = res.msg.title;
+                            document.getElementById("actodocontentmod"+res.msg.tdIdx).value = res.msg.contents;
+                            document.getElementById("actodoaddressmod"+res.msg.tdIdx).value = res.msg.address;
+                            if(res.msg.isPrivate){
+                            	document.getElementById("actodopvmod"+res.msg.tdIdx).checked =true;
+                            }else{
+                            	document.getElementById("actodopvmod"+res.msg.tdIdx).checked =false;
+                            }
+                            
 
-                            let id = 'd'+res.msg.tdIdx;
-                            document.getElementById(id).innerHTML =
-                                '<span style="background:yellow">'+ "숙박todo 제목, 내용, 날짜, 주소, 비밀: " + res.msg.title + " ,  " +res.msg.contents +
-                                res.msg.todoDate + " ,  " +res.msg.address + " ,  " +res.msg.isPrivate+ '<br>'+'</span>'
+                            //let id = 'd'+res.msg.tdIdx;
+                            //document.getElementById(id).innerHTML =
+                                //'<span style="background:yellow">'+ "숙박todo 제목, 내용, 날짜, 주소, 비밀: " + res.msg.title + " ,  " +res.msg.contents +
+                               // res.msg.todoDate + " ,  " +res.msg.address + " ,  " +res.msg.isPrivate+ '<br>'+'</span>'
                             
 
                         }else if(res.type === 'remove-accomodation'){

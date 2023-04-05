@@ -39,7 +39,7 @@ public class TodoController {
 			AccomodationTodoRegistRequest dto
 			) throws Exception {
 		simpMessagingTemplate.convertAndSend("/topic/planner-message/" + tpIdx, 
-				Map.of("type","upload-accomodation","msg",todoService.createAccomodationTodo(dto, tpIdx, tlIdx)));
+				Map.of("type","upload-accomodation","msg",todoService.createAccomodationTodo(dto, tpIdx, tlIdx),"tlIdx",tlIdx));
 		
 	}
 	
@@ -50,7 +50,7 @@ public class TodoController {
 			AttractionsTodoRegistRequest dto
 			) throws Exception {
 		simpMessagingTemplate.convertAndSend("/topic/planner-message/" + tpIdx, 
-				Map.of("type","upload-attractions","msg",todoService.createAttractionsTodo(dto, tpIdx, tlIdx)));
+				Map.of("type","upload-attractions","msg",todoService.createAttractionsTodo(dto, tpIdx, tlIdx),"tlIdx",tlIdx));
 		
 	}
 	
@@ -61,7 +61,7 @@ public class TodoController {
 			BudgetTodoRegistRequest dto
 			) throws Exception {
 		simpMessagingTemplate.convertAndSend("/topic/planner-message/" + tpIdx, 
-				Map.of("type","upload-budget","msg",todoService.createBudgetTodo(dto, tpIdx, tlIdx)));
+				Map.of("type","upload-budget","msg",todoService.createBudgetTodo(dto, tpIdx, tlIdx),"tlIdx",tlIdx));
 		
 	}
 	
@@ -72,7 +72,7 @@ public class TodoController {
 			GeneralTodoRegistRequest dto
 			) throws Exception {
 		simpMessagingTemplate.convertAndSend("/topic/planner-message/" + tpIdx, 
-				Map.of("type","upload-general","msg",todoService.createGeneralTodo(dto, tpIdx, tlIdx)));
+				Map.of("type","upload-general","msg",todoService.createGeneralTodo(dto, tpIdx, tlIdx),"tlIdx",tlIdx));
 		
 	}
 	
@@ -83,7 +83,7 @@ public class TodoController {
 			TransportTodoRegistRequest dto
 			) throws Exception {
 		simpMessagingTemplate.convertAndSend("/topic/planner-message/" + tpIdx, 
-				Map.of("type","upload-transport","msg",todoService.createTransportTodo(dto, tpIdx, tlIdx)));
+				Map.of("type","upload-transport","msg",todoService.createTransportTodo(dto, tpIdx, tlIdx),"tlIdx",tlIdx));
 		
 	}
 	
