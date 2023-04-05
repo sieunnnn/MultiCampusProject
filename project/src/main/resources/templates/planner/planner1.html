@@ -15,7 +15,6 @@
 
 <body>
 <div layout:fragment="content">
-
     <div class="container__contents">
 
         <div class="container__planner">
@@ -50,7 +49,7 @@
                 <!-- 메뉴 -->
                 <div class="wrapper__menu">
                     <!-- 나중에 주소 넣을때 사용 th:onclick="|location.href='@{/컨트롤러 주소}'|" -->
-                    <button><img src="/img/btn_weather.png"></button>
+                    <button onclick="window.open('/planner/weather', 'window_name', 'width=915, height=700, location=no, status=no, scrollbars=yes');"><img src="/img/btn_weather.png"></button>
                     <button><img src="/img/btn_live_chat.png"></button>
                     <button><img src="/img/btn_recommendation.png"></button>
                     <button><img src="/img/btn_planner.png"></button>

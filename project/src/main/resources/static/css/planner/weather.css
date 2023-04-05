@@ -1,0 +1,71 @@
+
+/* 웹폰트 */
+@font-face {
+
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.container__weather {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+
+    width: 800px;
+    padding: 50px;
+}
+
+.txt__title {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 70px;
+
+    margin: 30px 0 70px 0 ;
+
+    color: #1C1C1E;
+}
+
+.txt__second__title {
+
+    margin-bottom: 20px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 45px;
+
+    color: #1C1C1E;
+}
+
+.txt__content {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+
+    color: #1C1C1E;
+}
+
+table {
+
+    border-spacing: 16px;
+}
+
+button {
+
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: grab;
+}
