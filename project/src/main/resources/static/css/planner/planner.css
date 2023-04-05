@@ -8,6 +8,66 @@
     font-style: normal;
 }
 
+/* ===================================================================*/
+
+/* 공통 요소 */
+
+input {
+
+}
+
+input:focus {
+
+}
+
+button {
+
+
+}
+
+button:focus {
+
+}
+
+/* 체크 박스 */
+
+/* 스크롤 바*/
+
+/* 플래너 리스트 타이틀 */
+.planner__list__title {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+
+    color: #1C1C1E;
+}
+
+/* 투두 타이틀 */
+.planner__todo__title {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+
+    color: #1C1C1E;
+}
+
+/* 투두 내용 */
+.todo__title {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+
+    color: #1C1C1E;
+}
+
+/* ===================================================================*/
+
 .container__planner {
 
     display: flex;
@@ -352,6 +412,8 @@
 
 
 /* ===================================================================*/
+
+/* 카드 추가 버튼 */
 
 .wrapper__bar {
 
