@@ -139,54 +139,49 @@ public class TodoController {
 	
 	///////////////////////
 	
-	@MessageMapping("remove-accomodation/{tpIdx}/{tlIdx}")
+	@MessageMapping("remove-accomodation/{tpIdx}")
 	public void removeAccomodation(
 			@DestinationVariable("tpIdx") Long tpIdx,
-			@DestinationVariable("tlIdx") Long tlIdx,
 			TodoDeleteRequest dto
 			) {
-		todoService.AccomodationDeleteTodo(dto, tlIdx);
+		todoService.AccomodationDeleteTodo(dto);
 		simpMessagingTemplate.convertAndSend("/topic/planner-message/" + tpIdx, 
 				Map.of("type","remove-accomodation","msg",dto.getTdIdx()));
 		
 	}
-	@MessageMapping("remove-attractions/{tpIdx}/{tlIdx}")
+	@MessageMapping("remove-attractions/{tpIdx}")
 	public void removeAttractions(
 			@DestinationVariable("tpIdx") Long tpIdx,
-			@DestinationVariable("tlIdx") Long tlIdx,
 			TodoDeleteRequest dto
 			) {
-		todoService.AttractionsDeleteTodo(dto, tlIdx);
+		todoService.AttractionsDeleteTodo(dto);
 		simpMessagingTemplate.convertAndSend("/topic/planner-message/" + tpIdx, 
 				Map.of("type","remove-attractions","msg",dto.getTdIdx()));
 	}
-	@MessageMapping("remove-budget/{tpIdx}/{tlIdx}")
+	@MessageMapping("remove-budget/{tpIdx}")
 	public void removeBudget(
 			@DestinationVariable("tpIdx") Long tpIdx,
-			@DestinationVariable("tlIdx") Long tlIdx,
 			TodoDeleteRequest dto
 			) {
-		todoService.BudgetDeleteTodo(dto, tlIdx);
+		todoService.BudgetDeleteTodo(dto);
 		simpMessagingTemplate.convertAndSend("/topic/planner-message/" + tpIdx, 
 				Map.of("type","remove-budget","msg",dto.getTdIdx()));
 	}
-	@MessageMapping("remove-general/{tpIdx}/{tlIdx}")
+	@MessageMapping("remove-general/{tpIdx}")
 	public void removeGeneral(
 			@DestinationVariable("tpIdx") Long tpIdx,
-			@DestinationVariable("tlIdx") Long tlIdx,
 			TodoDeleteRequest dto
 			) {
-		todoService.GeneralDeleteTodo(dto, tlIdx);
+		todoService.GeneralDeleteTodo(dto);
 		simpMessagingTemplate.convertAndSend("/topic/planner-message/" + tpIdx, 
 				Map.of("type","remove-general","msg",dto.getTdIdx()));
 	}
-	@MessageMapping("remove-transport/{tpIdx}/{tlIdx}")
+	@MessageMapping("remove-transport/{tpIdx}")
 	public void removeTransport(
 			@DestinationVariable("tpIdx") Long tpIdx,
-			@DestinationVariable("tlIdx") Long tlIdx,
 			TodoDeleteRequest dto
 			) {
-		todoService.TransportDeleteTodo(dto, tlIdx);
+		todoService.TransportDeleteTodo(dto);
 		simpMessagingTemplate.convertAndSend("/topic/planner-message/" + tpIdx, 
 				Map.of("type","remove-transport","msg",dto.getTdIdx()));
 	}

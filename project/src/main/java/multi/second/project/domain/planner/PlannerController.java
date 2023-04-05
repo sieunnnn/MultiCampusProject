@@ -115,7 +115,7 @@ public class PlannerController {
 		PlannerDetailResponse dto = plannerService.findPlannerBytpIdx(tpIdx);
 		model.addAttribute("planner", dto);
 		
-		return "/planner/planner-contents";
+		return "/planner/planner";
 	}
 	
 	
