@@ -17,7 +17,7 @@ public class GalleryRepositoryImpl implements GalleryRepositoryExtension{
 	}
 	
 	@Override
-	public List<Gallery> testQueryDSL(String title, boolean isDel) {
+	public List<Gallery> testMethod(String title, boolean isDel) {
 		
 		List<Gallery> gallerys = query.select(gallery)
 				.from(gallery)
@@ -25,10 +25,13 @@ public class GalleryRepositoryImpl implements GalleryRepositoryExtension{
 				.fetch();
 		
 		return gallerys;
+
 	}
 
+	// 쿼리 메소드는 스프링 데이터 JPA에서 자동으로 지원해주는 것이고,
+	// 개발자가 직접 작성하는 쿼리 DSL은 QueryDSL이용해 작성하게 됩니다.
+
 	//이 코드는 QueryDSL을 이용하여 title과 isDel 값을 기준으로 Gallery 엔티티를 조회하는 코드입니다.
-	//
 	//JPAQueryFactory: QueryDSL을 사용하기 위한 클래스로, EntityManager를 인자로 받아 생성됩니다.
 	//QGallery: QueryDSL에서 사용하는 메타 모델 클래스로, Gallery 엔티티의 필드와 관계를 정의한 클래스입니다.
 	// QGallery.gallery와 같이 필드명.gallery 형식으로 사용됩니다.

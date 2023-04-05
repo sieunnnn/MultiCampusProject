@@ -54,7 +54,11 @@ public class GalleryService {
 		filePath.setGroupName("gallery");
 		
 		List<FileUploadDto> fileUploadDtos = fileUtil.generateFileUploadDtos("gallery", files);
-		
+
+//		gallery.setFiles(fileUploadDtos.stream()
+//				.map(e -> FilePath.createFilePath(e.getFilePathDto()))
+//				.collect(Collectors.toList()));
+
 		fileUploadDtos.forEach(e -> {
 			gallery.addFile(FilePath.createFilePath(e.getFilePathDto()));
 		});

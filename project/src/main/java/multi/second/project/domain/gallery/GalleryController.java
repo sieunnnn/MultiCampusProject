@@ -49,8 +49,8 @@ public class GalleryController {
 						 //@SessionAttribute(name="auth", required=false) Principal principal,
 						 GalleryRegistRequest dto)
 	{ //dto.setUserId(principal.getUserId());
-		dto.setUserId(UserPrincipal.getUserPrincipal().getUserId()); //로그인한 본인 아이디를 가져온다
-		galleryService.createGallery(dto, files);
+		dto.setUserId(UserPrincipal.getUserPrincipal().getUserId()); //로그인한 사람의 아이디를 받아 저장
+		galleryService.createGallery(dto, files); // 받은 정보와 파일들로 서비스에서 등록처리
 
 		return "redirect:/gallery/list";
 	}

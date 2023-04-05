@@ -95,14 +95,11 @@ public class Gallery {
 	public void removeComment(Comment comment) {
 		this.comments.remove(comment);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
+//	public void setFiles(List<FilePath> files) { this.files.addAll(files);
+//	}
+
+
 	// createGallery(), addFile(), removeFile(), updateGallery(), addComment(), removeComment() 메서드가 정의되어 있습니다.
 	// 이는 게시글에 대한 CRUD(Create, Read, Update, Delete) 기능 및 댓글 추가, 삭제 기능을 구현하기 위한 메서드들입니다.
 	
