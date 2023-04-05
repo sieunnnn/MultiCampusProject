@@ -115,7 +115,7 @@ public class PlannerController {
 		PlannerDetailResponse dto = plannerService.findPlannerBytpIdx(tpIdx);
 		model.addAttribute("planner", dto);
 		
-		return "/planner/planner";
+		return "/planner/planner1";
 	}
 	
 	
@@ -168,7 +168,13 @@ public class PlannerController {
 	}
 	
 	//planner 공유인원 추방? 필요한가?
-	
+
+	// 날씨
+	@GetMapping("/weather")
+	public String weather()  {
+
+		return "planner/weather";
+	}
 	
 	
 

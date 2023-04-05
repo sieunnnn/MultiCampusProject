@@ -15,7 +15,6 @@
 
 <body>
 <div layout:fragment="content">
-
     <div class="container__contents">
 
         <div class="container__planner">
@@ -50,7 +49,7 @@
                 <!-- 메뉴 -->
                 <div class="wrapper__menu">
                     <!-- 나중에 주소 넣을때 사용 th:onclick="|location.href='@{/컨트롤러 주소}'|" -->
-                    <button><img src="/img/btn_weather.png"></button>
+                    <button onclick="window.open('/planner/weather', 'window_name', 'width=915, height=700, location=no, status=no, scrollbars=yes');"><img src="/img/btn_weather.png"></button>
                     <button><img src="/img/btn_live_chat.png"></button>
                     <button><img src="/img/btn_recommendation.png"></button>
                     <button><img src="/img/btn_planner.png"></button>
@@ -263,7 +262,7 @@
                                 </div>
 
                                 <!-- 투두 카드 생기는 곳 -->
-                                <div id="response"></div>
+                                <div id="newCardResponse" th:id="'newCardResponse' + ${todolist.tlIdx}"></div>
 
                                 <!-- 버튼 클릭하면 카드 생성 (column) -->
                                 <div class="open" th:onclick="addCard([[${todolist.tlIdx}]])" th:id="'addCardBtn' + ${todolist.tlIdx}">
@@ -293,49 +292,78 @@
                                     </div>
 
                                     <div th:id="'addAccommodation' + ${todolist.tlIdx}">
-                                        <input type="checkbox" class="check__box" th:id="|actodopvadd${todolist.tlIdx}|"/>
-                                        <input type="text" th:value="숙박제목1" th:id="|actodotitleadd${todolist.tlIdx}|"/>
-                                        <input type="text" th:value="숙박내용1" th:id="|actodocontentadd${todolist.tlIdx}|"/>
-                                        <input type="text" th:value="|2023-06-12T19:25|" th:id="|actododateadd${todolist.tlIdx}|"/>
-                                        <input type="text" th:value="숙박주소1" th:id="|actodoaddressadd${todolist.tlIdx}|"/>
-                                        <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="actodoadd">등록</button>
+                                        <div>
+                                            <input type="checkbox" class="check__box" th:id="|actodopvadd${todolist.tlIdx}|"/>
+                                            <input type="text" th:value="숙박제목1" th:id="|actodotitleadd${todolist.tlIdx}|"/>
+                                            <input type="text" th:value="숙박내용1" th:id="|actodocontentadd${todolist.tlIdx}|"/>
+                                            <input type="text" th:value="|2023-06-12T19:25|" th:id="|actododateadd${todolist.tlIdx}|"/>
+                                            <input type="text" th:value="숙박주소1" th:id="|actodoaddressadd${todolist.tlIdx}|"/>
+                                        </div>
+                                        <div style="margin: 20px 7px 40px 134px">
+                                            <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="actodoadd">등록</button>
+                                            <button th:onclick="closeAddCard([[${todolist.tlIdx}]])">닫기</button>
+                                        </div>
                                     </div>
 
                                     <div th:id="'addAttraction' + ${todolist.tlIdx}">
-                                        <input type="checkbox" class="check__box" th:id="|attodopvadd${todolist.tlIdx}|"/>
-                                        <input type="text" th:value="관광지내용1" th:id="|attodocontentadd${todolist.tlIdx}|"/>
-                                        <input type="text" th:value="|2023-06-12T19:25|" th:id="|attododateadd${todolist.tlIdx}|"/>
-                                        <input type="text" th:value="관광지제목1" th:id="|attodotitleadd${todolist.tlIdx}|"/>
-                                        <input type="text" th:value="관광지정보1" th:id="|attodoinfoadd${todolist.tlIdx}|"/>
-                                        <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="attodoadd">등록</button>
+                                        <div>
+                                            <input type="checkbox" class="check__box" th:id="|attodopvadd${todolist.tlIdx}|"/>
+                                            <input type="text" th:value="관광지내용1" th:id="|attodocontentadd${todolist.tlIdx}|"/>
+                                            <input type="text" th:value="|2023-06-12T19:25|" th:id="|attododateadd${todolist.tlIdx}|"/>
+                                            <input type="text" th:value="관광지제목1" th:id="|attodotitleadd${todolist.tlIdx}|"/>
+                                            <input type="text" th:value="관광지정보1" th:id="|attodoinfoadd${todolist.tlIdx}|"/>
+                                        </div>
+
+                                        <div style="margin: 20px 7px 40px 134px">
+                                            <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="attodoadd">등록</button>
+                                            <button th:onclick="closeAddCard([[${todolist.tlIdx}]])">닫기</button>
+                                        </div>
                                     </div>
 
                                     <div th:id="'addBudget' + ${todolist.tlIdx}">
-                                        <input type="checkbox" class="check__box" th:id="|bgtodopvadd${todolist.tlIdx}|"/>
-                                        <input type="text" th:value="예산제목1" th:id="|bgtodotitleadd${todolist.tlIdx}|"/>
-                                        <input type="text" th:value="예산내용1" th:id="|bgtodocontentadd${todolist.tlIdx}|"/>
-                                        <input type="text" th:value="|2023-06-12T19:25|" th:id="|bgtododateadd${todolist.tlIdx}|"/>
-                                        <input type="text" th:value="10000" th:id="|bgtodomoneyadd${todolist.tlIdx}|"/>
-                                        <input type="text" th:value="FOOD" th:id="|bgtodotypeadd${todolist.tlIdx}|"/>
-                                        <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="bgtodoadd">등록</button>
+                                        <div>
+                                            <input type="checkbox" class="check__box" th:id="|bgtodopvadd${todolist.tlIdx}|"/>
+                                            <input type="text" th:value="예산제목1" th:id="|bgtodotitleadd${todolist.tlIdx}|"/>
+                                            <input type="text" th:value="예산내용1" th:id="|bgtodocontentadd${todolist.tlIdx}|"/>
+                                            <input type="text" th:value="|2023-06-12T19:25|" th:id="|bgtododateadd${todolist.tlIdx}|"/>
+                                            <input type="text" th:value="10000" th:id="|bgtodomoneyadd${todolist.tlIdx}|"/>
+                                            <input type="text" th:value="FOOD" th:id="|bgtodotypeadd${todolist.tlIdx}|"/>
+                                        </div>
+
+                                        <div style="margin: 20px 7px 40px 134px">
+                                            <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="bgtodoadd">등록</button>
+                                            <button th:onclick="closeAddCard([[${todolist.tlIdx}]])">닫기</button>
+                                        </div>
                                     </div>
 
                                     <div th:id="'addGeneral' + ${todolist.tlIdx}">
-                                        <input type="checkbox" class="check__box" th:id="|gntodopvadd${todolist.tlIdx}|"/>
-                                        <input type="text" th:value="일반제목1" th:id="|gntodotitleadd${todolist.tlIdx}|"/>
-                                        <input type="text" th:value="일반내용1" th:id="|gntodocontentadd${todolist.tlIdx}|"/>
-                                        <input type="text" th:value="|2023-06-12T19:25|" th:id="|gntododateadd${todolist.tlIdx}|"/>
-                                        <input type="text" th:value="일반주소1" th:id="|gntodoaddressadd${todolist.tlIdx}|"/>
-                                        <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="gntodoadd">등록</button>
+                                        <div>
+                                            <input type="checkbox" class="check__box" th:id="|gntodopvadd${todolist.tlIdx}|"/>
+                                            <input type="text" th:value="일반제목1" th:id="|gntodotitleadd${todolist.tlIdx}|"/>
+                                            <input type="text" th:value="일반내용1" th:id="|gntodocontentadd${todolist.tlIdx}|"/>
+                                            <input type="text" th:value="|2023-06-12T19:25|" th:id="|gntododateadd${todolist.tlIdx}|"/>
+                                            <input type="text" th:value="일반주소1" th:id="|gntodoaddressadd${todolist.tlIdx}|"/>
+                                        </div>
+
+                                        <div style="margin: 20px 7px 40px 134px">
+                                            <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="gntodoadd">등록</button>
+                                            <button th:onclick="closeAddCard([[${todolist.tlIdx}]])">닫기</button>
+                                        </div>
                                     </div>
 
                                     <div th:id="'addTrans' + ${todolist.tlIdx}">
-                                        <input type="checkbox" class="check__box" th:id="|trtodopvadd${todolist.tlIdx}|"/>
-                                        <input type="text" th:value="교통제목1" th:id="|trtodotitleadd${todolist.tlIdx}|"/>
-                                        <input type="text" th:value="교통내용1" th:id="|trtodocontentadd${todolist.tlIdx}|"/>
-                                        <input type="text" th:value="|2023-06-12T19:25|" th:id="|trtododateadd${todolist.tlIdx}|"/>
-                                        <input type="text" th:value="AIRPLANE" th:id="|trtodotypeadd${todolist.tlIdx}|"/>
-                                        <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="trtodoadd">등록</button>
+                                        <div>
+                                            <input type="checkbox" class="check__box" th:id="|trtodopvadd${todolist.tlIdx}|"/>
+                                            <input type="text" th:value="교통제목1" th:id="|trtodotitleadd${todolist.tlIdx}|"/>
+                                            <input type="text" th:value="교통내용1" th:id="|trtodocontentadd${todolist.tlIdx}|"/>
+                                            <input type="text" th:value="|2023-06-12T19:25|" th:id="|trtododateadd${todolist.tlIdx}|"/>
+                                            <input type="text" th:value="AIRPLANE" th:id="|trtodotypeadd${todolist.tlIdx}|"/>
+                                        </div>
+
+                                        <div style="margin: 20px 7px 40px 134px">
+                                            <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="trtodoadd">등록</button>
+                                            <button th:onclick="closeAddCard([[${todolist.tlIdx}]])">닫기</button>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -349,8 +377,12 @@
                             <div id="addDateResponse"></div>
 
                             <div id="addDate" style="margin-top: 26px">
-                                <div style="margin: 7px 0 0 3px"><input type="text" style="width: 195px" th:value="제목없음" name="todolistTitleAdd" id="todolistTitleAdd"/></div>
-                                <div style="margin: 14px 0 0 8px"><button onclick="addTodoList()">등록</button></div>
+                                <div>
+                                    <input type="text" style="width: 195px; margin: 14px 0 7px 13px;" th:value="제목없음" name="todolistTitleAdd" id="todolistTitleAdd"/>
+                                </div>
+                                <div style="margin: 14px 0 0 8px">
+                                    <button onclick="addTodoList()">등록</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -477,6 +509,12 @@
             document.getElementById('addGeneral' + str).style.display = 'none';
             document.getElementById('addTrans' + str).style.display = 'none';
             document.getElementById('addCardBtn' + str).style.display = 'none';
+        }
+
+        function closeAddCard(str) {
+
+            document.getElementById('addCard' + str).style.display = 'none';
+            document.getElementById('addCardBtn' + str).style.display = '';
         }
 
         // 리스트 / 투두 타이틀 클릭시 수정 / 삭제 창 나오게 ==================//
@@ -614,12 +652,10 @@
                             console.log('res.msg.address: '+res.msg.address);
                             console.log('res.msg.isPrivate: '+res.msg.isPrivate);
 
-                            var accomoResponse = document.getElementById('response');
-
-                            console.log('어디냐: ' + res.msg.tdIdx);
+                            console.log('어디냐: ' + res.msg.tlIdx);
                             console.log('어디냐: ' + res.msg.tdIdx);
 
-                            accomoResponse.innerHTML +=
+                            newCardResponse.innerHTML +=
                                 '<div class="card">' + res.msg.title + '</div>'
 
                         }else if(res.type === 'modify-accomodation'){
