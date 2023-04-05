@@ -8,6 +8,66 @@
     font-style: normal;
 }
 
+/* ===================================================================*/
+
+/* 공통 요소 */
+
+input {
+
+}
+
+input:focus {
+
+}
+
+button {
+
+
+}
+
+button:focus {
+
+}
+
+/* 체크 박스 */
+
+/* 스크롤 바*/
+
+/* 플래너 리스트 타이틀 */
+.planner__list__title {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+
+    color: #1C1C1E;
+}
+
+/* 투두 타이틀 */
+.planner__todo__title {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+
+    color: #1C1C1E;
+}
+
+/* 투두 내용 */
+.todo__title {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+
+    color: #1C1C1E;
+}
+
+/* ===================================================================*/
+
 .container__planner {
 
     display: flex;
@@ -353,28 +413,7 @@
 
 /* ===================================================================*/
 
-/* modal */
-
-/* add card */
-
-.container__add__card {
-
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: flex-start;
-
-    margin: 26px 0 28px 20px;
-    width: 330px;
-    height: 610px;
-
-    background: white;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(40px);
-    /* Note: backdrop-filter has minimal browser support */
-
-    border-radius: 16px;
-}
+/* 카드 추가 버튼 */
 
 .wrapper__bar {
 
@@ -388,80 +427,4 @@
 
     width: 45px;
     height: 45px;
-}
-
-.close, .close__date {
-
-    width: 60px;
-    height: 24px;
-    margin: 20px 0 20px 240px;
-
-    background: #FFFFFF;
-    border: 0.5px solid rgba(0, 0, 0, 0.2);
-    box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.2);
-    border-radius: 6px;
-
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    color: #1E1E1C;
-}
-
-.title__add__card {
-
-    margin: 0 0 20px 15px;
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 50px;
-    /* identical to box height, or 38% */
-
-    letter-spacing: 0.02em;
-
-    color: #1C1C1E;
-}
-
-.wrapper__contents {
-
-    background-color: orange;
-}
-
-/* ===================================================================*/
-
-/* modal */
-
-/* add date, modify date*/
-
-.container__add__date, .container__modify__date {
-
-    display: flex;
-    flex-direction: column;
-    align-content: flex-start;
-    justify-content: flex-start;
-
-    margin: 26px 0 28px 20px;
-    width: 320px;
-    height: 300px;
-
-    background: white;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(40px);
-    /* Note: backdrop-filter has minimal browser support */
-
-    border-radius: 16px;
-}
-
-.title__add__date, .title__modify__date {
-
-    margin: 0 0 20px 15px;
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 50px;
-    /* identical to box height, or 38% */
-
-    letter-spacing: 0.02em;
-
-    color: #1C1C1E;
 }
