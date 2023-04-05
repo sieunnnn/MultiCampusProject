@@ -74,7 +74,7 @@ public class Gallery {
 				.content(dto.getContent())
 				.build();
 	}
-
+	// 생성된 Gallery 엔티티 객체는 다른 메서드에서 사용될 수 있도록 반환됩니다.
 	public void addFile(FilePath filePath) {
 		this.files.add(filePath);
 	}

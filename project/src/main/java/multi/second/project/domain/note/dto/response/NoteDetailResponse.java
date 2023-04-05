@@ -11,9 +11,5 @@ import java.util.List;
 @Getter
 @Setter
 public class NoteDetailResponse {
-    private Long ntIdx;
-    private List<Member> members;
-    private List<Message> messages;
-    private LocalDateTime regDate;
-    private Boolean isDel;
+
 }

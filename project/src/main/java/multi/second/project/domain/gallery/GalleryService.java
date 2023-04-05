@@ -47,12 +47,13 @@ public class GalleryService {
 	public void createGallery(GalleryRegistRequest dto, List<MultipartFile> files) {
 		
 		Member member = memberRepository.findById(dto.getUserId()).get();
+		//아이디 정보만 가져와서 멤머 객체에 담는다
 		Gallery gallery = Gallery.createGallery(dto, member);
-		
+		//갤러리에는 리퀘스트 dto랑 위에서 빼온 아이디 정보만 담긴 member만 담겨있다 왜? 이것만 필요하니까
 		
 		FilePathDto filePath = new FilePathDto();
 		filePath.setGroupName("gallery");
-		
+
 		List<FileUploadDto> fileUploadDtos = fileUtil.generateFileUploadDtos("gallery", files);
 
 //		gallery.setFiles(fileUploadDtos.stream()

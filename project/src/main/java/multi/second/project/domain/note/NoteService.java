@@ -1,5 +1,6 @@
 package multi.second.project.domain.note;
 
+import lombok.AllArgsConstructor;
 import multi.second.project.domain.gallery.domain.Gallery;
 import multi.second.project.domain.gallery.dto.response.GalleryListResponse;
 import multi.second.project.domain.member.MemberRepository;
@@ -21,15 +22,12 @@ import java.util.Optional;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class NoteService {
 
     private final NoteRepository noteRepository;
     private final MemberRepository memberRepository;
 
-    public NoteService(NoteRepository noteRepository, MemberRepository memberRepository) {
-        this.noteRepository = noteRepository;
-        this.memberRepository = memberRepository;
-    }
 
     public Map<String, Object> findNoteListByUserId(String userId, Pageable pageable) {
         Page<Note> page = noteRepository.findByPartnersMemberUserId(userId,pageable);

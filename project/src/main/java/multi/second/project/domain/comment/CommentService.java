@@ -43,7 +43,6 @@ public class CommentService {
 
 	private final GalleryRepository galleryRepository;
 	private final MemberRepository memberRepository;
-	
 	private final CommentRepository commentRepository;
 	
 	//포스트의 댓글 가져오는 코드
@@ -79,7 +78,7 @@ public class CommentService {
 		Member member = memberRepository.findById(dto.getUserId()).get();
 		Comment comment = Comment.createComment(dto, member);
 		
-		Gallery gallery = galleryRepository.findById(postIdx)
+		Gallery gallery = galleryRepository.findById(postIdx) //인데스값만 담긴 갤러리 엔티티
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
 //		Gallery gallery = galleryRepository.findById(null).get();
 //				addComment(comment);
