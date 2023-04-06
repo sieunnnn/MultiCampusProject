@@ -19,7 +19,7 @@ public class BoardDetailResponse {
 	private LocalDateTime regDate;
 	private String userId;
 	private String content;
-	private List<FilePathDto> filePathDto = new ArrayList<FilePathDto>();
+	private List<FilePathDto> filePathDtos = new ArrayList<FilePathDto>();
 	
 	public BoardDetailResponse(Board board) {
 		this.bdIdx = board.getBdIdx();
@@ -27,7 +27,7 @@ public class BoardDetailResponse {
 		this.regDate = board.getRegDate();
 		this.userId = board.getMember().getUserId();
 		this.content = board.getContent();
-		this.filePathDto = FilePathDto.toDtoList(board.getFiles());
+		this.filePathDtos = FilePathDto.toDtoList(board.getFiles());
 	}
 	
 	public String getRegDateAsDate() {

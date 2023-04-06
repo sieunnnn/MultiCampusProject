@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>Title</title>
 </head>
+
+<script th:inline="javascript">
+
+  /*<![CDATA[*/
+
+  var message = [[${message}]];
+
+  alert(message);
+
+  location.replace([[${searchUrl}]]);
+  /*]]>*/
+
+  // controller에서 메시지를 여기서 전송, 메시지를 여기서 받아서 자바스크립트에서 창을 띄워즈는 alert에 담아 띄우고,
+ // 페이지를 이동시키는 location.replace로 경로를 담아 작성해준 것
+</script>
+
+
 <body>
-$END$
+
 </body>
 </html>

@@ -3,7 +3,7 @@
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{layout}">
 <head>
-	<link href="/css/board/board.css" rel="stylesheet"> 
+	<link href="/css/board/board.css" rel="stylesheet">
 </head>
 <body>
 
@@ -11,7 +11,7 @@
 <div class="row">
  <h2 class="tit">* 게시판</h2>
     <a href="/board/form">게시글 쓰기</a>
- 	   
+
  	   <table style="text-align: center" border="1">
        <thead>
            <tr>
@@ -34,21 +34,39 @@
 	<div class="row mt-3">
 		<nav aria-label="Page navigation example">
 		  <ul class="pagination justify-content-center">
-		   
+
 		    <li class="page-item">
 		      <a class="page-link" th:href="@{|/board/list?page=${paging.prevPage}&size=10&sort=title,ASC|}">Previous</a>
 		    </li>
-		   
+
 	    	<li class="page-item" th:each="page : ${#numbers.sequence(paging.blockStart, paging.blockEnd)}">
 	    		<a class="page-link" th:href="@{|/board/list?page=${page-1}&size=10&sort=title,ASC|}" th:text="${page}"></a>
 	    	</li>
-		  
+
 		    <li class="page-item">
 		      <a class="page-link" th:href="@{|/board/list?page=${paging.nextPage}&size=10&sort=title,ASC|}">Next</a>
 		    </li>
-		    
+
+
 		  </ul>
 		</nav>
+<!--		<nav aria-label="Page navigation" style="text-align:center;">-->
+<!--			<ul class="pagination" th:with="startNumber=${T(Math).floor(boardList.number/10)}*10+1, endNumber=(${boardList.totalPages} > ${startNumber}+9) ? ${startNumber}+9 : ${boardList.totalPages}">-->
+<!--				<li><a aria-label="Previous" href="/board/list?page=1">&laquo;</a></li>-->
+<!--				<li th:style="${boardList.first} ? 'display:none'">-->
+<!--					<a th:href="@{/board/list(page=${boardList.number})}">&lsaquo;</a>-->
+<!--				</li>-->
+
+<!--				<li th:each="page :${#numbers.sequence(startNumber, endNumber)}" th:class="(${page} == ${boardList.number}+1) ? 'active'">-->
+<!--					<a th:href="@{/board/list(page=${page})}" th:text="${page}"><span class="sr-only"></span></a>-->
+<!--				</li>-->
+
+<!--				<li th:style="${boardList.last} ? 'display:none'">-->
+<!--					<a th:href="@{/board/list(page=${boardList.number}+2)}">&rsaquo;</a>-->
+<!--				</li>-->
+<!--				<li><a aria-label="Next" th:href="@{/board/list(page=${boardList.totalPages})}">&raquo;</a></li>-->
+<!--			</ul>-->
+<!--		</nav>	-->
 	</div>
 </div>
 
