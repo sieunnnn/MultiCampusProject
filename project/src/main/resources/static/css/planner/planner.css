@@ -56,7 +56,7 @@ input:focus {
     outline: solid 2px rgba(58, 108, 217, 0.5);
 }
 
-.wrapper__date__box button, #addDate button{
+.wrapper__date__box button, #addDate button {
 
     width: 70px;
     height: 28px;
@@ -327,7 +327,7 @@ button:focus {
 
 /* ============================================================ */
 
-/* ì¹¸ë°˜ë³´ë“œ */
+/* 계획 부분 */
 
 .container__kanban {
 
@@ -402,7 +402,7 @@ button:focus {
     border: solid 3.5px rgba(58, 108, 217, 0.5);
     outline: solid 3.5px rgba(58, 108, 217, 0.5);
 
-    !important;
+!important;
 }
 
 #card, .card, .add__card{
@@ -508,4 +508,45 @@ button:focus {
     width: 50px;
     height: 50px;
     margin: 15px 5px 15px 5px;
+}
+
+/* ===================================================================*/
+
+/* 채팅 */
+
+/* 모달 */
+.wrapper__chat{
+
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    justify-content: flex-start;
+
+    margin: 26px 0 28px 33px;
+    width: 290px;
+    height: 611px;
+
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(40px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 16px;
+}
+
+.chat__title {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+
+    color: #1C1C1E;
+}
+
+#modalChat img {
+
+    margin: 10px 0 20px 237px;
+    width: 30px;
+    height: 30px;
 }
