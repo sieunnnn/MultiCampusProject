@@ -120,8 +120,9 @@
                                         </div>
 
                                         <div th:case="Attractions">
-                                            <p th:text="${todo.title}"/><p th:text="${todo.contents}"/><p th:text="${todo.todoDate}"/><p th:text="${todo.isPrivate}"/>
-                                            <p th:text="${todo.attractions}"/>
+                                            <p th:text="${todo.title}" th:id="|attitle${todo.tdIdx}|"/><p th:text="${todo.contents}" th:id="|atcontents${todo.tdIdx}|"/>
+                                            <p th:text="${todo.todoDate}" th:id="|attododate${todo.tdIdx}|"/><p th:text="${todo.isPrivate}" th:id="|atisPrivate${todo.tdIdx}|"/>
+                                            <p th:text="${todo.attractions}" th:id="|atattractions${todo.tdIdx}|"/>
                                             <input type="text" readonly th:value="${todo.tdIdx}" th:id="|tdidx${todo.tdIdx}|"/>
                                             <input type="text" th:value="${todo.title}" th:id="|attodotitlemod${todo.tdIdx}|"/>
                                             <input type="text" th:value="${todo.contents}" th:id="|attodocontentmod${todo.tdIdx}|"/>
@@ -133,8 +134,9 @@
                                         </div>
 
                                         <div th:case="Budget">
-                                            <p th:text="${todo.title}"/><p th:text="${todo.contents}"/><p th:text="${todo.todoDate}"/><p th:text="${todo.isPrivate}"/>
-                                            <p th:text="${todo.budgetType}"/><p th:text="${todo.budget}"/>
+                                            <p th:text="${todo.title}" th:id="|bgtitle${todo.tdIdx}|"/><p th:text="${todo.contents}" th:id="|bgcontents${todo.tdIdx}|"/>
+                                            <p th:text="${todo.todoDate}" th:id="|bgtododate${todo.tdIdx}|"/><p th:text="${todo.isPrivate}" th:id="|bgisPrivate${todo.tdIdx}|"/>
+                                            <p th:text="${todo.budgetType}" th:id="|bgbudgetType${todo.tdIdx}|"/><p th:text="${todo.budget}" th:id="|bgbudget${todo.tdIdx}|"/>
                                             <input type="text" readonly th:value="${todo.tdIdx}" th:id="|tdidx${todo.tdIdx}|"/>
                                             <input type="text" th:value="${todo.title}" th:id="|bgtodotitlemod${todo.tdIdx}|"/>
                                             <input type="text" th:value="${todo.contents}" th:id="|bgtodocontentmod${todo.tdIdx}|"/>
@@ -147,8 +149,9 @@
                                         </div>
 
                                         <div th:case="General">
-                                            <p th:text="${todo.title}"/><p th:text="${todo.contents}"/><p th:text="${todo.todoDate}"/><p th:text="${todo.isPrivate}"/>
-                                            <p th:text="${todo.gnAddress}"/>
+                                            <p th:text="${todo.title}" th:id="|gntitle${todo.tdIdx}|"/><p th:text="${todo.contents}" th:id="|gncontents${todo.tdIdx}|"/>
+                                            <p th:text="${todo.todoDate}" th:id="|gntododate${todo.tdIdx}|"/><p th:text="${todo.isPrivate}" th:id="|gnisPrivate${todo.tdIdx}|"/>
+                                            <p th:text="${todo.gnAddress}" th:id="|gnaddress${todo.tdIdx}|"/>
                                             <input type="text" readonly th:value="${todo.tdIdx}" th:id="|tdidx${todo.tdIdx}|"/>
                                             <input type="text" th:value="${todo.title}" th:id="|gntodotitlemod${todo.tdIdx}|"/>
                                             <input type="text" th:value="${todo.contents}" th:id="|gntodocontentmod${todo.tdIdx}|"/>
@@ -160,8 +163,9 @@
                                         </div>
 
                                         <div th:case="Transport">
-                                            <p th:text="${todo.title}"/><p th:text="${todo.contents}"/><p th:text="${todo.todoDate}"/><p th:text="${todo.isPrivate}"/>
-                                            <p th:text="${todo.transportType}"/>
+                                            <p th:text="${todo.title}" th:id="|trtitle${todo.tdIdx}|"/><p th:text="${todo.contents}" th:id="|trcontents${todo.tdIdx}|"/>
+                                            <p th:text="${todo.todoDate}" th:id="|trtododate${todo.tdIdx}|"/><p th:text="${todo.isPrivate}" th:id="|trisPrivate${todo.tdIdx}|"/>
+                                            <p th:text="${todo.transportType}" th:id="|trtransportType${todo.tdIdx}|"/>
                                             <input type="text" readonly th:value="${todo.tdIdx}" th:id="|tdidx${todo.tdIdx}|"/>
                                             <input type="text" th:value="${todo.title}" th:id="|trtodotitlemod${todo.tdIdx}|"/>
                                             <input type="text" th:value="${todo.contents}" th:id="|trtodocontentmod${todo.tdIdx}|"/>
@@ -214,9 +218,9 @@
                                     </div>
 
                                     <div th:id="'addAttraction' + ${todolist.tlIdx}">
+                                        <input type="text" th:value="관광지제목1" th:id="|attodotitleadd${todolist.tlIdx}|"/>
                                         <input type="text" th:value="관광지내용1" th:id="|attodocontentadd${todolist.tlIdx}|"/>
                                         <input type="text" th:value="|2023-06-12T19:25|" th:id="|attododateadd${todolist.tlIdx}|"/>
-                                        <input type="text" th:value="관광지제목1" th:id="|attodotitleadd${todolist.tlIdx}|"/>
                                         <input type="text" th:value="관광지정보1" th:id="|attodoinfoadd${todolist.tlIdx}|"/>
                                         <input type="checkbox" th:id="|attodopvadd${todolist.tlIdx}|"/>
                                         <button th:attr="data-tlidx=|${todolist.tlIdx}|" class="attodoadd">Attractions todo 등록</button>
@@ -331,10 +335,10 @@
             console.log(str);
             document.getElementById('addCard' + str).style.display = '';
             document.getElementById('addAccommodation' + str).style.display = 'none';
-            //document.getElementById('addAttraction' + str).style.display = 'none';
-            //document.getElementById('addBudget' + str).style.display = 'none';
-            //document.getElementById('addGeneral' + str).style.display = 'none';
-            //document.getElementById('addTrans' + str).style.display = 'none';
+            document.getElementById('addAttraction' + str).style.display = 'none';
+            document.getElementById('addBudget' + str).style.display = 'none';
+            document.getElementById('addGeneral' + str).style.display = 'none';
+            document.getElementById('addTrans' + str).style.display = 'none';
             document.getElementById('addCardBtn' + str).style.display = 'none';
 
         }
@@ -362,10 +366,10 @@
         function showAddAccommodation(str) {
 
             document.getElementById('addAccommodation' + str).style.display = '';
-            //document.getElementById('addAttraction' + str).style.display = 'none';
-            //document.getElementById('addBudget' + str).style.display = 'none';
-            //document.getElementById('addGeneral' + str).style.display = 'none';
-            //document.getElementById('addTrans' + str).style.display = 'none';
+            document.getElementById('addAttraction' + str).style.display = 'none';
+            document.getElementById('addBudget' + str).style.display = 'none';
+            document.getElementById('addGeneral' + str).style.display = 'none';
+            document.getElementById('addTrans' + str).style.display = 'none';
             document.getElementById('addCardBtn' + str).style.display = 'none';
         }
 
@@ -434,18 +438,20 @@
                         	tl.id = "tl"+res.msg.tlIdx;
                         	document.querySelector('#date'+res.msg.tlIdx).appendChild(tl);
                         	
+                        	//todolist 제목
                         	let tltitle = document.createElement("input");
                         	tltitle.id = "tltitle"+res.msg.tlIdx;
                         	tltitle.value = res.msg.title;
                         	document.querySelector('#date'+res.msg.tlIdx).appendChild(tltitle);
                         	
+                        	//todolist 수정
                         	let todolistmod = document.createElement("button");
                         	todolistmod.id = "todolistmod"+res.msg.tlIdx;
                         	todolistmod.className = "todolistmod";
                         	todolistmod.dataset.tlidx = res.msg.tlIdx;
                         	todolistmod.innerHTML= "todolist 제목 수정";
                         	document.querySelector('#date'+res.msg.tlIdx).appendChild(todolistmod);
-                        	todolistmod.addEventListener('click', ev => {
+                        	todolistmod.addEventListener('click', ev => {//
                         		let tlIdx = ev.target.dataset.tlidx;
                                 console.log('tlIdx: '+tlIdx);
 
@@ -458,7 +464,7 @@
                                 stompClient.send("/app/modify-todolist/" + [[${planner.tpIdx}]], {}, JSON.stringify({'title':todolistTitle, 'tlIdx':todolistIdx}));
                                 
                         	});
-                        	
+                        	//todolist 삭제
                         	let todolistdel = document.createElement("button");
                         	todolistdel.id = "todolistdel"+res.msg.tlIdx;
                         	todolistdel.className = "todolistdel";
@@ -478,16 +484,13 @@
                         	});
                         	
                         	//////////////
+                        	//
                         	let plannerTodo = document.createElement("div");
                         	plannerTodo.id = "plannerTodo"+res.msg.tlIdx;
                         	document.querySelector('#f'+res.msg.tlIdx).appendChild(plannerTodo);
                         	/////////////////
                         	
-                        	
-                        	//let tdresponse = document.createElement("div");
-                        	//tdresponse.id="mresponse";
-                        	//document.querySelector('#f'+res.msg.tlIdx).appendChild(tdresponse);
-                        	
+                        	//todo 새로만들기 버튼
                         	let addcardbtn = document.createElement("button");
                         	addcardbtn.id="addCardBtn"+ res.msg.tlIdx;
                         	addcardbtn.className = "open";
@@ -500,10 +503,10 @@
                         		
                         		document.getElementById('addCard' + str).style.display = '';
                                 document.getElementById('addAccommodation' + str).style.display = 'none';
-                              	//document.getElementById('addAttraction' + str).style.display = 'none';
-                                //document.getElementById('addBudget' + str).style.display = 'none';
-                                //document.getElementById('addGeneral' + str).style.display = 'none';
-                                //document.getElementById('addTrans' + str).style.display = 'none';
+                              	document.getElementById('addAttraction' + str).style.display = 'none';
+                                document.getElementById('addBudget' + str).style.display = 'none';
+                                document.getElementById('addGeneral' + str).style.display = 'none';
+                                document.getElementById('addTrans' + str).style.display = 'none';
                                 document.getElementById('addCardBtn' + str).style.display = 'none';
                         	});
                         	
@@ -520,7 +523,51 @@
                         	document.querySelector('#addCard'+res.msg.tlIdx).appendChild(addwhat);
                         	
                         	
+                        	//일반투두 버튼
+                        	let showAddGn = document.createElement("button");
+                        	showAddGn.id="showAddGeneral"+ res.msg.tlIdx;
+                        	document.querySelector('#addWhat'+res.msg.tlIdx).appendChild(showAddGn);
                         	
+                        	//일반투두 버튼 이미지
+                        	let gnImg = document.createElement("img");
+                        	gnImg.src = "/img/btn_todo.png"
+                        	document.querySelector('#showAddGeneral'+res.msg.tlIdx).appendChild(gnImg);
+                        	gnImg.dataset.tlidx = res.msg.tlIdx;
+                        	gnImg.addEventListener('click', ev => {
+                        		let str = ev.target.dataset.tlidx;
+                        		console.log('str: '+str);
+                        		
+                        		document.getElementById('addAccommodation' + str).style.display = 'none';
+                                document.getElementById('addAttraction' + str).style.display = 'none';
+                                document.getElementById('addBudget' + str).style.display = 'none';
+                                document.getElementById('addGeneral' + str).style.display = '';
+                                document.getElementById('addTrans' + str).style.display = 'none';
+                                document.getElementById('addCardBtn' + str).style.display = 'none';
+                        	});
+                        	
+                        	//교통투두 버튼
+                        	let showAddTr = document.createElement("button");
+                        	showAddTr.id="showAddTransport"+ res.msg.tlIdx;
+                        	document.querySelector('#addWhat'+res.msg.tlIdx).appendChild(showAddTr);
+                        	
+                        	//교통투두 버튼 이미지
+                        	let trImg = document.createElement("img");
+                        	trImg.src = "/img/btn_transport.png"
+                        	document.querySelector('#showAddTransport'+res.msg.tlIdx).appendChild(trImg);
+                        	trImg.dataset.tlidx = res.msg.tlIdx;
+                        	trImg.addEventListener('click', ev => {
+                        		let str = ev.target.dataset.tlidx;
+                        		console.log('str: '+str);
+                        		
+                        		document.getElementById('addAccommodation' + str).style.display = 'none';
+                                document.getElementById('addAttraction' + str).style.display = 'none';
+                                document.getElementById('addBudget' + str).style.display = 'none';
+                                document.getElementById('addGeneral' + str).style.display = 'none';
+                                document.getElementById('addTrans' + str).style.display = '';
+                                document.getElementById('addCardBtn' + str).style.display = 'none';
+                        	});
+                        	
+                        	//숙박투두 버튼
                         	let showAddAc = document.createElement("button");
                         	showAddAc.id="showAddAccommodation"+ res.msg.tlIdx;
                         	//showAddAc.setAttribute("src", "/img/btn_accommodation.png");
@@ -528,23 +575,68 @@
                         	//showAddAc.setAttribute("data-tlidx",res.msg.tlIdx);
                         	document.querySelector('#addWhat'+res.msg.tlIdx).appendChild(showAddAc);
                         	
-                        	
+                        	//숙박투두 버튼 이미지
                         	let acImg = document.createElement("img");
                         	acImg.src = "/img/btn_accommodation.png"
                         	document.querySelector('#showAddAccommodation'+res.msg.tlIdx).appendChild(acImg);
                         	acImg.dataset.tlidx = res.msg.tlIdx;
                         	acImg.addEventListener('click', ev => {
                         		let str = ev.target.dataset.tlidx;//왜 못받아 오는건지 알 수가 없다.
-                        		console.log('aaaaaaaaaaaaastr: '+str);
+                        		console.log('str: '+str);
                         		
                         		document.getElementById('addAccommodation' + str).style.display = '';
-                                //document.getElementById('addAttraction' + str).style.display = 'none';
-                                //document.getElementById('addBudget' + str).style.display = 'none';
-                                //document.getElementById('addGeneral' + str).style.display = 'none';
-                                //document.getElementById('addTrans' + str).style.display = 'none';
+                                document.getElementById('addAttraction' + str).style.display = 'none';
+                                document.getElementById('addBudget' + str).style.display = 'none';
+                                document.getElementById('addGeneral' + str).style.display = 'none';
+                                document.getElementById('addTrans' + str).style.display = 'none';
                                 document.getElementById('addCardBtn' + str).style.display = 'none';
                         	});
                         	
+                        	//관광지투두 버튼
+                        	let showAddAt = document.createElement("button");
+                        	showAddAt.id="showAddAttractions"+ res.msg.tlIdx;
+                        	document.querySelector('#addWhat'+res.msg.tlIdx).appendChild(showAddAt);
+                        	
+                        	//관광지투두 버튼 이미지
+                        	let atImg = document.createElement("img");
+                        	atImg.src = "/img/img_maps.png"
+                        	document.querySelector('#showAddAttractions'+res.msg.tlIdx).appendChild(atImg);
+                        	atImg.dataset.tlidx = res.msg.tlIdx;
+                        	atImg.addEventListener('click', ev => {
+                        		let str = ev.target.dataset.tlidx;
+                        		console.log('str: '+str);
+                        		
+                        		document.getElementById('addAccommodation' + str).style.display = 'none';
+                                document.getElementById('addAttraction' + str).style.display = '';
+                                document.getElementById('addBudget' + str).style.display = 'none';
+                                document.getElementById('addGeneral' + str).style.display = 'none';
+                                document.getElementById('addTrans' + str).style.display = 'none';
+                                document.getElementById('addCardBtn' + str).style.display = 'none';
+                        	});
+                        	
+                        	//예산투두 버튼
+                        	let showAddBg = document.createElement("button");
+                        	showAddBg.id="showAddBudget"+ res.msg.tlIdx;
+                        	document.querySelector('#addWhat'+res.msg.tlIdx).appendChild(showAddBg);
+                        	
+                        	//예산투두 버튼 이미지
+                        	let bgImg = document.createElement("img");
+                        	bgImg.src = "/img/btn_calculator.png"
+                        	document.querySelector('#showAddBudget'+res.msg.tlIdx).appendChild(bgImg);
+                        	bgImg.dataset.tlidx = res.msg.tlIdx;
+                        	bgImg.addEventListener('click', ev => {
+                        		let str = ev.target.dataset.tlidx;
+                        		console.log('str: '+str);
+                        		
+                        		document.getElementById('addAccommodation' + str).style.display = 'none';
+                                document.getElementById('addAttraction' + str).style.display = 'none';
+                                document.getElementById('addBudget' + str).style.display = '';
+                                document.getElementById('addGeneral' + str).style.display = 'none';
+                                document.getElementById('addTrans' + str).style.display = 'none';
+                                document.getElementById('addCardBtn' + str).style.display = 'none';
+                        	});
+                        	
+                        	//숙박 todo 추가
                         	let addAc = document.createElement("div"); 
                         	addAc.id="addAccommodation"+res.msg.tlIdx;
                         	document.querySelector('#addCard'+res.msg.tlIdx).appendChild(addAc);
@@ -604,6 +696,262 @@
                                 stompClient.send("/app/upload-accomodation/" + [[${planner.tpIdx}]]+"/"+tlIdx, {},
                                     JSON.stringify({'title':actodotitle, 'contents':actodocontent, 'todoDate':actododate,
                                         'address':actodoaddress, 'isPrivate':actodoprivate}));
+                        	});
+                        	
+                        	//관광지 todo 추가
+                        	let addAt = document.createElement("div"); 
+                        	addAt.id="addAttraction"+res.msg.tlIdx;
+                        	document.querySelector('#addCard'+res.msg.tlIdx).appendChild(addAt);
+                        	
+                        	let addAtTitle = document.createElement("input"); 
+                        	addAtTitle.id="attodotitleadd"+res.msg.tlIdx;
+                        	addAtTitle.nodeType = "text";
+                        	addAtTitle.value = "관광지제목";
+                        	document.querySelector('#addAttraction'+res.msg.tlIdx).appendChild(addAtTitle);
+                        	
+                        	let addAtContent = document.createElement("input"); 
+                        	addAtContent.id="attodocontentadd"+res.msg.tlIdx;
+                        	addAtContent.nodeType = "text";
+                        	addAtContent.value = "관광지내용";
+                        	document.querySelector('#addAttraction'+res.msg.tlIdx).appendChild(addAtContent);
+                        	
+                        	let addAtDate = document.createElement("input"); 
+                        	addAtDate.id="attododateadd"+res.msg.tlIdx;
+                        	addAtDate.setAttribute("type", "datetime-local");
+                        	document.querySelector('#addAttraction'+res.msg.tlIdx).appendChild(addAtDate);
+                        	
+                        	let addAtInfo = document.createElement("input"); 
+                        	addAtInfo.id="attodoinfoadd"+res.msg.tlIdx;
+                        	addAtInfo.nodeType = "text";
+                        	addAtInfo.value = "관광지정보";
+                        	document.querySelector('#addAttraction'+res.msg.tlIdx).appendChild(addAtInfo);
+                        	
+                        	let addAtPv = document.createElement("input"); 
+                        	addAtPv.id="attodopvadd"+res.msg.tlIdx;
+                        	addAtPv.setAttribute("type", "checkbox");
+                        	document.querySelector('#addAttraction'+res.msg.tlIdx).appendChild(addAtPv);
+                        	
+                        	let addAtButton = document.createElement("button"); 
+                        	addAtButton.id="attodoadd"+res.msg.tlIdx;
+                        	addAtButton.className = "attodoadd";
+                        	addAtButton.dataset.tlidx = res.msg.tlIdx;
+                        	addAtButton.innerHTML= "Attractions todo 등록";
+                        	document.querySelector('#addAttraction'+res.msg.tlIdx).appendChild(addAtButton);
+                        	addAtButton.addEventListener('click', ev => {
+                        		let tlIdx = ev.target.dataset.tlidx;
+                                console.log('tlIdx: '+tlIdx);
+
+                                let todolistIdx = document.getElementById('tlidx'+tlIdx).value;
+                                let attodotitle = document.getElementById('attodotitleadd'+tlIdx).value;
+                                let attodocontent = document.getElementById('attodocontentadd'+tlIdx).value;
+                                let attododate = document.getElementById('attododateadd'+tlIdx).value;
+                                let attodoinfo = document.getElementById('attodoinfoadd'+tlIdx).value;
+                                let attodoprivate = document.getElementById('attodopvadd'+tlIdx).checked;
+
+                                console.log('todolistIdx: '+todolistIdx);
+                                console.log('attodotitle: '+attodotitle);
+                                console.log('attodocontent: '+attodocontent);
+                                console.log('attododate: '+attododate);
+                                console.log('attodoinfo: '+attodoinfo);
+                                console.log('attodoprivate: '+attodoprivate);
+
+                                stompClient.send("/app/upload-attractions/" + [[${planner.tpIdx}]]+"/"+tlIdx, {},
+                                    JSON.stringify({'title':attodotitle, 'contents':attodocontent, 'todoDate':attododate,
+                                        'attractions':attodoinfo, 'isPrivate':attodoprivate}));
+                        	});
+                        	
+                        	//예산 todo 추가
+                        	let addBg = document.createElement("div"); 
+                        	addBg.id="addBudget"+res.msg.tlIdx;
+                        	document.querySelector('#addCard'+res.msg.tlIdx).appendChild(addBg);
+                        	
+                        	let addBgTitle = document.createElement("input"); 
+                        	addBgTitle.id="bgtodotitleadd"+res.msg.tlIdx;
+                        	addBgTitle.nodeType = "text";
+                        	addBgTitle.value = "예산제목";
+                        	document.querySelector('#addBudget'+res.msg.tlIdx).appendChild(addBgTitle);
+                        	
+                        	let addBgContent = document.createElement("input"); 
+                        	addBgContent.id="bgtodocontentadd"+res.msg.tlIdx;
+                        	addBgContent.nodeType = "text";
+                        	addBgContent.value = "예산내용";
+                        	document.querySelector('#addBudget'+res.msg.tlIdx).appendChild(addBgContent);
+                        	
+                        	let addBgDate = document.createElement("input"); 
+                        	addBgDate.id="bgtododateadd"+res.msg.tlIdx;
+                        	addBgDate.setAttribute("type", "datetime-local");
+                        	document.querySelector('#addBudget'+res.msg.tlIdx).appendChild(addBgDate);
+                        	
+                        	let addBgBudget = document.createElement("input"); 
+                        	addBgBudget.id="bgtodomoneyadd"+res.msg.tlIdx;
+                        	addBgBudget.nodeType = "text";
+                        	addBgBudget.value = "예산비용";//나중에 숫자만 들어가게
+                        	document.querySelector('#addBudget'+res.msg.tlIdx).appendChild(addBgBudget);
+                        	
+                        	let addBgType = document.createElement("input"); 
+                        	addBgType.id="bgtodotypeadd"+res.msg.tlIdx;
+                        	addBgType.nodeType = "text";
+                        	addBgType.value = "FOOD";//나중에 콤보박스나 라디오 버튼으로
+                        	document.querySelector('#addBudget'+res.msg.tlIdx).appendChild(addBgType);
+                        	
+                        	let addBgPv = document.createElement("input"); 
+                        	addBgPv.id="bgtodopvadd"+res.msg.tlIdx;
+                        	addBgPv.setAttribute("type", "checkbox");
+                        	document.querySelector('#addBudget'+res.msg.tlIdx).appendChild(addBgPv);
+                        	
+                        	let addBgButton = document.createElement("button"); 
+                        	addBgButton.id="bgtodoadd"+res.msg.tlIdx;
+                        	addBgButton.className = "bgtodoadd";
+                        	addBgButton.dataset.tlidx = res.msg.tlIdx;
+                        	addBgButton.innerHTML= "Budget todo 등록";
+                        	document.querySelector('#addBudget'+res.msg.tlIdx).appendChild(addBgButton);
+                        	addBgButton.addEventListener('click', ev => {
+                        		let tlIdx = ev.target.dataset.tlidx;
+                                console.log('tlIdx: '+tlIdx);
+
+                                let todolistIdx = document.getElementById('tlidx'+tlIdx).value;
+                                let bgtodotitle = document.getElementById('bgtodotitleadd'+tlIdx).value;
+                                let bgtodocontent = document.getElementById('bgtodocontentadd'+tlIdx).value;
+                                let bgtododate = document.getElementById('bgtododateadd'+tlIdx).value;
+                                let bgtodomoney = document.getElementById('bgtodomoneyadd'+tlIdx).value;
+                                let bgtodotype = document.getElementById('bgtodotypeadd'+tlIdx).value;
+                                let bgtodoprivate = document.getElementById('bgtodopvadd'+tlIdx).checked;
+
+                                console.log('todolistIdx: '+todolistIdx);
+                                console.log('bgtodotitle: '+bgtodotitle);
+                                console.log('bgtodocontent: '+bgtodocontent);
+                                console.log('bgtododate: '+bgtododate);
+                                console.log('bgtodomoney: '+bgtodomoney);
+                                console.log('bgtodotype: '+bgtodotype);
+                                console.log('bgtodoprivate: '+bgtodoprivate);
+
+                                stompClient.send("/app/upload-budget/" + [[${planner.tpIdx}]]+"/"+tlIdx, {},
+                                    JSON.stringify({'title':bgtodotitle, 'contents':bgtodocontent, 'todoDate':bgtododate,
+                                        'budget':bgtodomoney, 'budgetType':bgtodotype, 'isPrivate':bgtodoprivate}));
+                        	});
+                        	
+                        	//일반 todo 추가
+                        	let addGn = document.createElement("div"); 
+                        	addGn.id="addGeneral"+res.msg.tlIdx;
+                        	document.querySelector('#addCard'+res.msg.tlIdx).appendChild(addGn);
+                        	
+                        	let addGnTitle = document.createElement("input"); 
+                        	addGnTitle.id="gntodotitleadd"+res.msg.tlIdx;
+                        	addGnTitle.nodeType = "text";
+                        	addGnTitle.value = "일반제목";
+                        	document.querySelector('#addGeneral'+res.msg.tlIdx).appendChild(addGnTitle);
+                        	
+                        	let addGnContent = document.createElement("input"); 
+                        	addGnContent.id="gntodocontentadd"+res.msg.tlIdx;
+                        	addGnContent.nodeType = "text";
+                        	addGnContent.value = "일반내용";
+                        	document.querySelector('#addGeneral'+res.msg.tlIdx).appendChild(addGnContent);
+                        	
+                        	let addGnDate = document.createElement("input"); 
+                        	addGnDate.id="gntododateadd"+res.msg.tlIdx;
+                        	addGnDate.setAttribute("type", "datetime-local");
+                        	document.querySelector('#addGeneral'+res.msg.tlIdx).appendChild(addGnDate);
+                        	
+                        	let addGnAddress = document.createElement("input"); 
+                        	addGnAddress.id="gntodoaddressadd"+res.msg.tlIdx;
+                        	addGnAddress.nodeType = "text";
+                        	addGnAddress.value = "일반주소";
+                        	document.querySelector('#addGeneral'+res.msg.tlIdx).appendChild(addGnAddress);
+                        	
+                        	let addGnPv = document.createElement("input"); 
+                        	addGnPv.id="gntodopvadd"+res.msg.tlIdx;
+                        	addGnPv.setAttribute("type", "checkbox");
+                        	document.querySelector('#addGeneral'+res.msg.tlIdx).appendChild(addGnPv);
+                        	
+                        	let addGnButton = document.createElement("button"); 
+                        	addGnButton.id="gntodoadd"+res.msg.tlIdx;
+                        	addGnButton.className = "gntodoadd";
+                        	addGnButton.dataset.tlidx = res.msg.tlIdx;
+                        	addGnButton.innerHTML= "General todo 등록";
+                        	document.querySelector('#addGeneral'+res.msg.tlIdx).appendChild(addGnButton);
+                        	addGnButton.addEventListener('click', ev => {
+                        		let tlIdx = ev.target.dataset.tlidx;
+                                console.log('tlIdx: '+tlIdx);
+
+                                let todolistIdx = document.getElementById('tlidx'+tlIdx).value;
+                                let gntodotitle = document.getElementById('gntodotitleadd'+tlIdx).value;
+                                let gntodocontent = document.getElementById('gntodocontentadd'+tlIdx).value;
+                                let gntododate = document.getElementById('gntododateadd'+tlIdx).value;
+                                let gntodoaddress = document.getElementById('gntodoaddressadd'+tlIdx).value;
+                                let gntodoprivate = document.getElementById('gntodopvadd'+tlIdx).checked;
+
+                                console.log('todolistIdx: '+todolistIdx);
+                                console.log('gntodotitle: '+gntodotitle);
+                                console.log('gntodocontent: '+gntodocontent);
+                                console.log('gntododate: '+gntododate);
+                                console.log('gntodoaddress: '+gntodoaddress);
+                                console.log('gntodoprivate: '+gntodoprivate);
+
+                                stompClient.send("/app/upload-general/" + [[${planner.tpIdx}]]+"/"+tlIdx, {},
+                                    JSON.stringify({'title':gntodotitle, 'contents':gntodocontent, 'todoDate':gntododate,
+                                        'address':gntodoaddress, 'isPrivate':gntodoprivate}));
+                        	});
+                        	
+                        	//교통 todo 추가
+                        	let addTr = document.createElement("div"); 
+                        	addTr.id="addTrans"+res.msg.tlIdx;
+                        	document.querySelector('#addCard'+res.msg.tlIdx).appendChild(addTr);
+                        	
+                        	let addTrTitle = document.createElement("input"); 
+                        	addTrTitle.id="trtodotitleadd"+res.msg.tlIdx;
+                        	addTrTitle.nodeType = "text";
+                        	addTrTitle.value = "교통제목";
+                        	document.querySelector('#addTrans'+res.msg.tlIdx).appendChild(addTrTitle);
+                        	
+                        	let addTrContent = document.createElement("input"); 
+                        	addTrContent.id="trtodocontentadd"+res.msg.tlIdx;
+                        	addTrContent.nodeType = "text";
+                        	addTrContent.value = "교통내용";
+                        	document.querySelector('#addTrans'+res.msg.tlIdx).appendChild(addTrContent);
+                        	
+                        	let addTrDate = document.createElement("input"); 
+                        	addTrDate.id="trtododateadd"+res.msg.tlIdx;
+                        	addTrDate.setAttribute("type", "datetime-local");
+                        	document.querySelector('#addTrans'+res.msg.tlIdx).appendChild(addTrDate);
+                        	
+                        	let addTrType = document.createElement("input"); 
+                        	addTrType.id="trtodotypeadd"+res.msg.tlIdx;
+                        	addTrType.nodeType = "text";
+                        	addTrType.value = "AIRPLANE";
+                        	document.querySelector('#addTrans'+res.msg.tlIdx).appendChild(addTrType);
+                        	
+                        	let addTrPv = document.createElement("input"); 
+                        	addTrPv.id="trtodopvadd"+res.msg.tlIdx;
+                        	addTrPv.setAttribute("type", "checkbox");
+                        	document.querySelector('#addTrans'+res.msg.tlIdx).appendChild(addTrPv);
+                        	
+                        	let addTrButton = document.createElement("button"); 
+                        	addTrButton.id="trtodoadd"+res.msg.tlIdx;
+                        	addTrButton.className = "trtodoadd";
+                        	addTrButton.dataset.tlidx = res.msg.tlIdx;
+                        	addTrButton.innerHTML= "Transport todo 등록";
+                        	document.querySelector('#addTrans'+res.msg.tlIdx).appendChild(addTrButton);
+                        	addTrButton.addEventListener('click', ev => {
+                        		let tlIdx = ev.target.dataset.tlidx;
+                                console.log('tlIdx: '+tlIdx);
+
+                                let todolistIdx = document.getElementById('tlidx'+tlIdx).value;
+                                let trtodotitle = document.getElementById('trtodotitleadd'+tlIdx).value;
+                                let trtodocontent = document.getElementById('trtodocontentadd'+tlIdx).value;
+                                let trtododate = document.getElementById('trtododateadd'+tlIdx).value;
+                                let trtodotype = document.getElementById('trtodotypeadd'+tlIdx).value;
+                                let trtodoprivate = document.getElementById('trtodopvadd'+tlIdx).checked;
+
+                                console.log('todolistIdx: '+todolistIdx);
+                                console.log('trtodotitle: '+trtodotitle);
+                                console.log('trtodocontent: '+trtodocontent);
+                                console.log('trtododate: '+trtododate);
+                                console.log('trtodotype: '+trtodotype);
+                                console.log('trtodoprivate: '+trtodoprivate);
+
+                                stompClient.send("/app/upload-transport/" + [[${planner.tpIdx}]]+"/"+tlIdx, {},
+                                    JSON.stringify({'title':trtodotitle, 'contents':trtodocontent, 'todoDate':trtododate,
+                                        'transportType':trtodotype, 'isPrivate':trtodoprivate}));
                         	});
                         	
                         	
@@ -808,13 +1156,127 @@
                             console.log('res.msg.attractions: '+res.msg.attractions);
                             console.log('res.msg.isPrivate: '+res.msg.isPrivate);
 
-                            var attrResponse = document.getElementById('response');
+                            
+                            let todoResponse = document.getElementById("response"+res.tlIdx);
+                            let wpt = document.getElementById("plannerTodo"+res.tlIdx);
+                            let todo = document.createElement("div");
+                            todo.id='d'+res.msg.tdIdx;
+                            todo.className = "card";
+                            wpt.insertBefore(todo,todoResponse);
+                            
+                            let title = document.createElement("p"); 
+                            title.id = "attitle"+res.msg.tdIdx;
+                            title.innerHTML = res.msg.title;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(title);
+                            
+                            let contents = document.createElement("p"); 
+                            contents.id = "atcontents" + res.msg.tdIdx;
+                            contents.innerHTML = res.msg.contents;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(contents);
+                            
+                            let todoDate = document.createElement("p"); 
+                            todoDate.id = "attododate" + res.msg.tdIdx;
+                            todoDate.innerHTML = res.msg.todoDate;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(todoDate);
+                            
+                            let info = document.createElement("p"); 
+                            info.id = "atattractions" + res.msg.tdIdx;
+                            info.innerHTML = res.msg.attractions;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(info);
+                            
+                            let isPrivate = document.createElement("p"); 
+                            isPrivate.id = "atisPrivate"+ res.msg.tdIdx;
+                            isPrivate.innerHTML = res.msg.isPrivate;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(isPrivate);
+                            
+                            let td = document.createElement("input");
+                            td.id = "tdidx"+ res.msg.tdIdx;
+                            td.nodeType = "text";
+                            td.value = res.msg.tdIdx;
+                        	document.querySelector('#d'+res.msg.tdIdx).appendChild(td);
+                            
+                            let titlemod = document.createElement("input");
+                            titlemod.id = "attodotitlemod"+ res.msg.tdIdx;
+                            titlemod.nodeType = "text";
+                            titlemod.value = res.msg.title;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(titlemod);
+                            
+                            let contentsmod = document.createElement("input");
+                            contentsmod.id = "attodocontentmod"+ res.msg.tdIdx;
+                            contentsmod.nodeType = "text";
+                            contentsmod.value = res.msg.contents;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(contentsmod);
+                            
+                            let todoDatemod = document.createElement("input");
+                            todoDatemod.id = "attododatemod"+ res.msg.tdIdx;
+                            todoDatemod.setAttribute("type", "datetime-local");
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(todoDatemod);
+                            
+                            let infomod = document.createElement("input");
+                            infomod.id = "attodoinfomod"+ res.msg.tdIdx;
+                            infomod.nodeType = "text";
+                            infomod.value = res.msg.address;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(infomod);
+                            
+                            let isPrivatemod = document.createElement("input");
+                            isPrivatemod.id = "attodopvmod"+ res.msg.tdIdx;
+                            isPrivatemod.className = "check__box";
+                            isPrivatemod.setAttribute("type", "checkbox");
+                            if(res.msg.isPrivate){
+                            	isPrivatemod.checked =true;
+                            }else{
+                            	isPrivatemod.checked =false;
+                            }
+                        	document.querySelector('#d'+res.msg.tdIdx).appendChild(isPrivatemod);
+                            
+                        	let atmodbutton = document.createElement("button");
+                        	atmodbutton.id = "attodomod"+res.msg.tdIdx;
+                        	atmodbutton.className = "attodomod";
+                        	atmodbutton.dataset.tdidx = res.msg.tdIdx;
+                        	atmodbutton.innerHTML= "수정";
+                        	document.querySelector('#d'+res.msg.tdIdx).appendChild(atmodbutton);
+                        	atmodbutton.addEventListener('click', ev => {
+                        		let tdIdx = ev.target.dataset.tdidx;
+                                console.log('tdIdx: '+tdIdx);
+                                
+                                let attodoIdx = document.getElementById('tdidx'+tdIdx).value;
+                                let attodotitle = document.getElementById('attodotitlemod'+tdIdx).value;
+                                let attodocontent = document.getElementById('attodocontentmod'+tdIdx).value;
+                                let attododate = document.getElementById('attododatemod'+tdIdx).value;
+                                let attodoinfo = document.getElementById('attodoinfomod'+tdIdx).value;
+                                let attodoprivate = document.getElementById('attodopvmod'+tdIdx).checked;
 
-                            console.log('어디냐: ' + res.msg.tdIdx);
-                            console.log('어디냐: ' + res.msg.tdIdx);
+                                console.log('attodoIdx: '+attodoIdx);
+                                console.log('attodotitle: '+attodotitle);
+                                console.log('attodocontent: '+attodocontent);
+                                console.log('attododate: '+attododate);
+                                console.log('attodoinfo: '+attodoinfo);
+                                console.log('attodoprivate: '+attodoprivate);
 
-                            attrResponse.innerHTML +=
-                                '<div class="card">' + res.msg.title + '</div>'
+                                stompClient.send("/app/modify-attractions/" + [[${planner.tpIdx}]], {},
+                                    JSON.stringify({'tdIdx':attodoIdx, 'title':attodotitle, 'contents':attodocontent, 'todoDate':attododate,
+                                        'attractions':attodoinfo, 'isPrivate':attodoprivate}));
+
+                            });
+                        	
+                        	let atdelbutton = document.createElement("button");
+                        	atdelbutton.id = "attododel"+res.msg.tdIdx;
+                        	atdelbutton.className = "attododel";
+                        	atdelbutton.dataset.tdidx = res.msg.tdIdx;
+                        	atdelbutton.innerHTML= "삭제";
+                        	document.querySelector('#d'+res.msg.tdIdx).appendChild(atdelbutton);
+                        	atdelbutton.addEventListener('click', ev => {
+                        		let tdIdx = ev.target.dataset.tdidx;
+                                console.log('tdIdx: '+tdIdx);
+
+                                let attodoIdx = document.getElementById('tdidx'+tdIdx).value;
+
+                                console.log('attodoIdx: '+attodoIdx);
+
+                                stompClient.send("/app/remove-attractions/" + [[${planner.tpIdx}]], {},
+                                    JSON.stringify({'tdIdx':attodoIdx }));
+
+                            });
 
                         }else if(res.type === 'modify-attractions'){
 
@@ -824,13 +1286,27 @@
                             console.log('res.msg.todoDate: '+res.msg.todoDate);
                             console.log('res.msg.attractions: '+res.msg.attractions);
                             console.log('res.msg.isPrivate: '+res.msg.isPrivate);
-                            //document.querySelector('#d'+res.msg.tdIdx).style.display='none';
-                            //response.innerHTML +=
-                            let id = 'd'+res.msg.tdIdx;
-                            document.getElementById(id).innerHTML =
-                                '<span style="background:yellow">'+ "관광지todo 제목, 내용, 날짜, 주소, 비밀: " + res.msg.title + " ,  " +res.msg.contents +
-                                res.msg.todoDate + " ,  " +res.msg.attractions + " ,  " +res.msg.isPrivate+ '<br>'+'</span>';
+                            
+                            document.getElementById("attitle"+res.msg.tdIdx).innerHTML = res.msg.title;
+                            document.getElementById("atcontents" + res.msg.tdIdx).innerHTML = res.msg.contents;
+                            document.getElementById("attododate"+res.msg.tdIdx).innerHTML = res.msg.todoDate;
+                            document.getElementById("atattractions"+res.msg.tdIdx).innerHTML = res.msg.attractions;
+                            if(res.msg.isPrivate){
+                            	document.getElementById("acisPrivate"+res.msg.tdIdx).checked =true;
+                            }else{
+                            	document.getElementById("acisPrivate"+res.msg.tdIdx).checked =false;
+                            }
 
+                            document.getElementById("tdidx"+res.msg.tdIdx).value = res.msg.tdIdx;
+                            document.getElementById("attodotitlemod"+res.msg.tdIdx).value = res.msg.title;
+                            document.getElementById("attodocontentmod"+res.msg.tdIdx).value = res.msg.contents;
+                            document.getElementById("attodoinfomod"+res.msg.tdIdx).value = res.msg.attractions;
+                            if(res.msg.isPrivate){
+                            	document.getElementById("attodopvmod"+res.msg.tdIdx).checked =true;
+                            }else{
+                            	document.getElementById("attodopvmod"+res.msg.tdIdx).checked =false;
+                            }
+                            
                         }else if(res.type === 'remove-attractions'){
 
                             // 관광지 삭제
@@ -847,13 +1323,139 @@
                             console.log('res.msg.budgetType: '+res.msg.budgetType);
                             console.log('res.msg.isPrivate: '+res.msg.isPrivate);
 
-                            var budgetResponse = document.getElementById('response');
 
-                            console.log('어디냐: ' + res.msg.tdIdx);
-                            console.log('어디냐: ' + res.msg.tdIdx);
+                            let todoResponse = document.getElementById("response"+res.tlIdx);
+                            let wpt = document.getElementById("plannerTodo"+res.tlIdx);
+                            let todo = document.createElement("div");
+                            todo.id='d'+res.msg.tdIdx;
+                            todo.className = "card";
+                            wpt.insertBefore(todo,todoResponse);
+                            
+                            let title = document.createElement("p"); 
+                            title.id = "bgtitle"+res.msg.tdIdx;
+                            title.innerHTML = res.msg.title;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(title);
+                            
+                            let contents = document.createElement("p"); 
+                            contents.id = "bgcontents" + res.msg.tdIdx;
+                            contents.innerHTML = res.msg.contents;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(contents);
+                            
+                            let todoDate = document.createElement("p"); 
+                            todoDate.id = "bgtododate" + res.msg.tdIdx;
+                            todoDate.innerHTML = res.msg.todoDate;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(todoDate);
+                            
+                            let budgetType = document.createElement("p"); 
+                            budgetType.id = "bgbudgetType" + res.msg.tdIdx;
+                            budgetType.innerHTML = res.msg.budgetType;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(budgetType);
+                            
+                            let budget = document.createElement("p"); 
+                            budget.id = "bgbudget" + res.msg.tdIdx;
+                            budget.innerHTML = res.msg.budget;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(budget);
+                            
+                            let isPrivate = document.createElement("p"); 
+                            isPrivate.id = "bgisPrivate"+ res.msg.tdIdx;
+                            isPrivate.innerHTML = res.msg.isPrivate;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(isPrivate);
+                            
+                            let td = document.createElement("input");
+                            td.id = "tdidx"+ res.msg.tdIdx;
+                            td.nodeType = "text";
+                            td.value = res.msg.tdIdx;
+                        	document.querySelector('#d'+res.msg.tdIdx).appendChild(td);
+                            
+                            let titlemod = document.createElement("input");
+                            titlemod.id = "bgtodotitlemod"+ res.msg.tdIdx;
+                            titlemod.nodeType = "text";
+                            titlemod.value = res.msg.title;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(titlemod);
+                            
+                            let contentsmod = document.createElement("input");
+                            contentsmod.id = "bgtodocontentmod"+ res.msg.tdIdx;
+                            contentsmod.nodeType = "text";
+                            contentsmod.value = res.msg.contents;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(contentsmod);
+                            
+                            let todoDatemod = document.createElement("input");
+                            todoDatemod.id = "bgtododatemod"+ res.msg.tdIdx;
+                            todoDatemod.setAttribute("type", "datetime-local");
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(todoDatemod);
+                            
+                            let typemod = document.createElement("input");
+                            typemod.id = "bgtodotypemod"+ res.msg.tdIdx;
+                            typemod.nodeType = "text";
+                            typemod.value = res.msg.budgetType;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(typemod);
+                            
+                            let moneymod = document.createElement("input");
+                            moneymod.id = "bgtodomoneymod"+ res.msg.tdIdx;
+                            moneymod.nodeType = "text";
+                            moneymod.value = res.msg.budget;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(moneymod);
+                            
+                            let isPrivatemod = document.createElement("input");
+                            isPrivatemod.id = "bgtodopvmod"+ res.msg.tdIdx;
+                            isPrivatemod.className = "check__box";
+                            isPrivatemod.setAttribute("type", "checkbox");
+                            if(res.msg.isPrivate){
+                            	isPrivatemod.checked =true;
+                            }else{
+                            	isPrivatemod.checked =false;
+                            }
+                        	document.querySelector('#d'+res.msg.tdIdx).appendChild(isPrivatemod);
+                            
+                        	let modbutton = document.createElement("button");
+                        	modbutton.id = "bgtodomod"+res.msg.tdIdx;
+                        	modbutton.className = "bgtodomod";
+                        	modbutton.dataset.tdidx = res.msg.tdIdx;
+                        	modbutton.innerHTML= "수정";
+                        	document.querySelector('#d'+res.msg.tdIdx).appendChild(modbutton);
+                        	modbutton.addEventListener('click', ev => {
+                        		let tdIdx = ev.target.dataset.tdidx;
+                                console.log('tdIdx: '+tdIdx);
 
-                            budgetResponse.innerHTML +=
-                                '<div class="card">' + res.msg.title + '</div>'
+                                let bgtodoIdx = document.getElementById('tdidx'+tdIdx).value;
+                                let bgtodotitle = document.getElementById('bgtodotitlemod'+tdIdx).value;
+                                let bgtodocontent = document.getElementById('bgtodocontentmod'+tdIdx).value;
+                                let bgtododate = document.getElementById('bgtododatemod'+tdIdx).value;
+                                let bgtodomoney = document.getElementById('bgtodomoneymod'+tdIdx).value;
+                                let bgtodotype = document.getElementById('bgtodotypemod'+tdIdx).value;
+                                let bgtodoprivate = document.getElementById('bgtodopvmod'+tdIdx).checked;
+
+                                console.log('bgtodoIdx: '+bgtodoIdx);
+                                console.log('bgtodotitle: '+bgtodotitle);
+                                console.log('bgtodocontent: '+bgtodocontent);
+                                console.log('bgtododate: '+bgtododate);
+                                console.log('bgtodomoney: '+bgtodomoney);
+                                console.log('bgtodotype: '+bgtodotype);
+                                console.log('bgtodoprivate: '+bgtodoprivate);
+
+                                stompClient.send("/app/modify-budget/" + [[${planner.tpIdx}]], {},
+                                    JSON.stringify({'tdIdx':bgtodoIdx, 'title':bgtodotitle, 'contents':bgtodocontent, 'todoDate':bgtododate,
+                                        'budget':bgtodomoney, 'budgetType':bgtodotype, 'isPrivate':bgtodoprivate}));
+                            });
+                        	
+                        	let delbutton = document.createElement("button");
+                        	delbutton.id = "bgtododel"+res.msg.tdIdx;
+                        	delbutton.className = "bgtododel";
+                        	delbutton.dataset.tdidx = res.msg.tdIdx;
+                        	delbutton.innerHTML= "삭제";
+                        	document.querySelector('#d'+res.msg.tdIdx).appendChild(delbutton);
+                        	delbutton.addEventListener('click', ev => {
+                        		let tdIdx = ev.target.dataset.tdidx;
+                                console.log('tdIdx: '+tdIdx);
+
+                                let bgtodoIdx = document.getElementById('tdidx'+tdIdx).value;
+
+                                console.log('bgtodoIdx: '+bgtodoIdx);
+
+                                stompClient.send("/app/remove-budget/" + [[${planner.tpIdx}]], {},
+                                    JSON.stringify({'tdIdx':bgtodoIdx }));
+
+                            });
 
                         }else if(res.type === 'modify-budget'){
 
@@ -863,12 +1465,30 @@
                             console.log('res.msg.todoDate: '+res.msg.todoDate);
                             console.log('res.msg.address: '+res.msg.address);
                             console.log('res.msg.isPrivate: '+res.msg.isPrivate);
-                            //document.querySelector('#d'+res.msg.tdIdx).style.display='none';
-                            //response.innerHTML +=
-                            let id = 'd'+res.msg.tdIdx;
-                            document.getElementById(id).innerHTML =
-                                '<span style="background:yellow">'+ "예산todo 제목, 내용, 날짜, 주소, 비밀: " + res.msg.title + " ,  " +res.msg.contents +
-                                res.msg.todoDate + " ,  " +res.msg.address + " ,  " +res.msg.isPrivate+ '<br>'+'</span>';
+                            
+                            
+                            document.getElementById("bgtitle"+res.msg.tdIdx).innerHTML = res.msg.title;
+                            document.getElementById("bgcontents" + res.msg.tdIdx).innerHTML = res.msg.contents;
+                            document.getElementById("bgtododate"+res.msg.tdIdx).innerHTML = res.msg.todoDate;
+                            document.getElementById("bgbudgetType"+res.msg.tdIdx).innerHTML = res.msg.budgetType;
+                            document.getElementById("bgbudget"+res.msg.tdIdx).innerHTML = res.msg.budget;
+                            
+                            if(res.msg.isPrivate){
+                            	document.getElementById("bgisPrivate"+res.msg.tdIdx).checked =true;
+                            }else{
+                            	document.getElementById("bgisPrivate"+res.msg.tdIdx).checked =false;
+                            }
+
+                            document.getElementById("tdidx"+res.msg.tdIdx).value = res.msg.tdIdx;
+                            document.getElementById("bgtodotitlemod"+res.msg.tdIdx).value = res.msg.title;
+                            document.getElementById("bgtodocontentmod"+res.msg.tdIdx).value = res.msg.contents;
+                            document.getElementById("bgtodotypemod"+res.msg.tdIdx).value = res.msg.budgetType;
+                            document.getElementById("bgtodomoneymod"+res.msg.tdIdx).value = res.msg.budget;
+                            if(res.msg.isPrivate){
+                            	document.getElementById("bgtodopvmod"+res.msg.tdIdx).checked =true;
+                            }else{
+                            	document.getElementById("bgtodopvmod"+res.msg.tdIdx).checked =false;
+                            }
 
                         }else if(res.type === 'remove-budget'){
 
@@ -885,13 +1505,128 @@
                             console.log('res.msg.address: '+res.msg.address);
                             console.log('res.msg.isPrivate: '+res.msg.isPrivate);
 
-                            var generalResponse = document.getElementById('response');
+                            let todoResponse = document.getElementById("response"+res.tlIdx);
+                            let wpt = document.getElementById("plannerTodo"+res.tlIdx);
+                            let todo = document.createElement("div");
+                            todo.id='d'+res.msg.tdIdx;
+                            todo.className = "card";
+                            wpt.insertBefore(todo,todoResponse);
+                            
+                            let title = document.createElement("p"); 
+                            title.id = "gntitle"+res.msg.tdIdx;
+                            title.innerHTML = res.msg.title;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(title);
+                            
+                            let contents = document.createElement("p"); 
+                            contents.id = "gncontents" + res.msg.tdIdx;
+                            contents.innerHTML = res.msg.contents;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(contents);
+                            
+                            let todoDate = document.createElement("p"); 
+                            todoDate.id = "gntododate" + res.msg.tdIdx;
+                            todoDate.innerHTML = res.msg.todoDate;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(todoDate);
+                            
+                            let address = document.createElement("p"); 
+                            address.id = "gnaddress" + res.msg.tdIdx;
+                            address.innerHTML = res.msg.address;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(address);
+                            
+                            let isPrivate = document.createElement("p"); 
+                            isPrivate.id = "gnisPrivate"+ res.msg.tdIdx;
+                            isPrivate.innerHTML = res.msg.isPrivate;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(isPrivate);
+                            
+                            let td = document.createElement("input");
+                            td.id = "tdidx"+ res.msg.tdIdx;
+                            td.nodeType = "text";
+                            td.value = res.msg.tdIdx;
+                        	document.querySelector('#d'+res.msg.tdIdx).appendChild(td);
+                            
+                            let titlemod = document.createElement("input");
+                            titlemod.id = "gntodotitlemod"+ res.msg.tdIdx;
+                            titlemod.nodeType = "text";
+                            titlemod.value = res.msg.title;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(titlemod);
+                            
+                            let contentsmod = document.createElement("input");
+                            contentsmod.id = "gntodocontentmod"+ res.msg.tdIdx;
+                            contentsmod.nodeType = "text";
+                            contentsmod.value = res.msg.contents;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(contentsmod);
+                            
+                            let todoDatemod = document.createElement("input");
+                            todoDatemod.id = "gntododatemod"+ res.msg.tdIdx;
+                            todoDatemod.setAttribute("type", "datetime-local");
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(todoDatemod);
+                            
+                            let addressmod = document.createElement("input");
+                            addressmod.id = "gntodoaddressmod"+ res.msg.tdIdx;
+                            addressmod.nodeType = "text";
+                            addressmod.value = res.msg.address;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(addressmod);
+                            
+                            let isPrivatemod = document.createElement("input");
+                            isPrivatemod.id = "gntodopvmod"+ res.msg.tdIdx;
+                            isPrivatemod.className = "check__box";
+                            isPrivatemod.setAttribute("type", "checkbox");
+                            if(res.msg.isPrivate){
+                            	isPrivatemod.checked =true;
+                            }else{
+                            	isPrivatemod.checked =false;
+                            }
+                        	document.querySelector('#d'+res.msg.tdIdx).appendChild(isPrivatemod);
+                            
+                        	let modbutton = document.createElement("button");
+                        	modbutton.id = "gntodomod"+res.msg.tdIdx;
+                        	modbutton.className = "gntodomod";
+                        	modbutton.dataset.tdidx = res.msg.tdIdx;
+                        	modbutton.innerHTML= "수정";
+                        	document.querySelector('#d'+res.msg.tdIdx).appendChild(modbutton);
+                        	modbutton.addEventListener('click', ev => {
+                        		let tdIdx = ev.target.dataset.tdidx;
+                                console.log('tdIdx: '+tdIdx);
 
-                            console.log('어디냐: ' + res.msg.tdIdx);
-                            console.log('어디냐: ' + res.msg.tdIdx);
+                                let bgtodoIdx = document.getElementById('tdidx'+tdIdx).value;
+                                let bgtodotitle = document.getElementById('bgtodotitlemod'+tdIdx).value;
+                                let bgtodocontent = document.getElementById('bgtodocontentmod'+tdIdx).value;
+                                let bgtododate = document.getElementById('bgtododatemod'+tdIdx).value;
+                                let bgtodomoney = document.getElementById('bgtodomoneymod'+tdIdx).value;
+                                let bgtodotype = document.getElementById('bgtodotypemod'+tdIdx).value;
+                                let bgtodoprivate = document.getElementById('bgtodopvmod'+tdIdx).checked;
 
-                            generalResponse.innerHTML +=
-                                '<div class="card">' + res.msg.title + '</div>'
+                                console.log('bgtodoIdx: '+bgtodoIdx);
+                                console.log('bgtodotitle: '+bgtodotitle);
+                                console.log('bgtodocontent: '+bgtodocontent);
+                                console.log('bgtododate: '+bgtododate);
+                                console.log('bgtodomoney: '+bgtodomoney);
+                                console.log('bgtodotype: '+bgtodotype);
+                                console.log('bgtodoprivate: '+bgtodoprivate);
+
+                                stompClient.send("/app/modify-budget/" + [[${planner.tpIdx}]], {},
+                                    JSON.stringify({'tdIdx':bgtodoIdx, 'title':bgtodotitle, 'contents':bgtodocontent, 'todoDate':bgtododate,
+                                        'budget':bgtodomoney, 'budgetType':bgtodotype, 'isPrivate':bgtodoprivate}));
+
+                            });
+                        	
+                        	let delbutton = document.createElement("button");
+                        	delbutton.id = "gntododel"+res.msg.tdIdx;
+                        	delbutton.className = "gntododel";
+                        	delbutton.dataset.tdidx = res.msg.tdIdx;
+                        	delbutton.innerHTML= "삭제";
+                        	document.querySelector('#d'+res.msg.tdIdx).appendChild(delbutton);
+                        	delbutton.addEventListener('click', ev => {
+                        		let tdIdx = ev.target.dataset.tdidx;
+                                console.log('tdIdx: '+tdIdx);
+
+                                let gntodoIdx = document.getElementById('tdidx'+tdIdx).value;
+
+                                console.log('gntodoIdx: '+gntodoIdx);
+
+                                stompClient.send("/app/remove-general/" + [[${planner.tpIdx}]], {},
+                                    JSON.stringify({'tdIdx':gntodoIdx }));
+
+                            });
 
                         }else if(res.type === 'modify-general'){
 
@@ -901,13 +1636,28 @@
                             console.log('res.msg.todoDate: '+res.msg.todoDate);
                             console.log('res.msg.address: '+res.msg.address);
                             console.log('res.msg.isPrivate: '+res.msg.isPrivate);
-                            //document.querySelector('#d'+res.msg.tdIdx).style.display='none';
-                            //response.innerHTML +=
-                            let id = 'd'+res.msg.tdIdx;
-                            document.getElementById(id).innerHTML =
-                                '<span style="background:yellow">'+ "일반todo 제목, 내용, 날짜, 주소, 비밀: " + res.msg.title + " ,  " +res.msg.contents +
-                                res.msg.todoDate + " ,  " +res.msg.address + " ,  " +res.msg.isPrivate+ '<br>'+'</span>';
+                            
+                            document.getElementById("gntitle"+res.msg.tdIdx).innerHTML = res.msg.title;
+                            document.getElementById("gncontents" + res.msg.tdIdx).innerHTML = res.msg.contents;
+                            document.getElementById("gntododate"+res.msg.tdIdx).innerHTML = res.msg.todoDate;
+                            document.getElementById("gnaddress"+res.msg.tdIdx).innerHTML = res.msg.address;
+                            
+                            if(res.msg.isPrivate){
+                            	document.getElementById("gnisPrivate"+res.msg.tdIdx).checked =true;
+                            }else{
+                            	document.getElementById("gnisPrivate"+res.msg.tdIdx).checked =false;
+                            }
 
+                            document.getElementById("tdidx"+res.msg.tdIdx).value = res.msg.tdIdx;
+                            document.getElementById("gntodotitlemod"+res.msg.tdIdx).value = res.msg.title;
+                            document.getElementById("gntodocontentmod"+res.msg.tdIdx).value = res.msg.contents;
+                            document.getElementById("gntodoaddressmod"+res.msg.tdIdx).value = res.msg.address;
+                            if(res.msg.isPrivate){
+                            	document.getElementById("gntodopvmod"+res.msg.tdIdx).checked =true;
+                            }else{
+                            	document.getElementById("gntodopvmod"+res.msg.tdIdx).checked =false;
+                            }
+                            
                         }else if(res.type === 'remove-general'){
 
                             // 일반 투두 제거
@@ -924,13 +1674,126 @@
                             console.log('res.msg.transportType: '+res.msg.transportType);
                             console.log('res.msg.isPrivate: '+res.msg.isPrivate);
 
-                            var transResponse = document.getElementById('response');
+                            let todoResponse = document.getElementById("response"+res.tlIdx);
+                            let wpt = document.getElementById("plannerTodo"+res.tlIdx);
+                            let todo = document.createElement("div");
+                            todo.id='d'+res.msg.tdIdx;
+                            todo.className = "card";
+                            wpt.insertBefore(todo,todoResponse);
+                            
+                            let title = document.createElement("p"); 
+                            title.id = "trtitle"+res.msg.tdIdx;
+                            title.innerHTML = res.msg.title;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(title);
+                            
+                            let contents = document.createElement("p"); 
+                            contents.id = "trcontents" + res.msg.tdIdx;
+                            contents.innerHTML = res.msg.contents;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(contents);
+                            
+                            let todoDate = document.createElement("p"); 
+                            todoDate.id = "trtododate" + res.msg.tdIdx;
+                            todoDate.innerHTML = res.msg.todoDate;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(todoDate);
+                            
+                            let type = document.createElement("p"); 
+                            type.id = "trtransportType" + res.msg.tdIdx;
+                            type.innerHTML = res.msg.transportType;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(type);
+                            
+                            let isPrivate = document.createElement("p"); 
+                            isPrivate.id = "trisPrivate"+ res.msg.tdIdx;
+                            isPrivate.innerHTML = res.msg.isPrivate;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(isPrivate);
+                            
+                            let td = document.createElement("input");
+                            td.id = "tdidx"+ res.msg.tdIdx;
+                            td.nodeType = "text";
+                            td.value = res.msg.tdIdx;
+                        	document.querySelector('#d'+res.msg.tdIdx).appendChild(td);
+                            
+                            let titlemod = document.createElement("input");
+                            titlemod.id = "trtodotitlemod"+ res.msg.tdIdx;
+                            titlemod.nodeType = "text";
+                            titlemod.value = res.msg.title;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(titlemod);
+                            
+                            let contentsmod = document.createElement("input");
+                            contentsmod.id = "trtodocontentmod"+ res.msg.tdIdx;
+                            contentsmod.nodeType = "text";
+                            contentsmod.value = res.msg.contents;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(contentsmod);
+                            
+                            let todoDatemod = document.createElement("input");
+                            todoDatemod.id = "trtododatemod"+ res.msg.tdIdx;
+                            todoDatemod.setAttribute("type", "datetime-local");
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(todoDatemod);
+                            
+                            let typemod = document.createElement("input");
+                            typemod.id = "trtodotypemod"+ res.msg.tdIdx;
+                            typemod.nodeType = "text";
+                            typemod.value = res.msg.transportType;
+                            document.querySelector('#d'+res.msg.tdIdx).appendChild(typemod);
+                            
+                            let isPrivatemod = document.createElement("input");
+                            isPrivatemod.id = "trtodopvmod"+ res.msg.tdIdx;
+                            isPrivatemod.className = "check__box";
+                            isPrivatemod.setAttribute("type", "checkbox");
+                            if(res.msg.isPrivate){
+                            	isPrivatemod.checked =true;
+                            }else{
+                            	isPrivatemod.checked =false;
+                            }
+                        	document.querySelector('#d'+res.msg.tdIdx).appendChild(isPrivatemod);
+                            
+                        	let modbutton = document.createElement("button");
+                        	modbutton.id = "trtodomod"+res.msg.tdIdx;
+                        	modbutton.className = "trtodomod";
+                        	modbutton.dataset.tdidx = res.msg.tdIdx;
+                        	modbutton.innerHTML= "수정";
+                        	document.querySelector('#d'+res.msg.tdIdx).appendChild(modbutton);
+                        	modbutton.addEventListener('click', ev => {
+                        		let tdIdx = ev.target.dataset.tdidx;
+                                console.log('tdIdx: '+tdIdx);
 
-                            console.log('어디냐: ' + res.msg.tdIdx);
-                            console.log('어디냐: ' + res.msg.tdIdx);
+                                let trtodoIdx = document.getElementById('tdidx'+tdIdx).value;
+                                let trtodotitle = document.getElementById('trtodotitlemod'+tdIdx).value;
+                                let trtodocontent = document.getElementById('trtodocontentmod'+tdIdx).value;
+                                let trtododate = document.getElementById('trtododatemod'+tdIdx).value;
+                                let trtodotype = document.getElementById('trtodotypemod'+tdIdx).value;
+                                let trtodoprivate = document.getElementById('trtodopvmod'+tdIdx).checked;
 
-                            transResponse.innerHTML +=
-                                '<div class="card">' + res.msg.title + '</div>'
+                                console.log('trtodoIdx: '+trtodoIdx);
+                                console.log('trtodotitle: '+trtodotitle);
+                                console.log('trtodocontent: '+trtodocontent);
+                                console.log('trtododate: '+trtododate);
+                                console.log('trtodotype: '+trtodotype);
+                                console.log('trtodoprivate: '+trtodoprivate);
+
+                                stompClient.send("/app/modify-transport/" + [[${planner.tpIdx}]], {},
+                                    JSON.stringify({'tdIdx':trtodoIdx, 'title':trtodotitle, 'contents':trtodocontent, 'todoDate':trtododate,
+                                        'transportType':trtodotype, 'isPrivate':trtodoprivate}));
+
+                            });
+                        	
+                        	let delbutton = document.createElement("button");
+                        	delbutton.id = "trtododel"+res.msg.tdIdx;
+                        	delbutton.className = "trtododel";
+                        	delbutton.dataset.tdidx = res.msg.tdIdx;
+                        	delbutton.innerHTML= "삭제";
+                        	document.querySelector('#d'+res.msg.tdIdx).appendChild(delbutton);
+                        	delbutton.addEventListener('click', ev => {
+                        		let tdIdx = ev.target.dataset.tdidx;
+                                console.log('tdIdx: '+tdIdx);
+
+                                let trtodoIdx = document.getElementById('tdidx'+tdIdx).value;
+
+                                console.log('trtodoIdx: '+trtodoIdx);
+
+                                stompClient.send("/app/remove-transport/" + [[${planner.tpIdx}]], {},
+                                    JSON.stringify({'tdIdx':trtodoIdx }));
+
+                            });
 
                         }else if(res.type === 'modify-transport'){
 
@@ -940,13 +1803,28 @@
                             console.log('res.msg.todoDate: '+res.msg.todoDate);
                             console.log('res.msg.transportType: '+res.msg.transportType);
                             console.log('res.msg.isPrivate: '+res.msg.isPrivate);
-                            //document.querySelector('#d'+res.msg.tdIdx).style.display='none';
-                            //response.innerHTML +=
-                            let id = 'd'+res.msg.tdIdx;
-                            document.getElementById(id).innerHTML =
-                                '<span style="background:yellow">'+ "교통todo 제목, 내용, 날짜, 종류, 비밀: " + res.msg.title + " ,  " +res.msg.contents +
-                                res.msg.todoDate + " ,  " +res.msg.transportType + " ,  " +res.msg.isPrivate+ '<br>'+'</span>';
+                            
+                            document.getElementById("trtitle"+res.msg.tdIdx).innerHTML = res.msg.title;
+                            document.getElementById("trcontents" + res.msg.tdIdx).innerHTML = res.msg.contents;
+                            document.getElementById("trtododate"+res.msg.tdIdx).innerHTML = res.msg.todoDate;
+                            document.getElementById("trtransportType"+res.msg.tdIdx).innerHTML = res.msg.transportType;
+                            
+                            if(res.msg.isPrivate){
+                            	document.getElementById("trisPrivate"+res.msg.tdIdx).checked =true;
+                            }else{
+                            	document.getElementById("trisPrivate"+res.msg.tdIdx).checked =false;
+                            }
 
+                            document.getElementById("tdidx"+res.msg.tdIdx).value = res.msg.tdIdx;
+                            document.getElementById("trtodotitlemod"+res.msg.tdIdx).value = res.msg.title;
+                            document.getElementById("trtodocontentmod"+res.msg.tdIdx).value = res.msg.contents;
+                            document.getElementById("trtodotypemod"+res.msg.tdIdx).value = res.msg.transportType;
+                            if(res.msg.isPrivate){
+                            	document.getElementById("trtodopvmod"+res.msg.tdIdx).checked =true;
+                            }else{
+                            	document.getElementById("trtodopvmod"+res.msg.tdIdx).checked =false;
+                            }
+                            
                         }else if(res.type === 'remove-transport'){
 
                             // 교통 삭제
