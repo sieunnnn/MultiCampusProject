@@ -33,15 +33,6 @@
         <div class="wrapper__setting__friends">
             <div class="wrapper__setting__btn">
                 <!-- 경로는 나중에 알맞게 수정 해주세요 -->
-
-                <span th:each="note, status : ${noteList}">
-
-                    <span th:each="partner :${note.partnerResponse}">
-
-                        <p th:text="${partner.member.userId}"/>
-                    </span>
-
-                 </span>
                 <div th:onclick="|location.href='@{/add/note}'|">
                     <input type="button" class="btn__add__friends" value="친구 추가">
 
@@ -56,6 +47,22 @@
         <!-- 친구 목록 추가 -->
         <!-- 대략 작성 해주시면 제가 나중에 수정 하겠습니다 -->
         <div class="wrapper__friends__list">
+             <span th:each="note, status : ${noteList}">
+
+                    <span th:each="partner :${note.partnerResponse}">
+
+                        <p th:text="${partner.member.userId}"/>
+                    </span>
+
+                 </span>
+<!--            <form th:action="@{/note/add}" method="post" th:object="${loginRequest}">-->
+<!--                <div class="wrapper__login__input">-->
+<!--                    <div class="input__id">-->
+<!--                        <input style="width: 245px; height: 28px" type="text" id="userId" name="userId" placeholder="아이디 입력"/>-->
+<!--                        <span class="error__id" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></span>-->
+<!--                    </div>-->
+<!--                <button class="btn__login">로그인</button>-->
+<!--            </form>-->
         </div>
     </div>
 

@@ -1,17 +1,19 @@
 package multi.second.project.domain.note;
 
 import lombok.AllArgsConstructor;
-import multi.second.project.domain.gallery.GalleryService;
+import multi.second.project.domain.gallery.dto.request.GalleryRegistRequest;
 import multi.second.project.domain.member.UserPrincipal;
+import multi.second.project.domain.member.domain.Member;
 import multi.second.project.domain.note.dto.request.NoteRegistRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -20,10 +22,21 @@ import java.util.Map;
 public class NoteController {
 
     private final NoteService noteService;
+
     @GetMapping("form")
     public String noteForm() {
         return"/";
     }
+
+    @PostMapping("upload")
+    public String upload(NoteRegistRequest dto)
+    {
+        dto.setUserId(UserPrincipal.getUserPrincipal().getUserId()); //로그인한 사람의 아이디를 받아 저장
+        noteService.createNote(dto); // 받은 정보와 파일들로 서비스에서 등록처리
+
+        return "redirect:/note/list";
+    }
+
 
 
     @GetMapping("list")

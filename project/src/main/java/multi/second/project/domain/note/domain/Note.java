@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import multi.second.project.domain.note.dto.request.NoteRegistRequest;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -27,37 +28,58 @@ public class Note {
 	@Id
 	@GeneratedValue
 	private Long ntIdx;
-	
+
 	//나
-//	@ManyToOne
-//	@JoinColumn(name = "userId")
-//	private Member member;
-	
+	@ManyToOne
+	@JoinColumn(name = "userId")
+	private Member member;
+
 	//상대방
 //	@OneToOne
 //	@JoinColumn(name = "userId")
 //	private Member member2;
-	
-	@OneToMany(fetch = FetchType.EAGER)
+
+	@OneToMany(mappedBy = "note", cascade = CascadeType.ALL, orphanRemoval = true)
+	@Builder.Default
 	private List<Partner> partners = new ArrayList<>();
-	
-	@OneToMany(cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "note", cascade = CascadeType.ALL, orphanRemoval = true)
 	@Builder.Default
 	private List<Message> messages = new ArrayList<>();
-	
+
 //	//상대방
 //	@OneToOne
 //	private Member partner;
-	
+
 	//쪽지 처음 만들어진 시간
 	@Column(columnDefinition = "timestamp default now()")
 	private LocalDateTime regDate;
-	
+
 	//쪽지 삭제 여부
 	@ColumnDefault("false")
 	private Boolean isDel;
 
+	public static Note createNote(NoteRegistRequest dto, Member member) {
+		return Note.builder().build();
+	}
+
 	public void addPartner(Partner partner) {
 		partners.add(partner);
+		partner.setNote(this);
+	}
+
+	public void removePartner(Partner partner) {
+		partners.remove(partner);
+		partner.setNote(null);
+	}
+
+	public void addMessage(Message message) {
+		messages.add(message);
+
+	}
+
+	public void removeMessage(Message message) {
+		messages.remove(message);
+
 	}
 }

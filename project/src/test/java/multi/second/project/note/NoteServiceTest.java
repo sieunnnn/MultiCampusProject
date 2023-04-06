@@ -14,7 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class NoteControllerTest {
+public class NoteServiceTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -28,17 +28,15 @@ public class NoteControllerTest {
 
     @Test
     public void testPartnerUpload(){
-//
-//        Member me = memberRepository.findById("guswnd1212").get();
+
+
+          Member me = memberRepository.findById("guswnd1212").get();
 //        Member you = memberRepository.findById("guswnd1380").get();
-        //System.out.println("me : "+me);
-        Note note = Note.builder().build();
-        noteRepository.save(note);
+          Note note = Note.builder().build();
+          noteRepository.save(note);
 
 //        Partner partner1 = Partner.builder().member(me).build();
-
 //        partnerRepository.save(partner1);
-//
 //        note.addPartner(partner1);
 
 //        Partner partner2 = Partner.builder().member(you).build();
@@ -51,15 +49,15 @@ public class NoteControllerTest {
     @Test
     public void testPartnerAdd(){
 
-        Note note = noteRepository.findById(9L).get();
+        Note note = noteRepository.findById(1L).get();
 
-        Member member = memberRepository.findById("guswnd1380").get();
-        //System.out.println("me : "+me);
+        Member member = memberRepository.findById("guswnd1212").get();
         Partner partner = Partner.builder().member(member).build();
         partnerRepository.save(partner);
         note.addPartner(partner);
 
         noteRepository.save(note);
+
 
 
     }

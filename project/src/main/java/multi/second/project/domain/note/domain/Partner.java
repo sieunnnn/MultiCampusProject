@@ -25,14 +25,20 @@ public class Partner {
 	@GeneratedValue
 	private Long pnIdx;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "note_id")
+	private Note note;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "member_id")
 	private Member member;
 
-	@Builder.Default
-	private LocalDateTime createdAt=LocalDateTime.now();
+	@Builder
+	public Partner(Note note, Member member) {
+		this.note = note;
+		this.member = member;
+	}
 
-
-	private LocalDateTime deletedAt;
-
-
+	public void setNote(Note note) {
+	}
 }

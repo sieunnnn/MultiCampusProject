@@ -34,31 +34,139 @@ public class MemberControllerTest {
 	@Test
 	@DisplayName("회원가입 정보 저장")
 	public void testSignUpImpl() throws Exception {
-		
+
 		SignUpRequest form = new SignUpRequest();
+		form.setUserId("guswnd1380");
+		form.setPassword("123qwe!@#QWE");
+		form.setEmail("azimemory@gmail.com");
+		form.setGrade("ROLE_USER");
+		//form.setImagePath(null);
+
+		mockMvc.perform(get("/member/signupimpl/1234")
+						.sessionAttr("signupForm", form)
+						.sessionAttr("authToken", "1234"))
+				.andExpect(status().is3xxRedirection());
+
+		form.setUserId("guswnd1212");
+		form.setPassword("123qwe!@#QWE");
+		form.setEmail("azimemory@gmail.com");
+		form.setGrade("ROLE_USER");
+		//form.setImagePath(null);
+
+		mockMvc.perform(get("/member/signupimpl/1234")
+						.sessionAttr("signupForm", form)
+						.sessionAttr("authToken", "1234"))
+				.andExpect(status().is3xxRedirection());
+
 		form.setUserId("guswnd2050");
 		form.setPassword("123qwe!@#QWE");
 		form.setEmail("azimemory@gmail.com");
 		form.setGrade("ROLE_USER");
 		//form.setImagePath(null);
-		
+
 		mockMvc.perform(get("/member/signupimpl/1234")
-				.sessionAttr("signupForm", form)
-				.sessionAttr("authToken", "1234"))
-		.andExpect(status().is3xxRedirection());
+						.sessionAttr("signupForm", form)
+						.sessionAttr("authToken", "1234"))
+				.andExpect(status().is3xxRedirection());
+
+		form.setUserId("group1A");
+		form.setPassword("123qwe!@#QWE");
+		form.setEmail("azimemory@gmail.com");
+		form.setGrade("ROLE_USER");
+		//form.setImagePath(null);
+
+		mockMvc.perform(get("/member/signupimpl/1234")
+						.sessionAttr("signupForm", form)
+						.sessionAttr("authToken", "1234"))
+				.andExpect(status().is3xxRedirection());
+
+		form.setUserId("group1B");
+		form.setPassword("123qwe!@#QWE");
+		form.setEmail("azimemory@gmail.com");
+		form.setGrade("ROLE_USER");
+		//form.setImagePath(null);
+
+		mockMvc.perform(get("/member/signupimpl/1234")
+						.sessionAttr("signupForm", form)
+						.sessionAttr("authToken", "1234"))
+				.andExpect(status().is3xxRedirection());
+
+		form.setUserId("group1C");
+		form.setPassword("123qwe!@#QWE");
+		form.setEmail("azimemory@gmail.com");
+		form.setGrade("ROLE_USER");
+		//form.setImagePath(null);
+
+		mockMvc.perform(get("/member/signupimpl/1234")
+						.sessionAttr("signupForm", form)
+						.sessionAttr("authToken", "1234"))
+				.andExpect(status().is3xxRedirection());
+		form.setUserId("group2A");
+		form.setPassword("123qwe!@#QWE");
+		form.setEmail("azimemory@gmail.com");
+		form.setGrade("ROLE_USER");
+		//form.setImagePath(null);
+
+		mockMvc.perform(get("/member/signupimpl/1234")
+						.sessionAttr("signupForm", form)
+						.sessionAttr("authToken", "1234"))
+
+				.andExpect(status().is3xxRedirection());
+		form.setUserId("group2B");
+		form.setPassword("123qwe!@#QWE");
+		form.setEmail("azimemory@gmail.com");
+		form.setGrade("ROLE_USER");
+		//form.setImagePath(null);
+
+		mockMvc.perform(get("/member/signupimpl/1234")
+						.sessionAttr("signupForm", form)
+						.sessionAttr("authToken", "1234"))
+
+				.andExpect(status().is3xxRedirection());
+		form.setUserId("group2C");
+		form.setPassword("123qwe!@#QWE");
+		form.setEmail("azimemory@gmail.com");
+		form.setGrade("ROLE_USER");
+		//form.setImagePath(null);
+
+		mockMvc.perform(get("/member/signupimpl/1234")
+						.sessionAttr("signupForm", form)
+						.sessionAttr("authToken", "1234"))
+				.andExpect(status().is3xxRedirection());
+
+		form.setUserId("test11");
+		form.setPassword("123qwe!@#QWE");
+		form.setEmail("azimemory@gmail.com");
+		form.setGrade("ROLE_USER");
+		//form.setImagePath(null);
+
+		mockMvc.perform(get("/member/signupimpl/1234")
+						.sessionAttr("signupForm", form)
+						.sessionAttr("authToken", "1234"))
+				.andExpect(status().is3xxRedirection());
+		form.setUserId("test22");
+		form.setPassword("123qwe!@#QWE");
+		form.setEmail("azimemory@gmail.com");
+		form.setGrade("ROLE_USER");
+		//form.setImagePath(null);
+
+		mockMvc.perform(get("/member/signupimpl/1234")
+						.sessionAttr("signupForm", form)
+						.sessionAttr("authToken", "1234"))
+				.andExpect(status().is3xxRedirection());
+
+		form.setUserId("admin");
+		form.setPassword("123qwe!@#QWE");
+		form.setEmail("azimemory@gmail.com");
+		form.setGrade("ROLE_ADMIN");
+		//form.setImagePath(null);
+
+		mockMvc.perform(get("/member/signupimpl/1234")
+						.sessionAttr("signupForm", form)
+						.sessionAttr("authToken", "1234"))
+				.andExpect(status().is3xxRedirection());
+
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

@@ -35,14 +35,7 @@ public class Member {
 	private String email;
 	private String grade;
 	//private String imagePath;
-	
-//	@OneToMany(cascade = CascadeType.ALL)
-//	@Builder.Default
-//	private List<Friend> friends = new ArrayList<>();
-	
-//	@OneToMany(cascade = CascadeType.ALL)
-//	@Builder.Default
-//	private List<Planner> planners = new ArrayList<>();
+
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@Builder.Default
