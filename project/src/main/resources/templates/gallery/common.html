@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="main_layout">
+
+<head>
+	<title>Gallery</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="../../static/css/gallery/common.css" th:href="@{/css/gallery/common.css}"/>
+</head>
+
+<body>
+<!-- 대체하고 싶은 요소에 layout:fragment 속성을 부여한다. -->
+<div layout:fragment="content">
+	<div class="container__gallery__contents">
+		<div class="wrapper__notification">
+			<div class="wrapper__notification__head">
+				<div class="txt__notification">Notification</div>
+			</div>
+
+			<!-- 알람 리스트 -->
+			<div class="wrapper__list"></div>
+		</div>
+		<div class="txt__Bookmark">즐겨찾기</div>
+		<div class="wrapper__bookmark">
+			<!-- 즐겨 찾기 리스트 -->
+		</div>
+		<div class="txt__advertise">광고</div>
+		<div class="wrapper__advertise">
+			<div id="Ad1"></div>
+			<div id="Ad2"></div>
+			<div id="Ad3"></div>
+		</div>
+	</div>
+
+	<div class="wrapper__gallery">
+		<div class="wrapper__gallery__head">
+			<div class="user__profile__pic"></div>
+		</div>
+		<div layout:fragment="gallery__content"></div>
+	</div>
+</div>
+</body>
+</html>

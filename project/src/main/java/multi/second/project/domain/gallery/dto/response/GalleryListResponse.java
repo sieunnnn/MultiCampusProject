@@ -16,7 +16,6 @@ public class GalleryListResponse {
 	private String userId;
 	private String title;
 	private LocalDateTime regDate;
-
 	private Long thumb;
 
 
@@ -34,3 +33,12 @@ public class GalleryListResponse {
 	}
 
 }
+
+//이 코드는 갤러리 게시물의 리스트를 응답하기 위한 DTO 클래스입니다.
+//
+//Gallery 엔티티를 받아와서 GalleryListResponse 클래스로 매핑해주는 역할을 합니다.
+// 생성자에서는 Gallery 엔티티에서 게시물의 고유번호, 제목, 작성자 아이디, 썸네일 이미지 등을 받아옵니다.
+//
+//그리고 toDtoList 메서드에서는 Gallery 엔티티의 리스트를 GalleryListResponse DTO의 리스트로 변환합니다.
+// Stream의 map 메서드를 이용해서 Gallery 엔티티를 GalleryListResponse DTO로 변환한 후,
+// collect 메서드를 이용해서 리스트로 만듭니다.
