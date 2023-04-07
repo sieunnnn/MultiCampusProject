@@ -58,27 +58,13 @@ public class Note {
 	@ColumnDefault("false")
 	private Boolean isDel;
 
-	public static Note createNote(NoteRegistRequest dto, Member member) {
-		return Note.builder().build();
-	}
+//	public static Note createNote(NoteRegistRequest dto, Member member) {
+//		return Note.builder().build();
+//	}
+//
+//	public void addPartner(Partner partner) {
+//		partners.add(partner);
+//
+//	}
 
-	public void addPartner(Partner partner) {
-		partners.add(partner);
-
-	}
-
-	public void removePartner(Partner partner) {
-		partners.remove(partner);
-
-	}
-
-	public void addMessage(Message message) {
-		messages.add(message);
-
-	}
-
-	public void removeMessage(Message message) {
-		messages.remove(message);
-
-	}
 }

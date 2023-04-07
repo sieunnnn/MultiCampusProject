@@ -9,5 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PartnerRequestDto {
+
+    private Long ntIdx;
+
     private String userId;
+
 }
