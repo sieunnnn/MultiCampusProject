@@ -460,58 +460,6 @@ button:focus {
     border-radius: 16px;
 }
 
-/* toggle ============================================================*/
-
-.wrapper__planner__toggle {
-
-}
-
-.toggle__switch__planner {
-
-    width: 57px;
-    height: 26px;
-
-    display: block;
-    position: relative;
-
-    border-radius: 30px;
-    background: rgba(0, 122, 255, 1);
-    /*box-shadow: 0 0 8px 3px rgba(0 0 0 / 15%);*/
-
-    cursor: pointer;
-}
-
-
-.toggle__switch__planner .toggle__button {
-
-    width: 20px;
-    height: 20.5px;
-    position: absolute;
-    top: 50%;
-    left: 34px;
-    transform: translateY(-50%);
-
-    border-radius: 50%;
-
-    background: #fff;
-}
-
-.toggle__switch__planner.active {
-
-    background: rgba(120, 120, 128, 32%);
-}
-
-.toggle__switch__planner.active .toggle__button {
-
-    left: calc(100% - 54px);
-    background: #fff !important;
-}
-
-.toggle__switch__planner, .toggle__button {
-
-    transition: all 0.2s ease-in;
-}
-
 
 /* ===================================================================*/
 
@@ -537,7 +485,7 @@ button:focus {
 /* 채팅 */
 
 /* 모달 */
-.wrapper__chat, .container__calendar, .container__member{
+.wrapper__chat, .container__calendar, .container__member, .container__trip {
 
     display: flex;
     flex-direction: column;
@@ -558,7 +506,7 @@ button:focus {
     border-radius: 16px;
 }
 
-.chat__title, .calendar__title, .member__title {
+.chat__title, .calendar__title, .member__title, .trip__title {
 
     margin: 20px 0 30px 20px;
 
@@ -570,14 +518,7 @@ button:focus {
     color: #1C1C1E;
 }
 
-#modalChat img, .container__calendar img, .container__member img{
-
-    margin: 10px 0 20px 273px;
-    width: 30px;
-    height: 30px;
-}
-
-.wrapper__message, .wrapper__member {
+.wrapper__message, .wrapper__member, .wrapper__trip {
 
     display: flex;
     flex-direction: column;
@@ -590,6 +531,50 @@ button:focus {
     background-color: #1A71CC;
 }
 
+.wrapper__message__input {
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+
+    width: 260px;
+    height: auto;
+
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+
+    color: #1C1C1E;
+}
+
+
+/* 여행 */
+
+.wrapper__trip {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+
+    color: #1C1C1E;
+}
+
 /* 캘린더 */
 /* section calendar */
 
@@ -598,6 +583,7 @@ button:focus {
     margin-bottom: 20px;
 }
 .sec_cal {
+
     width: 270px;
     margin: 0 auto;
 
