@@ -11,6 +11,13 @@
 <div class="row">
  <h2 class="tit">* 게시판</h2>
  <div>
+ 
+ 	<form th:action="@{/planner/other-list}" method="get">
+ 	 <input type="text" th:value="group1B" name="profileId"/>
+	 <button><span>플래너 이동</span></button>
+ 	</form>
+ 	
+ 	
  	<form th:action="@{/planner/create}" method="post" >
 		  <input type="hidden" th:value="${#authentication.name}" name="userId"/> 
 	    <input type="text" th:value="플래너제목" name="title"/>

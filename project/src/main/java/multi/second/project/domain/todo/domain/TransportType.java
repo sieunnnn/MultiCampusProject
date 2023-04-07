@@ -4,7 +4,8 @@ public enum TransportType {
 
 	AIRPLANE,
 	KTX,
-	BUS,
 	SRT,
-	SUBWAY;
+	BUS,
+	SUBWAY,
+	ETC;
 }
