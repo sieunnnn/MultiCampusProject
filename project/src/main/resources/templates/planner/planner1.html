@@ -107,7 +107,7 @@
                     </div>
 
                     <!-- 멤버 모달 -->
-                    <div style="display: none" class="wrapper__member">
+                    <div style="display: none" class="container__member">
                         <div>
                             <button onclick="closeMember()"><img src="/img/btn_close.png"></button>
                             <div class="member__title">Member</div>
@@ -674,12 +674,17 @@
         function openChat() {
             document.querySelector('.wrapper__money').style.display = 'none';
             document.getElementById('modalChat').style.display = '';
+            document.querySelector('.wrapper__member').style.display = 'none';
+            document.querySelector('.container__calendar').style.display = 'none';
         }
 
         function closeChat() {
 
             document.getElementById('modalChat').style.display = 'none';
             document.querySelector('.wrapper__money').style.display = '';
+            document.querySelector('.wrapper__member').style.display = 'none';
+            document.querySelector('.container__calendar').style.display = 'none';
+
         }
 
         // 멤버 모달 =====================================================//
@@ -688,7 +693,7 @@
             document.querySelector('.wrapper__money').style.display = 'none';
             document.querySelector('.container__calendar').style.display = 'none';
             document.getElementById('modalChat').style.display = 'none';
-            document.querySelector('.wrapper__member').style.display = '';
+            document.querySelector('.container__member').style.display = '';
 
         }
 
@@ -697,7 +702,7 @@
             document.getElementById('modalChat').style.display = 'none';
             document.querySelector('.wrapper__money').style.display = '';
             document.querySelector('.container__calendar').style.display = 'none';
-            document.querySelector('.wrapper__member').style.display = 'none';
+            document.querySelector('.container__member').style.display = 'none';
 
 
         }
@@ -708,6 +713,8 @@
             document.querySelector('.wrapper__money').style.display = 'none';
             document.querySelector('#modalChat').style.display = 'none';
             document.querySelector('.container__calendar').style.display = '';
+            document.querySelector('.wrapper__member').style.display = 'none';
+
         }
 
         function closeCalendar() {
@@ -715,6 +722,8 @@
             document.querySelector('.container__calendar').style.display = 'none';
             document.querySelector('.wrapper__money').style.display = '';
             document.querySelector('#modalChat').style.display = 'none';
+            document.querySelector('.wrapper__member').style.display = 'none';
+
         }
 
         $(document).ready(function() {

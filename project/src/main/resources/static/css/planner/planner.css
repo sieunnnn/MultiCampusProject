@@ -537,7 +537,7 @@ button:focus {
 /* 채팅 */
 
 /* 모달 */
-.wrapper__chat, .container__calendar, .wrapper__member{
+.wrapper__chat, .container__calendar, .container__member{
 
     display: flex;
     flex-direction: column;
@@ -570,7 +570,7 @@ button:focus {
     color: #1C1C1E;
 }
 
-#modalChat img, .container__calendar img{
+#modalChat img, .container__calendar img, .container__member img{
 
     margin: 10px 0 20px 273px;
     width: 30px;
