@@ -30,20 +30,19 @@ public class Note {
 	private Long ntIdx;
 
 	//나
-	@ManyToOne
-	@JoinColumn(name = "userId")
-	private Member member;
+//	@ManyToOne
+//	@JoinColumn(name = "userId")
+//	private Member member;
 
 	//상대방
 //	@OneToOne
 //	@JoinColumn(name = "userId")
 //	private Member member2;
 
-	@OneToMany(mappedBy = "note", cascade = CascadeType.ALL, orphanRemoval = true)
-	@Builder.Default
+	@OneToMany(fetch = FetchType.EAGER)
 	private List<Partner> partners = new ArrayList<>();
 
-	@OneToMany(mappedBy = "note", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL)
 	@Builder.Default
 	private List<Message> messages = new ArrayList<>();
 
@@ -65,12 +64,12 @@ public class Note {
 
 	public void addPartner(Partner partner) {
 		partners.add(partner);
-		partner.setNote(this);
+
 	}
 
 	public void removePartner(Partner partner) {
 		partners.remove(partner);
-		partner.setNote(null);
+
 	}
 
 	public void addMessage(Message message) {

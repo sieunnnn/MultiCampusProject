@@ -37,6 +37,15 @@ public class NoteController {
         return "redirect:/note/list";
     }
 
+//    @PostMapping("upload")
+//    public String upload(NoteRegistRequest dto)
+//    {
+//        dto.setUserId(UserPrincipal.getUserPrincipal().getUserId()); //로그인한 사람의 아이디를 받아 저장
+//        noteService.createNote(dto); // 받은 정보와 파일들로 서비스에서 등록처리
+//
+//        return "redirect:/note/list";
+//    }
+
 
 
     @GetMapping("list")
