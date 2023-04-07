@@ -18,6 +18,7 @@
     <div class="container">
         <div class="popup-wrap" id="popup">
             <div class="popup">
+            
                 <div class="popup-head">
                     <span class="head-title">프로필 변경</span>
                 </div>
@@ -30,7 +31,7 @@
                             <div class="file-container">
                                 <div class="image-upload" id="image-upload">
 
-                                    <form method="post" action="/profile/saveImg" enctype="multipart/form-data">
+                                    <form method="post" th:action="@{/profile/saveImg}" enctype="multipart/form-data">
                                         <!--                                        <div class="button">-->
                                         <!--                                            <label for="chooseFile">-->
                                         <!--                                                사진찾기-->
@@ -96,10 +97,9 @@
  	 				<input type="text" th:value="group1B" name="profileId"/>
 	 				<button class="btn__travel1"><span>님의 여행 일정</span></button>
  				</form>
- 				<form th:action="@{/planner/list}" method="get">
- 					<input type="hidden" th:value="${#authentication.name}" name="userId"/> 
+ 				
                 	<button class="btn__travel2">님의 이전 여행</button>
-                </form>
+                
             </div>
         </div>
     </div>
