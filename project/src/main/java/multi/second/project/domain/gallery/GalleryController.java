@@ -60,7 +60,7 @@ public class GalleryController {
 	//갤러리 리스트 화면
 	@GetMapping("list")
 	public String galleryList(//등록글들을 타이틀이 아닌 그림으로 보여줘야 하는데 어떻게 할까?
-							  @PageableDefault(size=10, sort="postIdx", direction = Direction.DESC, page = 0)
+							  @PageableDefault(size=12, sort="postIdx", direction = Direction.DESC, page = 0)
 //			@SessionAttribute(name="auth", required=false) Principal principal,//현재 아이디정보를 얻기위해 추가
 							  Pageable pageable,
 							  Model model
