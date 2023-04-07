@@ -18,11 +18,12 @@
     <div class="container__contents">
 
         <div class="container__planner">
-
-            <div style="display:none;" th:each="group : ${planner.travelGroup.participants}">
-                <p th:text="${group.member.userId}">
-            </div>
-
+			<div th:id=memberGroup>
+            	<div style="display:none;" th:each="group : ${planner.travelGroup.participants}">
+                	<p th:text="${group.member.userId}">
+            	</div>
+            	<div th:id=memberResponse></div>
+			</div>
             <!-- 타이틀 -->
             <div class="wrapper__title">
                 <div class="txt__title">
@@ -45,6 +46,18 @@
                     </div>
 
                 </div>
+                <div th:id=memberGroup>
+	            	<div style="display:block;" th:each="group : ${planner.travelGroup.participants}">
+	                	<div th:text="${group.member.userId}"></div>
+	            	</div>
+	            	<div th:id=memberResponse></div>
+				</div>
+            <!-- 타이틀 -->
+            <div class="wrapper__title">
+                <div class="txt__title">
+                    [[${planner.title}]]
+                </div>
+            </div>
 
                 <!-- 메뉴 -->
                 <div class="wrapper__menu">
@@ -112,7 +125,10 @@
                             <button onclick="closeMember()"><img src="/img/btn_close.png"></button>
                             <div class="member__title">Member</div>
                             <div class="wrapper__member">
-                                <!-- 채팅 메시지 부분입니당 -->
+                                <!-- 멤버 검색 부분입니당 -->
+                                <input name="keyword" id="searchUserId" placeholder="초대할 멤버의 ID를 입력하세요." class = "groupsearch">
+								<button onclick="sendKeyword()" class ="groupsearch">검색</button>
+								<div th:id ="groupsearchResponse" class ="groupsearch"></div>
                             </div>
                         </div>
                     </div>
@@ -835,7 +851,13 @@
 
                         // 그룹추가
                         if (res.type === 'add-group') {
-                            response.innerHTML += '<span style="background:yellow">' + res.msg.userId + '<br>' + '</span>';
+                            //response.innerHTML += '<span style="background:yellow">' + res.msg.userId + '<br>' + '</span>';
+                        	let memberResponse = document.getElementById('memberResponse');
+                            let memberGroup = document.getElementById('memberGroup');
+                            let newMember = document.createElement('p');
+
+                            newMember.innertext = res.msg.userId;
+                            memberGroup.insertBefore(newMember, memberResponse);
 
                         } else if (res.type === 'upload-todolist') {
 
@@ -2915,6 +2937,44 @@
                         	}else{
                         		chatResponse.innerHTML += '<span>' + res.msg.userId + " :  " +res.msg.message + '<br>'+'</span>';
                         	}
+                        }else if(res.type === 'search-group'){
+                        	
+                        	//멤버 검색
+                        	let travelGroup = [[${planner.travelGroup.participants}]]
+                        	groupsearchResponse.innerHTML = "";
+                        	for(let i=0; i<res.msg.length; i++){
+                        		//groupsearchResponse.innerHTML += '<span>' +res.msg[i].userId + '<br>'+'</span>';
+                        		
+                        		if(res.msg[i].userId === [[${#authentication.name}]]){
+                        			continue;
+                        		}
+                        		let groupsearchResponse = document.getElementById("groupsearchResponse");
+                        		let user = document.createElement("div");
+                        		user.id = "user"+i;
+                        		user.className = "groupsearch";
+                        		user.dataset.userId = res.msg[i].userId;
+                        		user.innerHTML= res.msg[i].userId;
+
+                        		groupsearchResponse.appendChild(user);
+                        		user.addEventListener('click', ev => {
+                                    let newUserId = ev.target.dataset.userId;
+                                    console.log('newUserId: '+newUserId);
+									
+                                    for(let j=0; i<travelGroup.length; j++){
+                                    	if(newUserId === travelGroup[j].member.userId){
+                                    		alert('이미 그룹에 포함되어 있는 유저입니다.');
+                                    		break;
+                                    	}
+                                    	stompClient.send("/app/add-group/" + [[${planner.tpIdx}]], {}, JSON.stringify({'newUserId':newUserId}));
+                                    }
+                                    
+                                });
+
+                        		
+                        	}
+                        	
+                        	
+                        
                         }
                     })
                 }
@@ -3383,6 +3443,14 @@
 		let userId = user.value;
 		
 	    stompClient.send("/app/chat-plan/" + [[${planner.tpIdx}]]+"/"+[[${planner.travelGroup.tgIdx}]], {}, JSON.stringify({'message':message, 'userId':userId}));
+	}
+        
+        
+      //멤버 검색
+        function sendKeyword() {
+		let keyword = searchUserId.value;
+		
+	    stompClient.send("/app/search-group/" + [[${planner.tpIdx}]], {}, JSON.stringify({'keyword':keyword}));
 	}
         /* [end] 웹소켓 ============================================================================================== */
 

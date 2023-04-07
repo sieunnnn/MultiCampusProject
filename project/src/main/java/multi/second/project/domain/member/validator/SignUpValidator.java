@@ -7,8 +7,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import lombok.AllArgsConstructor;
-import multi.second.project.domain.member.MemberRepository;
 import multi.second.project.domain.member.dto.request.SignUpRequest;
+import multi.second.project.domain.member.repository.MemberRepository;
 
 @Component
 @AllArgsConstructor

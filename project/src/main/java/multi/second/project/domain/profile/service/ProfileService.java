@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import multi.second.project.domain.group.repository.TravelGroupRepository;
 import multi.second.project.domain.host.repository.HostRepository;
-import multi.second.project.domain.member.MemberRepository;
 import multi.second.project.domain.member.domain.Member;
+import multi.second.project.domain.member.repository.MemberRepository;
 import multi.second.project.domain.planner.repository.ParticipantRepository;
 import multi.second.project.domain.planner.repository.PlannerRepository;
 import multi.second.project.domain.profile.domain.Profile;
@@ -50,7 +50,7 @@ public class ProfileService {
     public void saveProfileImage(MultipartFile upFile, String userId, ProfileModifyRequest dto) throws IOException {
         String filename = uploadFile(upFile);
         System.out.println("userId"+userId);
-        Member member = memberRepository.findByUserId(userId);
+        Member member = memberRepository.findById(userId).get();
         Profile profile = profileRepository.findProfileByMemberUserId(userId);
         if(profile == null){
             profile = Profile.builder().member(member).imagePath(filename).build();

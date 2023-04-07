@@ -35,6 +35,7 @@ import multi.second.project.domain.member.UserPrincipal;
 import multi.second.project.domain.member.dto.Principal;
 import multi.second.project.domain.planner.domain.Planner;
 import multi.second.project.domain.planner.dto.request.PlannerGroupModifyRequest;
+import multi.second.project.domain.planner.dto.request.PlannerGroupSearchRequest;
 import multi.second.project.domain.planner.dto.request.PlannerHostModifyRequest;
 import multi.second.project.domain.planner.dto.request.PlannerPrivateModifyRequest;
 import multi.second.project.domain.planner.dto.request.PlannerRegistRequest;
@@ -164,6 +165,15 @@ public class PlannerController {
 				PlannerGroupModifyRequest dto) throws Exception {
 			simpMessagingTemplate.convertAndSend("/topic/planner-message/" + tpIdx, 
 					Map.of("type","add-group","msg",plannerService.addPlannerGroup(dto, tpIdx)));
+		
+	}
+		//planner 공유할 인원 검색 
+		@MessageMapping("/search-group/{tpIdx}")
+		public void searchGroup(
+				@DestinationVariable("tpIdx") Long tpIdx,
+				PlannerGroupSearchRequest dto) throws Exception {
+			simpMessagingTemplate.convertAndSend("/topic/planner-message/" + tpIdx, 
+					Map.of("type","search-group","msg",plannerService.searchPlannerGroup(dto)));
 		
 	}
 	
