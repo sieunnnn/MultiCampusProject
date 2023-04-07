@@ -56,6 +56,28 @@ input:focus {
     outline: solid 2px rgba(58, 108, 217, 0.5);
 }
 
+input[type="datetime-local"] {
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 7px 6px;
+    margin: 7px 0 7px 20px;
+
+    width: 260px;
+    height: auto;
+
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+
+    color: #1C1C1E;
+}
+
 .wrapper__date__box button, #addDate button {
 
     width: 70px;
@@ -522,8 +544,8 @@ button:focus {
     align-content: flex-start;
     justify-content: flex-start;
 
-    margin: 26px 0 28px 33px;
-    width: 290px;
+    margin: 26px 0 28px 20px;
+    width: 320px;
     height: 611px;
 
     background: rgba(255, 255, 255, 0.9);
@@ -536,17 +558,32 @@ button:focus {
 
 .chat__title {
 
+    margin: 10px 0 20px 20px;
+
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 600;
-    font-size: 40px;
+    font-size: 50px;
 
     color: #1C1C1E;
 }
 
 #modalChat img {
 
-    margin: 10px 0 20px 237px;
+    margin: 10px 0 20px 273px;
     width: 30px;
     height: 30px;
+}
+
+.wrapper__message {
+
+    display: flex;
+    flex-direction: column;
+
+    overflow-y: scroll;
+
+    width: 100%;
+    height: 456px;
+
+    background-color: #1A71CC;
 }
