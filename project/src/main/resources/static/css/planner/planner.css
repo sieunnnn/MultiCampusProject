@@ -50,13 +50,34 @@ input {
     color: #1C1C1E;
 }
 
-input:focus {
+/*input:focus, select:focus {
 
-    border: solid 2px rgba(58, 108, 217, 0.5);
     outline: solid 2px rgba(58, 108, 217, 0.5);
-}
+}*/
 
 input[type="datetime-local"] {
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 7px 6px;
+    margin: 7px 0 7px 20px;
+
+    width: 260px;
+    height: auto;
+
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+
+    color: #1C1C1E;
+}
+
+select {
 
     display: flex;
     flex-direction: row;
@@ -100,12 +121,24 @@ button:focus {
     outline: none;
 }
 
+label {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+
+    color: #1C1C1E;
+
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
 /* 체크 박스 */
 .check__box {
 
-    width: 20px;
-    height: 20px;
-    margin-bottom: 10px;
+    width: auto;
+    height: auto;
     margin-left: 22px;
 }
 
@@ -485,7 +518,7 @@ button:focus {
 /* 채팅 */
 
 /* 모달 */
-.wrapper__chat, .container__calendar, .container__member, .container__trip {
+.wrapper__chat, .container__calendar, .container__member, .container__trip, .container__help {
 
     display: flex;
     flex-direction: column;
@@ -506,29 +539,124 @@ button:focus {
     border-radius: 16px;
 }
 
-.chat__title, .calendar__title, .member__title, .trip__title {
+.chat__title, .calendar__title, .member__title, .trip__title, .help__title{
 
     margin: 20px 0 30px 20px;
 
     font-family: 'Pretendard';
     font-style: normal;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 50px;
 
     color: #1C1C1E;
 }
 
-.wrapper__message, .wrapper__member, .wrapper__trip {
+.wrapper__message {
 
     display: flex;
     flex-direction: column;
 
-    overflow-y: scroll;
-
-    width: 100%;
-    height: 456px;
+    width: 320px;
+    height: 436px;
 
     background-color: #1A71CC;
+}
+
+.chat {
+
+    display: flex;
+    flex-direction: column;
+
+    width: 320px;
+    height: 350px;
+
+    overflow-y: scroll;
+
+    background-color: orange;
+}
+
+.chat__me {
+
+    /* Bubble */
+
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 6px 12px;
+    margin-left: 20px;
+    margin-bottom: 5px;
+
+    width: 180px;
+    height: auto;
+
+    background: #448AF7;
+    border-radius: 18px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+
+    color: white;
+}
+
+.me__id {
+
+    margin: 10px 20px 5px 22px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+
+    color: #1E1E1C;
+}
+
+.other__id {
+
+    margin: 10px 22px 5px 222px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+
+    color: #1E1E1C;
+}
+
+.chat__other {
+
+    /* Bubble */
+
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    padding: 6px 12px;
+    margin: 0 20px 5px 100px;
+
+    width: 180px;
+    height: auto;
+
+    background: #E9E9EB;
+    border-radius: 18px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 1;
+    z-index: 0;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+
+    color: #1C1C1E;
 }
 
 .wrapper__message__input {
@@ -539,13 +667,21 @@ button:focus {
 
     display: flex;
     flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
 
-    width: 260px;
-    height: auto;
+    position: fixed;
+    top: 550px;
+
+    margin-left: 15px;
+    margin-bottom: 20px;
+
+    width: 90%;
+    height: 40px;
 
     background-color: white;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 6px;
+    border-radius: 20px;
 
     /* Inside auto layout */
 
@@ -557,7 +693,7 @@ button:focus {
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 20px;
 
     color: #1C1C1E;
 }
@@ -703,4 +839,29 @@ button:focus {
 
 .sec_cal .cal_wrap .day.disable {
     color: #ddd;
+}
+
+/* 멤버 / 여행 */
+
+.wrapper__member, .wrapper__trip {
+
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: 456px;
+
+    background-color: #1A71CC;
+}
+
+/* 도움말 */
+
+.wrapper__help {
+
+    margin: 0 20px 0 20px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-size: 22px;
+
+    color: #1C1C1E;
 }
