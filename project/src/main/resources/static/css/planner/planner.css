@@ -537,7 +537,7 @@ button:focus {
 /* 채팅 */
 
 /* 모달 */
-.wrapper__chat{
+.wrapper__chat, .container__calendar, .container__member{
 
     display: flex;
     flex-direction: column;
@@ -548,6 +548,8 @@ button:focus {
     width: 320px;
     height: 611px;
 
+    overflow-y: scroll;
+
     background: rgba(255, 255, 255, 0.9);
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(40px);
@@ -556,9 +558,9 @@ button:focus {
     border-radius: 16px;
 }
 
-.chat__title {
+.chat__title, .calendar__title, .member__title {
 
-    margin: 10px 0 20px 20px;
+    margin: 20px 0 30px 20px;
 
     font-family: 'Pretendard';
     font-style: normal;
@@ -568,14 +570,14 @@ button:focus {
     color: #1C1C1E;
 }
 
-#modalChat img {
+#modalChat img, .container__calendar img, .container__member img{
 
     margin: 10px 0 20px 273px;
     width: 30px;
     height: 30px;
 }
 
-.wrapper__message {
+.wrapper__message, .wrapper__member {
 
     display: flex;
     flex-direction: column;
@@ -586,4 +588,133 @@ button:focus {
     height: 456px;
 
     background-color: #1A71CC;
+}
+
+/* 캘린더 */
+/* section calendar */
+
+.wrapper__calendar {
+
+    margin-bottom: 20px;
+}
+.sec_cal {
+    width: 270px;
+    margin: 0 auto;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 50px;
+
+    color: #1C1C1E;
+}
+
+.sec_cal .cal_nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 78px;
+}
+
+.sec_cal .cal_nav .year-month {
+    width: 300px;
+    text-align: center;
+    line-height: 1;
+}
+
+.sec_cal .cal_nav .nav {
+    display: flex;
+    border: 1px solid #333333;
+    border-radius: 5px;
+}
+
+.sec_cal .cal_nav .go-prev,
+.sec_cal .cal_nav .go-next {
+    display: block;
+    width: 50px;
+    height: 50px;
+    font-size: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sec_cal .cal_nav .go-prev::before,
+.sec_cal .cal_nav .go-next::before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border: 0.5px solid #000;
+    border-width: 1px 1px 0 0;
+    transition: border 0.1s;
+}
+
+.sec_cal .cal_nav .go-prev:hover::before,
+.sec_cal .cal_nav .go-next:hover::before {
+    border-color: #1E1E1C;
+}
+
+.sec_cal .cal_nav .go-prev::before {
+    transform: rotate(-135deg);
+}
+
+.sec_cal .cal_nav .go-next::before {
+    transform: rotate(45deg);
+}
+
+.sec_cal .cal_wrap {
+    padding-top: 20px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.sec_cal .cal_wrap .days {
+    display: flex;
+    margin-top: 10px;
+    padding-bottom: 20px;
+
+    font-weight: 700;
+    font-size: 40px;
+
+}
+
+.sec_cal .cal_wrap::after {
+    top: 368px;
+
+}
+
+.sec_cal .cal_wrap .day {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% / 7);
+    text-align: left;
+    color: #1E1E1C;
+    font-size: 20px;
+    text-align: center;
+    border-radius:5px
+}
+
+.current.today {
+    background: lightgray;}
+
+.sec_cal .cal_wrap .dates {
+    display: flex;
+    flex-flow: wrap;
+    height: 290px;
+}
+
+.sec_cal .cal_wrap .day:nth-child(7n -1) {
+    color: #3c6ffa;
+}
+
+.sec_cal .cal_wrap .day:nth-child(7n) {
+    color: #ed2a61;
+}
+
+.sec_cal .cal_wrap .day.disable {
+    color: #ddd;
 }
