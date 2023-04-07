@@ -29,6 +29,7 @@ public class ProfileService {
 
     public Profile getProfileData(String userId){
         Profile profile = repository.findProfileByMemberUserId(userId);
+        System.out.println("profile.getMember().getUserId() : " +profile.getMember().getUserId());
         return profile;
     }
 
@@ -41,7 +42,7 @@ public class ProfileService {
             profile = Profile.builder().member(member).imagePath(filename).build();
             repository.save(profile);
         }else{
-            repository.updateById(member, filename, userId);
+           // repository.updateById(member, filename, userId);
         }
 
         log.info("Entity Id : {} is saved.", profile.getPfIdx());

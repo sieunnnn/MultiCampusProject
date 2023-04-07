@@ -28,6 +28,11 @@ public class RecommandController {
 		 model.addAttribute("tgIdx", tgIdx);
 		 return "recommand/recommand";
 	 }
+	  @MessageMapping("/chat-plan/{tpIdx}/{tgIdx}")
+	  public void chat(@DestinationVariable("tpIdx") Long tpIdx, @DestinationVariable("tgIdx") Long tgIdx, ChatRequest dto) throws Exception {
+		  simpMessagingTemplate.convertAndSend("/topic/planner-message/" + tpIdx,
+					Map.of("type","chat-plan","msg", recommandService.generateChat(dto)));
+	  }
 	
 //	  @MessageMapping("/recommand-plan/{tgIdx}")
 //	  public void recommandPlan(@DestinationVariable("tgIdx") Long tgIdx, PlanRecommandRequest dto) throws Exception {

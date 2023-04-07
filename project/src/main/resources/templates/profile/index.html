@@ -91,8 +91,15 @@
 
             <!-- 클래스 이름을 알맞게 수정 해서 쓰면 됩니다 . id 를 쓰셔도 좋아요 -->
             <div class="wrapper__profile__btn">
-                <button class="btn__travel1">님의 여행 일정</button>
-                <button class="btn__travel2">님의 이전 여행</button>
+            
+             	<form th:action="@{/planner/other-list}" method="get">
+ 	 				<input type="text" th:value="group1B" name="profileId"/>
+	 				<button class="btn__travel1"><span>님의 여행 일정</span></button>
+ 				</form>
+ 				<form th:action="@{/planner/list}" method="get">
+ 					<input type="hidden" th:value="${#authentication.name}" name="userId"/> 
+                	<button class="btn__travel2">님의 이전 여행</button>
+                </form>
             </div>
         </div>
     </div>
