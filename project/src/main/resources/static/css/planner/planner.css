@@ -424,7 +424,7 @@ button:focus {
 
 }
 
-#costPerDay {
+.costPerDay {
 
     width: 300px;
     height: 57px;
