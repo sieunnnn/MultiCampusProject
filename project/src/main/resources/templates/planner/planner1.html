@@ -66,9 +66,12 @@
 
                     <!-- 채팅 모달 -->
                     <div style="display: none" class="wrapper__chat" id="modalChat">
-                        <div style="padding: 10px">
+                        <div>
                             <button onclick="closeChat()"><img src="/img/btn_close.png"></button>
                             <div class="chat__title">Chat</div>
+                            <div class="wrapper__message">
+                                <!-- 채팅 메시지 부분입니당 -->
+                            </div>
                         </div>
                     </div>
 
@@ -140,7 +143,7 @@
                                                 <input type="checkbox" class="check__box" th:value="${todo.isPrivate}" th:id="|actodopvmod${todo.tdIdx}|"/>
                                                 <input type="text" readonly th:value="${todo.tdIdx}" th:id="|tdidx${todo.tdIdx}|"/>
                                                 <input type="text" th:value="${todo.title}" th:id="|actodotitlemod${todo.tdIdx}|"/>
-                                                <input type="text" th:value="${todo.todoDate}" th:id="|actododatemod${todo.tdIdx}|"/>
+                                                <input type="datetime-local" th:value="${todo.todoDate}" th:id="|actododatemod${todo.tdIdx}|"/>
                                                 <input type="text" th:value="${todo.acAddress}" th:id="|actodoaddressmod${todo.tdIdx}|"/>
                                                 <input type="text" th:value="${todo.contents}" th:id="|actodocontentmod${todo.tdIdx}|"/>
 
@@ -169,7 +172,7 @@
                                                 <input type="checkbox" class="check__box" th:value="${todo.isPrivate}" th:id="|attodopvmod${todo.tdIdx}|"/>
                                                 <input type="text" readonly th:value="${todo.tdIdx}" th:id="|tdidx${todo.tdIdx}|"/>
                                                 <input type="text" th:value="${todo.title}" th:id="|attodotitlemod${todo.tdIdx}|"/>
-                                                <input type="text" th:value="${todo.todoDate}" th:id="|attododatemod${todo.tdIdx}|"/>
+                                                <input type="datetime-local" th:value="${todo.todoDate}" th:id="|attododatemod${todo.tdIdx}|"/>
                                                 <input type="text" th:value="${todo.attractions}" th:id="|attodoinfomod${todo.tdIdx}|"/>
                                                 <input type="text" th:value="${todo.contents}" th:id="|attodocontentmod${todo.tdIdx}|"/>
 
@@ -197,9 +200,9 @@
                                                 <input type="checkbox" class="check__box" th:value="${todo.isPrivate}" th:id="|bgtodopvmod${todo.tdIdx}|"/>
                                                 <input type="text" readonly th:value="${todo.tdIdx}" th:id="|tdidx${todo.tdIdx}|"/>
                                                 <input type="text" th:value="${todo.title}" th:id="|bgtodotitlemod${todo.tdIdx}|"/>
-                                                <input type="text" th:value="${todo.todoDate}" th:id="|bgtododatemod${todo.tdIdx}|"/>
+                                                <input type="datetime-local" th:value="${todo.todoDate}" th:id="|bgtododatemod${todo.tdIdx}|"/>
                                                 <input type="text" th:value="${todo.budgetType}" th:id="|bgtodotypemod${todo.tdIdx}|"/>
-                                                <input type="text" th:value="${todo.budget}" th:id="|bgtodomoneymod${todo.tdIdx}|"/>
+                                                <input type="number" th:value="${todo.budget}" th:id="|bgtodomoneymod${todo.tdIdx}|"/>
                                                 <input type="text" th:value="${todo.contents}" th:id="|bgtodocontentmod${todo.tdIdx}|"/>
 
                                                 <div style="margin: 15px 7px 40px 57px">
@@ -226,7 +229,7 @@
                                                     <input type="checkbox" class="check__box" th:value="${todo.isPrivate}" th:id="|gntodopvmod${todo.tdIdx}|"/>
                                                     <input type="text" readonly th:value="${todo.tdIdx}" th:id="|tdidx${todo.tdIdx}|"/>
                                                     <input type="text" th:value="${todo.title}" th:id="|gntodotitlemod${todo.tdIdx}|"/>
-                                                    <input type="text" th:value="${todo.todoDate}" th:id="|gntododatemod${todo.tdIdx}|"/>
+                                                    <input type="datetime-local" th:value="${todo.todoDate}" th:id="|gntododatemod${todo.tdIdx}|"/>
                                                     <input type="text" th:value="${todo.gnAddress}" th:id="|gntodoaddressmod${todo.tdIdx}|"/>
                                                     <input type="text" th:value="${todo.contents}" th:id="|gntodocontentmod${todo.tdIdx}|"/>
                                                 </div>
@@ -253,7 +256,7 @@
                                                 <input type="checkbox" class="check__box" th:value="${todo.isPrivate}" th:id="|trtodopvmod${todo.tdIdx}|"/>
                                                 <input type="text" readonly th:value="${todo.tdIdx}" th:id="|tdidx${todo.tdIdx}|"/>
                                                 <input type="text" th:value="${todo.title}" th:id="|trtodotitlemod${todo.tdIdx}|"/>
-                                                <input type="text" th:value="${todo.todoDate}" th:id="|trtododatemod${todo.tdIdx}|"/>
+                                                <input type="datetime-local" th:value="${todo.todoDate}" th:id="|trtododatemod${todo.tdIdx}|"/>
                                                 <input type="text" th:value="${todo.transportType}" th:id="|trtodotypemod${todo.tdIdx}|"/>
                                                 <input type="text" th:value="${todo.contents}" th:id="|trtodocontentmod${todo.tdIdx}|"/>
 
@@ -301,7 +304,7 @@
                                         <div>
                                             <input type="checkbox" class="check__box" th:id="|actodopvadd${todolist.tlIdx}|"/>
                                             <input type="text" th:value="숙박제목1" th:id="|actodotitleadd${todolist.tlIdx}|"/>
-                                            <input type="text" th:value="|2023-06-12T19:25|" th:id="|actododateadd${todolist.tlIdx}|"/>
+                                            <input type="datetime-local" th:value="|2023-06-12T19:25|" th:id="|actododateadd${todolist.tlIdx}|"/>
                                             <input type="text" th:value="숙박주소1" th:id="|actodoaddressadd${todolist.tlIdx}|"/>
                                             <input type="text" th:value="숙박내용1" th:id="|actodocontentadd${todolist.tlIdx}|"/>
                                         </div>
@@ -315,7 +318,7 @@
                                         <div>
                                             <input type="checkbox" class="check__box" th:id="|attodopvadd${todolist.tlIdx}|"/>
                                             <input type="text" th:value="관광지제목1" th:id="|attodotitleadd${todolist.tlIdx}|"/>
-                                            <input type="text" th:value="|2023-06-12T19:25|" th:id="|attododateadd${todolist.tlIdx}|"/>
+                                            <input type="datetime-local" th:value="|2023-06-12T19:25|" th:id="|attododateadd${todolist.tlIdx}|"/>
                                             <input type="text" th:value="관광지정보1" th:id="|attodoinfoadd${todolist.tlIdx}|"/>
                                             <input type="text" th:value="관광지내용1" th:id="|attodocontentadd${todolist.tlIdx}|"/>
                                         </div>
@@ -331,8 +334,8 @@
                                             <input type="checkbox" class="check__box" th:id="|bgtodopvadd${todolist.tlIdx}|"/>
                                             <input type="text" th:value="예산제목1" th:id="|bgtodotitleadd${todolist.tlIdx}|"/>
                                             <input type="text" th:value="FOOD" th:id="|bgtodotypeadd${todolist.tlIdx}|"/>
-                                            <input type="text" th:value="10000" th:id="|bgtodomoneyadd${todolist.tlIdx}|"/>
-                                            <input type="text" th:value="|2023-06-12T19:25|" th:id="|bgtododateadd${todolist.tlIdx}|"/>
+                                            <input type="number" th:value="10000" th:id="|bgtodomoneyadd${todolist.tlIdx}|"/>
+                                            <input type="datetime-local" th:value="|2023-06-12T19:25|" th:id="|bgtododateadd${todolist.tlIdx}|"/>
                                             <input type="text" th:value="예산내용1" th:id="|bgtodocontentadd${todolist.tlIdx}|"/>
                                         </div>
 
@@ -346,7 +349,7 @@
                                         <div>
                                             <input type="checkbox" class="check__box" th:id="|gntodopvadd${todolist.tlIdx}|"/>
                                             <input type="text" th:value="일반제목1" th:id="|gntodotitleadd${todolist.tlIdx}|"/>
-                                            <input type="text" th:value="|2023-06-12T19:25|" th:id="|gntododateadd${todolist.tlIdx}|"/>
+                                            <input type="datetime-local" th:value="|2023-06-12T19:25|" th:id="|gntododateadd${todolist.tlIdx}|"/>
                                             <input type="text" th:value="일반주소1" th:id="|gntodoaddressadd${todolist.tlIdx}|"/>
                                             <input type="text" th:value="일반내용1" th:id="|gntodocontentadd${todolist.tlIdx}|"/>
                                         </div>
@@ -362,7 +365,7 @@
                                             <input type="checkbox" class="check__box" th:id="|trtodopvadd${todolist.tlIdx}|"/>
                                             <input type="text" th:value="교통제목1" th:id="|trtodotitleadd${todolist.tlIdx}|"/>
                                             <input type="text" th:value="AIRPLANE" th:id="|trtodotypeadd${todolist.tlIdx}|"/>
-                                            <input type="text" th:value="|2023-06-12T19:25|" th:id="|trtododateadd${todolist.tlIdx}|"/>
+                                            <input type="datetime-local" th:value="|2023-06-12T19:25|" th:id="|trtododateadd${todolist.tlIdx}|"/>
                                             <input type="text" th:value="교통내용1" th:id="|trtodocontentadd${todolist.tlIdx}|"/>
                                         </div>
 
