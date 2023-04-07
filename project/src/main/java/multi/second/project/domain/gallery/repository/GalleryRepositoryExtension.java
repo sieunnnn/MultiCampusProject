@@ -6,7 +6,7 @@ import multi.second.project.domain.gallery.domain.Gallery;
 
 
 public interface GalleryRepositoryExtension {
-	
-	List<Gallery> testQueryDSL(String title, boolean isDel);
+
+    List<Gallery> testQueryDSL(String title, boolean isDel);
 
 }

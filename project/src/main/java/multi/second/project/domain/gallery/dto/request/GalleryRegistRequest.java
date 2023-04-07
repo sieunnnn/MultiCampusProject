@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GalleryRegistRequest {
 
-	private String userId;
-	
-	@NotEmpty
-	private String title;
-	
-	@NotEmpty
-	private String content;
-	
+    private String userId;
+
+    @NotEmpty
+    private String title;
+
+    @NotEmpty
+    private String content;
+
 }
