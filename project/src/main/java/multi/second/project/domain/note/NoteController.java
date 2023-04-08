@@ -51,9 +51,9 @@ public class NoteController {
 
     @GetMapping("list")
     public String noteList(
-                              @PageableDefault(size=10, sort="ntIdx", direction = Sort.Direction.DESC, page = 0)
-                              Pageable pageable,
-                              Model model
+            @PageableDefault(size=10, sort="ntIdx", direction = Sort.Direction.DESC, page = 0)
+            Pageable pageable,
+            Model model
 
     ) {
 

@@ -14,11 +14,11 @@ import static java.util.stream.Collectors.toList;
 public class NoteListResponse {
 
     private Long ntIdx;
-    private List<PartnerResponse> partnerResponse = new ArrayList<>();
+    private String partner;
     //    private String lastMassage;
     public NoteListResponse(Note note) {
         this.ntIdx = note.getNtIdx();
-        this.partnerResponse =  PartnerResponse.toDtoList(note.getPartners());
+        this.partner = note.getPartner();
     }
 
     public static List<NoteListResponse> toDtoList(List<Note> entityList){

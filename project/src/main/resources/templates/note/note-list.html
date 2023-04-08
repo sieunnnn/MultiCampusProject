@@ -58,26 +58,26 @@
             <div>
                 <h3>Chat Rooms:</h3>
                 <ul>
-    <span th:each="note, status : ${noteList}">
-      <li>
-        <span th:text="${note.ntIdx}"></span>
-        <ul>
-          <span th:each="partner :${note.partnerResponse}">
-            <li>
-              <span th:text="${partner.member.userId}"></span>
-            </li>
-          </span>
-        </ul>
-      </li>
-    </span>
+
                 </ul>
             </div>
 
-
-             <span th:each="note, status : ${noteList}">
-                    <span th:each="partner :${note.partnerResponse}">
-                        <p th:text="${partner.member.userId}"/>
-                    </span>
+<!--            <span th:each="note, status : ${noteList}">-->
+<!--                          <li>-->
+<!--                            <span th:text="${note.ntIdx}"></span>-->
+<!--                            <ul>-->
+<!--                              <span th:each="partner :${note.partnerResponse}">-->
+<!--                                <li>-->
+<!--                                  <span th:text="${partner.member.userId}"></span>-->
+<!--                                </li>-->
+<!--                              </span>-->
+<!--                            </ul>-->
+<!--                          </li>-->
+<!--                        </span>-->
+<!--             <span th:each="note, status : ${noteList}">-->
+<!--                    <span th:each="partner :${note.partnerResponse}">-->
+<!--                        <p th:text="${partner.member.userId}"/>-->
+<!--                    </span>-->
 
                  </span>
 <!--            <form th:action="@{/note/add}" method="post" th:object="${loginRequest}">-->
