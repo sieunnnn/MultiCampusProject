@@ -29,9 +29,9 @@ public class Partner {
 	//@JoinColumn(name = "userId")
 	private Member member;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@Builder.Default
-	private List<Message> messages = new ArrayList<>();
+//	@OneToMany(cascade = CascadeType.ALL)
+//	@Builder.Default
+//	private List<Message> messages = new ArrayList<>();
 
 	@ManyToOne
 	@JoinColumn(name= "ntIdx")

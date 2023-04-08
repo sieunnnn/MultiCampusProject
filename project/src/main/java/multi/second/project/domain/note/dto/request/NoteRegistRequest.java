@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import multi.second.project.domain.member.domain.Member;
 import multi.second.project.domain.message.domain.Message;
+import multi.second.project.domain.note.domain.Partner;
 
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
@@ -16,9 +17,10 @@ import java.util.List;
 @NoArgsConstructor
 public class NoteRegistRequest {
 
-    private String userId;
+    private String host;
+    private String partner;
 
-    private String nickName;
+//    private String nickName;
 
 //    @NotEmpty
 //    private String sendId;

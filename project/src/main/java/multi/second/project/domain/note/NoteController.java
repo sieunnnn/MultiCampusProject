@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -24,14 +25,14 @@ public class NoteController {
     private final NoteService noteService;
 
     @GetMapping("form")
-    public String noteForm() {
+    public String noteForm(Model model) {
         return"/";
     }
 
     @PostMapping("upload")
     public String upload(NoteRegistRequest dto)
     {
-        dto.setUserId(UserPrincipal.getUserPrincipal().getUserId()); //로그인한 사람의 아이디를 받아 저장
+//        dto.setUserId(UserPrincipal.getUserPrincipal().getUserId()); //로그인한 사람의 아이디를 받아 저장
         noteService.createNote(dto); // 받은 정보와 파일들로 서비스에서 등록처리
 
         return "redirect:/note/list";
@@ -56,11 +57,26 @@ public class NoteController {
 
     ) {
 
-        Map<String, Object> commandMap = noteService.findNoteListByUserId(UserPrincipal.getUserPrincipal().getPrincipal().getUserId(),pageable);
+        String userId = UserPrincipal.getUserPrincipal().getPrincipal().getUserId();
+        model.addAttribute("userId", userId);
+
+        Map<String, Object> commandMap = noteService.findNoteListByUserId(userId, pageable);
         System.out.println("galleryService.findGalleryListByUserId(principal.getUserId(),pageable) : "+commandMap);
         model.addAllAttributes(commandMap);
 
         return "note/note-list";
     }
+
+//    @GetMapping("/{ntIdx}")
+//    public String noteDetail(@PathVariable("ntIdx") long ntIdx, Model model) {
+//
+//        // ntIdx로 note 조회
+//        noteService.findNoteByNtIdx(ntIdx);
+//        //note가 조회되면 List<Message> 조회가 되겠지지
+//
+//        model.addAttribute("note", note);
+//
+//        return "note/note-detail";
+//    }
 
 }

@@ -34,6 +34,8 @@ public class Note {
 	@JoinColumn(name = "userId")
 	private Member member;
 
+	private String partner;
+
 	//상대방
 //	@OneToOne
 //	@JoinColumn(name = "userId")
@@ -42,11 +44,11 @@ public class Note {
 	@OneToMany(fetch = FetchType.EAGER)
 	private List<Partner> partners = new ArrayList<>();
 
-//	@OneToMany(cascade = CascadeType.ALL)
-//	@Builder.Default
-//	private List<Message> messages = new ArrayList<>();
+	@OneToMany(cascade = CascadeType.ALL)
+	@Builder.Default
+	private List<Message> messages = new ArrayList<>();
 
-//	//상대방
+	//상대방
 //	@OneToOne
 //	private Member partner;
 
@@ -59,12 +61,16 @@ public class Note {
 	private Boolean isDel;
 
 		public static Note createNote(NoteRegistRequest dto, Member member) {
-		return Note.builder().member(member).build();
+
+			return Note.builder()
+					.member(member)
+					.partner(dto.getPartner())
+					.build();
 	}
 
 //	public void addPartner(Partner partner) {
 //		partners.add(partner);
-//
+
 //	}
 
 }

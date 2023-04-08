@@ -49,13 +49,12 @@ public class NoteService {
 
     @Transactional
     public void createNote(NoteRegistRequest dto) {
-        Member member = memberRepository.findById(dto.getUserId()).get();
+        Member member = memberRepository.findById(dto.getHost()).get();
         Note note = Note.createNote(dto, member);
 
         // JPA가 변경된 내용을 데이터베이스에 반영
         noteRepository.saveAndFlush(note);
 
     }
-
 
 }
