@@ -8,6 +8,7 @@ import multi.second.project.domain.member.domain.Member;
 import multi.second.project.domain.message.domain.Message;
 
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
 public class NoteRegistRequest {
 
     private Long ntIdx;
-
+    private LocalDateTime regDate;
     private String userId;
 
 //    @NotEmpty

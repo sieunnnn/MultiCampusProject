@@ -30,9 +30,9 @@ public class Note {
 	private Long ntIdx;
 
 	//나
-//	@ManyToOne
-//	@JoinColumn(name = "userId")
-//	private Member member;
+	@ManyToOne
+	@JoinColumn(name = "userId")
+	private Member member;
 
 	//상대방
 //	@OneToOne
@@ -58,13 +58,13 @@ public class Note {
 	@ColumnDefault("false")
 	private Boolean isDel;
 
-//	public static Note createNote(NoteRegistRequest dto, Member member) {
-//		return Note.builder().build();
-//	}
-//
-//	public void addPartner(Partner partner) {
-//		partners.add(partner);
-//
-//	}
+		public static Note createNote(NoteRegistRequest dto, Member member) {
+		return Note.builder().member(member).build();
+	}
+
+	public void addPartner(Partner partner) {
+		partners.add(partner);
+
+	}
 
 }

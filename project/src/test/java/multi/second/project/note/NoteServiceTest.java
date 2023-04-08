@@ -27,12 +27,12 @@ public class NoteServiceTest {
 
 
     @Test
-    public void testPartnerUpload(){
+    public void testCreateNote(){
 
 
           Member me = memberRepository.findById("guswnd1212").get();
 //        Member you = memberRepository.findById("guswnd1380").get();
-          Note note = Note.builder().build();
+          Note note = Note.builder().member(me).build();
           noteRepository.save(note);
 
 //        Partner partner1 = Partner.builder().member(me).build();
@@ -49,9 +49,9 @@ public class NoteServiceTest {
     @Test
     public void testPartnerAdd(){
 
-        Note note = noteRepository.findById(1L).get();
+        Note note = noteRepository.findById(2L).get();
 
-        Member member = memberRepository.findById("guswnd1212").get();
+        Member member = memberRepository.findById("guswnd0127").get();
         Partner partner = Partner.builder().member(member).build();
         partnerRepository.save(partner);
         note.addPartner(partner);
@@ -61,4 +61,9 @@ public class NoteServiceTest {
 
 
     }
+
+
+
+
+
 }

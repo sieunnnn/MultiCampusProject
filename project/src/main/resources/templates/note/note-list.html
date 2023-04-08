@@ -47,10 +47,27 @@
         <!-- 친구 목록 추가 -->
         <!-- 대략 작성 해주시면 제가 나중에 수정 하겠습니다 -->
         <div class="wrapper__friends__list">
+            <div>
+                <h3>Chat Rooms:</h3>
+                <ul>
+    <span th:each="note, status : ${noteList}">
+      <li>
+        <span th:text="${note.ntIdx}"></span>
+        <ul>
+          <span th:each="partner :${note.partnerResponse}">
+            <li>
+              <span th:text="${partner.member.userId}"></span>
+            </li>
+          </span>
+        </ul>
+      </li>
+    </span>
+                </ul>
+            </div>
+
+
              <span th:each="note, status : ${noteList}">
-
                     <span th:each="partner :${note.partnerResponse}">
-
                         <p th:text="${partner.member.userId}"/>
                     </span>
 
@@ -64,6 +81,8 @@
 <!--                <button class="btn__login">로그인</button>-->
 <!--            </form>-->
         </div>
+
+
     </div>
 
     <!-- 결과물 출력 부분 -->
@@ -72,3 +91,4 @@
     </div>
 </div>
 </body>
+</html>

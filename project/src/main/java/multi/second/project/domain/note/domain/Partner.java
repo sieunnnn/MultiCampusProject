@@ -26,6 +26,7 @@ public class Partner {
 	private Long pnIdx;
 
 	@ManyToOne
+	//@JoinColumn(name = "userId")
 	private Member member;
 
 	@Builder.Default
