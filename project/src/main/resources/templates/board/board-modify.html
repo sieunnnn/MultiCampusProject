@@ -19,6 +19,13 @@
 				<div class="tit_board">
 					제목 :  <input type="text" name="title" class="mt-2" required="required" th:value="${board.title}"/><br>
 					작성자 : <span th:text="${board.userId}"></span><br>
+					카테고리 : <select name="boardCategory" >
+									<option value="GENERAL" selected>일반</option>
+    								<option value="REVIEW" >여행후기</option>
+    								<option value="RECOMMAND">지역주민추천</option>
+    								<option value="LOCALACCOMODATION">지역주민홍보</option>
+    								<option value="PROMOTION">여행지추천</option>
+  								</select>
 					파일 :  <input type="file" class="mt-2" name="fileList" id="contract_file" multiple/>
 				</div>
 				

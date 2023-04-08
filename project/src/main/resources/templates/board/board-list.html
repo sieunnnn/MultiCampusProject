@@ -8,10 +8,25 @@
 <body>
 
 <div class="container" layout:fragment="content">
+<a th:href="@{|/board/list|}" style="text-decoration-line:none;"> 전체 </a>
+<a th:href="@{|/board/category?category=REVIEW|}" style="text-decoration-line:none;"> 여행후기 </a>
+<a th:href="@{|/board/category?category=RECOMMAND|}" style="text-decoration-line:none;"> 여행지추천 </a>
+<a th:href="@{|/board/category?category=LOCALACCOMODATION|}" style="text-decoration-line:none;"> 지역주민추천 </a>
+<a th:href="@{|/board/category?category=PROMOTION|}" style="text-decoration-line:none;"> 지역주민홍보 </a>
 <div class="row">
- <h2 class="tit">* 게시판</h2>
+
+	<div th:switch = ${category}>
+	<span th:case="REVIEW"><h2 class="tit">* 여행후기 게시판</h2></span>
+    <span th:case="RECOMMAND"><h2 class="tit">* 여행지추천 게시판</h2></span>
+    <span th:case="LOCALACCOMODATION"><h2 class="tit">* 지역주민추천 게시판</h2></span>
+    <span th:case="PROMOTION"><h2 class="tit">* 지역주민홍보 게시판</h2></span>
+    <span th:case="*"><h2 class="tit">* 전체 게시판</h2></span>
+	</div>
+ 
     <a href="/board/form">게시글 쓰기</a>
- 	   
+      
+
+	
  	   <table style="text-align: center" border="1">
        <thead>
            <tr>

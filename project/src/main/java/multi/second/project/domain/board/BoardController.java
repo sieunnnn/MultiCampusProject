@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
+import multi.second.project.domain.board.domain.BoardCategory;
 import multi.second.project.domain.board.dto.request.BoardModifyRequest;
 import multi.second.project.domain.board.dto.request.BoardRegistRequest;
 import multi.second.project.domain.board.dto.response.BoardDetailResponse;
@@ -48,7 +49,7 @@ public class BoardController {
 		dto.setUserId(UserPrincipal.getUserPrincipal().getUserId());
 		boardService.createBoard(dto, files);
 		
-		return "redirect:/";
+		return "redirect:/board/list";
 	}
 	
 	@GetMapping("list")
@@ -60,6 +61,21 @@ public class BoardController {
 			) {
 
 		Map<String, Object> commandMap = boardService.findBoardList(pageable); 
+		model.addAllAttributes(commandMap);
+		
+		return "/board/board-list";
+	}
+	
+	@GetMapping("category")
+	public String boardListByCategory(
+			@PageableDefault(size=10, sort="bdIdx", direction = Direction.DESC, page = 0)
+			Pageable pageable,
+			String category,
+			Model model
+			
+			) {
+		model.addAttribute("category", category);
+		Map<String, Object> commandMap = boardService.findBoardListByCategory(pageable, category); 
 		model.addAllAttributes(commandMap);
 		
 		return "/board/board-list";

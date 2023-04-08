@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 import multi.second.project.domain.board.domain.Board;
+import multi.second.project.domain.board.domain.BoardCategory;
 import multi.second.project.domain.board.dto.request.BoardModifyRequest;
 import multi.second.project.domain.board.dto.request.BoardRegistRequest;
 import multi.second.project.domain.board.dto.response.BoardDetailResponse;
@@ -73,6 +74,24 @@ public class BoardService {
 		
 		return Map.of("boardList",BoardListResponse.toDtoList(page.getContent()), "paging", paging);
 	}
+	
+	public Map<String, Object> findBoardListByCategory(Pageable pageable, String category) {
+		// TODO Auto-generated method stub
+		
+		BoardCategory boardCategory = Enum.valueOf(BoardCategory.class, category);
+		
+		System.out.println("boardCategory :"+boardCategory);
+		
+		Page<Board> page = boardRepository.findByBoardCategory(boardCategory, pageable);
+		
+		Paging paging = Paging.builder()
+				.page(page)
+				.blockCnt(5)
+				.build();
+		
+		return Map.of("boardList",BoardListResponse.toDtoList(page.getContent()), "paging", paging);
+	}
+	
 
 	public BoardDetailResponse findBoardByBdIdx(Long bdIdx) {
 		Board board = boardRepository.findById(bdIdx)
@@ -141,7 +160,8 @@ public class BoardService {
 		});
 		
 	}
-	
+
+
 	
 	
 	
