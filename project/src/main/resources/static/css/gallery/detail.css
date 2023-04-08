@@ -276,9 +276,14 @@ button:active {
 
 .txt__comment {
 
+
     margin-top: 20px;
-    width: 440px;
-    height: auto;
+    margin-bottom: 20px;
+
+    width: 540px;
+    height: 30px;
+
+    overflow-y: scroll;
 
     font-family: 'Pretendard';
     font-style: normal;
@@ -288,21 +293,19 @@ button:active {
     color: #1C1C1E;
 }
 
-.container__comment__hidden {
+.container__comment__hidden, .wrapper__comment__hidden {
 
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-content: center;
 
-    width: 700px;
+    width: 800px;
     height: 25px;
 }
 
 .input__modify__comment {
 
-    width: 440px;
-    height: 20px;
+    width: 480px;
+    height: 23px;
 
     outline: none;
     border: none;
