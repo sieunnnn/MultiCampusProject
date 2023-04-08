@@ -74,6 +74,7 @@ public class BoardService {
 		return Map.of("boardList", BoardListResponse.toDtoList(page.getContent()), "paging", paging);
 	}
 
+
 	public BoardDetailResponse findBoardByBdIdx(Long bdIdx) {
 		Board board = boardRepository.findById(bdIdx)
 				.orElseThrow(() -> new HandlableException(ErrorCode.NOT_EXISTS));
@@ -144,7 +145,24 @@ public class BoardService {
 		});
 
 	}
-	public Page<Board> boardSearchList(String searchKeyword, Pageable pageable){
-		return boardRepository.findByTitleContaining(searchKeyword, pageable);
+
+	// 게시글 리스트 불러오기 처리
+	public Page<Board> boardlist(Pageable pageable){
+		return boardRepository.findAll(pageable); //Board라는 class가 담긴 list를 찾아 반환 , 매개변수가 없는 경우에는 public list이지만, 매개변수로 pageable을 주면 public pableable로 바뀜
+	}
+	public Map<String, Object> boardSearchList(String searchKeyword, Pageable pageable){
+
+
+		Page<Board> page = boardRepository.findByTitleContaining(searchKeyword, pageable);
+
+		Paging paging = Paging.builder()
+				.page(page)
+				.blockCnt(5)
+				.build();
+
+		return Map.of("boardList", BoardListResponse.toDtoList(page.getContent()), "paging", paging);
+
+		//return Map.of("boardList", boardRepository.findByTitleContaining(searchKeyword, pageable), "paging", paging);
+		//return boardRepository.findByTitleContaining(searchKeyword, pageable);
 	}
 }

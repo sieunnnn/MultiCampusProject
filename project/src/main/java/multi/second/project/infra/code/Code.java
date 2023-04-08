@@ -6,8 +6,8 @@ public enum Code {
 	SMTP_FROM("@naver.com"),
 	
 	// 배포시 servlet-context.xml의 resources 경로도 함께 수정
-	STORAGE_PATH("C:\\post\\postImg\\");
-
+	//STORAGE_PATH("C:\\post\\postImg\\");
+	STORAGE_PATH("/Users/hong-uiju/Documents/project/MultiCampusProject/project/src/main/resources/static/img/image");
 	public String desc;
 	
 	Code(String desc) {

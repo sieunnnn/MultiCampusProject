@@ -36,19 +36,19 @@ import java.util.Map;
 public class BoardController {
 
 	private final BoardService boardService;
-	
+
 	@GetMapping("form")
 	public String boardForm() {
 		return "/board/board-form";
 	}
-	
+
 	@PostMapping("upload")
 	public String upload(
 			@RequestParam List<MultipartFile> files,
 			BoardRegistRequest dto,
 			Model model
-			) {
-		
+	) {
+
 		dto.setUserId(UserPrincipal.getUserPrincipal().getUserId());
 		boardService.createBoard(dto, files);
 		model.addAttribute("message", "글 작성이 완료되었습니다.");
@@ -56,7 +56,7 @@ public class BoardController {
 		return "board/message";
 
 	}
-//	@GetMapping("list")
+	//	@GetMapping("list")
 //	public String boardList(Model model,
 //							@PageableDefault(page = 0, size = 10, sort = "bdIdx", direction = Sort.Direction.DESC)
 //							Pageable pageable,
@@ -82,18 +82,39 @@ public class BoardController {
 //	}
 	@GetMapping("list")
 	public String boardList(
-			@PageableDefault(size=10, sort="bdIdx", direction = Direction.DESC, page = 0)
+			@PageableDefault(size=10, sort="bdIdx", direction = Sort.Direction.DESC, page = 0)
 			Pageable pageable,
-			Model model
+			Model model,
+			String searchKeyword
 
-			) {
+	) {
 
-		Map<String, Object> commandMap = boardService.findBoardList(pageable);
-		model.addAllAttributes(commandMap);
+		//Page<Board> list = null;
+
+		if(searchKeyword != null){
+			Map<String, Object> commandMap = boardService.boardSearchList(searchKeyword, pageable);
+			model.addAllAttributes(commandMap);
+		} else {
+			Map<String, Object> commandMap = boardService.findBoardList(pageable);
+			model.addAllAttributes(commandMap);
+		}
+
+//		int nowPage = list.getPageable().getPageNumber() + 1; // 현재 페이지를 가져옴 , 0에서 시작하기에 처리를 위해 + 1
+//		int startPage = Math.max(nowPage - 4, 1); // Math.max(a, b) -- a 와 b 중 큰 값을 반환 --> 그냥 nowPAge - 4만 하면 nowpage가 1인 경우 -3도 가능하기에 이를 방지하기 위함
+//		int endPage = Math.min(nowPage + 5, list.getTotalPages()); // totalPage보다 크면 안되기에 두개 중 최소값 반환하는 Math.min을 사용
+//
+//		model.addAttribute("list", list ); // boardService에서 생성한 boardlist메소드를 통해 list가 반환되는데 해당 list를 "list"라는 이름으로 넘겨주겠다는 것(html에 나올 수 있게)
+//		model.addAttribute("nowPage", nowPage);
+//		model.addAttribute("startPage", startPage);
+//		model.addAttribute("endPage", endPage);
+
+		//Map<String, Object> commandMap = boardService.findBoardList(pageable);
+
+
 
 		return "/board/board-list";
 	}
-	
+
 	@GetMapping("detail")
 	public String boardDetail(Model model, Long bdIdx) {
 
@@ -104,35 +125,35 @@ public class BoardController {
 
 	@GetMapping("download")
 	public ResponseEntity<FileSystemResource> downloadFile(Long fpIdx){
-		
+
 		FilePathDto dto = boardService.findFilePathByFpIdx(fpIdx);
-		
+
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 		headers.setContentDisposition(ContentDisposition.builder("attachment")
-									.filename(dto.getOriginFileName(), Charset.forName("utf-8"))
-									.build());
-		
+				.filename(dto.getOriginFileName(), Charset.forName("utf-8"))
+				.build());
+
 		FileSystemResource fsr = new FileSystemResource(dto.getFullPath());
 		return ResponseEntity.ok().headers(headers).body(fsr);
 	}
-	
-	
+
+
 	@GetMapping("modify")
 	public String boardModify(Long bdIdx, Model model) {
 		BoardDetailResponse dto = boardService.findBoardByBdIdx(bdIdx);
 		model.addAttribute("board", dto);
-   		return "board/board-modify";
+		return "/board/board-modify";
 
 	}
-	
+
 	@PostMapping("modify")
 	public String modify(Model model,
 						 BoardModifyRequest dto,
 						 @RequestParam List<MultipartFile> fileList
 
-			) {
-		
+	) {
+
 		dto.setUserId(UserPrincipal.getUserPrincipal().getUserId());
 		boardService.updateBoard(dto, fileList);
 
@@ -140,7 +161,7 @@ public class BoardController {
 		model.addAttribute("searchUrl","/board/detail?bdIdx="+dto.getBdIdx());
 		return "board/message";
 	}
-	
+
 	@PostMapping("remove")
 	public String remove(Long bdIdx,Model model) {
 		boardService.removeBoard(bdIdx, UserPrincipal.getUserPrincipal().getPrincipal());
@@ -152,28 +173,28 @@ public class BoardController {
 
 
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
