@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout}">
+<head>
+	  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+	  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</head>
+<body>
+
+<div layout:fragment="content">
+	<!--  
+	<input name="location" id="loc" placeholder="여행지를 입력하세요.">
+	<input type="number" id="planMonth" min="1" max="12" placeholder="여행갈 월을 입력하세요.">
+	<input type="number" id="memberCnt" placeholder="같이 여행 갈 인원수를 입력하세요." min="1"> 
+	<button onclick="sendPlan()">문의하기</button>
+	-->
+	<input name="message" id="con" placeholder="채팅을 입력하세요.">
+	<input type="text" th:value="${#authentication.name}" name="userId" id="user"/> 
+	<button onclick="sendChat()">전송하기</button>
+	<button onclick="sendChat2()">전송하기2</button>
+	
+	<hr>
+	<div id="response"></div>
+	
+</div>
+
+<script type="text/javascript" layout:fragment="script" th:inline="javascript">
+	var stompClient = null;
+	var stompClient2 = null;
+	
+	<!--  
+	function connect() {
+	    var socket = new SockJS('/gs-guide-websocket');
+	    stompClient = Stomp.over(socket);
+	    
+	    stompClient.connect({}, function (frame) {
+	        console.log('Connected: ' + frame);
+	        stompClient.subscribe('/topic/recommand-plan/' + [[${tgIdx}]], function (recommand) {
+	          	res = JSON.parse(recommand.body);
+	          	console.dir(res)
+	          	response.innerHTML += '<span style="background:yellow">' +  res.message + '</span>';
+	        });
+	    });
+	}
+	-->
+	
+	function connect() {
+	    var socket = new SockJS('/gs-guide-websocket');
+	    stompClient = Stomp.over(socket);
+	    
+	    stompClient.connect({}, function (frame) {
+	        console.log('Connected: ' + frame);
+	        stompClient.subscribe('/topic/recommand-plan/' + [[${tgIdx}]], function (recommand) {
+	        	res = JSON.parse(recommand.body);
+	          	console.dir(res)
+	          	response.innerHTML += '<span style="background:yellow">' + res.userId + " :  " +res.message + '<br>'+'</span>';
+	        }    
+	        );
+	    });
+	}
+	
+	function connect2() {
+	    var socket = new SockJS('/gs-guide-websocket');
+	    stompClient2 = Stomp.over(socket);
+	    
+	    stompClient2.connect({}, function (frame) {
+	        console.log('Connected: ' + frame);
+	        stompClient.subscribe('/topic/recommand-plan2/' + [[${tgIdx}]], function (recommand) {
+	        	res = JSON.parse(recommand.body);
+	          	console.dir(res)
+	          	response.innerHTML += '<span style="background:yellow">' + res.userId + " :  " +res.message + '<br>'+'</span>';
+	        }    
+	        );
+	    });
+	}
+	
+	function disconnect() {
+	    if (stompClient !== null) {
+	        stompClient.disconnect();
+	    }
+	    console.log("Disconnected");
+	}
+	function disconnect2() {
+	    if (stompClient2 !== null) {
+	        stompClient2.disconnect();
+	    }
+	    console.log("Disconnected");
+	}
+	<!--  
+	function sendPlan() {
+		let location = loc.value;
+		let month = planMonth.value;
+		let participantCnt = memberCnt.value;
+		
+	    stompClient.send("/app/recommand-plan/" + [[${tgIdx}]], {}, JSON.stringify({'location':location,'month':month, 'participantCnt':participantCnt}));
+	}
+	-->
+	function sendChat() {
+		let message = con.value;
+		let userId = user.value;
+		
+	    stompClient.send("/app/recommand-plan/" + [[${tgIdx}]], {}, JSON.stringify({'message':message, 'userId':userId}));
+	}
+	
+	function sendChat2() {
+		let message = con.value;
+		let userId = user.value;
+		
+	    stompClient.send("/app/recommand-plan2/" + [[${tgIdx}]], {}, JSON.stringify({'message':message, 'userId':userId}));
+	}
+	
+	connect();
+	connect2();
+
+
+
+</script>
+
+
+</body>
+</html>

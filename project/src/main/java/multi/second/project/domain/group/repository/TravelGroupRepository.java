@@ -8,6 +8,7 @@ import multi.second.project.domain.group.domain.TravelGroup;
 @Repository
 public interface TravelGroupRepository extends JpaRepository<TravelGroup, Long>{
 
-	TravelGroup findTravelGroupByMembersUserId(String userId);
-
+//	TravelGroup findTravelGroupByMembersUserId(String userId);
+	
+//	TravelGroup findByParticipantsPcIdx(Long pcIdx);
 }

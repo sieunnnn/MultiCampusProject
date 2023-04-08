@@ -3,7 +3,9 @@ package multi.second.project.domain.group.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -19,6 +21,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import multi.second.project.domain.member.domain.Member;
+import multi.second.project.domain.planner.domain.Participant;
 import multi.second.project.domain.planner.domain.Planner;
 
 @Entity
@@ -33,20 +36,16 @@ public class TravelGroup {
 	
 	//플래너 공유 인원
 	@OneToMany
-	private List<Member> members = new ArrayList<>();
+	private List<Participant> participants = new ArrayList<>();
 	
-	public void addMembers(Member member) {
-		members.add(member);
+	public void addParticipant(Participant participant) {
+		participants.add(participant);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	public void removeParticipant(Participant participant) {
+		// TODO Auto-generated method stub
+		participants.remove(participant);
+	}
 	
 	
 	

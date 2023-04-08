@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GalleryModifyRequest {
 
-	private Long postIdx;
-	private String userId;
-	private String title;
-	private String content;
-	private List<Long> delFiles = new ArrayList<Long>();
-	
+    private Long postIdx;
+    private String userId;
+    private String title;
+    private String content;
+    private List<Long> delFiles = new ArrayList<Long>();
+
 }
