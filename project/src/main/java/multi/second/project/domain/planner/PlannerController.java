@@ -68,7 +68,7 @@ public class PlannerController {
 		Map<String, Object> commandMap = plannerService.findPlannerListByUserId(UserPrincipal.getUserPrincipal().getPrincipal().getUserId(),pageable);
 		model.addAllAttributes(commandMap);
 		
-		return "/planner/list";
+		return "/planner/planner-list";
 	}
 	
 	//다른사람의 플래너를 볼 때
@@ -118,6 +118,7 @@ public class PlannerController {
 		
 		return "/planner/planner1";
 	}
+
 	
 	
 	//planner 이름 변경(host가 변경가능)

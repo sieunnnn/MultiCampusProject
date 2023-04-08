@@ -18,12 +18,6 @@
     <div class="container__contents">
 
         <div class="container__planner">
-			<div th:id=memberGroup>
-            	<div style="display:none;" th:each="group : ${planner.travelGroup.participants}">
-                	<p th:text="${group.member.userId}">
-            	</div>
-            	<div th:id=memberResponse></div>
-			</div>
             <!-- 타이틀 -->
             <div class="wrapper__title">
                 <div class="txt__title">
@@ -856,7 +850,7 @@
                             let memberGroup = document.getElementById('memberGroup');
                             let newMember = document.createElement('p');
 
-                            newMember.innertext = res.msg.userId;
+                            newMember.innerText = res.msg.userId;
                             memberGroup.insertBefore(newMember, memberResponse);
 
                         } else if (res.type === 'upload-todolist') {
@@ -2960,13 +2954,20 @@
                                     let newUserId = ev.target.dataset.userId;
                                     console.log('newUserId: '+newUserId);
 									
+                                    let flag =0;
                                     for(let j=0; i<travelGroup.length; j++){
                                     	if(newUserId === travelGroup[j].member.userId){
-                                    		alert('이미 그룹에 포함되어 있는 유저입니다.');
-                                    		break;
+                                    		
+                                    		flag =1;
                                     	}
+                                    	
+                                    }
+                                    if(flag){
+                                    	alert('이미 그룹에 포함되어 있는 유저입니다.');
+                                    }else{
                                     	stompClient.send("/app/add-group/" + [[${planner.tpIdx}]], {}, JSON.stringify({'newUserId':newUserId}));
                                     }
+                                    	
                                     
                                 });
 

@@ -66,7 +66,7 @@ public class ProfileController {
         MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)req;
         //req 로 넘어오는 데이터를 MultipartHttpServletRequest 로 변령을 해준다
         MultipartFile file = multipartHttpServletRequest.getFile("uploadFile");
-        System.out.println(file.getName());
+        System.out.println("file.getName() : "+file.getName());
         //이제 여기에서 앞에서 보낸 formData 의 key 값을 적어주면 해당 파일을 뽑아 올 수 있는 것이다
 
         //Principal principal = (Principal)session.getAttribute("auth");
