@@ -16,9 +16,9 @@ import java.util.List;
 @NoArgsConstructor
 public class NoteRegistRequest {
 
-    private Long ntIdx;
-    private LocalDateTime regDate;
     private String userId;
+
+    private String nickName;
 
 //    @NotEmpty
 //    private String sendId;

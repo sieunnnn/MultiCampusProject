@@ -62,9 +62,9 @@ public class Note {
 		return Note.builder().member(member).build();
 	}
 
-	public void addPartner(Partner partner) {
-		partners.add(partner);
-
-	}
+//	public void addPartner(Partner partner) {
+//		partners.add(partner);
+//
+//	}
 
 }
