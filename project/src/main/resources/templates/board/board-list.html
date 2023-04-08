@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout}">
+<head>
+	<link href="/css/board/board.css" rel="stylesheet"> 
+</head>
+<body>
+
+<div class="container" layout:fragment="content">
+<div class="row">
+ <h2 class="tit">* 게시판</h2>
+    <a href="/board/form">게시글 쓰기</a>
+ 	   
+ 	   <table style="text-align: center" border="1">
+       <thead>
+           <tr>
+               <th style="width: 10%; height:20%;"><span>번호</span></th>
+               <th style="width: 70%;"><span>제목</span></th>
+               <th style="width: 10%;"><span>작성자</span></th>
+               <th style="width: 10%;"><span>등록일</span></th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr th:each="board, status : ${boardList}">
+               <td th:text="${board.bdIdx}"></td>
+               <td><a th:href="@{|/board/detail?bdIdx=${board.bdIdx}|}" th:text="${board.title}"></a></td>
+               <td th:text="${board.userId}"></td>
+               <td th:text="${board.regDate}"></td>
+           </tr>
+       </tbody>
+    </table>
+	</div>
+	<div class="row mt-3">
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination justify-content-center">
+		   
+		    <li class="page-item">
+		      <a class="page-link" th:href="@{|/board/list?page=${paging.prevPage}&size=10&sort=title,ASC|}">Previous</a>
+		    </li>
+		   
+	    	<li class="page-item" th:each="page : ${#numbers.sequence(paging.blockStart, paging.blockEnd)}">
+	    		<a class="page-link" th:href="@{|/board/list?page=${page-1}&size=10&sort=title,ASC|}" th:text="${page}"></a>
+	    	</li>
+		  
+		    <li class="page-item">
+		      <a class="page-link" th:href="@{|/board/list?page=${paging.nextPage}&size=10&sort=title,ASC|}">Next</a>
+		    </li>
+		    
+		  </ul>
+		</nav>
+	</div>
+</div>
+
+</body>
+</html>

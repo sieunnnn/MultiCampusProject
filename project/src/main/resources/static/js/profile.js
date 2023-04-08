@@ -28,21 +28,21 @@ function showImage() {
     var formData = new FormData();
     formData.append('uploadFile', $("#chooseFile")[0].files[0]) ;
 
-    $.ajax({
-        type : "POST",
-        url : "/profile/saveImg",
-        processData: false,
-        contentType: false,
-        data : formData,
-        success : function(data) {
-            alert('업로드 성공');
-
-
-        },
-        error : function(xhr, status, error) {
-            alert(error);
-        }
-    });
+//    $.ajax({
+//        type : "POST",
+//        url : "/profile/saveImg",
+//        processData: false,
+//        contentType: false,
+//        data : formData,
+//        success : function(data) {
+//            alert('업로드 성공');
+//
+//
+//        },
+//        error : function(xhr, status, error) {
+//            alert(error);
+//        }
+//    });
 
 
     document.getElementById('fileName').textContent = null;     //기존 파일 이름 지우기

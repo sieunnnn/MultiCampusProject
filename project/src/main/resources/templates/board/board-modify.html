@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout}">
+<head>
+	<link href="/css/board/board.css" rel="stylesheet"> 
+</head>
+<body>
+
+<div class="content container" layout:fragment="content">
+
+	<h2 class="tit">*게시판</h2>
+	<div class="desc_board">
+		<form th:action="@{/board/modify}" id="frmModify" class="frm_modify" method="post" enctype="multipart/form-data">
+		
+			<input type="hidden" th:value="${board.bdIdx}" name="bdIdx"> 
+			
+			<div >
+				<div class="tit_board">
+					제목 :  <input type="text" name="title" class="mt-2" required="required" th:value="${board.title}"/><br>
+					작성자 : <span th:text="${board.userId}"></span><br>
+					파일 :  <input type="file" class="mt-2" name="fileList" id="contract_file" multiple/>
+				</div>
+				
+				<div class='info file_info'>
+					<ol>
+			      		<li th:each="file : ${board.filePathDtos}" th:id="|f${file.fpIdx}|" class="filelist">  
+			      	 		<span>[[${file.originFileName}]]
+			      	 		<b th:attr="data-idx=|f${file.fpIdx}|" class="btnClose">x</b></span> 
+			      	 	</li>	     
+			      	</ol>
+				</div>
+				<div class="content_board">
+					<textarea name="content" required="required"  th:text="${board.content}"></textarea>
+				</div>
+				<div class="btn_section">
+					<button style="background-color:red; color:white; width:100%">전송</button>
+				</div>
+			</div>
+
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript" layout:fragment="script">
+
+document.querySelectorAll('.btnClose').forEach(e => {
+	
+	e.addEventListener('click', ev => {
+		
+		let fileId = ev.target.dataset.idx;
+		document.querySelector('#'+fileId).style.display='none';
+		
+		fileId = fileId.replace('f','');
+		
+		inpDelfile = createElement("input",{prop:{"type":"hidden","value":fileId,"name":"delFiles"}});
+		frmModify.append(inpDelfile);
+		
+	});
+})
+
+</script>
+
+
+
+
+
+
+
+</body>
+</html>

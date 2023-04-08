@@ -22,6 +22,9 @@
                 <div class="popup-head">
                     <span class="head-title">프로필 변경</span>
                 </div>
+                <form method="post" th:action="@{/profile/saveImg}" enctype="multipart/form-data">
+                
+                
                 <div class="popup-body">
                     <div class="body-content">
                         <div class="body-titlebox">
@@ -31,7 +34,7 @@
                             <div class="file-container">
                                 <div class="image-upload" id="image-upload">
 
-                                    <form method="post" th:action="@{/profile/saveImg}" enctype="multipart/form-data">
+                                    
                                         <!--                                        <div class="button">-->
                                         <!--                                            <label for="chooseFile">-->
                                         <!--                                                사진찾기-->
@@ -53,8 +56,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="file" id="chooseFile" name="chooseFile">
-                                    </form>
+                                        <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)">
+                                   
                                 </div>
 
                                 <!--                                <div class="image-show" id="image-show"></div>-->
@@ -62,8 +65,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="btn_section">
+					<button style="background-color:red; color:white; width:100%"  id="confirm">전송</button>
+				</div>
+                 </form>
+                
                 <div class="popup-foot">
-                    <span class="pop-btn confirm" id="confirm">확인</span>
+                    <span class="pop-btn confirm">확인</span>
                     <span class="pop-btn close" id="close">창 닫기</span>
                 </div>
             </div>

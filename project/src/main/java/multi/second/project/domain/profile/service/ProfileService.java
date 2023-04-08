@@ -47,7 +47,7 @@ public class ProfileService {
     }
 
     @Transactional
-    public void saveProfileImage(MultipartFile upFile, String userId, ProfileModifyRequest dto) throws IOException {
+    public Profile saveProfileImage(MultipartFile upFile, String userId, ProfileModifyRequest dto) throws IOException {
         String filename = uploadFile(upFile);
         System.out.println("userId"+userId);
         Member member = memberRepository.findById(userId).get();
@@ -64,7 +64,7 @@ public class ProfileService {
 
         log.info("Entity Id : {} is saved.", profile.getPfIdx());
 
-        //return profile;
+        return profile;
     }
 
     public String uploadFile(MultipartFile upFile) throws IOException {
