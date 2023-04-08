@@ -26,8 +26,12 @@ public class Partner {
 	private Long pnIdx;
 
 	@ManyToOne
-	//@JoinColumn(name = "userId")
+	@JoinColumn(name = "userId")
 	private Member member;
+
+	@ManyToOne
+	@JoinColumn(name= "ntIdx")
+	private Note note;
 
 	@Builder.Default
 	private LocalDateTime createdAt=LocalDateTime.now();
