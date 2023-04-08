@@ -26,8 +26,12 @@ public class Partner {
 	private Long pnIdx;
 
 	@ManyToOne
-	@JoinColumn(name = "userId")
+	//@JoinColumn(name = "userId")
 	private Member member;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@Builder.Default
+	private List<Message> messages = new ArrayList<>();
 
 	@ManyToOne
 	@JoinColumn(name= "ntIdx")
