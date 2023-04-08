@@ -50,10 +50,10 @@ input {
     color: #1C1C1E;
 }
 
-/*input:focus, select:focus {
+input:focus, select:focus {
 
     outline: solid 2px rgba(58, 108, 217, 0.5);
-}*/
+}
 
 input[type="datetime-local"] {
 

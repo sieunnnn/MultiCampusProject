@@ -47,7 +47,7 @@
                 <div class="wrapper__cards">
 
                     <!-- 카드 클릭 시, 세부내용 화면으로 이동 처리 해야함 -->
-                    <div th:each="planner, status : ${plannerList}" class="card" id="card">
+                    <div th:each="planner, status : ${plannerList}" class="card" id="card" th:onclick="popUpModify([[${planner.tpIdx}]])">
 
                         <!-- 플래너 제목 -->
                         <div class="card__title">
@@ -68,38 +68,43 @@
                         </div>
 
                         <!-- 수정 -->
-                        <div>
+                        <div class="wrapper__modify" style="display: none" th:id="${planner.tpIdx}">
+
                             <!-- 공개 여부를 결정하는 체크박스 -->
                             <form th:action="@{/planner/modify-private}" method="post" >
                                 <input type="hidden" th:value="${planner.tpIdx}" name="tpIdx"/>
                                 <input type="checkbox" name="isPrivate" value='1' id="input_check"/>
                                 <label for="input_check">비공개를 원하면 클릭해주세요</label>
                                 <input type="hidden" name="isPrivate" value='0' id="input_check_hidden"/>
-                                <button>수정</button>
+                                <button style="margin-left: 19px">수정</button>
                             </form>
 
                             <!-- 제목수정 -->
-                            <form th:action="@{/planner/modify-title}" method="post" >
+                            <form th:action="@{/planner/modify-title}" method="post" class="form__title">
                                 <input type="hidden" th:value="${planner.tpIdx}" name="tpIdx"/>
-                                <input type="text" th:value="${planner.title}"  name="title"/>
-                                <button><span>제목수정</span></button>
+                                <input type="text" th:value="${planner.title}"  name="title" style="width: 214px; margin-right: 10px"/>
+                                <button style="margin-top: 7px">제목수정</button>
                             </form>
 
                             <!-- 삭제 -->
                             <form th:action="@{/planner/remove}" method="post" >
                                 <input type="hidden" th:value="${planner.tpIdx}" name="tpIdx"/>
-                                <button id="btnDel"><span>삭제</span></button>
+
+                                <div class="wrapper__mod__btn">
+                                    <button id="btnDel" style="margin-left: 200px; margin-bottom: 30px">삭제</button>
+                                    <button id="closeModBtn" style="margin-right: 22px; margin-left: 6px">닫기</button>
+                                </div>
                             </form>
                         </div>
                     </div>
 
                     <!-- 플래너 생성 버튼 -->
-                    <div class="btn__add__planner" onclick="popup()">
-                        <div class="add__planner">
-                            <form th:action="@{/planner/create}" method="post" >
+                    <div class="btn__add__planner" th:onclick="popUp()">
+                        <div class="add__planner" style="display: none">
+                            <form th:action="@{/planner/create}" method="post">
                                 <input type="hidden" th:value="${#authentication.name}" name="userId"/>
-                                <input type="text" name="title" th:value="플래너제목"/>
-                                <button>생성</button>
+                                <input type="text" name="title" th:value="플래너제목" style="margin-top: 80px"/>
+                                <button style="margin-left: 245px">생성</button>
                             </form>
                         </div>
                     </div>
@@ -107,22 +112,17 @@
             </div>
         </div>
 
-        <script type="text/javascript">
+        <script type="text/javascript" th:inline="javascript">
 
-            document.querySelector('.add__planner').style.display = 'none';
+            function popUp() {
 
-            function popup(){
-                document.querySelector('.add__planner').style.display = '';
+                document.querySelector('.add__planner').style.display = 'block';
             }
 
-            const toggleList = document.querySelectorAll(".toggle__switch__planner");
+            function popUpModify(str) {
 
-            // 이 상태를 DB 에 어떻게 전송할 것인가 고민하기
-            toggleList.forEach(($toggle) => {
-                $toggle.onclick = () => {
-                    $toggle.classList.toggle('active');}
-            });
-
+                document.getElementById(str).style.display = 'block';
+            }
         </script>
     </div>
 </body>
