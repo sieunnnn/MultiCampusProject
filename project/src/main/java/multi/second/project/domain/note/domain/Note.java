@@ -42,9 +42,9 @@ public class Note {
 	@OneToMany(fetch = FetchType.EAGER)
 	private List<Partner> partners = new ArrayList<>();
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@Builder.Default
-	private List<Message> messages = new ArrayList<>();
+//	@OneToMany(cascade = CascadeType.ALL)
+//	@Builder.Default
+//	private List<Message> messages = new ArrayList<>();
 
 //	//상대방
 //	@OneToOne
