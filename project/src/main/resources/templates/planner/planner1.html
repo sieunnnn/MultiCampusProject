@@ -29,29 +29,27 @@
             <div class="container__menu">
 
                 <!-- 같이 여행가는 친구들 -->
-                <div class="wrapper__friends" onclick="openMember()">
+                <div>
 
-                    <div class="profile">
-                        <img style="width:60px; height: 60px" src="/img/btn_profile.png">
+                    <div th:id=memberGroup class="wrapper__friends">
+                        <div th:each="group : ${planner.travelGroup.participants}" class="profile">
+                            <div th:text="${group.member.userId}"></div>
+                        </div>
+                        <div th:id=memberResponse></div>
+                        <div class="profile__btn" th:onclick="openMember()"></div>
                     </div>
 
-                    <div class="profile">
-                        <img style="width:60px; height: 60px" src="/img/btn_profile.png">
-                    </div>
+
+<!--                    <div class="profile">-->
+<!--                        <img style="width:60px; height: 60px" src="/img/btn_profile.png">-->
+<!--                    </div>-->
+
+<!--                    <div class="profile">-->
+<!--                        <img style="width:60px; height: 60px" src="/img/btn_profile.png">-->
+<!--                    </div>-->
 
                 </div>
-                <div th:id=memberGroup>
-	            	<div style="display:block;" th:each="group : ${planner.travelGroup.participants}">
-	                	<div th:text="${group.member.userId}"></div>
-	            	</div>
-	            	<div th:id=memberResponse></div>
-				</div>
-            <!-- 타이틀 -->
-            <div class="wrapper__title">
-                <div class="txt__title">
-                    [[${planner.title}]]
-                </div>
-            </div>
+
 
                 <!-- 메뉴 -->
                 <div class="wrapper__menu">
@@ -87,8 +85,8 @@
                                         <input type="hidden" th:value="${#authentication.name}" name="userId" id="user" class ="chat"/>
                                     </div>
                                     <div>
-                                        <button onclick="sendChat()"  class ="chat" style="height: 30px">
-                                            <img style="height: 25px; width: 25px; margin: 7px 5px 0 0; padding: 0" src="/img/btn_send_message.png">
+                                        <button onclick="sendChat()"  class ="chat" style="width: 40px; height: 30px">
+                                            <img style="height: 25px; width: 25px; margin: 4px 5px 0 0; padding: 0" src="/img/btn_send_message.png">
                                         </button>
                                     </div>
                                 </div>
@@ -134,11 +132,21 @@
                             <div class="member__title">Member</div>
                             <div class="wrapper__member">
 
-                                <!-- 멤버 검색 부분입니당 -->
-                                <input name="keyword" id="searchUserId" placeholder="초대할 멤버의 ID를 입력하세요." class = "groupsearch">
-								<button onclick="sendKeyword()" class ="groupsearch">검색</button>
-								<div th:id ="groupsearchResponse" class ="groupsearch"></div>
+                                <div style="font-family: Pretendard; font-weight: 400; font-size: 18px; margin: 0 20px 0 20px">여행을 같이 할 친구를 초대해보세요.</div>
+                                <br>
+                                <div style="font-family: Pretendard; font-weight: 500; font-size: 20px; margin: 0 20px 0 20px">친구의 아이디를 검색하고, 클릭!</div>
+                                <br>
+                                <div style="font-family: Pretendard; font-weight: 400; font-size: 18px; margin: 0 20px 0 20px">간편하게 친구를 추가하고 여행 계획의 즐거움을 같이 나눠보세요.</div>
+                                <br>
 
+                                <!-- 멤버 검색 부분입니당 -->
+                                <div class="member__search">
+                                    <input style="width: 210px" name="keyword" id="searchUserId" placeholder="초대할 멤버의 ID를 입력하세요." class = "groupsearch">
+                                    <button style="width: 60px; margin: 7px 20px 0 10px; padding: 0" onclick="sendKeyword()" class ="groupsearch">검색</button>
+                                </div>
+
+                                <!-- 결과 출력 -->
+                                <div th:id ="groupsearchResponse" class ="groupsearch"></div>
                             </div>
                         </div>
                     </div>
@@ -823,16 +831,17 @@
         function openChat() {
             document.querySelector('.wrapper__money').style.display = 'none';
             document.getElementById('modalChat').style.display = '';
-            document.querySelector('.wrapper__member').style.display = 'none';
+            document.querySelector('.container__member').style.display = 'none';
             document.querySelector('.container__trip').style.display = 'none';
             document.querySelector('.container__calendar').style.display = 'none';
+            document.querySelector('.container__member').style.display = 'none';
         }
 
         function closeChat() {
 
             document.getElementById('modalChat').style.display = 'none';
             document.querySelector('.wrapper__money').style.display = '';
-            document.querySelector('.wrapper__member').style.display = 'none';
+            document.querySelector('.container__member').style.display = 'none';
             document.querySelector('.container__calendar').style.display = 'none';
             document.querySelector('.container__trip').style.display = 'none';
 
@@ -856,7 +865,6 @@
             document.querySelector('.container__calendar').style.display = 'none';
             document.querySelector('.container__member').style.display = 'none';
             document.querySelector('.container__trip').style.display = 'none';
-
 
         }
 
@@ -1047,7 +1055,8 @@
                             //response.innerHTML += '<span style="background:yellow">' + res.msg.userId + '<br>' + '</span>';
                         	let memberResponse = document.getElementById('memberResponse');
                             let memberGroup = document.getElementById('memberGroup');
-                            let newMember = document.createElement('p');
+                            let newMember = document.createElement('div')
+                            newMember.className="profile";
 
                             newMember.innerText = res.msg.userId;
                             memberGroup.insertBefore(newMember, memberResponse);
@@ -1200,6 +1209,8 @@
                             addCardVoid.addEventListener('click', ev => {
 
                                 addCard.style.display = 'block';
+                                addCardVoid.style.display = 'none';
+                                addCardBtn.style.display = 'none';
                             })
                             // [end] 투두 새로만들기 버튼 ==============================
 
@@ -3224,20 +3235,30 @@
                             document.querySelector('#d'+res.msg).style.display='none';
 
                         }else if(res.type === 'chat-plan'){
-                        	
+
                         	//채팅
                         	if([[${#authentication.name}]] === res.msg.userId){
                         		chatResponse.innerHTML +=
                                     '<div>'
                                     + '<div class="me__id">' + res.msg.userId + '</div>'
-                                    + '<div class="chat__me">' +res.msg.message + '</div>'
+                                    +'<div class="wrapper__chat__me">'
+                                        + '<div class="chat__me">' +res.msg.message + '</div>'
+                                        + '<div class="chat__me__tail">'
+                                            + '<img style="width: 16.42px; height: 20.32px" src="/img/chatMeTail.png">'
+                                        + '</div> '
+                                    + '</div>'
                                     + '</div>';
 
                         	}else{
                         		chatResponse.innerHTML +=
                                     '<div>'
                                     + '<div class="other__id">' + res.msg.userId + '</div>'
+                                    +'<div class="wrapper__chat__other">'
                                     + '<div class="chat__other">' +res.msg.message + '</div>'
+                                    + '<div class="chat__other__tail">'
+                                    + '<img style="width: 16.42px; height: 20.32px" src="/img/chatOtherTail.png">'
+                                    + '</div> '
+                                    + '</div>'
                                     + '</div>';
                         	}
                         }else if(res.type === 'search-group'){
