@@ -66,7 +66,7 @@ public class NoteController {
         return "note/note-list";
     }
 
-    @GetMapping("/{ntIdx}")
+    @GetMapping("list/{ntIdx}")
     public String noteDetail() {
 //    public String noteDetail(@PathVariable("ntIdx") long ntIdx, Model model) {
 //
