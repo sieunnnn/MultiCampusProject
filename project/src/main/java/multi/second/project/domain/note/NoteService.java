@@ -33,8 +33,8 @@ public class NoteService {
     private final NoteRepository noteRepository;
     private final MemberRepository memberRepository;
 
-    public Map<String, Object> findNoteListByUserId(String userId, Pageable pageable) {
-        Page<Note> page = noteRepository.findByPartnersMemberUserId(userId,pageable);
+    public Map<String, Object> findNoteListByMemberUserId(String userId, Pageable pageable) {
+        Page<Note> page = noteRepository.findNoteListByMemberUserId(userId,pageable);
         //  System.out.println("noteRepository.findByMemberUserId(userId,pageable) :  "+page);
         Paging paging = Paging.builder()
                 .page(page)
@@ -54,5 +54,8 @@ public class NoteService {
         noteRepository.saveAndFlush(note);
 
     }
+
+//    public void findNoteByNtIdx(long ntIdx) {
+//    }
 
 }

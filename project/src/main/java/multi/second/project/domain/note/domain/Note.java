@@ -34,7 +34,7 @@ public class Note {
 	@JoinColumn(name = "userId")
 	private Member member;
 
-	private String partner;
+	private String guest;
 
 	//상대방
 //	@OneToOne
@@ -64,13 +64,13 @@ public class Note {
 
 			return Note.builder()
 					.member(member)
-					.partner(dto.getPartner())
+					.guest(dto.getGuest())
 					.build();
 	}
 
-//	public void addPartner(Partner partner) {
-//		partners.add(partner);
+	public void addPartner(Partner partner) {
+		partners.add(partner);
 
-//	}
+	}
 
 }

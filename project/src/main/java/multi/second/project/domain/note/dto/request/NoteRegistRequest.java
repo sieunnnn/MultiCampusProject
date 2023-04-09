@@ -18,7 +18,7 @@ import java.util.List;
 public class NoteRegistRequest {
 
     private String host;
-    private String partner;
+    private String guest;
 
 //    private String nickName;
 

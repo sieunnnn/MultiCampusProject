@@ -60,13 +60,14 @@ public class NoteController {
         String userId = UserPrincipal.getUserPrincipal().getPrincipal().getUserId();
         model.addAttribute("userId", userId);
 
-        Map<String, Object> commandMap = noteService.findNoteListByUserId(userId, pageable);
+        Map<String, Object> commandMap = noteService.findNoteListByMemberUserId(userId, pageable);
         model.addAllAttributes(commandMap);
 
         return "note/note-list";
     }
 
-//    @GetMapping("/{ntIdx}")
+    @GetMapping("/{ntIdx}")
+    public String noteDetail() {
 //    public String noteDetail(@PathVariable("ntIdx") long ntIdx, Model model) {
 //
 //        // ntIdx로 note 조회
@@ -74,8 +75,8 @@ public class NoteController {
 //        //note가 조회되면 List<Message> 조회가 되겠지지
 //
 //        model.addAttribute("note", note);
-//
-//        return "note/note-detail";
-//    }
+
+        return "note/messages";
+    }
 
 }

@@ -2,6 +2,7 @@ package multi.second.project.domain.note.dto.response;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import multi.second.project.domain.member.domain.Member;
 import multi.second.project.domain.note.domain.Note;
 
 import java.util.ArrayList;
@@ -15,21 +16,14 @@ public class NoteListResponse {
 
     private Long ntIdx;
     private List<PartnerResponse> partnerResponse = new ArrayList<>();
+    private String guest;
+    private Member member;
     //    private String lastMassage;
     public NoteListResponse(Note note) {
         this.ntIdx = note.getNtIdx();
-        this.partnerResponse =  PartnerResponse.toDtoList(note.getPartners());
+        this.guest = note.getGuest();
+        this.member = note.getMember();
     }
-
-
-
-//    private Long ntIdx;
-//    private String partner;
-//    //    private String lastMassage;
-//    public NoteListResponse(Note note) {
-//        this.ntIdx = note.getNtIdx();
-//        this.partner = note.getPartner();
-//    }
 
     public static List<NoteListResponse> toDtoList(List<Note> entityList){
         return entityList.stream().map(e -> new NoteListResponse(e)).collect(toList());

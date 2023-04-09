@@ -30,7 +30,7 @@
 
                         <!-- css로 아래 input만 표시되지 않게 disabled 처리 -->
                         <input type="text" name="host" th:value="${userId}" style="display:none" />
-                        <input id="search" name="partner" type="text">
+                        <input id="search" name="guest" type="text">
                     </div>
                     <input type="submit" class="btn__search" value="create">
                 </div>
@@ -62,24 +62,24 @@
                 </ul>
             </div>
 
-            <span th:each="note, status : ${noteList}">
-                          <li>
-                            <span th:text="${note.ntIdx}"></span>
-                            <ul>
-                              <span th:each="partner :${note.partnerResponse}">
-                                <li>
-                                  <span th:text="${partner}"></span>
-                                </li>
-                              </span>
-                            </ul>
-                          </li>
-                        </span>
+<!--            <span th:each="note, status : ${noteList}">-->
+<!--                          <li>-->
+<!--                            <span th:text="${note.ntIdx}"></span>-->
+<!--                            <ul>-->
+<!--                              <span th:each="note :${note.NoteListResponse}">-->
+<!--                                <li>-->
+<!--                                  <span th:text="${partner}"></span>-->
+<!--                                </li>-->
+<!--                              </span>-->
+<!--                            </ul>-->
+<!--                          </li>-->
+<!--                        </span>-->
 <!--             <span th:each="note, status : ${noteList}">-->
 <!--                    <span th:each="partner :${note.partnerResponse}">-->
 <!--                        <p th:text="${partner.member.userId}"/>-->
 <!--                    </span>-->
 
-                 </span>
+<!--                 </span>-->
 <!--            <form th:action="@{/note/add}" method="post" th:object="${loginRequest}">-->
 <!--                <div class="wrapper__login__input">-->
 <!--                    <div class="input__id">-->
