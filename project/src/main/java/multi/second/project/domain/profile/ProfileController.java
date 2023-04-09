@@ -1,12 +1,19 @@
 package multi.second.project.domain.profile;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import multi.second.project.infra.util.file.dto.FilePathDto;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -91,5 +98,20 @@ public class ProfileController {
         //model.addAttribute("imagePath", imagePath);
         //return result.getImagePath();
         return "redirect:/profile/profile";
+    }
+
+    @GetMapping("download")
+    public ResponseEntity<FileSystemResource> downloadFile(@RequestParam Long pfIdx){
+
+        ProfileModifyRequest dto = profileService.findImagePathByPfIdx(pfIdx);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.setContentDisposition(ContentDisposition.builder("attachment")
+                .filename(dto.getImagePath(), Charset.forName("utf-8"))
+                .build());
+
+        FileSystemResource fsr = new FileSystemResource(dto.getFullPath());
+        return ResponseEntity.ok().headers(headers).body(fsr);
     }
 }

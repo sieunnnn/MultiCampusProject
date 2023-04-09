@@ -14,6 +14,10 @@ import multi.second.project.domain.profile.dto.request.ProfileModifyRequest;
 import multi.second.project.domain.profile.repository.ProfileRepository;
 import multi.second.project.infra.code.Code;
 
+import multi.second.project.infra.code.ErrorCode;
+import multi.second.project.infra.exception.HandlableException;
+import multi.second.project.infra.util.file.FilePath;
+import multi.second.project.infra.util.file.dto.FilePathDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,7 +49,7 @@ public class ProfileService {
         Profile profile = profileRepository.findProfileByMemberUserId(userId);
         System.out.println("profile :" +profile);
         if(profile == null){
-        	Member member = memberRepository.findById(userId).get();
+        	Member member = memberRepository.findById("admin").get();
             profile = Profile.builder().member(member).build();
             profileRepository.save(profile);
         }
@@ -113,4 +117,12 @@ public class ProfileService {
         }
         return originalFilename;
     }
+
+    public ProfileModifyRequest findImagePathByPfIdx(Long pfIdx) {
+
+        Profile profile = profileRepository.findImagePathByPfIdx(pfIdx);
+
+        return new ProfileModifyRequest(profile);
+    }
+
 }
