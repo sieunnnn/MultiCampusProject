@@ -15,6 +15,13 @@
 				<div class="tit_board">
 					제목 : <input type="text" name="title" required="required"/>
 					파일 : <input type="file" name="files" id="contract_file" multiple/>
+					분류 : <select class="form-control" name="boardType">
+							<option th:each="typeValue : ${T(multi.second.project.domain.board.domain.BoardType).values()}"
+									th:value="${typeValue.name()}"
+									th:text="${typeValue.getValue()}">
+								val
+							</option>
+						</select>
 				</div>
 				<div class="content_board">
 					<textarea name="content" required="required"></textarea>

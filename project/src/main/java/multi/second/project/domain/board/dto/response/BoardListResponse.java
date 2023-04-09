@@ -4,6 +4,7 @@ package multi.second.project.domain.board.dto.response;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import multi.second.project.domain.board.domain.Board;
+import multi.second.project.domain.board.domain.BoardType;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -19,11 +20,14 @@ public class BoardListResponse {
 	private String title;
 	private LocalDateTime regDate;
 
+	private BoardType boardType;
+
 	public BoardListResponse(Board entity) {
 		this.bdIdx = entity.getBdIdx();
 		this.title = entity.getTitle();
 		this.regDate = entity.getRegDate();
 		this.userId = entity.getMember().getUserId();
+		this.boardType = entity.getBoardType();
 	}
 	
 	public String getRegDateAsDate() {

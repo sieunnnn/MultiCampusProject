@@ -38,6 +38,10 @@ public class Board {
 
     private String content;
 
+    @Column
+    @Enumerated(EnumType.STRING)
+    private BoardType boardType;
+
     @ColumnDefault("false")
     private Boolean isDel;
 
@@ -50,6 +54,7 @@ public class Board {
                 .member(member)
                 .title(dto.getTitle())
                 .content(dto.getContent())
+                .boardType(dto.getBoardType())
                 .build();
     }
 

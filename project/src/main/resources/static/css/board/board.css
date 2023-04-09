@@ -30,6 +30,10 @@
 .info{font-size:1.3vw; border-bottom:1px solid}
 .info span{padding-right: 3vw;}
 
+.container{
+    width: 100%;
+}
+
 .info li{
     font-size: 1.2vw;
     color:white;

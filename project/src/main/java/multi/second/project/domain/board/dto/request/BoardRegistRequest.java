@@ -2,6 +2,7 @@ package multi.second.project.domain.board.dto.request;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import multi.second.project.domain.board.domain.BoardType;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -16,5 +17,8 @@ public class BoardRegistRequest {
 	
 	@NotEmpty
 	private String content;
+
+	@NotEmpty
+	private BoardType boardType;
 	
 }

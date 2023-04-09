@@ -16,14 +16,17 @@
        <thead>
            <tr>
                <th style="width: 10%; height:20%;"><span>번호</span></th>
-               <th style="width: 70%;"><span>제목</span></th>
-               <th style="width: 10%;"><span>작성자</span></th>
-               <th style="width: 10%;"><span>등록일</span></th>
+
+			   <th style="width: 10%;"><span>분류</span></th>
+			   <th style="width: 60%;"><span>제목</span></th>
+			   <th style="width: 10%;"><span>작성자</span></th>
+			   <th style="width: 10%;"><span>등록일</span></th>
            </tr>
        </thead>
        <tbody>
            <tr th:each="board, status : ${boardList}">
                <td th:text="${board.bdIdx}"></td>
+               <td th:text="${board.boardType?.getValue()}"></td>
                <td><a th:href="@{|/board/detail?bdIdx=${board.bdIdx}|}" th:text="${board.title}"></a></td>
                <td th:text="${board.userId}"></td>
                <td th:text="${board.regDate}"></td>
@@ -32,12 +35,12 @@
     </table>
 	</div>
 	<div class="row mt-3">
-		<nav aria-label="Page navigation example">
-		  <ul class="pagination justify-content-center">
+<!--		<nav aria-label="Page navigation example">-->
+		  <ul class="pagination justify-content-center" style="text-align: center; list-style: none;">
 
 		    <li class="page-item">
 		      <a class="page-link" th:href="@{|/board/list?page=${paging.prevPage}&size=10&sort=title,DESC|}">Previous</a>
-		    </li>
+
 
 	    	<li class="page-item" th:each="page : ${#numbers.sequence(paging.blockStart, paging.blockEnd)}">
 	    		<a class="page-link" th:href="@{|/board/list?page=${page - 1}&size=10&sort=title,DESC|}" th:text="${page}"></a>
@@ -53,7 +56,7 @@
 			  </form>
 
 		  </ul>
-		</nav>
+<!--		</nav>-->
 
 	</div>
 </div>
