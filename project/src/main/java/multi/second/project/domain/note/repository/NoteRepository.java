@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface NoteRepository extends JpaRepository<Note, Long> {
 
    // Page<Note> findByMembersUserId(String userId, Pageable pageable);
-    Page<Note> findByPartnersMemberUserId(String userId, Pageable pageable);
+   // Page<Note> findByPartnersMemberUserId(String userId, Pageable pageable);
 
     Page<Note> findNoteListByMemberUserId(String userId, Pageable pageable);
 }
