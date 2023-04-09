@@ -9,13 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GalleryRegistRequest {
 
-	private String userId;
-	
-	@NotEmpty
-	private String title;
-	
-	@NotEmpty
-	private String content;
+    private String userId;
 
-// 제목, 내용 프론트에서 input으로 받아온다
+    @NotEmpty
+    private String title;
+
+    @NotEmpty
+    private String content;
+
 }

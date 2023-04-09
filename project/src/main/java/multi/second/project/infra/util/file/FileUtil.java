@@ -23,16 +23,18 @@ public class FileUtil {
 	
 	
 	public List<FileUploadDto> generateFileUploadDtos(String groupName, List<MultipartFile> files){
-		
+		//generateFileUploadDtos() 메서드는 파일 업로드시에 업로드된 파일의 정보를 담은 List를 반환하는 메서드입니다.
 		List<FileUploadDto> fileInfos = new ArrayList<FileUploadDto>();
-		
+		//generateFileUploadDtos() 메서드 fileInfos 반환한다
+
 		// 2. 파일 업로드
 		for (MultipartFile multipartFile : files) {
 			
 			if(multipartFile.isEmpty()) continue;
 			
 			FilePathDto file = new FilePathDto();
-			
+			//FileUploadDto안에서 FilePathDto 타입의 객체를 선언한다
+
 			String uploadPath = createUploadPath(groupName);
 			String originFileName = multipartFile.getOriginalFilename();
 			String renameFileName = createRenameFileName(originFileName);

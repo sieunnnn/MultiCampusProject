@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Planner</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/planner/weather.css"/>
+</head>
+
+<body>
+<div class="container__weather">
+    <div>
+        <div class="txt__title">날씨.</div>
+    </div>
+
+    <div>
+        <div class="txt__second__title">현재 날씨</div>
+        <div class="txt__content" style="margin-bottom: 30px;">현재 위치를 기반으로 날씨를 제공합니다.</div>
+    </div>
+
+    <div id="current">
+        <script>
+            (function(d, s, id) {
+                if (d.getElementById(id)) {
+                    if (window.__TOMORROW__) {
+                        window.__TOMORROW__.renderWidget();
+                    }
+                    return;
+                }
+                const fjs = d.getElementsByTagName(s)[0];
+                const js = d.createElement(s);
+                js.id = id;
+                js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
+
+                fjs.parentNode.insertBefore(js, fjs);
+            })(document, 'script', 'tomorrow-sdk');
+        </script>
+
+        <div class="tomorrow"
+             data-location-id=""
+             data-language="EN"
+             data-unit-system="METRIC"
+             data-skin="light"
+             data-widget-type="summary"
+             style="padding-bottom:22px;position:relative;"
+        >
+            <a
+                    href="https://www.tomorrow.io/weather-api/"
+                    rel="nofollow noopener noreferrer"
+                    target="_blank"
+                    style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;"
+            >
+            </a>
+        </div>
+    </div>
+
+    <div>
+        <div class="txt__second__title" style="margin-top: 80px">일기 예보</div>
+        <div class="txt__content" style="margin-bottom: 20px;">여행 가려는 곳과 근접한 위치를 선택해주세요.</div>
+
+        <div class="txt__content" style="margin-bottom: 30px">
+            <table>
+                <tr>
+                    <td><button onclick="showWeather1()"><img width="125px" src="/img/sb1.jpg"></button></td>
+                    <td><button onclick="showWeather2()"><img width="125px" src="/img/sb2.jpg"></button></td>
+                    <td><button onclick="showWeather3()"><img width="125px" src="/img/sb3.jpg"></button></td>
+                    <td><button onclick="showWeather4()"><img width="125px" src="/img/sb4.jpg"></button></td>
+                    <td><button onclick="showWeather5()"><img width="125px" src="/img/sb5.jpg"></button></td>
+                </tr>
+
+                <tr>
+                    <td><button onclick="showWeather6()"><img width="125px" src="/img/sb6.jpg"></button></td>
+                    <td><button onclick="showWeather7()"><img width="125px" src="/img/sb7.jpg"></button></td>
+                    <td><button onclick="showWeather8()"><img width="125px" src="/img/sb8.png"></button></td>
+                    <td><button onclick="showWeather9()"><img width="125px" src="/img/sb9.png"></button></td>
+                    <td><button onclick="showWeather10()"><img width="125px" src="/img/sb10.png"></button></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 결과화면 -->
+        <div>
+            <!-- 서울 -->
+            <div id="btn1" style="display: none">
+                <script>
+                    (function(d, s, id) {
+                        if (d.getElementById(id)) {
+                            if (window.__TOMORROW__) {
+                                window.__TOMORROW__.renderWidget();
+                            }
+                            return;
+                        }
+                        const fjs = d.getElementsByTagName(s)[0];
+                        const js = d.createElement(s);
+                        js.id = id;
+                        js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
+
+                        fjs.parentNode.insertBefore(js, fjs);
+                    })(document, 'script', 'tomorrow-sdk');
+                </script>
+
+                <div class="tomorrow"
+                     data-location-id="065498"
+                     data-language="EN"
+                     data-unit-system="METRIC"
+                     data-skin="light"
+                     data-widget-type="upcoming"
+                     style="padding-bottom:22px;position:relative;"
+                >
+                    <a
+                            href="https://www.tomorrow.io/weather-api/"
+                            rel="nofollow noopener noreferrer"
+                            target="_blank"
+                            style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;"
+                    >
+                    </a>
+                </div>
+            </div>
+
+            <!-- 춘천 -->
+            <div id="btn2" style="display: none">
+                <script>
+                    (function(d, s, id) {
+                        if (d.getElementById(id)) {
+                            if (window.__TOMORROW__) {
+                                window.__TOMORROW__.renderWidget();
+                            }
+                            return;
+                        }
+                        const fjs = d.getElementsByTagName(s)[0];
+                        const js = d.createElement(s);
+                        js.id = id;
+                        js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
+
+                        fjs.parentNode.insertBefore(js, fjs);
+                    })(document, 'script', 'tomorrow-sdk');
+                </script>
+
+                <div class="tomorrow"
+                     data-location-id="065297"
+                     data-language="EN"
+                     data-unit-system="METRIC"
+                     data-skin="light"
+                     data-widget-type="upcoming"
+                     style="padding-bottom:22px;position:relative;"
+                >
+                    <a
+                            href="https://www.tomorrow.io/weather-api/"
+                            rel="nofollow noopener noreferrer"
+                            target="_blank"
+                            style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;"
+                    >
+                        <img
+                                alt="Powered by the Tomorrow.io Weather API"
+                                src="https://weather-website-client.tomorrow.io/img/powered-by.svg"
+                                width="250"
+                                height="18"
+                        />
+                    </a>
+                </div>
+            </div>
+
+            <!-- 강릉 -->
+            <div id="btn3" style="display: none">
+                <script>
+                    (function(d, s, id) {
+                        if (d.getElementById(id)) {
+                            if (window.__TOMORROW__) {
+                                window.__TOMORROW__.renderWidget();
+                            }
+                            return;
+                        }
+                        const fjs = d.getElementsByTagName(s)[0];
+                        const js = d.createElement(s);
+                        js.id = id;
+                        js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
+
+                        fjs.parentNode.insertBefore(js, fjs);
+                    })(document, 'script', 'tomorrow-sdk');
+                </script>
+
+                <div class="tomorrow"
+                     data-location-id="065322"
+                     data-language="EN"
+                     data-unit-system="METRIC"
+                     data-skin="light"
+                     data-widget-type="upcoming"
+                     style="padding-bottom:22px;position:relative;"
+                >
+                    <a
+                            href="https://www.tomorrow.io/weather-api/"
+                            rel="nofollow noopener noreferrer"
+                            target="_blank"
+                            style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;"
+                    >
+                    </a>
+                </div>
+            </div>
+
+            <!-- 대전 -->
+            <div id="btn4" style="display: none">
+                <script>
+                    (function(d, s, id) {
+                        if (d.getElementById(id)) {
+                            if (window.__TOMORROW__) {
+                                window.__TOMORROW__.renderWidget();
+                            }
+                            return;
+                        }
+                        const fjs = d.getElementsByTagName(s)[0];
+                        const js = d.createElement(s);
+                        js.id = id;
+                        js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
+
+                        fjs.parentNode.insertBefore(js, fjs);
+                    })(document, 'script', 'tomorrow-sdk');
+                </script>
+
+                <div class="tomorrow"
+                     data-location-id="065301"
+                     data-language="EN"
+                     data-unit-system="METRIC"
+                     data-skin="light"
+                     data-widget-type="upcoming"
+                     style="padding-bottom:22px;position:relative;"
+                >
+                    <a
+                            href="https://www.tomorrow.io/weather-api/"
+                            rel="nofollow noopener noreferrer"
+                            target="_blank"
+                            style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;"
+                    >
+                    </a>
+                </div>
+            </div>
+
+            <!-- 청주 -->
+            <div id="btn5" style="display: none">
+                <script>
+                    (function(d, s, id) {
+                        if (d.getElementById(id)) {
+                            if (window.__TOMORROW__) {
+                                window.__TOMORROW__.renderWidget();
+                            }
+                            return;
+                        }
+                        const fjs = d.getElementsByTagName(s)[0];
+                        const js = d.createElement(s);
+                        js.id = id;
+                        js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
+
+                        fjs.parentNode.insertBefore(js, fjs);
+                    })(document, 'script', 'tomorrow-sdk');
+                </script>
+
+                <div class="tomorrow"
+                     data-location-id="065289"
+                     data-language="EN"
+                     data-unit-system="METRIC"
+                     data-skin="light"
+                     data-widget-type="upcoming"
+                     style="padding-bottom:22px;position:relative;"
+                >
+                    <a
+                            href="https://www.tomorrow.io/weather-api/"
+                            rel="nofollow noopener noreferrer"
+                            target="_blank"
+                            style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;"
+                    >
+                    </a>
+                </div>
+            </div>
+
+            <!-- 대구 -->
+            <div id="btn6" style="display: none">
+                <script>
+                    (function(d, s, id) {
+                        if (d.getElementById(id)) {
+                            if (window.__TOMORROW__) {
+                                window.__TOMORROW__.renderWidget();
+                            }
+                            return;
+                        }
+                        const fjs = d.getElementsByTagName(s)[0];
+                        const js = d.createElement(s);
+                        js.id = id;
+                        js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
+
+                        fjs.parentNode.insertBefore(js, fjs);
+                    })(document, 'script', 'tomorrow-sdk');
+                </script>
+
+                <div class="tomorrow"
+                     data-location-id="065300"
+                     data-language="EN"
+                     data-unit-system="METRIC"
+                     data-skin="light"
+                     data-widget-type="upcoming"
+                     style="padding-bottom:22px;position:relative;"
+                >
+                    <a
+                            href="https://www.tomorrow.io/weather-api/"
+                            rel="nofollow noopener noreferrer"
+                            target="_blank"
+                            style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;"
+                    >
+                    </a>
+                </div>
+            </div>
+
+            <!-- 전주 -->
+            <div id="btn7" style="display: none">
+                <script>
+                    (function(d, s, id) {
+                        if (d.getElementById(id)) {
+                            if (window.__TOMORROW__) {
+                                window.__TOMORROW__.renderWidget();
+                            }
+                            return;
+                        }
+                        const fjs = d.getElementsByTagName(s)[0];
+                        const js = d.createElement(s);
+                        js.id = id;
+                        js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
+
+                        fjs.parentNode.insertBefore(js, fjs);
+                    })(document, 'script', 'tomorrow-sdk');
+                </script>
+
+                <div class="tomorrow"
+                     data-location-id="065412"
+                     data-language="EN"
+                     data-unit-system="METRIC"
+                     data-skin="light"
+                     data-widget-type="upcoming"
+                     style="padding-bottom:22px;position:relative;"
+                >
+                    <a
+                            href="https://www.tomorrow.io/weather-api/"
+                            rel="nofollow noopener noreferrer"
+                            target="_blank"
+                            style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;"
+                    >
+                    </a>
+                </div>
+            </div>
+
+            <!-- 광주 -->
+            <div id="btn8" style="display: none">
+                <script>
+                    (function(d, s, id) {
+                        if (d.getElementById(id)) {
+                            if (window.__TOMORROW__) {
+                                window.__TOMORROW__.renderWidget();
+                            }
+                            return;
+                        }
+                        const fjs = d.getElementsByTagName(s)[0];
+                        const js = d.createElement(s);
+                        js.id = id;
+                        js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
+
+                        fjs.parentNode.insertBefore(js, fjs);
+                    })(document, 'script', 'tomorrow-sdk');
+                </script>
+
+                <div class="tomorrow"
+                     data-location-id="065362"
+                     data-language="EN"
+                     data-unit-system="METRIC"
+                     data-skin="light"
+                     data-widget-type="upcoming"
+                     style="padding-bottom:22px;position:relative;"
+                >
+                    <a
+                            href="https://www.tomorrow.io/weather-api/"
+                            rel="nofollow noopener noreferrer"
+                            target="_blank"
+                            style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;"
+                    >
+                    </a>
+                </div>
+            </div>
+
+            <!-- 부산 -->
+            <div id="btn9" style="display: none">
+                <script>
+                    (function(d, s, id) {
+                        if (d.getElementById(id)) {
+                            if (window.__TOMORROW__) {
+                                window.__TOMORROW__.renderWidget();
+                            }
+                            return;
+                        }
+                        const fjs = d.getElementsByTagName(s)[0];
+                        const js = d.createElement(s);
+                        js.id = id;
+                        js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
+
+                        fjs.parentNode.insertBefore(js, fjs);
+                    })(document, 'script', 'tomorrow-sdk');
+                </script>
+
+                <div class="tomorrow"
+                     data-location-id="065278"
+                     data-language="EN"
+                     data-unit-system="METRIC"
+                     data-skin="light"
+                     data-widget-type="upcoming"
+                     style="padding-bottom:22px;position:relative;"
+                >
+                    <a
+                            href="https://www.tomorrow.io/weather-api/"
+                            rel="nofollow noopener noreferrer"
+                            target="_blank"
+                            style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;"
+                    >
+                    </a>
+                </div>
+            </div>
+
+            <!-- 제주 -->
+            <div id="btn10" style="display: none">
+                <script>
+                    (function(d, s, id) {
+                        if (d.getElementById(id)) {
+                            if (window.__TOMORROW__) {
+                                window.__TOMORROW__.renderWidget();
+                            }
+                            return;
+                        }
+                        const fjs = d.getElementsByTagName(s)[0];
+                        const js = d.createElement(s);
+                        js.id = id;
+                        js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
+
+                        fjs.parentNode.insertBefore(js, fjs);
+                    })(document, 'script', 'tomorrow-sdk');
+                </script>
+
+                <div class="tomorrow"
+                     data-location-id="065406"
+                     data-language="EN"
+                     data-unit-system="METRIC"
+                     data-skin="light"
+                     data-widget-type="upcoming"
+                     style="padding-bottom:22px;position:relative;"
+                >
+                    <a
+                            href="https://www.tomorrow.io/weather-api/"
+                            rel="nofollow noopener noreferrer"
+                            target="_blank"
+                            style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;"
+                    >
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+    function showWeather1() {
+
+        document.getElementById('btn1').style.display = '';
+        document.getElementById('btn2').style.display = 'none';
+        document.getElementById('btn3').style.display = 'none';
+        document.getElementById('btn4').style.display = 'none';
+        document.getElementById('btn5').style.display = 'none';
+        document.getElementById('btn6').style.display = 'none';
+        document.getElementById('btn7').style.display = 'none';
+        document.getElementById('btn8').style.display = 'none';
+        document.getElementById('btn9').style.display = 'none';
+        document.getElementById('btn10').style.display = 'none';
+    }
+    function showWeather2() {
+
+        document.getElementById('btn1').style.display = 'none';
+        document.getElementById('btn2').style.display = '';
+        document.getElementById('btn3').style.display = 'none';
+        document.getElementById('btn4').style.display = 'none';
+        document.getElementById('btn5').style.display = 'none';
+        document.getElementById('btn6').style.display = 'none';
+        document.getElementById('btn7').style.display = 'none';
+        document.getElementById('btn8').style.display = 'none';
+        document.getElementById('btn9').style.display = 'none';
+        document.getElementById('btn10').style.display = 'none';
+    }
+    function showWeather3() {
+
+        document.getElementById('btn1').style.display = 'none';
+        document.getElementById('btn2').style.display = 'none';
+        document.getElementById('btn3').style.display = '';
+        document.getElementById('btn4').style.display = 'none';
+        document.getElementById('btn5').style.display = 'none';
+        document.getElementById('btn6').style.display = 'none';
+        document.getElementById('btn7').style.display = 'none';
+        document.getElementById('btn8').style.display = 'none';
+        document.getElementById('btn9').style.display = 'none';
+        document.getElementById('btn10').style.display = 'none';
+    }
+    function showWeather4() {
+
+        document.getElementById('btn1').style.display = 'none';
+        document.getElementById('btn2').style.display = 'none';
+        document.getElementById('btn3').style.display = 'none';
+        document.getElementById('btn4').style.display = '';
+        document.getElementById('btn5').style.display = 'none';
+        document.getElementById('btn6').style.display = 'none';
+        document.getElementById('btn7').style.display = 'none';
+        document.getElementById('btn8').style.display = 'none';
+        document.getElementById('btn9').style.display = 'none';
+        document.getElementById('btn10').style.display = 'none';
+    }
+    function showWeather5() {
+
+        document.getElementById('btn1').style.display = 'none';
+        document.getElementById('btn2').style.display = 'none';
+        document.getElementById('btn3').style.display = 'none';
+        document.getElementById('btn4').style.display = 'none';
+        document.getElementById('btn5').style.display = '';
+        document.getElementById('btn6').style.display = 'none';
+        document.getElementById('btn7').style.display = 'none';
+        document.getElementById('btn8').style.display = 'none';
+        document.getElementById('btn9').style.display = 'none';
+        document.getElementById('btn10').style.display = 'none';
+    }
+    function showWeather6() {
+
+        document.getElementById('btn1').style.display = 'none';
+        document.getElementById('btn2').style.display = 'none';
+        document.getElementById('btn3').style.display = 'none';
+        document.getElementById('btn4').style.display = 'none';
+        document.getElementById('btn5').style.display = 'none';
+        document.getElementById('btn6').style.display = '';
+        document.getElementById('btn7').style.display = 'none';
+        document.getElementById('btn8').style.display = 'none';
+        document.getElementById('btn9').style.display = 'none';
+        document.getElementById('btn10').style.display = 'none';
+    }
+    function showWeather7() {
+
+        document.getElementById('btn1').style.display = 'none';
+        document.getElementById('btn2').style.display = 'none';
+        document.getElementById('btn3').style.display = 'none';
+        document.getElementById('btn4').style.display = 'none';
+        document.getElementById('btn5').style.display = 'none';
+        document.getElementById('btn6').style.display = 'none';
+        document.getElementById('btn7').style.display = '';
+        document.getElementById('btn8').style.display = 'none';
+        document.getElementById('btn9').style.display = 'none';
+        document.getElementById('btn10').style.display = 'none';
+    }
+    function showWeather8() {
+
+        document.getElementById('btn1').style.display = 'none';
+        document.getElementById('btn2').style.display = 'none';
+        document.getElementById('btn3').style.display = 'none';
+        document.getElementById('btn4').style.display = 'none';
+        document.getElementById('btn5').style.display = 'none';
+        document.getElementById('btn6').style.display = 'none';
+        document.getElementById('btn7').style.display = 'none';
+        document.getElementById('btn8').style.display = '';
+        document.getElementById('btn9').style.display = 'none';
+        document.getElementById('btn10').style.display = 'none';
+    }
+    function showWeather9() {
+
+        document.getElementById('btn1').style.display = 'none';
+        document.getElementById('btn2').style.display = 'none';
+        document.getElementById('btn3').style.display = 'none';
+        document.getElementById('btn4').style.display = 'none';
+        document.getElementById('btn5').style.display = 'none';
+        document.getElementById('btn6').style.display = 'none';
+        document.getElementById('btn7').style.display = 'none';
+        document.getElementById('btn8').style.display = 'none';
+        document.getElementById('btn9').style.display = '';
+        document.getElementById('btn10').style.display = 'none';
+    }
+    function showWeather10() {
+
+        document.getElementById('btn1').style.display = 'none';
+        document.getElementById('btn2').style.display = 'none';
+        document.getElementById('btn3').style.display = 'none';
+        document.getElementById('btn4').style.display = 'none';
+        document.getElementById('btn5').style.display = 'none';
+        document.getElementById('btn6').style.display = 'none';
+        document.getElementById('btn7').style.display = 'none';
+        document.getElementById('btn8').style.display = 'none';
+        document.getElementById('btn9').style.display = 'none';
+        document.getElementById('btn10').style.display = '';
+    }
+
+</script>
+</html>

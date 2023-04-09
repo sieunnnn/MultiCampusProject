@@ -1,12 +1,13 @@
-package multi.second.project.domain.todo.domain;
+package multi.second.project.domain.planner.domain;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -15,20 +16,23 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import multi.second.project.domain.member.domain.Member;
 
 @Entity
 @DynamicInsert // insert 쿼리를 생성할 때 null인 필드는 쿼리에서 생략
 @DynamicUpdate // entity에서 변경이 발견되지 않은 값은 쿼리에서 생략
 @Builder @NoArgsConstructor @AllArgsConstructor @Getter
-public class BudgetType_before {
-
+public class Participant {
+	
 	@Id
 	@GeneratedValue
-	private Long btpIdx;
-	//예산 종류
+	private Long pcIdx;
+	
 	@ManyToOne
-	@JoinColumn(name = "budgetType")
-	private BudgetTodo budgetTodo;
-	//지출예정 항목
-	private String budgetItem;
+	private Member member;
+	@Builder.Default
+	private LocalDateTime createdAt = LocalDateTime.now();
+	private LocalDateTime deleteAt;
+	
+	
 }

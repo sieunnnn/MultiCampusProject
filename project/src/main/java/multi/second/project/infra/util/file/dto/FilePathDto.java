@@ -8,9 +8,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import multi.second.project.infra.code.Code;
 import multi.second.project.infra.util.file.FilePath;
+import org.springframework.stereotype.Component;
 
 @Data
 @NoArgsConstructor
+@Component
 public class FilePathDto {
 	
 	private Long fpIdx;

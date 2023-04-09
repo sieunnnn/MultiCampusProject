@@ -47,14 +47,18 @@ public class GalleryService {
 	public void createGallery(GalleryRegistRequest dto, List<MultipartFile> files) {
 		
 		Member member = memberRepository.findById(dto.getUserId()).get();
+		//아이디 정보만 가져와서 멤머 객체에 담는다
 		Gallery gallery = Gallery.createGallery(dto, member);
-		
-		
+		// 요청 받은 정보를 갤러리 엔티티에 저장
 		FilePathDto filePath = new FilePathDto();
 		filePath.setGroupName("gallery");
-		
+
 		List<FileUploadDto> fileUploadDtos = fileUtil.generateFileUploadDtos("gallery", files);
-		
+
+//		gallery.setFiles(fileUploadDtos.stream()
+//				.map(e -> FilePath.createFilePath(e.getFilePathDto()))
+//				.collect(Collectors.toList()));
+
 		fileUploadDtos.forEach(e -> {
 			gallery.addFile(FilePath.createFilePath(e.getFilePathDto()));
 		});

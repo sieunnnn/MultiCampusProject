@@ -34,31 +34,21 @@ public class MemberControllerTest {
 	@Test
 	@DisplayName("회원가입 정보 저장")
 	public void testSignUpImpl() throws Exception {
-		
+
 		SignUpRequest form = new SignUpRequest();
-		form.setUserId("admin");
+
+		form.setUserId("guswnd2050");
 		form.setPassword("123qwe!@#QWE");
 		form.setEmail("azimemory@gmail.com");
-		form.setGrade("ROLE_ADMIN");
+		form.setGrade("ROLE_USER");
 		//form.setImagePath(null);
-		
+
 		mockMvc.perform(get("/member/signupimpl/1234")
-				.sessionAttr("signupForm", form)
-				.sessionAttr("authToken", "1234"))
-		.andExpect(status().is3xxRedirection());
+						.sessionAttr("signupForm", form)
+						.sessionAttr("authToken", "1234"))
+				.andExpect(status().is3xxRedirection());
+
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
