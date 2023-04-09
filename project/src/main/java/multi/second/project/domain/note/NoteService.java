@@ -35,15 +35,13 @@ public class NoteService {
 
     public Map<String, Object> findNoteListByUserId(String userId, Pageable pageable) {
         Page<Note> page = noteRepository.findByPartnersMemberUserId(userId,pageable);
-
-        System.out.println("noteRepository.findByMemberUserId(userId,pageable) :  "+page);
-
+        //  System.out.println("noteRepository.findByMemberUserId(userId,pageable) :  "+page);
         Paging paging = Paging.builder()
                 .page(page)
                 .blockCnt(5)
                 .build();
-        System.out.println("page.getContent() :  " +page.getContent());
-        System.out.println("NoteListResponse.toDtoList(page.getContent()) :  "+ NoteListResponse.toDtoList(page.getContent()));
+//        System.out.println("page.getContent() :  " +page.getContent());
+//        System.out.println("NoteListResponse.toDtoList(page.getContent()) :  "+ NoteListResponse.toDtoList(page.getContent()));
         return Map.of("noteList", NoteListResponse.toDtoList(page.getContent()), "paging", paging);
     }
 

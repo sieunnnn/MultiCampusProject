@@ -14,12 +14,22 @@ import static java.util.stream.Collectors.toList;
 public class NoteListResponse {
 
     private Long ntIdx;
-    private String partner;
+    private List<PartnerResponse> partnerResponse = new ArrayList<>();
     //    private String lastMassage;
     public NoteListResponse(Note note) {
         this.ntIdx = note.getNtIdx();
-        this.partner = note.getPartner();
+        this.partnerResponse =  PartnerResponse.toDtoList(note.getPartners());
     }
+
+
+
+//    private Long ntIdx;
+//    private String partner;
+//    //    private String lastMassage;
+//    public NoteListResponse(Note note) {
+//        this.ntIdx = note.getNtIdx();
+//        this.partner = note.getPartner();
+//    }
 
     public static List<NoteListResponse> toDtoList(List<Note> entityList){
         return entityList.stream().map(e -> new NoteListResponse(e)).collect(toList());

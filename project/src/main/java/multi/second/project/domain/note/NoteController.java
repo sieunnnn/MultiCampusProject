@@ -61,7 +61,6 @@ public class NoteController {
         model.addAttribute("userId", userId);
 
         Map<String, Object> commandMap = noteService.findNoteListByUserId(userId, pageable);
-        System.out.println("galleryService.findGalleryListByUserId(principal.getUserId(),pageable) : "+commandMap);
         model.addAllAttributes(commandMap);
 
         return "note/note-list";

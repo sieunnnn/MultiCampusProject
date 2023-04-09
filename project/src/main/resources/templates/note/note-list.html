@@ -18,7 +18,7 @@
 
         <!-- 상단부분 -->
         <div class="wrapper__friends__head">
-            <div class="txt__friends">Friends</div>
+            <div class="txt__friends">NoteRoom</div>
 
             <form th:action="@{/note/upload}" method="post">
                 <div class="wrapper__search__friends">
@@ -32,7 +32,7 @@
                         <input type="text" name="host" th:value="${userId}" style="display:none" />
                         <input id="search" name="partner" type="text">
                     </div>
-                    <input type="submit" class="btn__search" value="Search">
+                    <input type="submit" class="btn__search" value="create">
                 </div>
             </form>
         </div>
@@ -62,18 +62,18 @@
                 </ul>
             </div>
 
-<!--            <span th:each="note, status : ${noteList}">-->
-<!--                          <li>-->
-<!--                            <span th:text="${note.ntIdx}"></span>-->
-<!--                            <ul>-->
-<!--                              <span th:each="partner :${note.partnerResponse}">-->
-<!--                                <li>-->
-<!--                                  <span th:text="${partner.member.userId}"></span>-->
-<!--                                </li>-->
-<!--                              </span>-->
-<!--                            </ul>-->
-<!--                          </li>-->
-<!--                        </span>-->
+            <span th:each="note, status : ${noteList}">
+                          <li>
+                            <span th:text="${note.ntIdx}"></span>
+                            <ul>
+                              <span th:each="partner :${note.partnerResponse}">
+                                <li>
+                                  <span th:text="${partner}"></span>
+                                </li>
+                              </span>
+                            </ul>
+                          </li>
+                        </span>
 <!--             <span th:each="note, status : ${noteList}">-->
 <!--                    <span th:each="partner :${note.partnerResponse}">-->
 <!--                        <p th:text="${partner.member.userId}"/>-->
