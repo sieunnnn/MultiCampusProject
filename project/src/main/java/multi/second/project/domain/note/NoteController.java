@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import multi.second.project.domain.gallery.dto.request.GalleryRegistRequest;
 import multi.second.project.domain.member.UserPrincipal;
 import multi.second.project.domain.member.domain.Member;
+import multi.second.project.domain.note.domain.Note;
 import multi.second.project.domain.note.dto.request.NoteRegistRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -66,8 +67,15 @@ public class NoteController {
         return "note/note-list";
     }
 
-    @GetMapping("list/{ntIdx}")
-    public String noteDetail() {
+    @GetMapping("/{ntIdx}")
+    public String noteDetail(@PathVariable("ntIdx") Long ntIdx, Model model) {
+
+//        public String noteDetail(@PathVariable("ntIdx") Long ntIdx, Model model) {
+//            Note note = noteService.findNoteByNtIdx(ntIdx);
+//            model.addAttribute("note", note);
+//            return "note/messages";
+
+
 //    public String noteDetail(@PathVariable("ntIdx") long ntIdx, Model model) {
 //
 //        // ntIdx로 note 조회

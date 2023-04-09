@@ -57,29 +57,22 @@
         <div class="wrapper__friends__list">
             <div>
                 <h3>Chat Rooms:</h3>
-                <ul>
-
-                </ul>
             </div>
+            <ul>
+                 <span th:each="note : ${noteList}">
+                    <li>
+                        <a th:href="@{/note/{ntIdx}(ntIdx=${note.ntIdx})}">
+                            <span th:text="${note.guest} + '와의 쪽지입니다'"></span>
+                        </a>
+                    </li>
+                </span>
+            </ul>
+        </div>
 
-<!--            <span th:each="note, status : ${noteList}">-->
-<!--                          <li>-->
-<!--                            <span th:text="${note.ntIdx}"></span>-->
-<!--                            <ul>-->
-<!--                              <span th:each="note :${note.NoteListResponse}">-->
-<!--                                <li>-->
-<!--                                  <span th:text="${partner}"></span>-->
-<!--                                </li>-->
-<!--                              </span>-->
-<!--                            </ul>-->
-<!--                          </li>-->
-<!--                        </span>-->
-<!--             <span th:each="note, status : ${noteList}">-->
-<!--                    <span th:each="partner :${note.partnerResponse}">-->
-<!--                        <p th:text="${partner.member.userId}"/>-->
-<!--                    </span>-->
 
-<!--                 </span>-->
+
+
+
 <!--            <form th:action="@{/note/add}" method="post" th:object="${loginRequest}">-->
 <!--                <div class="wrapper__login__input">-->
 <!--                    <div class="input__id">-->
@@ -88,8 +81,6 @@
 <!--                    </div>-->
 <!--                <button class="btn__login">로그인</button>-->
 <!--            </form>-->
-        </div>
-
 
     </div>
 
