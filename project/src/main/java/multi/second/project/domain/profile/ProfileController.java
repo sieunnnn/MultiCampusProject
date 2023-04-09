@@ -88,6 +88,6 @@ public class ProfileController {
         //String imagePath = "/img/image/"+ result.getImagePath();
         //model.addAttribute("imagePath", imagePath);
         //return result.getImagePath();
-        return "redirect:/";
+        return "redirect:/profile/profile";
     }
 }

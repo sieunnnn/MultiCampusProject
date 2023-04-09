@@ -85,11 +85,15 @@
         <div class="container__profile">
             <div class="txt__welcome">
                 <span th:text="${data}">message</span>
-                <span>님 안녕하세요!</span>
+                <span>[[${profile.member.userId}]] 님 안녕하세요!</span>
+               <span>[[${profile.imagePath}]]</span>
+                <div >
+                    <img th:src="@{|/profile/${profile.imagePath}|}">
+                </div>
             </div>
 
             <!-- 클릭 하면 유저 사진 바꿀수 있는 팝업창 생성 -->
-            <button id="image-show" class="wrapper__user__pic" onclick="modalOpen();"><img id="newImage" th:src="${imageUrl}"></button>
+            <button id="image-show" class="wrapper__user__pic" onclick="modalOpen();"><img id="newImage" th:src="@{/profile/${profile.imagePath}}"></button>
             <!--            <div>-->
             <!--                <button class="button__modify">수정</button>-->
             <!--            </div>-->
@@ -103,10 +107,10 @@
             
              	<form th:action="@{/planner/other-list}" method="get">
  	 				<input type="text" th:value="group1B" name="profileId"/>
-	 				<button class="btn__travel1"><span>님의 여행 일정</span></button>
+	 				<button class="btn__travel1"><span>[[${profile.member.userId}]] 님의 여행 일정</span></button>
  				</form>
  				
-                	<button class="btn__travel2">님의 이전 여행</button>
+                	<button class="btn__travel2">[[${profile.member.userId}]] 님의 이전 여행</button>
                 
             </div>
         </div>

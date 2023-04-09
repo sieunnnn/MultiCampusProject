@@ -26,6 +26,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
+
 import multi.second.project.infra.code.Code;
 
 @Service
@@ -47,7 +48,7 @@ public class ProfileService {
     }
 
     @Transactional
-    public Profile saveProfileImage(MultipartFile upFile, String userId, ProfileModifyRequest dto) throws IOException {
+    public void saveProfileImage(MultipartFile upFile, String userId, ProfileModifyRequest dto) throws IOException {
         String filename = uploadFile(upFile);
         System.out.println("userId"+userId);
         Member member = memberRepository.findById(userId).get();
@@ -64,7 +65,7 @@ public class ProfileService {
 
         log.info("Entity Id : {} is saved.", profile.getPfIdx());
 
-        return profile;
+//        return profile;
     }
 
     public String uploadFile(MultipartFile upFile) throws IOException {
@@ -96,10 +97,10 @@ public class ProfileService {
         originalFilename += Integer.toString(date);
 
         System.out.println(Code.PROFILE_STORAGE_PATH);
-        File folder = new File(Code.PROFILE_STORAGE_PATH.name());
+        File folder = new File(Code.PROFILE_STORAGE_PATH+"");
 
         if(!folder.exists()) {
-            folder.mkdir();
+            folder.mkdirs();
             System.out.println("폴더가 생성되었습니다");
         }else {
             System.out.println("이미 폴더가 존재합니다");

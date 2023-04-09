@@ -28,5 +28,8 @@ public class WebConfig implements WebMvcConfigurer {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler(connectPath)
 				.addResourceLocations(resourcePath);
+		
+		registry.addResourceHandler("/profile/**")
+				.addResourceLocations("file:///profile/profileImg");
 	}
 }
