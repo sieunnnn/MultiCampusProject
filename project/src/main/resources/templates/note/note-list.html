@@ -1,0 +1,102 @@
+
+<!-- 친구 목록 부분 -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="main_layout">
+
+<head>
+    <title>friends</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../static/css/message/friends.css" th:href="@{/css/message/friends.css}"/>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div class="container__friends">
+
+        <!-- 상단부분 -->
+        <div class="wrapper__friends__head">
+            <div class="txt__friends">NoteRoom</div>
+
+            <form th:action="@{/note/upload}" method="post">
+                <div class="wrapper__search__friends">
+                    <div class="search__friends">
+                        <img src="/img/img_magnify.png" style="width: 15px; height: 15px; margin: 10px">
+
+                        <!-- hidden은 submit 시 데이터가 안넘어감 -->
+    <!--                    <input type="hidden" th:value="${userId}" />-->
+
+                        <!-- css로 아래 input만 표시되지 않게 disabled 처리 -->
+                        <input type="text" name="host" th:value="${userId}" style="display:none" />
+                        <input id="search" name="guest" type="text">
+                    </div>
+                    <input type="submit" class="btn__search" value="create">
+                </div>
+            </form>
+        </div>
+
+        <!-- 친구 설정 메뉴 -->
+        <div class="wrapper__setting__friends">
+            <div class="wrapper__setting__btn">
+                <!-- 경로는 나중에 알맞게 수정 해주세요 -->
+                <div th:onclick="|location.href='@{/add/note}'|">
+                    <input type="button" class="btn__add__friends" value="친구 추가">
+
+                </div>
+                <span class="divider"></span>
+                <div th:onclick="|location.href='@{/delete/note}'|">
+                    <input type="button" class="btn__setting__friends" value="친구 편집">
+                </div>
+            </div>
+        </div>
+
+        <!-- 친구 목록 추가 -->
+        <!-- 대략 작성 해주시면 제가 나중에 수정 하겠습니다 -->
+        <div class="wrapper__friends__list">
+            <div>
+                <h3>Chat Rooms:</h3>
+                <ul>
+
+                </ul>
+            </div>
+
+<!--            <span th:each="note, status : ${noteList}">-->
+<!--                          <li>-->
+<!--                            <span th:text="${note.ntIdx}"></span>-->
+<!--                            <ul>-->
+<!--                              <span th:each="note :${note.NoteListResponse}">-->
+<!--                                <li>-->
+<!--                                  <span th:text="${partner}"></span>-->
+<!--                                </li>-->
+<!--                              </span>-->
+<!--                            </ul>-->
+<!--                          </li>-->
+<!--                        </span>-->
+<!--             <span th:each="note, status : ${noteList}">-->
+<!--                    <span th:each="partner :${note.partnerResponse}">-->
+<!--                        <p th:text="${partner.member.userId}"/>-->
+<!--                    </span>-->
+
+<!--                 </span>-->
+<!--            <form th:action="@{/note/add}" method="post" th:object="${loginRequest}">-->
+<!--                <div class="wrapper__login__input">-->
+<!--                    <div class="input__id">-->
+<!--                        <input style="width: 245px; height: 28px" type="text" id="userId" name="userId" placeholder="아이디 입력"/>-->
+<!--                        <span class="error__id" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></span>-->
+<!--                    </div>-->
+<!--                <button class="btn__login">로그인</button>-->
+<!--            </form>-->
+        </div>
+
+
+    </div>
+
+    <!-- 결과물 출력 부분 -->
+    <div class="container__friends__contents">
+        <div layout:fragment="container__friends__contents"></div>
+    </div>
+</div>
+</body>
+</html>
