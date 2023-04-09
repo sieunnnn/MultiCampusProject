@@ -88,12 +88,13 @@
                 <span>[[${profile.member.userId}]] 님 안녕하세요!</span>
                <span>[[${profile.imagePath}]]</span>
                 <div >
-                    <img th:src="@{|/profile/${profile.imagePath}|}">
+                    <!--  <img th:src="@{/profile/${profile.imagePath}}">-->
+                    <img th:src="${imageUrl}">
                 </div>
             </div>
 
             <!-- 클릭 하면 유저 사진 바꿀수 있는 팝업창 생성 -->
-            <button id="image-show" class="wrapper__user__pic" onclick="modalOpen();"><img id="newImage" th:src="@{/profile/${profile.imagePath}}"></button>
+            <button id="image-show" class="wrapper__user__pic" onclick="modalOpen();"><img id="newImage" th:src="${imageUrl}"></button>
             <!--            <div>-->
             <!--                <button class="button__modify">수정</button>-->
             <!--            </div>-->

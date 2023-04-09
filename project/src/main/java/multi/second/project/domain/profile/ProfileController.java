@@ -45,6 +45,8 @@ public class ProfileController {
             //model.addAttribute("data", UserPrincipal.getUserPrincipal().getPrincipal().getUserId());
             Profile profile = profileService.getProfileData(UserPrincipal.getUserPrincipal().getPrincipal().getUserId());
             model.addAttribute("profile", profile);
+            String imagePath = "/profile/"+ profile.getImagePath();
+            model.addAttribute("imageUrl", imagePath);
 //            System.out.println("profile :" +profile);
 //            if(profile != null){
 //                String imagePath = "/img/image/"+ profile.getImagePath();

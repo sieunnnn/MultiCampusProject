@@ -43,6 +43,12 @@ public class ProfileService {
 
     public Profile getProfileData(String userId){
         Profile profile = profileRepository.findProfileByMemberUserId(userId);
+        System.out.println("profile :" +profile);
+        if(profile == null){
+        	Member member = memberRepository.findById(userId).get();
+            profile = Profile.builder().member(member).build();
+            profileRepository.save(profile);
+        }
         
         return profile;
     }
