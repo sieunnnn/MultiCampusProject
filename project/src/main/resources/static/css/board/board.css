@@ -33,6 +33,14 @@
 .container{
     width: 100%;
 }
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+.pagination li {
+    float: left;
+    margin-right: 10px;
+}
 
 .info li{
     font-size: 1.2vw;
