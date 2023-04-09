@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import multi.second.project.domain.member.domain.Member;
 import multi.second.project.domain.message.domain.Message;
-import multi.second.project.domain.note.domain.Partner;
 
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;

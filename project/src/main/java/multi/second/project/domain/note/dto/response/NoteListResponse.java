@@ -15,7 +15,7 @@ import static java.util.stream.Collectors.toList;
 public class NoteListResponse {
 
     private Long ntIdx;
-    private List<PartnerResponse> partnerResponse = new ArrayList<>();
+//    private List<PartnerResponse> partnerResponse = new ArrayList<>();
     private String guest;
     private Member member;
     //    private String lastMassage;

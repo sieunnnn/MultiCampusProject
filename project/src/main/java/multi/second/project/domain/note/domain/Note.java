@@ -41,8 +41,8 @@ public class Note {
 //	@JoinColumn(name = "userId")
 //	private Member member2;
 
-	@OneToMany(fetch = FetchType.EAGER)
-	private List<Partner> partners = new ArrayList<>();
+//	@OneToMany(fetch = FetchType.EAGER)
+//	private List<Partner> partners = new ArrayList<>();
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@Builder.Default
@@ -68,9 +68,9 @@ public class Note {
 					.build();
 	}
 
-	public void addPartner(Partner partner) {
-		partners.add(partner);
-
-	}
+//	public void addPartner(Partner partner) {
+//		partners.add(partner);
+//
+//	}
 
 }
