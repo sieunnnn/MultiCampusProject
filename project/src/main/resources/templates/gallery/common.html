@@ -35,7 +35,9 @@
 
 	<div class="wrapper__gallery">
 		<div class="wrapper__gallery__head">
-			<div class="user__profile__pic"></div>
+			<div class="user__profile__pic">
+				<img th:src="@{/profile/download(pfIdx=${profile?.pfIdx})}">
+			</div>
 		</div>
 		<div layout:fragment="gallery__content"></div>
 	</div>

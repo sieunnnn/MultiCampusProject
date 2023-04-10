@@ -32,10 +32,17 @@
                 <div>
 
                     <div th:id=memberGroup class="wrapper__friends">
-                        <div th:each="group : ${planner.travelGroup.participants}" class="profile">
-                            <div th:text="${group.member.userId}"></div>
+                        <div th:each="group : ${planner.travelGroup.getParticipants}" class="profile">
+
+                            <div th:if="${profile.member.getUserId()} == ${group.member.getUserId()}">
+                                <img th:src="@{/profile/download(pfIdx=${profile.pfIdx})}">
+                            </div>
+
+                            <div th:unless="${profile.member.getUserId()} == ${group.member.getUserId()}">
+                                <p>[[${group.member.getUserId()}]]</p>
+                            </div>
                         </div>
-                        <div th:id=memberResponse></div>
+                        <div th:id=memberResponse class="profile"></div>
                         <div class="profile__btn" th:onclick="openMember()"></div>
                     </div>
 
@@ -835,6 +842,7 @@
             document.querySelector('.container__trip').style.display = 'none';
             document.querySelector('.container__calendar').style.display = 'none';
             document.querySelector('.container__member').style.display = 'none';
+
         }
 
         function closeChat() {
@@ -855,6 +863,7 @@
             document.getElementById('modalChat').style.display = 'none';
             document.querySelector('.container__member').style.display = '';
             document.querySelector('.container__trip').style.display = 'none';
+            document.querySelector('.container__help').style.display = 'none';
 
         }
 
@@ -865,6 +874,7 @@
             document.querySelector('.container__calendar').style.display = 'none';
             document.querySelector('.container__member').style.display = 'none';
             document.querySelector('.container__trip').style.display = 'none';
+            document.querySelector('.container__help').style.display = 'none';
 
         }
 
@@ -876,6 +886,7 @@
             document.getElementById('modalChat').style.display = 'none';
             document.querySelector('.container__member').style.display = 'none';
             document.querySelector('.container__trip').style.display = '';
+            document.querySelector('.container__help').style.display = 'none';
 
         }
 
@@ -886,6 +897,7 @@
             document.querySelector('.container__calendar').style.display = 'none';
             document.querySelector('.container__member').style.display = 'none';
             document.querySelector('.container__trip').style.display = 'none';
+            document.querySelector('.container__help').style.display = 'none';
 
         }
 
@@ -930,6 +942,7 @@
             document.querySelector('.container__calendar').style.display = '';
             document.querySelector('.container__trip').style.display = 'none';
             document.querySelector('.wrapper__member').style.display = 'none';
+            document.querySelector('.container__help').style.display = 'none';
 
         }
 
@@ -940,6 +953,7 @@
             document.querySelector('#modalChat').style.display = 'none';
             document.querySelector('.container__trip').style.display = 'none';
             document.querySelector('.wrapper__member').style.display = 'none';
+            document.querySelector('.container__help').style.display = 'none';
 
         }
 
@@ -1056,9 +1070,8 @@
                         	let memberResponse = document.getElementById('memberResponse');
                             let memberGroup = document.getElementById('memberGroup');
                             let newMember = document.createElement('div')
-                            newMember.className="profile";
-
-                            newMember.innerText = res.msg.userId;
+                            newMember.className = "profile";
+                            newMember.innerHTML = '<p>'+ res.msg.userId + '</p>';
                             memberGroup.insertBefore(newMember, memberResponse);
 
                         } else if (res.type === 'upload-todolist') {
@@ -3270,8 +3283,10 @@
                         		//groupsearchResponse.innerHTML += '<span>' +res.msg[i].userId + '<br>'+'</span>';
                         		
                         		if(res.msg[i].userId === [[${#authentication.name}]]){
-                        			continue;
+
+                                    continue;
                         		}
+
                         		let groupsearchResponse = document.getElementById("groupsearchResponse");
                         		let user = document.createElement("div");
                         		user.id = "user"+i;

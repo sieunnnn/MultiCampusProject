@@ -35,8 +35,6 @@ button:focus {
     font-size: 64px;
     /* identical to box height, or 38% */
 
-    letter-spacing: 0.02em;
-
     color: #1C1C1E;
 
     margin-bottom: 65px;
@@ -87,6 +85,8 @@ button:focus {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+
+    margin: 10px 0 25px 0;
 }
 
 .btn__travel1, .btn__travel1:focus {
@@ -94,7 +94,7 @@ button:focus {
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 400;
-    font-size: 23px;
+    font-size: 20px;
     line-height: 24px;
     /* or 104% */
 
@@ -107,7 +107,7 @@ button:focus {
     justify-content: center;
     align-items: center;
 
-    width: auto;
+    width: 220px;
     height: 42px;
     margin-right: 10px;
 
@@ -120,8 +120,8 @@ button:focus {
 
     font-family: 'Pretendard';
     font-style: normal;
-    font-weight: 500;
-    font-size: 23px;
+    font-weight: 600;
+    font-size: 20px;
     line-height: 24px;
     /* or 104% */
 
@@ -134,7 +134,7 @@ button:focus {
     justify-content: center;
     align-items: center;
 
-    width: auto;
+    width: 220px;
     height: 42px;
     margin-left: 10px;
 
@@ -145,6 +145,7 @@ button:focus {
 }
 
 /* =========================프로필=======================================*/
+
 .wrapper__profile {
 
     justify-content: center;
@@ -161,7 +162,9 @@ button:focus {
     top: 14rem;
     right: 4rem;
 }
+
 /*==== 팝업 ====*/
+
 .popup-wrap{
     background-color:rgba(0,0,0,.3);
 
@@ -181,46 +184,78 @@ button:focus {
 .popup{
     width:100%;
     max-width:470px;
-    border-radius:10px;
+    border-radius:20px;
     overflow:hidden;
-    background-color:#264db5;
+    background-color:white;
     box-shadow: 5px 10px 10px 1px rgba(0,0,0,.3);
 }
 
 .popup-head {
-    width: 100%;
-    height: 50px;
+
+    margin-top: 50px;
+
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-content: center;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 45px;
+    /* identical to box height, or 120% */
+
+    letter-spacing: 0.02em;
+
+    color: #1E1E1C;
 }
 
 .popup-body{
+
     width:100%;
     background-color:#ffffff;
 }
+
 .body-content{
+
     padding:30px;
     max-width: available;
 }
+
 .body-titlebox{
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    /* identical to box height, or 120% */
+
+    letter-spacing: 0.02em;
+
+    color: #1E1E1C;
+
     text-align:center;
     width:100%;
     height:40px;
-    margin-bottom:10px;
+    margin:20px 0 20px 0;
 }
+
 .body-contentbox{
+
     word-break:break-word;
     overflow-y:auto;
     min-height:100px;
     max-height:200px;
 }
+
 .popup-foot{
+
     width:100%;
     height:50px;
     display: flex;
 }
+
 .pop-btn{
+
     display:inline-flex;
     width:50%;
     height:100%;
@@ -230,11 +265,14 @@ button:focus {
     color:#ffffff;
     cursor:pointer;
 }
+
 .pop-btn.confirm{
+
     border-right:1px solid #3b5fbf;
 }
 
 .file-container {
+
     font-family: sans-serif;
     display: flex;
     height: 100%;
@@ -242,6 +280,7 @@ button:focus {
 }
 
 .image-upload {
+
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -249,60 +288,93 @@ button:focus {
 }
 
 .button {
+
     display: flex;
     justify-content: center;
 }
 
 label {
+
     cursor: pointer;
     font-size: 1em;
 }
 
 #chooseFile {
+
     visibility: hidden;
 }
 
 .fileContainer {
+
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .fileInput {
+
     display: flex;
     align-items: center;
-    border-bottom: solid 2px black;
-    width: 60%;
-    height: 30px;
+
+    width: auto;
+    height: auto;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
 }
 
 #fileNameLabel{
+
     min-width: 80px;
 }
+
 #fileName {
-    margin-left: 5px;
+
+    margin-left:
+            5px;
     text-overflow: ellipsis;
     display: block;
     overflow: hidden;
     white-space: nowrap;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
 }
 
 .buttonContainer {
-    width: 15%;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+
+    /* or 104% */
+
+    letter-spacing: 0.02em;
+
+    color: #1C1C1E;
+
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-left: 10px;
-    background-color: black;
-    color: white;
-    border-radius: 30px;
-    padding: 10px;
-    font-size: 0.8em;
 
-    cursor: pointer;
+    width: 70px;
+    height: 25px;
+    margin-left: 10px;
+
+    background: #FFFFFF;
+    border: 0.5px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
 }
 
 .image-show {
+
     z-index: -1;
     display: flex;
     justify-content: center;
@@ -312,7 +384,77 @@ label {
 }
 
 #newImage{
+
     width : 280px;
     height : 280px;
     border-radius: 50%;
+}
+
+.btn_section{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+
+#confirm {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    color: white;
+
+    margin: 0 5px 70px 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 14px;
+    gap: 10px;
+
+    width: 84px;
+    height: 33px;
+
+    background: linear-gradient(180deg, #4B91F7 0%, #367AF6 100%);
+    box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25);
+    border-radius: 6px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+#close {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    color: #1E1E1C;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 14px;
+    gap: 10px;
+
+    margin: 0 0 70px 5px;
+
+    width: 84px;
+    height: 33px;
+
+    background: #FFFFFF;
+    border: 0.5px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
 }
