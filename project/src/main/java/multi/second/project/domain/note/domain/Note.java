@@ -2,9 +2,11 @@ package multi.second.project.domain.note.domain;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
+import multi.second.project.domain.message.domain.Message;
 import multi.second.project.domain.note.dto.request.NoteRegistRequest;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
@@ -41,9 +43,9 @@ public class Note {
 //	@OneToMany(fetch = FetchType.EAGER)
 //	private List<Partner> partners = new ArrayList<>();
 
-//	@OneToMany(cascade = CascadeType.ALL)
-//	@Builder.Default
-//	private List<Message> messages = new ArrayList<>();
+	@OneToMany(cascade = CascadeType.ALL)
+	@Builder.Default
+	private List<Message> messages = new ArrayList<>();
 
 	//상대방
 //	@OneToOne
