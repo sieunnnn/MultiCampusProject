@@ -69,11 +69,9 @@ public class NoteController {
 
     @GetMapping("/{ntIdx}")
     public String noteDetail(@PathVariable("ntIdx") Long ntIdx, Model model) {
-
-//        public String noteDetail(@PathVariable("ntIdx") Long ntIdx, Model model) {
-//            Note note = noteService.findNoteByNtIdx(ntIdx);
-//            model.addAttribute("note", note);
-//            return "note/messages";
+            Note note = noteService.findNoteByNtIdx(ntIdx);
+            model.addAttribute("note", note);
+            return "note/note-detail";
 
 
 //    public String noteDetail(@PathVariable("ntIdx") long ntIdx, Model model) {
@@ -84,7 +82,6 @@ public class NoteController {
 //
 //        model.addAttribute("note", note);
 
-        return "note/messages";
     }
 
 }

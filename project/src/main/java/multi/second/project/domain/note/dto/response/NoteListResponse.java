@@ -17,12 +17,10 @@ public class NoteListResponse {
     private Long ntIdx;
 //    private List<PartnerResponse> partnerResponse = new ArrayList<>();
     private String guest;
-    private Member member;
     //    private String lastMassage;
     public NoteListResponse(Note note) {
         this.ntIdx = note.getNtIdx();
         this.guest = note.getGuest();
-        this.member = note.getMember();
     }
 
     public static List<NoteListResponse> toDtoList(List<Note> entityList){
