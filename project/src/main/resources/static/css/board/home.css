@@ -1,0 +1,297 @@
+
+html {
+
+    padding: 0;
+    margin:  0;
+
+    background: url("../../img/boardHome.png") no-repeat;
+    background-size: contain;
+
+    width: 100%;
+    height: 7259px;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+
+}
+
+
+/* 웹폰트 */
+@font-face {
+
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+::-webkit-scrollbar {
+
+    display: none;
+}
+
+.container__contents {
+
+    display: flex;
+
+    background-color: blue;
+}
+
+.txt__title {
+
+    position: absolute;
+    width: 849px;
+    height: 290px;
+    left: 132px;
+    top: 414px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 270px;
+    line-height: 322px;
+
+    color: #FFFFFF;
+
+}
+
+.second__title {
+
+    position: absolute;
+    width: 1240px;
+    height: 224px;
+    left: 132px;
+    top: 786px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 128px;
+    line-height: 153px;
+
+    color: #1E1E1C;
+}
+
+.third__title {
+
+    position: absolute;
+    width: 1222px;
+    height: 220px;
+    left: 132px;
+    top: 1290px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 128px;
+    line-height: 153px;
+
+    color: #FFFFFF;
+}
+
+.wrapper__recommend {
+
+    position: absolute;
+    width: 1147px;
+    height: 600px;
+    left: 141px;
+    top: 1510px;
+
+    background: rgba(255, 255, 255, 0.9);
+    border: 0.5px solid rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(40px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 20px;
+}
+
+.txt__recommend {
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+    margin: 60px 0 30px 60px;
+    /* or 46% */
+
+    color: #1E1E1C;
+}
+
+.fourth__title {
+
+    position: absolute;
+    width: 1061px;
+    height: 131px;
+    left: 132px;
+    top: 2245px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 110px;
+    line-height: 131px;
+
+    color: #FFFFFF;
+}
+
+.fifth__title {
+
+    position: absolute;
+    width: 893px;
+    height: 76px;
+    left: 132px;
+    top: 2408px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 76px;
+
+    color: #FFFFFF;
+
+}
+
+.night__title {
+
+    position: absolute;
+    width: 1062px;
+    height: 306px;
+    left: 137px;
+    top: 3900px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 128px;
+    line-height: 153px;
+
+    color: #FFFFFF;
+
+}
+
+.night__second__title {
+
+    position: absolute;
+    width: 1217px;
+    height: 262px;
+    left: 132px;
+    top: 5300px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 110px;
+    line-height: 131px;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.night__third__title {
+
+    position: absolute;
+    width: 820px;
+    height: 190px;
+    left: 331px;
+    top: 6600px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 80px;
+    line-height: 95px;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.poster, .poster:focus {
+
+    position: absolute;
+    width: 548px;
+    height: 741px;
+    left: 467px;
+    top: 5800px;
+
+    cursor: grab;
+
+    border: none;
+    outline: none;
+
+    background: url("../../img/homePoster.png") no-repeat;
+}
+
+.btn__board, .btn__board:focus {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px 20px 20px 40px;
+    gap: 10px;
+
+    position: absolute;
+    width: 224px;
+    height: 61px;
+    left: 1178px;
+    top: 53px;
+
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    border-radius: 100px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 95px;
+    text-align: center;
+}
+
+.wrapper__han__recommend {
+
+    display: flex;
+    flex-direction: row;
+
+    overflow-x: scroll;
+    position: absolute;
+    width: 100%;
+    height: 546px;
+    left: 0px;
+    top: 2564px;
+
+    background: transparent;
+}
+
+.wrapper__han__recommend button, .wrapper__han__recommend button:focus {
+
+    margin: 63px 30px 0 30px;
+    width: 864px;
+    height: 418px;
+    border: none;
+    outline: none;
+
+    background-color: transparent;
+
+    cursor: grab;
+}
+
+.info {
+
+    position: absolute;
+    width: 912px;
+    height: 60px;
+    left: 132px;
+    top: 3142px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 50px;
+    line-height: 60px;
+    /* identical to box height */
+
+
+    color: #FFFFFF;
+}

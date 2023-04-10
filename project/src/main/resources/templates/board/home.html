@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>boardHome</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/css/board/home.css"/>
+</head>
+
+<body>
+<div class="container__contents">
+    <button class="btn__board" th:onclick="|location.href='@{/board/list}'|">게시판 바로가기</button>
+    <div class="txt__title">서울</div>
+    <div class="second__title">
+        현재와 과거를 넘나드는<br>
+        그런여행.
+    </div>
+    <div class="third__title">
+        한강따라 벚꽃구경
+    </div>
+    <div class="wrapper__recommend">
+        <div class="txt__recommend">
+            가족, 친구, 연인... 혼자라도 좋아요.<br>
+            따뜻한 햇빛아래 여유로움을 즐겨보세요.
+        </div>
+        <div>
+            <img style="margin-left: 60px" src="/img/recommend1.png">
+            <img style="margin-left: 5px" src="/img/recommend2.png">
+        </div>
+    </div>
+    <div class="fourth__title">
+        다른 한강공원은 어때요?
+    </div>
+    <div class="fifth__title">
+        카드를 클릭하면 지도로 이동합니다.
+    </div>
+    <div class="wrapper__han__recommend">
+        <button style="margin-left: 120px" onclick="location.href='https://naver.me/5kLX5Fnx'"><img src="/img/han1.png"></button>
+        <button onclick="location.href='https://naver.me/GQ4YGCy9'"><img src="/img/han2.png"></button>
+        <button onclick="location.href='https://naver.me/FDQX1kYo'"><img src="/img/han3.png"></button>
+        <button onclick="location.href='https://naver.me/G5rQsSKv'"><img src="/img/han4.png"></button>
+        <button onclick="location.href='https://naver.me/GhENX2nP'"><img src="/img/han5.png"></button>
+        <button onclick="location.href='https://naver.me/xyUltbwv'"><img src="/img/han6.png"></button>
+        <button onclick="location.href='https://naver.me/xaPgrlj4'"><img src="/img/han7.png"></button>
+    </div>
+
+    <div class="info">
+        shift 버튼을 누르고 마우스 휠을 움직여보세요.
+    </div>
+
+    <!-- 밤 -->
+    <div class="night__title">
+        한국의 멋. <br>
+        기간한정으로 즐기기.
+    </div>
+    <div class="night__second__title">
+        어두울수록 빛나는 고궁에서 <br>
+        옛 아름다움을 느껴보세요.
+    </div>
+    <div class="night__third__title">
+        포스터를 클릭하면<br>
+        예매사이트로 이동합니다.
+    </div>
+    <button onclick="location.href= 'https://ticket.11st.co.kr/Product/Detail?id=267448&prdNo=5626407961'" class="poster">
+    </button>
+</div>
+</body>
+</html>

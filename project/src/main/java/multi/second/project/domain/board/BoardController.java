@@ -34,7 +34,12 @@ import multi.second.project.infra.util.file.dto.FilePathDto;
 public class BoardController {
 
 	private final BoardService boardService;
-	
+
+	@GetMapping("home")
+	public String boardHome() {
+
+		return "/board/home";
+	}
 	@GetMapping("form")
 	public String boardForm() {
 		return "/board/board-form";

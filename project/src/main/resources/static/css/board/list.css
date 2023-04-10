@@ -1,0 +1,220 @@
+html {
+
+    margin: 0;
+    padding: 0;
+
+
+    font-family: 'Pretendard';
+}
+
+/* 웹폰트 */
+@font-face {
+
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+header {
+
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: 16px;
+    !important;
+}
+
+.btn__write {
+
+    /* Dark Mode=True, Type=Primary */
+
+
+    /* Auto layout */
+
+    margin-left: 1020px;
+    margin-bottom: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px;
+    gap: 10px;
+
+    width: 84px;
+    height: 25px;
+
+    background: linear-gradient(180deg, #1568E5 0%, #155CCC 100%);
+    box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.5), inset 0px 0.5px 0px rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-size: 12px;
+    color: white;
+    text-decoration: none;
+}
+
+table {
+
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-size: 18px;
+    color: #1C1C1E;
+    !important;
+}
+
+table a, table:hover, table:focus {
+
+    text-decoration: none;
+    color: #1C1C1E;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.pagination li {
+
+    border: 1px solid #1C1C1E;
+
+    text-align: center;
+
+    width: 30px;
+    height: 30px;
+
+    padding: 2px;
+    border-radius: 50%;
+    margin: 0 2px;
+
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-size: 16px;
+    color: #1C1C1E;
+}
+
+.pagination a {
+
+    text-decoration: none;
+    color: #1C1C1E;
+}
+
+.txt__title {
+
+    font-family: 'Pretendard';
+    font-weight: 700;
+    font-size: 50px;
+    color: #1C1C1E;
+}
+
+.txt__second__title {
+
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-size: 30px;
+    color: #1C1C1E;
+}
+
+.wrapper__recommend, .wrapper__top {
+
+     display: flex;
+     width: 100%;
+     height: 340px;
+     overflow-x: auto;
+
+     margin-top: 25px;
+}
+
+.wrapper__top {
+
+    display: flex;
+    width: 100%;
+    height: 280px;
+    overflow-x: auto;
+
+    margin-top: 25px;
+}
+
+.wrapper__recommend img {
+
+    width: 245px;
+    height: 320px;
+}
+
+.modal-header {
+
+    font-family: 'Pretendard';
+    font-weight: 700;
+    font-size: 40px;
+    color: #1C1C1E;
+}
+
+.modal-footer {
+
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: 20px;
+    color: white;
+}
+
+.modal-body {
+
+    padding: 40px 20px 40px 20px;
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-size: 20px;
+    color: #1C1C1E;
+}
+
+.tit {
+
+    font-family: 'Pretendard';
+    font-weight: 700;
+    font-size: 40px;
+    color: #1C1C1E;
+}
+
+.warning {
+
+    padding: 0 20px 10px;
+    margin-bottom: 20px;
+}
+
+.warning li {
+
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-size: 24px;
+    color: #1C1C1E;
+}
+
+footer {
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: 22px;
+    color: #1C1C1E;
+}
+
+.wrapper__tool, .wrapper__github {
+
+    display: flex;
+    flex-direction: row;
+}
+
+.wrapper__tool img, .wrapper__github img{
+
+    margin: 30px;
+}
