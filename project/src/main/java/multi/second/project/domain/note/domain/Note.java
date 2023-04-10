@@ -28,19 +28,9 @@ public class Note {
 	@GeneratedValue
 	private Long ntIdx;
 	
-	//나
-//	@ManyToOne
-//	@JoinColumn(name = "userId")
-//	private Member member;
-	
-	//상대방
-//	@OneToOne
-//	@JoinColumn(name = "userId")
-//	private Member member2;
-	
-	@OneToMany(fetch = FetchType.EAGER)
-	private List<Partner> partners = new ArrayList<>();
-	
+//	@OneToMany(fetch = FetchType.EAGER)
+//	private List<Partner> partners = new ArrayList<>();
+//
 	@OneToMany(cascade = CascadeType.ALL)
 	@Builder.Default
 	private List<Message> messages = new ArrayList<>();
@@ -57,7 +47,4 @@ public class Note {
 	@ColumnDefault("false")
 	private Boolean isDel;
 
-	public void addPartner(Partner partner) {
-		partners.add(partner);
-	}
 }

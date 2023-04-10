@@ -26,27 +26,27 @@ public class NoteControllerTest {
     private MemberRepository memberRepository;
 
 
-    @Test
-    public void testPartnerUpload(){
-//
-//        Member me = memberRepository.findById("guswnd1212").get();
-//        Member you = memberRepository.findById("guswnd1380").get();
-        //System.out.println("me : "+me);
-        Note note = Note.builder().build();
-        noteRepository.save(note);
-
-//        Partner partner1 = Partner.builder().member(me).build();
-
-//        partnerRepository.save(partner1);
-//
-//        note.addPartner(partner1);
-
-//        Partner partner2 = Partner.builder().member(you).build();
-//        partnerRepository.save(partner2);
-     //   note.addPartner(partner2);
+//    @Test
+//    public void testPartnerUpload(){
+////
+////        Member me = memberRepository.findById("guswnd1212").get();
+////        Member you = memberRepository.findById("guswnd1380").get();
+//        //System.out.println("me : "+me);
+//        Note note = Note.builder().build();
 //        noteRepository.save(note);
-
-    }
+//
+////        Partner partner1 = Partner.builder().member(me).build();
+//
+////        partnerRepository.save(partner1);
+////
+////        note.addPartner(partner1);
+//
+////        Partner partner2 = Partner.builder().member(you).build();
+////        partnerRepository.save(partner2);
+//     //   note.addPartner(partner2);
+////        noteRepository.save(note);
+//
+//    }
 
     @Test
     public void testPartnerAdd(){
