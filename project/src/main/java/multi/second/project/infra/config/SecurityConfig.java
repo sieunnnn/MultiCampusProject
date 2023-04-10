@@ -45,7 +45,7 @@ public class SecurityConfig {
 				.antMatchers(HttpMethod.POST, "/mail").permitAll()
 				.antMatchers(HttpMethod.GET, "/profile", "/profile/download").permitAll()
 				.antMatchers(HttpMethod.GET, "/", "/download").permitAll()
-				.antMatchers(HttpMethod.GET,"/board/list", "/board/detail", "/board/download").permitAll()
+				.antMatchers(HttpMethod.GET,"/board/home", "/board/list", "/board/detail", "/board/download").permitAll()
 				.antMatchers(HttpMethod.GET,"/gallery/list", "/gallery/detail").permitAll()
 				.antMatchers(HttpMethod.GET, "/admin").hasAuthority("ROLE_ADMIN")
 				.anyRequest().authenticated();
