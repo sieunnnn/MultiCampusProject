@@ -30,7 +30,7 @@ public class Note {
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private Member member;
-
+	//게스트??
 	private String guest;
 
 	//상대방
