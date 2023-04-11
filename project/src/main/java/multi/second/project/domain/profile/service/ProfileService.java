@@ -49,7 +49,7 @@ public class ProfileService {
         Profile profile = profileRepository.findProfileByMemberUserId(userId);
         System.out.println("profile :" +profile);
         if(profile == null){
-        	Member member = memberRepository.findById("admin").get();
+        	Member member = memberRepository.findById(userId).get();
             profile = Profile.builder().member(member).build();
             profileRepository.save(profile);
         }
