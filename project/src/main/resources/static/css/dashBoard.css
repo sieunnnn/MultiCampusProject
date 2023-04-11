@@ -1,0 +1,12 @@
+.background {
+    display: flex;
+
+    width: 93%;
+    height: 87%;
+}
+
+.background img {
+
+    width: 100%;
+    height: 100%;
+}
