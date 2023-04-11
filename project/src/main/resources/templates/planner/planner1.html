@@ -92,8 +92,8 @@
                                         <input type="hidden" th:value="${#authentication.name}" name="userId" id="user" class ="chat"/>
                                     </div>
                                     <div>
-                                        <button onclick="sendChat()"  class ="chat" style="width: 40px; height: 30px">
-                                            <img style="height: 25px; width: 25px; margin: 4px 5px 0 0; padding: 0" src="/img/btn_send_message.png">
+                                        <button onclick="sendChat()"  class ="chat" style="width: 40px; height: 32px">
+                                            <img style="height: 25px; width: 25px; margin: 6px 5px 0 0; padding: 0" src="/img/btn_send_message.png">
                                         </button>
                                     </div>
                                 </div>
@@ -260,14 +260,7 @@
                         </div>
 
                         <div class="wrapper__summary">
-
-                            <!-- 총 예산 내역 (table)-->
-                            <div class="summary">
-                            </div>
-
-                            <!-- 세부 내역 (table)-->
-                            <div class="details">
-                            </div>
+                            <img src="/img/budgetImg.png">
                         </div>
                     </div>
 
@@ -3290,7 +3283,7 @@
                         		let groupsearchResponse = document.getElementById("groupsearchResponse");
                         		let user = document.createElement("div");
                         		user.id = "user"+i;
-                        		user.className = "groupsearch";
+                        		user.className = "user__list";
                         		user.dataset.userId = res.msg[i].userId;
                         		user.innerHTML= res.msg[i].userId;
 

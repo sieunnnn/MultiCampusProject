@@ -32,7 +32,7 @@ public class DashboardController {
 		Profile profile = profileService.getProfileData(UserPrincipal.getUserPrincipal().getPrincipal().getUserId());
 		model.addAttribute("profile", profile);
 
-		return "main_layout";
+		return "dashBoard";
 	}
 
 	@GetMapping("download")

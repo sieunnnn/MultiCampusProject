@@ -16,6 +16,11 @@
     display: none;
 }
 
+button {
+
+    cursor: grab;
+}
+
 input {
 
     box-sizing: border-box;
@@ -403,6 +408,13 @@ label {
     /* Note: backdrop-filter has minimal browser support */
 
     border-radius: 16px;
+}
+
+.wrapper__summary img {
+
+    margin: 40px 0 0 20px;
+    width: 85%;
+    height: auto;
 }
 
 
@@ -1011,4 +1023,23 @@ label {
 
     display: flex;
     flex-direction: row;
+}
+
+.user__list {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    margin: 0px 20px 0px 20px;
+    padding: 15px 10px 15px 10px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-size: 20px;
+    font-weight: 500;
+
+    border-bottom: 1px solid gray;
+
+    color: #1C1C1E;
 }
