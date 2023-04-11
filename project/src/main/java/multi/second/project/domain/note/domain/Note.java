@@ -31,7 +31,7 @@ public class Note {
 	//나
 	@ManyToOne
 	@JoinColumn(name = "userId")
-	private Member member;
+	private Member host;
 
 	private String guest;
 
@@ -59,17 +59,23 @@ public class Note {
 	@ColumnDefault("false")
 	private Boolean isDel;
 
-		public static Note createNote(NoteRegistRequest dto, Member member) {
+		public static Note createNote(NoteRegistRequest dto,Member host) {
 
 			return Note.builder()
-					.member(member)
+					.host(host)
 					.guest(dto.getGuest())
 					.build();
 	}
+
+
 
 //	public void addPartner(Partner partner) {
 //		partners.add(partner);
 //
 //	}
 
+
+
+	//@JoinColumn(name = "userId")에서 userId는 연결하려는 외래 키를 가진 테이블(여기서는 Note 테이블)에서 참조하려는 대상 테이블(여기서는 Member 테이블)의 컬럼명을 의미합니다.
+	// 따라서 userId 컬럼은 Member 테이블의 컬럼 중 하나여야 합니다.
 }
