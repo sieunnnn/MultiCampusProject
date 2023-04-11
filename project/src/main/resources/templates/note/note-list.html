@@ -59,9 +59,9 @@
                 <h3>Chat Rooms:</h3>
             </div>
             <ul>
-                 <span th:each="note : ${noteList}">
+              <span th:each="note : ${noteList}">
                     <li>
-                        <a th:href="@{/note/{ntIdx}(ntIdx=${note.ntIdx})}">
+                        <a th:href="'/note/' + ${note.ntIdx}" onclick="window.open(this.href, 'popup', 'width=600,height=600'); return false;">
                             <span th:text="${note.guest} + '와의 쪽지입니다'"></span>
                         </a>
                     </li>
