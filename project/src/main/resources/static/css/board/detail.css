@@ -1,0 +1,128 @@
+html {
+
+    margin: 0;
+    padding: 0;
+
+
+    font-family: 'Pretendard';
+}
+
+/* 웹폰트 */
+@font-face {
+
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.info {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: center;
+    vertical-align: center;
+
+    font-family: 'Pretendard';
+    font-size: 24px;
+    color: #1C1C1E;
+}
+
+.category {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 10px 0 10px;
+
+    width: auto;
+    height: 30px;
+
+    /* Material Dark/Material */
+
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.63), rgba(0, 0, 0, 0.63)), rgba(255, 255, 255, 0.35);
+    /* Material Dark/Material */
+
+    backdrop-filter: blur(40px);
+    /* Note: backdrop-filter has minimal browser support */
+
+    border-radius: 16px;
+
+
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-size: 14px;
+    color: white;
+}
+
+.wrapper__file {
+
+    margin-bottom: 100px;
+}
+
+.article_content {
+
+    padding: 50px;
+
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-size: 26px;
+    color: #1E1E1C;
+}
+
+.btn_section, .wrapper__form {
+
+    display: flex;
+    flex-direction: row;
+}
+
+.btn_section button, .btn_section button:focus {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3px 14px;
+    gap: 10px;
+
+    width: 84px;
+    height: 30px;
+
+    background: linear-gradient(180deg, #1568E5 0%, #155CCC 100%);
+    box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.5), inset 0px 0.5px 0px rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
+
+
+    border: none;
+
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: 16px;
+    color: white;
+}
+
+.wrapper__form  button, .wrapper__form button:focus {
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 3px 27px;
+    gap: 10px;
+
+    width: 84px;
+    height: 30px;
+
+    background: #FFFFFF;
+    border: 0.5px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: 16px;
+    color: #1E1E1C;
+}

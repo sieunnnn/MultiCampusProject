@@ -19,7 +19,9 @@
 			</div>
 
 			<!-- 알람 리스트 -->
-			<div class="wrapper__list"></div>
+			<div class="wrapper__list">
+				<img style="width: 90%; height: 80%; margin: 20px 0 0 15px" src="/img/notification.png">
+			</div>
 		</div>
 		<div class="txt__Bookmark">즐겨찾기</div>
 		<div class="wrapper__bookmark">
@@ -27,15 +29,23 @@
 		</div>
 		<div class="txt__advertise">광고</div>
 		<div class="wrapper__advertise">
-			<div id="Ad1"></div>
-			<div id="Ad2"></div>
-			<div id="Ad3"></div>
+			<a href="https://triple.guide/" id="Ad1">
+				<img style="width: 100%; height: 100%; border-radius: 10px" src="/img/ad1.png">
+			</a>
+			<a href="https://www.skyscanner.co.kr/" id="Ad2">
+				<img style="width: 100%; height: 100%; border-radius: 10px" src="/img/ad2.png">
+			</a>
+			<a href="https://yanolja.in/" id="Ad3">
+				<img style="width: 100%; height: 100%; border-radius: 10px" src="/img/ad3.png">
+			</a>
 		</div>
 	</div>
 
 	<div class="wrapper__gallery">
 		<div class="wrapper__gallery__head">
-			<div class="user__profile__pic"></div>
+			<div class="user__profile__pic">
+				<img th:src="@{/profile/download(pfIdx=${profile?.pfIdx})}">
+			</div>
 		</div>
 		<div layout:fragment="gallery__content"></div>
 	</div>

@@ -74,7 +74,7 @@ nav {
 }
 
 
-.wrapper__btn__profile {
+.wrapper__btn__profile img{
 
     display: flex;
     align-items: center;
@@ -88,6 +88,8 @@ nav {
 
     margin-top: 77px;
     margin-bottom: 7px;
+
+    !important;
 }
 
 

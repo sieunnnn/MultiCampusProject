@@ -10,10 +10,10 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class MvcConfiguration implements WebMvcConfigurer {
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**")
-                .addResourceLocations("classpath:/templates/", "classpath:/static/")
-                .setCacheControl(CacheControl.maxAge(10, TimeUnit.MINUTES));
-    }
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/**")
+//                .addResourceLocations("classpath:/templates/", "classpath:/static/")
+//                .setCacheControl(CacheControl.maxAge(10, TimeUnit.MINUTES));
+//    }
 }

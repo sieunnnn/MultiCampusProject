@@ -18,19 +18,23 @@
     <div class="container">
         <div class="popup-wrap" id="popup">
             <div class="popup">
+
                 <div class="popup-head">
                     <span class="head-title">프로필 변경</span>
                 </div>
+                <form method="post" th:action="@{/profile/saveImg}" enctype="multipart/form-data">
+                
+                
                 <div class="popup-body">
                     <div class="body-content">
                         <div class="body-titlebox">
-                            <h1>사진 업로드</h1>
+                            사진 업로드
                         </div>
                         <div class="body-contentbox">
                             <div class="file-container">
                                 <div class="image-upload" id="image-upload">
 
-                                    <form method="post" action="/profile/saveImg" enctype="multipart/form-data">
+                                    
                                         <!--                                        <div class="button">-->
                                         <!--                                            <label for="chooseFile">-->
                                         <!--                                                사진찾기-->
@@ -41,7 +45,6 @@
 
                                         <div class="fileContainer">
                                             <div class="fileInput">
-                                                <p id="fileNameLabel">FILE NAME: </p>
                                                 <p id="fileName"></p>
                                             </div>
                                             <div class="buttonContainer">
@@ -53,7 +56,7 @@
                                             </div>
                                         </div>
                                         <input type="file" id="chooseFile" name="chooseFile" accept="image/*" onchange="loadFile(this)">
-                                    </form>
+                                   
                                 </div>
 
                                 <!--                                <div class="image-show" id="image-show"></div>-->
@@ -61,10 +64,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="popup-foot">
-                    <span class="pop-btn confirm" id="confirm">확인</span>
-                    <span class="pop-btn close" id="close">창 닫기</span>
-                </div>
+                <div class="btn_section">
+					<button id="confirm"><span>전송</span></button>
+                    <button id="close"><span>창 닫기</span></button>
+				</div>
+                </form>
             </div>
         </div>
     </div>
@@ -75,12 +79,13 @@
 
         <div class="container__profile">
             <div class="txt__welcome">
-                <span th:text="${data}">message</span>
-                <span>님 안녕하세요!</span>
+                [[${profile.member.userId}]] 님 안녕하세요!
             </div>
 
             <!-- 클릭 하면 유저 사진 바꿀수 있는 팝업창 생성 -->
-            <button id="image-show" class="wrapper__user__pic" onclick="modalOpen();"><img id="newImage" th:src="${imageUrl}"></button>
+            <button id="image-show" class="wrapper__user__pic" onclick="modalOpen();">
+                <img id="newImage" th:src="@{/profile/download(pfIdx=${profile.pfIdx})}">
+            </button>
             <!--            <div>-->
             <!--                <button class="button__modify">수정</button>-->
             <!--            </div>-->
@@ -93,13 +98,11 @@
             <div class="wrapper__profile__btn">
             
              	<form th:action="@{/planner/other-list}" method="get">
- 	 				<input type="text" th:value="group1B" name="profileId"/>
-	 				<button class="btn__travel1"><span>님의 여행 일정</span></button>
+	 				<button class="btn__travel1"><span>[[${profile.member.userId}]] 님의 여행 일정</span></button>
  				</form>
- 				<form th:action="@{/planner/list}" method="get">
- 					<input type="hidden" th:value="${#authentication.name}" name="userId"/> 
-                	<button class="btn__travel2">님의 이전 여행</button>
-                </form>
+ 				
+                <button class="btn__travel2">[[${profile.member.userId}]] 님의 이전 여행</button>
+                
             </div>
         </div>
     </div>

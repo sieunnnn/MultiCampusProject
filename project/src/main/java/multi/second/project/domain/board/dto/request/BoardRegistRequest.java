@@ -4,6 +4,7 @@ import javax.validation.constraints.NotEmpty;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import multi.second.project.domain.board.domain.BoardCategory;
 
 @Data
 @NoArgsConstructor
@@ -16,5 +17,7 @@ public class BoardRegistRequest {
 	
 	@NotEmpty
 	private String content;
+	
+	private String boardCategory;
 	
 }

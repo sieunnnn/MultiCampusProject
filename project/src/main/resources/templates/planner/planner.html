@@ -21,7 +21,7 @@
         <div class="container__planner">
 
             <div style="display:none;" th:each="group : ${planner.travelGroup.participants}">
-                <p th:text="${group.member.userId}">
+                <div th:text="${group.member.userId}">
             </div>
 
             <!-- 타이틀 -->
@@ -36,15 +36,6 @@
 
                 <!-- 같이 여행가는 친구들 -->
                 <div class="wrapper__friends">
-
-                    <div class="profile">
-                        <img style="width:60px; height: 60px" src="/img/btn_profile.png">
-                    </div>
-
-                    <div class="profile">
-                        <img style="width:60px; height: 60px" src="/img/btn_profile.png">
-                    </div>
-
                 </div>
 
                 <!-- 메뉴 -->

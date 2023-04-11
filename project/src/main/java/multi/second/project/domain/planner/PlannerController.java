@@ -1,9 +1,15 @@
 package multi.second.project.domain.planner;
 
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
 
+import multi.second.project.domain.member.domain.Member;
+import multi.second.project.domain.planner.domain.Participant;
+import multi.second.project.domain.profile.domain.Profile;
+import multi.second.project.domain.profile.dto.request.ProfileModifyRequest;
+import multi.second.project.domain.profile.service.ProfileService;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -35,6 +41,7 @@ import multi.second.project.domain.member.UserPrincipal;
 import multi.second.project.domain.member.dto.Principal;
 import multi.second.project.domain.planner.domain.Planner;
 import multi.second.project.domain.planner.dto.request.PlannerGroupModifyRequest;
+import multi.second.project.domain.planner.dto.request.PlannerGroupSearchRequest;
 import multi.second.project.domain.planner.dto.request.PlannerHostModifyRequest;
 import multi.second.project.domain.planner.dto.request.PlannerPrivateModifyRequest;
 import multi.second.project.domain.planner.dto.request.PlannerRegistRequest;
@@ -50,11 +57,7 @@ public class PlannerController {
 	private final PlannerService plannerService;
 	private final SimpMessagingTemplate simpMessagingTemplate;
 
-	//테스트용?
-	@GetMapping("planner")
-    public String planner() {
-        return "planner/planner";
-    }
+	private final ProfileService profileService;
 	
 	//planner 리스트 뷰
 	@GetMapping("list")
@@ -66,6 +69,9 @@ public class PlannerController {
 		
 		Map<String, Object> commandMap = plannerService.findPlannerListByUserId(UserPrincipal.getUserPrincipal().getPrincipal().getUserId(),pageable);
 		model.addAllAttributes(commandMap);
+
+		Profile profile = profileService.getProfileData(UserPrincipal.getUserPrincipal().getPrincipal().getUserId());
+		model.addAttribute("profile", profile);
 		
 		return "/planner/list";
 	}
@@ -84,8 +90,11 @@ public class PlannerController {
 		//-> 어떻게 할까? 일단 백앤드에서 예외처리를하자 그룹인원이 아니면 권한없다고 하도록
 		Map<String, Object> commandMap = plannerService.findPlannerListByUserId(profileId,pageable);
 		model.addAllAttributes(commandMap);
+
+		Profile profile = profileService.getProfileData(UserPrincipal.getUserPrincipal().getPrincipal().getUserId());
+		model.addAttribute("profile", profile);
 		
-		return "/planner/planner-list";
+		return "/planner/list";
 	}
 	
 	//planner추가
@@ -95,6 +104,7 @@ public class PlannerController {
 		
 		dto.setUserId(UserPrincipal.getUserPrincipal().getUserId());
 		plannerService.createPlanner(dto);
+
 		
 		return "redirect:/planner/list";
 	}
@@ -113,10 +123,17 @@ public class PlannerController {
 	public String plannerDetail(Long tpIdx, Model model) {
 		
 		PlannerDetailResponse dto = plannerService.findPlannerBytpIdx(tpIdx);
+
 		model.addAttribute("planner", dto);
-		
+
+		Member member = new Member();
+
+		Profile profile = profileService.getProfileData(UserPrincipal.getUserPrincipal().getPrincipal().getUserId());
+		model.addAttribute("profile", profile);
+
 		return "/planner/planner1";
 	}
+
 	
 	
 	//planner 이름 변경(host가 변경가능)
@@ -166,6 +183,15 @@ public class PlannerController {
 					Map.of("type","add-group","msg",plannerService.addPlannerGroup(dto, tpIdx)));
 		
 	}
+		//planner 공유할 인원 검색 
+		@MessageMapping("/search-group/{tpIdx}")
+		public void searchGroup(
+				@DestinationVariable("tpIdx") Long tpIdx,
+				PlannerGroupSearchRequest dto) throws Exception {
+			simpMessagingTemplate.convertAndSend("/topic/planner-message/" + tpIdx, 
+					Map.of("type","search-group","msg",plannerService.searchPlannerGroup(dto)));
+		
+	}
 	
 	//planner 공유인원 추방? 필요한가?
 
@@ -175,8 +201,8 @@ public class PlannerController {
 
 		return "planner/weather";
 	}
-	
-	
+
+
 
     
 //	private final PlannerService galleryService;
