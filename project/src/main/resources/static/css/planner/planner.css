@@ -186,11 +186,13 @@ label {
 /* 투두 내용 */
 .todo__txt {
 
-    margin: 10px;
+    padding: 10px;
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
+
+    white-space: normal;
 
     color: #1C1C1E;
 }
@@ -775,7 +777,7 @@ label {
     font-weight: 400;
     font-size: 14px;
 
-    color: white;
+    color: #1E1E1C;
 }
 
 .chat__other__tail {
