@@ -42,17 +42,19 @@ public class MessageController {
         Map<String, Object> commandMap = messageService.findMessageListByNoteNtIdx(ntIdx, pageable);
         model.addAllAttributes(commandMap);
 
-        return "message/message-list";
+        return "note/note-detail?{ntIdx}=";
     }
 
-    @PostMapping("/{ntIdx}/write")
+    @PostMapping("/{ntIdx}/")
     public String writeMessage(
             @PathVariable("ntIdx") Long ntIdx,
             MessageRegistRequest dto
     ) {
         Member member = memberRepository.findById(dto.getUserId()).get();
         messageService.createMessage(dto, member, ntIdx);
-        return "redirect:/message/" + ntIdx;
+        return "redirect:/note-detail/" + ntIdx;
     }
+
+
 
 }

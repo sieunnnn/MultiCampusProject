@@ -28,6 +28,9 @@ public class MessageListResponse {
 
     private LocalDateTime regDate;
 
+//    private Long msIdx;
+//    private String content;
+
     public MessageListResponse(Message message) {
         this.msIdx = message.getMsIdx();
         this.userId = message.getMember().getUserId();
@@ -36,6 +39,10 @@ public class MessageListResponse {
         this.regDate = message.getRegDate();
     }
 
+
+//    public static List<MessageListResponse> toDtoList(List<Message> entityList){
+//        return entityList.stream().map(e -> new MessageListResponse(e.getMsIdx(), e.getContent())).collect(toList());
+//    }
     public static List<MessageListResponse> toDtoList(List<Message> entityList) {
         return entityList.stream().map(e -> new MessageListResponse(e)).collect(toList());
 

@@ -57,6 +57,16 @@ public class Message {
 				.build();
 	}
 
+	public void updateMessage(MessageRegistRequest dto) {
+		this.content = dto.getContent();
+	}
+
+	public void deleteMessage() {
+		this.isDel = true;
+	}
+
+
+
 //	public void addFile(FilePath filePath) {
 //		this.files.add(filePath);
 //	}

@@ -36,6 +36,17 @@ import java.util.Map;
             message.setNote(Note.builder().ntIdx(ntIdx).build());
             messageRepository.save(message);
         }
+
+
+        public void updateMessage(Long msIdx, MessageRegistRequest dto) {
+            Message message = messageRepository.findById(msIdx).orElseThrow(() -> new IllegalArgumentException("Invalid message id"));
+            message.updateMessage(dto);
+        }
+
+        public void deleteMessage(Long msIdx) {
+            Message message = messageRepository.findById(msIdx).orElseThrow(() -> new IllegalArgumentException("Invalid message id"));
+            message.deleteMessage();
+        }
     }
 
 

@@ -69,12 +69,8 @@ public class MemberController {
 		}
 		
 		session.setAttribute("signupForm", form);
-		System.out.println("@PostMapping(\"signup\") form :  "+form);
-		
 		String authToken = UUID.randomUUID().toString();
 		session.setAttribute("authToken", authToken);
-		System.out.println("@PostMapping(\"signup\") authToken :  "+authToken);
-		
 		memberService.authenticateEmail(form, authToken);
 		return "redirect:/member/signup";
 	}
