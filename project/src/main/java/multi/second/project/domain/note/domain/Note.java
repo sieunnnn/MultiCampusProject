@@ -31,17 +31,18 @@ public class Note {
 	//나
 	@ManyToOne
 	@JoinColumn(name = "userId")
-	private Member host;
+	private Member member;
 
-	private String guest;
+//	private String guest;
 
 	//상대방
 //	@OneToOne
 //	@JoinColumn(name = "userId")
 //	private Member member2;
 
-//	@OneToMany(fetch = FetchType.EAGER)
-//	private List<Partner> partners = new ArrayList<>();
+//	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//  @Builder.Default
+//	private Partner partner;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@Builder.Default
@@ -59,11 +60,11 @@ public class Note {
 	@ColumnDefault("false")
 	private Boolean isDel;
 
-		public static Note createNote(NoteRegistRequest dto,Member host) {
+		public static Note createNote(NoteRegistRequest dto, Member member) {
 
 			return Note.builder()
-					.host(host)
-					.guest(dto.getGuest())
+					.member(member)
+				//	.guest(dto.getGuest())
 					.build();
 	}
 

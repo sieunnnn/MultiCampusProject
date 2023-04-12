@@ -20,7 +20,7 @@ public class NoteListResponse {
     //    private String lastMassage;
     public NoteListResponse(Note note) {
         this.ntIdx = note.getNtIdx();
-        this.guest = note.getGuest();
+     //   this.guest = note.getGuest();
     }
 
     public static List<NoteListResponse> toDtoList(List<Note> entityList){

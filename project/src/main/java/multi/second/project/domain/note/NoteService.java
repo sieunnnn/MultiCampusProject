@@ -37,7 +37,7 @@ public class NoteService {
     }
 
     @Transactional
-    public void uploadNote(NoteRegistRequest dto) {
+    public void createNote(NoteRegistRequest dto) {
         Member host = memberRepository.findById(dto.getHost()).get();
         Note note = Note.createNote(dto, host);
 
