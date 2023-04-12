@@ -5,7 +5,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns="http://www.w3.org/1999/html"
-      layout:decorate="gallery/common">
+      layout:decorate="~{gallery/common}">
 
 <head>
     <title>Detail</title>
@@ -94,7 +94,9 @@
                             <div th:if="${comment.userId eq #authentication.name}">
                                 <img style="width: 70px; height: 70px; border-radius: 50%" th:src="@{/profile/download(pfIdx=${profile?.pfIdx})}">
                             </div>
-                            <div th:unless="${comment.userId eq #authentication.name}">[[${comment.userId}]]</div>
+                            <div th:unless="${comment.userId eq #authentication.name}">
+                                <img style="width: 70px; height: 70px; border-radius: 50%" th:src="@{/profile/other-download(otherId=${comment.userId})}">
+                            </div>
                         </div>
 
                         <!-- 댓글 겸 댓글 수정창 나오는 버튼 -->
@@ -106,7 +108,11 @@
                         <form th:action="@{/comment/remove}" method="post" >
                             <input type="hidden" th:value="${comment.cmIdx}" name="cmIdx"/>
                             <input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/>
-                            <button class="btn__comment__white" id="btnDel" style="margin: 20px 24px 0 0;">삭제</button>
+                            <div th:if="${comment.userId eq #authentication.name}">
+                            	<button class="btn__comment__white" id="btnDel" style="margin: 20px 24px 0 0;">삭제</button>
+                            </div>
+                            <div th:unless="${comment.userId eq #authentication.name}">
+                            </div>
                         </form>
                     </div>
 

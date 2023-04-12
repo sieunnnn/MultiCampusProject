@@ -70,6 +70,8 @@ public class PlannerController {
 		Map<String, Object> commandMap = plannerService.findPlannerListByUserId(UserPrincipal.getUserPrincipal().getPrincipal().getUserId(),pageable);
 		model.addAllAttributes(commandMap);
 
+		model.addAttribute("user", UserPrincipal.getUserPrincipal().getPrincipal().getUserId());
+		
 		Profile profile = profileService.getProfileData(UserPrincipal.getUserPrincipal().getPrincipal().getUserId());
 		model.addAttribute("profile", profile);
 		
@@ -90,6 +92,8 @@ public class PlannerController {
 		//-> 어떻게 할까? 일단 백앤드에서 예외처리를하자 그룹인원이 아니면 권한없다고 하도록
 		Map<String, Object> commandMap = plannerService.findPlannerListByUserId(profileId,pageable);
 		model.addAllAttributes(commandMap);
+		
+		model.addAttribute("user", profileId);
 
 		Profile profile = profileService.getProfileData(UserPrincipal.getUserPrincipal().getPrincipal().getUserId());
 		model.addAttribute("profile", profile);

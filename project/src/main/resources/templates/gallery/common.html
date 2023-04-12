@@ -44,7 +44,7 @@
 	<div class="wrapper__gallery">
 		<div class="wrapper__gallery__head">
 			<div class="user__profile__pic">
-				<img th:src="@{/profile/download(pfIdx=${profile?.pfIdx})}">
+				<img th:src="@{/profile/other-download(otherId=${user})}" onerror="this.src='/img/user.png'">
 			</div>
 		</div>
 		<div layout:fragment="gallery__content"></div>

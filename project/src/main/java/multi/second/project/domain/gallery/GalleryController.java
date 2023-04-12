@@ -78,12 +78,37 @@ public class GalleryController {
 		Map<String, Object> commandMap = galleryService.findGalleryListByUserId(UserPrincipal.getUserPrincipal().getPrincipal().getUserId(),pageable);
 		System.out.println("galleryService.findGalleryListByUserId(principal.getUserId(),pageable) : "+commandMap);
 		model.addAllAttributes(commandMap);
+		
+		model.addAttribute("user", UserPrincipal.getUserPrincipal().getPrincipal().getUserId());
 
 		Profile profile = profileService.getProfileData(UserPrincipal.getUserPrincipal().getPrincipal().getUserId());
 		model.addAttribute("profile", profile);
 
 		return "gallery/list";
 	}
+	
+	
+	//갤러리 리스트 화면
+		@GetMapping("other-gallery")
+		public String otherGalleryList(
+								  @PageableDefault(size=12, sort="postIdx", direction = Direction.DESC, page = 0)
+								  Pageable pageable,
+								  Model model,
+								  String profileId
+
+		) {
+			Map<String, Object> commandMap = galleryService.findGalleryListByUserId(profileId,pageable);
+			System.out.println("galleryService.findGalleryListByUserId(principal.getUserId(),pageable) : "+commandMap);
+			model.addAllAttributes(commandMap);
+			
+			model.addAttribute("user", profileId);
+
+			Profile profile = profileService.getProfileData(UserPrincipal.getUserPrincipal().getPrincipal().getUserId());
+			model.addAttribute("profile", profile);
+
+			return "gallery/list";
+		}
+	
 
 	//갤러리 특정 포스트 방문시
 	@GetMapping("detail")
@@ -151,6 +176,7 @@ public class GalleryController {
 	@GetMapping("modify")
 	public String galleryModify(Long postIdx, Model model) {
 		GalleryDetailResponse dto = galleryService.findGalleryByPostIdx(postIdx);
+		model.addAttribute("user", dto.getUserId());
 		model.addAttribute("gallery", dto);
 		return "gallery/modify";
 

@@ -64,6 +64,22 @@ public class ProfileController {
 
         return "profile/index";
     }
+    
+    //다른사람 프로필 가져올때
+    @GetMapping("other-profile")
+    public String otherProfile(//HttpSession session,
+    		Model model
+    		, String otherId
+    		) throws IOException {
+
+            Profile profile = profileService.getProfileData(otherId);
+            model.addAttribute("profile", profile);
+            String imagePath = "/profile/"+ profile.getImagePath();
+            model.addAttribute("imageUrl", imagePath);
+
+
+        return "profile/index";
+    }
 
 //    @GetMapping("/modify")
 //    public String modify(){
@@ -99,6 +115,22 @@ public class ProfileController {
         //return result.getImagePath();
         return "redirect:/profile/profile";
     }
+    
+    @GetMapping("other-download")
+    public ResponseEntity<FileSystemResource> otherDownloadFile(@RequestParam String otherId){
+
+        ProfileModifyRequest dto = profileService.findImagePathByMemberUserId(otherId);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.setContentDisposition(ContentDisposition.builder("attachment")
+                .filename(dto.getImagePath(), Charset.forName("utf-8"))
+                .build());
+
+        FileSystemResource fsr = new FileSystemResource(dto.getFullPath());
+        return ResponseEntity.ok().headers(headers).body(fsr);
+    }
+    
 
     @GetMapping("download")
     public ResponseEntity<FileSystemResource> downloadFile(@RequestParam Long pfIdx){

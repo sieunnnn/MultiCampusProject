@@ -16,7 +16,7 @@
     <div layout:fragment="content">
         <div class="container__planner_list">
             <div class="title__planner">
-                <div style="margin: 6px 0 6px 0">[[${#authentication.name}]] 님의 여행 기록</div>
+                <div style="margin: 6px 0 6px 0">[[${user}]] 님의 여행 기록</div>
             </div>
 
             <!-- 플래너 상단부분 -->
@@ -24,7 +24,7 @@
                 <!-- 프로필 -->
                 <div class="planner__profile">
                     <div class="wrapper__profile">
-                        <img th:src="@{/profile/download(pfIdx=${profile?.pfIdx})}">
+                        <img th:src="@{/profile/other-download(otherId=${user})}" onerror="this.src='/img/user.png'">
                     </div>
                 </div>
 
@@ -54,11 +54,11 @@
                                 <div th:each="group : ${planner.travelGroup.getParticipants}" class="profile">
 
                                     <div th:if="${profile.member.getUserId()} == ${group.member.getUserId()}">
-                                        <img th:src="@{/profile/download(pfIdx=${profile.pfIdx})}">
+                                        <img th:src="@{/profile/download(pfIdx=${profile.pfIdx})}" onerror="this.src='/img/user.png'">
                                     </div>
 
                                     <div th:unless="${profile.member.getUserId()} == ${group.member.getUserId()}">
-                                        <p>[[${group.member.getUserId()}]]</p>
+                                        <img th:src="@{/profile/other-download(otherId=${group.member.getUserId()})}" onerror="this.src='/img/user.png'">
                                     </div>
                                 </div>
                             </div>

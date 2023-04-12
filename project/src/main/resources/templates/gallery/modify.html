@@ -24,7 +24,7 @@
 
         <!-- 제목 -->
         <div class="wrapper__input__title">
-            <input type="text" name="title" class="input__title" required="required" th:value="${gallery.title}"/>
+            <input type="text" name="title" class="input__title" required="required" th:value="${gallery.title}" placeholder="제목 입력"/>
         </div>
 
         <!-- 제목 밑의 bar -->
@@ -59,7 +59,7 @@
 
             <div class="wrapper__post">
                 <div>
-                    <textarea name="content" required="required"  th:text="${gallery.content}"></textarea>
+                    <textarea name="content" required="required"  th:text="${gallery.content}" placeholder="내용 입력"></textarea>
                 </div>
             </div>
         </div>

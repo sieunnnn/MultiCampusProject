@@ -125,4 +125,11 @@ public class ProfileService {
         return new ProfileModifyRequest(profile);
     }
 
+	public ProfileModifyRequest findImagePathByMemberUserId(String otherId) {
+		// TODO Auto-generated method stub
+		Profile profile = profileRepository.findImagePathByMemberUserId(otherId);
+
+        return new ProfileModifyRequest(profile);
+	}
+
 }

@@ -13,6 +13,8 @@ public interface ProfileRepository  extends JpaRepository<Profile, String> {
     Profile findProfileByMemberUserId(String userId);
 
     Profile findImagePathByPfIdx(Long pfIdx);
+    
+    Profile findImagePathByMemberUserId(String userId);
 
     Profile findByMemberUserId(String userId);
 
