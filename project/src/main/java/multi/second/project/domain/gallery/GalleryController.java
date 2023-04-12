@@ -4,6 +4,8 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
 
+import multi.second.project.domain.profile.domain.Profile;
+import multi.second.project.domain.profile.service.ProfileService;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -36,9 +38,12 @@ public class GalleryController {
 	private final GalleryService galleryService;
 	private final CommentService commentService;
 
+	private final ProfileService profileService;
+
 	//갤러리 포스트 추가 폼
 	@GetMapping("add")
-	public String galleryForm() {
+	public String galleryForm(Model model) {
+		model.addAttribute("user", UserPrincipal.getUserPrincipal().getPrincipal().getUserId());
 		return "gallery/add";
 	}
 
@@ -72,9 +77,37 @@ public class GalleryController {
 		Map<String, Object> commandMap = galleryService.findGalleryListByUserId(UserPrincipal.getUserPrincipal().getPrincipal().getUserId(),pageable);
 		System.out.println("galleryService.findGalleryListByUserId(principal.getUserId(),pageable) : "+commandMap);
 		model.addAllAttributes(commandMap);
+		
+		model.addAttribute("user", UserPrincipal.getUserPrincipal().getPrincipal().getUserId());
+
+		Profile profile = profileService.getProfileData(UserPrincipal.getUserPrincipal().getPrincipal().getUserId());
+		model.addAttribute("profile", profile);
 
 		return "gallery/list";
 	}
+	
+	
+	//갤러리 리스트 화면
+		@GetMapping("other-gallery")
+		public String otherGalleryList(
+								  @PageableDefault(size=12, sort="postIdx", direction = Direction.DESC, page = 0)
+								  Pageable pageable,
+								  Model model,
+								  String profileId
+
+		) {
+			Map<String, Object> commandMap = galleryService.findGalleryListByUserId(profileId,pageable);
+			System.out.println("galleryService.findGalleryListByUserId(principal.getUserId(),pageable) : "+commandMap);
+			model.addAllAttributes(commandMap);
+			
+			model.addAttribute("user", profileId);
+
+			Profile profile = profileService.getProfileData(UserPrincipal.getUserPrincipal().getPrincipal().getUserId());
+			model.addAttribute("profile", profile);
+
+			return "gallery/list";
+		}
+	
 
 	//갤러리 특정 포스트 방문시
 	@GetMapping("detail")
@@ -82,6 +115,11 @@ public class GalleryController {
 		//포스트 번호로 특정 포스트를 찾는다
 		GalleryDetailResponse dto = galleryService.findGalleryByPostIdx(postIdx);
 		model.addAttribute("gallery", dto);
+
+		Profile profile = profileService.getProfileData(UserPrincipal.getUserPrincipal().getPrincipal().getUserId());
+		model.addAttribute("profile", profile);
+		
+		model.addAttribute("user", dto.getUserId());
 
 //		//특정 포스트의 댓글을 가져오는 코드 (확인필요)(필요없을듯)
 //		System.out.println("galleryService.findCommentListByPostIdx(postIdx) :  "+galleryService.findCommentListByPostIdx(postIdx));
@@ -139,8 +177,10 @@ public class GalleryController {
 	@GetMapping("modify")
 	public String galleryModify(Long postIdx, Model model) {
 		GalleryDetailResponse dto = galleryService.findGalleryByPostIdx(postIdx);
+		model.addAttribute("user", dto.getUserId());
 		model.addAttribute("gallery", dto);
 		return "gallery/modify";
+
 	}
 	//갤러리 포스트 수정완료시
 	@PostMapping("modify")

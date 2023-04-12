@@ -15,8 +15,11 @@
 <body>
 <!-- 대체하고 싶은 요소에 layout:fragment 속성을 부여한다. -->
 <div layout:fragment="gallery__content">
-    <div class="wrapper__button">
+    <div class="wrapper__button" th:if="${user} == ${#authentication.name}" >
         <button th:onclick="|location.href='@{/gallery/add}'|" class="btn__blue">글쓰기</button>
+    </div>
+    <div class="wrapper__button" th:unless="${user} == ${#authentication.name}" >
+        <button th:onclick="|location.href='@{/gallery/add}'|" class="btn__blue" style="display: none">글쓰기</button>
     </div>
     <div class="wrapper__photo__list">
         <div class="photo__list">

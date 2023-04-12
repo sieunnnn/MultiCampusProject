@@ -6,8 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import multi.second.project.domain.group.domain.TravelGroup;
 import multi.second.project.domain.group.repository.TravelGroupRepository;
-import multi.second.project.domain.member.MemberRepository;
 import multi.second.project.domain.member.domain.Member;
+import multi.second.project.domain.member.repository.MemberRepository;
 
 @SpringBootTest
 public class TravleGroupServiceTest {

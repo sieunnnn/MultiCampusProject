@@ -1,30 +1,31 @@
 package multi.second.project.domain.member.dto.response;
 
-
+import java.util.List;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import multi.second.project.domain.member.domain.Member;
-import multi.second.project.domain.note.domain.Note;
-import multi.second.project.infra.util.file.dto.FilePathDto;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import static java.util.stream.Collectors.*;
 
 @Data
 @NoArgsConstructor
 public class MemberResponse {
 
-    private String userId;
-    private String email;
-    private String grade;
+	private String userId;
+	private String password;
+	private String email;
+	private String grade;
 
-    public MemberResponse(Member member) {
-        this.userId = member.getUserId();
-        this.email = member.getEmail();
-        this.grade = member.getGrade();
-    }
 
+	public MemberResponse(Member entity) {
+		this.userId = entity.getUserId();
+		this.password = entity.getPassword();
+		this.email = entity.getEmail();
+		this.grade = entity.getGrade();
+	}
+
+	public static List<MemberResponse> toDtoList(List<Member> entityList){
+		return entityList.stream().map(e -> new MemberResponse(e)).collect(toList());
+	}
 
 }

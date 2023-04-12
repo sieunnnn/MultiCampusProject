@@ -16,6 +16,11 @@
     display: none;
 }
 
+button {
+
+    cursor: grab;
+}
+
 input {
 
     box-sizing: border-box;
@@ -99,7 +104,7 @@ select {
     color: #1C1C1E;
 }
 
-.wrapper__date__box button, #addDate button {
+.wrapper__date__box button, #addDate button, .member__search button{
 
     width: 70px;
     height: 28px;
@@ -181,11 +186,13 @@ label {
 /* 투두 내용 */
 .todo__txt {
 
-    margin: 10px;
+    margin-bottom: 5px;
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
+
+    white-space: normal;
 
     color: #1C1C1E;
 }
@@ -260,13 +267,51 @@ label {
 
 }
 
-.profile {
+.profile p, .profile form {
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    overflow-x: auto;
 
     margin: 7px 7px 6px 7px;
     width: 60px;
     height: 60px;
 
     background-color: rgba(0, 0, 0, 0.32);
+    border-radius: 50%;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+
+    color: white;
+
+}
+
+.profile button {
+
+    padding: 0;
+
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+    width: 60px;
+    height: 60px;
+}
+
+.profile__btn {
+
+    margin: 7px 7px 6px 7px;
+    width: 57px;
+    height: 57px;
+
+    background: rgba(0, 0, 0, 0.05);
+    border: 0.5px dashed #303030;
     border-radius: 50%;
 }
 
@@ -300,8 +345,8 @@ label {
 
     width: 1169px;
     height: 710px;
-
-    background-color: green;
+/*
+    background-color: green;*/
 }
 
 .wrapper__plan {
@@ -379,6 +424,13 @@ label {
     border-radius: 16px;
 }
 
+.wrapper__summary img {
+
+    margin: 40px 0 0 20px;
+    width: 85%;
+    height: auto;
+}
+
 
 /* ============================================================ */
 
@@ -398,7 +450,7 @@ label {
     width: 767px;
     height: 665px;
 
-    background-color: blue;
+/*    background-color: blue;*/
 }
 
 .wrapper__planner__list {
@@ -419,7 +471,7 @@ label {
     height: 100%;
 
     overflow-y: scroll;
-    background-color: orange;
+/*    background-color: orange;*/
 }
 
 #date, .date {
@@ -444,7 +496,7 @@ label {
     height: 57px;
     margin: 0 0 20px 13px;
 
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.2);
     border: 0.5px dashed #676767;
     backdrop-filter: blur(40px);
     /* Note: backdrop-filter has minimal browser support */
@@ -559,7 +611,7 @@ label {
     width: 320px;
     height: 436px;
 
-    background-color: #1A71CC;
+/*    background-color: #1A71CC;*/
 }
 
 .chat {
@@ -572,7 +624,34 @@ label {
 
     overflow-y: scroll;
 
-    background-color: orange;
+/*    background-color: orange;*/
+}
+
+.wrapper__chat__me {
+
+    /* Bubble + Tail */
+
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 0px;
+    isolation: isolate;
+
+    width: 180px;
+    height: auto;
+
+    margin-left: 140px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
 }
 
 .chat__me {
@@ -586,43 +665,92 @@ label {
     flex-direction: row;
     align-items: flex-start;
     padding: 6px 12px;
-    margin-left: 20px;
-    margin-bottom: 5px;
 
     width: 180px;
     height: auto;
 
+    white-space: normal;
+
+    overflow: scroll;
+
     background: #448AF7;
     border-radius: 18px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 1;
+    z-index: 0;
+
 
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 14px;
 
     color: white;
 }
 
+.chat__me__tail {
+
+    /* Tail */
+
+
+    /* Auto layout */
+
+    position: relative;
+    right: 14px;
+    top: 2px;
+
+    width: 16.42px;
+    height: 20.32px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    z-index: 1;
+}
+
 .me__id {
 
-    margin: 10px 20px 5px 22px;
+    margin: 10px 20px 5px 105px;
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 500;
-    font-size: 24px;
+    font-size: 16px;
 
     color: #1E1E1C;
 }
 
-.other__id {
+.wrapper__chat__other {
 
-    margin: 10px 22px 5px 222px;
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 24px;
+    /* Bubble + Tail */
 
-    color: #1E1E1C;
+
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 0px;
+    isolation: isolate;
+
+    width: 180px;
+    height: auto;
+
+    margin-left: 60px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
 }
 
 .chat__other {
@@ -631,14 +759,18 @@ label {
 
 
     /* Auto layout */
+
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
+    align-items: flex-start;
     padding: 6px 12px;
-    margin: 0 20px 5px 100px;
 
     width: 180px;
     height: auto;
+
+    white-space: normal;
+
+    overflow: scroll;
 
     background: #E9E9EB;
     border-radius: 18px;
@@ -651,12 +783,46 @@ label {
     flex-grow: 1;
     z-index: 0;
 
+
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 14px;
 
-    color: #1C1C1E;
+    color: #1E1E1C;
+}
+
+.chat__other__tail {
+
+    /* Tail */
+
+
+    /* Auto layout */
+
+    position: relative;
+    right: 207px;
+    top: 2px;
+
+    width: 16.42px;
+    height: 20.32px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    z-index: 1;
+}
+
+.other__id {
+
+    margin: 10px 20px 5px 23px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+
+    color: #1E1E1C;
 }
 
 .wrapper__message__input {
@@ -851,7 +1017,6 @@ label {
     width: 100%;
     height: 456px;
 
-    background-color: #1A71CC;
 }
 
 /* 도움말 */
@@ -862,6 +1027,33 @@ label {
     font-family: 'Pretendard';
     font-style: normal;
     font-size: 22px;
+
+    color: #1C1C1E;
+}
+
+/* 멤버 추가 */
+
+.member__search {
+
+    display: flex;
+    flex-direction: row;
+}
+
+.user__list {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    margin: 0px 20px 0px 20px;
+    padding: 15px 10px 15px 10px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-size: 20px;
+    font-weight: 500;
+
+    border-bottom: 1px solid gray;
 
     color: #1C1C1E;
 }

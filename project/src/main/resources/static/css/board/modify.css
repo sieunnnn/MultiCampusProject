@@ -1,0 +1,81 @@
+
+/* 웹폰트 */
+@font-face {
+
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.tit_board {
+
+    font-family: 'Pretendard';
+    font-size: 23px;
+    font-weight: 500;
+    color: #1C1C1E;
+}
+
+input, textarea {
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 5px 10px;
+    gap: 10px;
+
+    height: auto;
+
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+input:focus, textarea:focus {
+
+    outline: 2px solid rgba(58, 108, 217, 0.5);
+}
+
+select:focus, select:active {
+
+    border: 2px solid rgba(58, 108, 217, 0.5);
+    !important;
+}
+
+#contract_file {
+
+    font-family: 'Pretendard';
+    font-size: 20px;
+    font-weight: 500;
+    color: #1C1C1E;
+}
+
+.container__file {
+
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper__file {
+
+    display: flex;
+    flex-direction: row;
+    padding: 20px 5px;
+    height: auto;
+
+    font-family: 'Pretendard';
+    font-size: 20px;
+    font-weight: 400;
+    color: #1C1C1E;
+}

@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import multi.second.project.domain.board.domain.Board;
+import multi.second.project.domain.board.domain.BoardCategory;
 
 @Data
 @NoArgsConstructor
@@ -16,6 +17,7 @@ public class BoardListResponse {
 	private Long bdIdx;
 	private String userId;
 	private String title;
+	private BoardCategory boardCategory;
 	private LocalDateTime regDate;
 
 	public BoardListResponse(Board entity) {
@@ -23,6 +25,7 @@ public class BoardListResponse {
 		this.title = entity.getTitle();
 		this.regDate = entity.getRegDate();
 		this.userId = entity.getMember().getUserId();
+		this.boardCategory = entity.getBoardCategory();
 	}
 	
 	public String getRegDateAsDate() {

@@ -8,6 +8,7 @@ import java.util.List;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import multi.second.project.domain.board.domain.Board;
+import multi.second.project.domain.board.domain.BoardCategory;
 import multi.second.project.infra.util.file.dto.FilePathDto;
 
 @Data
@@ -19,6 +20,7 @@ public class BoardDetailResponse {
 	private LocalDateTime regDate;
 	private String userId;
 	private String content;
+	private BoardCategory boardCategory;
 	private List<FilePathDto> filePathDtos = new ArrayList<FilePathDto>();
 	
 	public BoardDetailResponse(Board board) {
@@ -27,6 +29,7 @@ public class BoardDetailResponse {
 		this.regDate = board.getRegDate();
 		this.userId = board.getMember().getUserId();
 		this.content = board.getContent();
+		this.boardCategory = board.getBoardCategory();
 		this.filePathDtos = FilePathDto.toDtoList(board.getFiles());
 	}
 	

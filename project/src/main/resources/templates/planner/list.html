@@ -16,7 +16,7 @@
     <div layout:fragment="content">
         <div class="container__planner_list">
             <div class="title__planner">
-                <div style="margin: 6px 0 6px 0">[[${#authentication.name}]] 님의 여행 기록</div>
+                <div style="margin: 6px 0 6px 0">[[${user}]] 님의 여행 기록</div>
             </div>
 
             <!-- 플래너 상단부분 -->
@@ -24,19 +24,13 @@
                 <!-- 프로필 -->
                 <div class="planner__profile">
                     <div class="wrapper__profile">
-                        <!-- 프로필 이미지 들어가는 곳 -->
+                        <img th:src="@{/profile/other-download(otherId=${user})}" onerror="this.src='/img/user.png'">
                     </div>
                 </div>
 
                 <!-- 추천 여행지 -->
                 <div class="recommend">
-                    <div>
-                        <!-- 해당 회원의 아이디 받아오기 -->
-                    </div>
-
-                    <div>
-                        <!-- 추천 여행지 -->
-                    </div>
+                    <img src="/img/plannerListHead.png">
                 </div>
             </div>
 
@@ -56,13 +50,16 @@
 
                         <div class="container__travel__friends">
                             <!-- 같이 여행하는 사람들 리스트 -->
-                            <div  class="wrapper__friends">
-                                <!-- 프로필 사진 반복문 -->
-                                <div class="profile">
-                                    <img style="width:40px; height: 40px" src="/img/btn_profile.png">
-                                </div>
-                                <div class="profile">
-                                    <img style="width:40px; height: 40px" src="/img/btn_profile.png">
+                            <div th:id=memberGroup class="wrapper__friends">
+                                <div th:each="group : ${planner.travelGroup.getParticipants}" class="profile">
+
+                                    <div th:if="${profile.member.getUserId()} == ${group.member.getUserId()}">
+                                        <img th:src="@{/profile/download(pfIdx=${profile.pfIdx})}" onerror="this.src='/img/user.png'">
+                                    </div>
+
+                                    <div th:unless="${profile.member.getUserId()} == ${group.member.getUserId()}">
+                                        <img th:src="@{/profile/other-download(otherId=${group.member.getUserId()})}" onerror="this.src='/img/user.png'">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -83,7 +80,7 @@
                             <form th:action="@{/planner/modify-title}" method="post" class="form__title">
                                 <input type="hidden" th:value="${planner.tpIdx}" name="tpIdx"/>
                                 <input type="text" th:value="${planner.title}"  name="title" style="width: 214px; margin-right: 10px"/>
-                                <button style="margin-top: 7px">제목수정</button>
+                                <button style="margin-top: 8px">제목수정</button>
                             </form>
 
                             <!-- 삭제 -->
@@ -91,8 +88,7 @@
                                 <input type="hidden" th:value="${planner.tpIdx}" name="tpIdx"/>
 
                                 <div class="wrapper__mod__btn">
-                                    <button id="btnDel" style="margin-left: 200px; margin-bottom: 30px">삭제</button>
-                                    <button id="closeModBtn" style="margin-right: 22px; margin-left: 6px">닫기</button>
+                                    <button id="btnDel" style="margin-left: 244px; margin-bottom: 30px">삭제</button>
                                 </div>
                             </form>
                         </div>
@@ -122,6 +118,11 @@
             function popUpModify(str) {
 
                 document.getElementById(str).style.display = 'block';
+            }
+
+            function closeModify(str) {
+
+                document.getElementById(str).style.display = 'none';
             }
         </script>
     </div>

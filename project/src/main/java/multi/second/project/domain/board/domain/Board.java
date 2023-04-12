@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -50,6 +52,9 @@ public class Board {
 	@ColumnDefault("false")
 	private Boolean isDel;
 	
+	@Enumerated(EnumType.STRING)
+	private BoardCategory boardCategory;
+	
 	@OneToMany(cascade = CascadeType.ALL)
 	@Builder.Default
 	private List<FilePath> files = new ArrayList<FilePath>();
@@ -59,6 +64,7 @@ public class Board {
 				.member(member)
 				.title(dto.getTitle())
 				.content(dto.getContent())
+				.boardCategory(Enum.valueOf(BoardCategory.class, dto.getBoardCategory()))
 				.build();
 	}
 
@@ -73,6 +79,7 @@ public class Board {
 	public void updateBoard(BoardModifyRequest dto) {
 		this.title = dto.getTitle();
 		this.content = dto.getContent();
+		this.boardCategory = Enum.valueOf(BoardCategory.class, dto.getBoardCategory());
 	}
 
 

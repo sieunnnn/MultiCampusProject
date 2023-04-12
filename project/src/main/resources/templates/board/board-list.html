@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>boardList</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <link href="/css/board/list.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- 헤더 -->
+
+<header class="p-3 text-bg-dark">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="/" class="nav-link px-2 text-secondary">대시보드</a></li>
+                <li><a href="/board/list" class="nav-link px-2 text-white">전체</a></li>
+                <li><a href="/board/category?category=REVIEW" class="nav-link px-2 text-white">여행후기</a></li>
+                <li><a href="/board/category?category=RECOMMAND" class="nav-link px-2 text-white">여행지 추천</a></li>
+                <li><a href="/board/category?category=LOCALACCOMODATION" class="nav-link px-2 text-white">지역주민 추천</a></li>
+                <li><a href="/board/category?category=PROMOTION" class="nav-link px-2 text-white">지역주민 홍보</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+
+
+<div style="margin: 100px 100px 50px 100px">
+    <div style="display: none" class="tit">전체 게시판</div>
+    <div class="txt__title">에디터 선정 국내 여행지 10 곳</div>
+    <div class="txt__second__title">VAR 플래너 소속 에디터가 소개하는 명소를 확인해보세요.</div>
+    <div class="wrapper__recommend">
+        <div  data-bs-toggle="modal" data-bs-target="#exampleModal"><img src="/img/r1.png"></div>
+        <div><img src="/img/r2.png"></div>
+        <div><img src="/img/r3.png"></div>
+        <div><img src="/img/r3.png"></div>
+        <div><img src="/img/r3.png"></div>
+        <div><img src="/img/r3.png"></div>
+        <div><img src="/img/r3.png"></div>
+        <div><img src="/img/r3.png"></div>
+        <div><img src="/img/r3.png"></div>
+        <div><img src="/img/r3.png"></div>
+    </div>
+
+    <div class="txt__title" style="margin-top: 130px;">명예의 전당</div>
+    <div class="txt__second__title">
+        여행을 진정으로 즐기는 이들을 소개합니다. 여행 초보자라면 아래 여행자들의 플래너를 방문해보세요.<br>
+    </div>
+    <div class="wrapper__top" style="margin-top: 40px">
+        <div style="margin-left: 40px" class="m1" onclick="showBubble()"><img src="/img/m1.png" width="180px" height="180px"></div>
+        <div style="margin: 15px 15px 0 20px; display: none" class="mb1"><img src="/img/mb1.png" height="140px"></div>
+        <div style="margin-left: 40px"><img src="/img/m2.png" width="180px" height="180px"></div>
+        <div style="margin-left: 40px"><img src="/img/m3.png" width="180px" height="180px"></div>
+        <div style="margin-left: 40px"><img src="/img/m4.png" width="180px" height="180px"></div>
+    </div>
+
+    <!-- 모달 -->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>남산타워</div>
+                </div>
+                <div class="modal-body">
+                    에디터가 남산타워 여행 후기나, 정보를 담을 수 있는 공간입니다.
+                    내용이 길어지면 스크롤이 자동으로 생성됩니다.<br>
+                    예를들면, 이렇게요.
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 게시글 테이블 -->
+<div class="w-75 p-3"  style="margin-left: auto; margin-right: auto;">
+    <!-- 타이틀 -->
+    <div th:switch = ${category}>
+        <div th:case="REVIEW"><p class="tit">여행후기</p></div>
+        <div th:case="RECOMMAND"><p class="tit">여행지추천</p></div>
+        <div th:case="LOCALACCOMODATION"><p class="tit">지역주민추천</p></div>
+        <div th:case="PROMOTION"><p class="tit">지역주민홍보</p></div>
+        <div th:case="*"><p class="tit">전체</p></div>
+    </div>
+
+    <div class="warning">
+        <li>욕설, 비방, 불쾌함을 유발할수 있는 글은 자제해주세요.</li>
+        <li>허위글 작성은 많은 사람들에게 피해를 줄 수 있습니다. 글을 신중하게 작성해주세요.</li>
+        <li>일정 건수 이상 신고가 누적되면 계정이 잠금조치 됩니다. 이 점 유의해주세요.</li>
+    </div>
+
+    <!-- 게시글 쓰기 버튼 -->
+    <a href="/board/form" class="btn__write">게시글 쓰기</a>
+
+    <table class="table" >
+        <thead>
+            <tr>
+                <th scope="col">번호</th>
+                <th scope="col">제목</th>
+                <th scope="col">작성자</th>
+                <th scope="col">등록일</th>
+            </tr>
+        </thead>
+
+        <tbody class="table-group-divider">
+            <tr th:each="board, status : ${boardList}">
+                <th scope="row" th:text="${board.bdIdx}"></th>
+                <td><a th:href="@{|/board/detail?bdIdx=${board.bdIdx}|}" th:text="${board.title}"></a></td>
+                <td th:text="${board.userId}"></td>
+                <td th:text="${board.regDate}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- 페이지 네이션 -->
+<nav aria-label="pagination" style="margin-bottom: 300px">
+    <ul class="pagination">
+        <li><a th:href="@{|/board/list?page=${paging.prevPage}&size=10&sort=title,ASC|}"><span class="visuallyhidden"><</span></a></li>
+        <li th:each="page : ${#numbers.sequence(paging.blockStart, paging.blockEnd)}">
+            <a th:href="@{|/board/list?page=${page-1}&size=10&sort=title,ASC|}" th:text="${page}"></a>
+        </li>
+        <li><a th:href="@{|/board/list?page=${paging.nextPage}&size=10&sort=title,ASC|}"><span class="visuallyhidden">></span></a></li>
+    </ul>
+</nav>
+
+<hr>
+
+<!-- 푸터 -->
+<footer class="w-90 p-3"  style="margin-left: auto; margin-right: auto;">
+    <div style="margin: 50px 0 0 50px">멀티캠퍼스 2조 팀 프로젝트 입니다.</div>
+    <div style="margin-left: 50px">아래 아이콘을 클릭하면 포트폴리오에 이용한 도구로 이동합니다.</div>
+    <div class="wrapper__tool" style="margin-left: 50px">
+        <a href="https://sieun96.notion.site/2-bb44c09796d94d53ab1ee0a463d4ff1d">
+            <img src="/img/notion.png" width="60px" height="60px"></a>
+        <a href="https://www.figma.com/file/tAnoNqthCkRc8KnHQIqWBI/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8?node-id=0%3A1&t=O6GCwiZDRPhq6pky-1">
+            <img src="/img/figma.png" width="60px" height="60px"></a>
+        <a href="https://www.figma.com/file/saEoo8SqVP9GQ2cYNGFm3d/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8?node-id=679%3A1239&t=q7FNTJsygxERdloE-1">
+            <img src="/img/figma.png" width="60px" height="60px"></a>
+        <a href="https://github.com/sieunnnn/MultiCampusProject.git">
+            <img src="/img/github.png" width="60px" height="60px"></a>
+    </div>
+    <div style="margin-left: 50px">아래 미모티콘을 클릭하면 팀원 개인 깃허브 주소로 이동합니다.</div>
+    <div class="wrapper__github" style="margin-bottom: 100px; margin-left: 50px">
+        <a href="https://github.com/sieunnnn"><img src="/img/m1.png" width="90px" height="90px"></a>
+        <a href="https://github.com/workbjh"><img src="/img/m2.png" width="90px" height="90px"></a>
+        <a href="https://github.com/joonhyung2"><img src="/img/m3.png" width="90px" height="90px"></a>
+        <a href="https://github.com/Joongjii"><img src="/img/m4.png" width="90px" height="90px"></a>
+    </div>
+</footer>
+
+</body>
+
+<script>
+    const myModal = document.getElementById('myModal')
+    const myInput = document.getElementById('myInput')
+
+    myModal.addEventListener('shown.bs.modal', () => {
+        myInput.focus()
+    })
+
+    function showBubble() {
+        document.querySelector('.mb1').style.display = 'block'
+    }
+</script>
+</html>

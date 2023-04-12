@@ -21,6 +21,7 @@ import multi.second.project.domain.member.domain.Member;
 import multi.second.project.domain.member.dto.Principal;
 import multi.second.project.domain.member.dto.request.LoginRequest;
 import multi.second.project.domain.member.dto.request.SignUpRequest;
+import multi.second.project.domain.member.repository.MemberRepository;
 import multi.second.project.infra.code.Code;
 import multi.second.project.infra.util.mail.EmailSender;
 

@@ -14,15 +14,17 @@
 <body>
 <div class="container__common">
     <nav>
-        <div class="wrapper__btn__profile">
-            <button th:onclick="|location.href='@{/profile}'|"><img src="/img/btn_profile.png"></button>
+        <div>
+            <button class="wrapper__btn__profile" th:onclick="|location.href='@{/profile/profile}'|">
+                <img th:src="@{/profile/other-download(otherId=${#authentication.name})}" onerror="this.src='/img/user.png'">
+            </button>
         </div>
         <div class="wrapper__btn">
-            <button th:onclick="|location.href='@{/dashboard}'|"><img src="/img/btn_dashboard.png"></button>
-            <button th:onclick="|location.href='@{/note/list}'|"><img src="/img/btn_message.png"></button>
+            <button th:onclick="|location.href='@{/}'|"><img src="/img/btn_dashboard.png"></button>
+            <button th:onclick="|location.href='@{/message}'|"><img src="/img/btn_message.png"></button>
             <button th:onclick="|location.href='@{/planner/list}'|"><img src="/img/btn_planner.png"></button>
             <button th:onclick="|location.href='@{/gallery/list}'|"><img src="/img/btn_gallery.png"></button>
-            <button><img src="/img/btn_board.png"></button>
+            <button th:onclick="|location.href='@{/board/home}'|"><img src="/img/btn_board.png"></button>
         </div>
 
         <button class="toggle__switch__login" th:onclick="|location.href='@{/member/login}'|">

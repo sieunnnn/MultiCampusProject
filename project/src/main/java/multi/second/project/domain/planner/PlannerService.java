@@ -23,12 +23,14 @@ import multi.second.project.domain.group.dto.response.GroupResponse;
 import multi.second.project.domain.group.repository.TravelGroupRepository;
 import multi.second.project.domain.host.domain.Host;
 import multi.second.project.domain.host.repository.HostRepository;
-import multi.second.project.domain.member.MemberRepository;
 import multi.second.project.domain.member.domain.Member;
 import multi.second.project.domain.member.dto.Principal;
+import multi.second.project.domain.member.dto.response.MemberResponse;
+import multi.second.project.domain.member.repository.MemberRepository;
 import multi.second.project.domain.planner.domain.Participant;
 import multi.second.project.domain.planner.domain.Planner;
 import multi.second.project.domain.planner.dto.request.PlannerGroupModifyRequest;
+import multi.second.project.domain.planner.dto.request.PlannerGroupSearchRequest;
 import multi.second.project.domain.planner.dto.request.PlannerHostModifyRequest;
 import multi.second.project.domain.planner.dto.request.PlannerPrivateModifyRequest;
 import multi.second.project.domain.planner.dto.request.PlannerRegistRequest;
@@ -220,6 +222,22 @@ public class PlannerService {
 		
 		return member;
 		
+	}
+
+	@Transactional
+	public List<Member> searchPlannerGroup(PlannerGroupSearchRequest dto) {
+		
+		List<String> filters = List.of("userId");
+		String keyword = dto.getKeyword();
+		System.out.println("keyword : "+keyword);
+		
+		memberRepository.dynamicQueryWithMemberOr(filters, keyword).forEach(e -> {
+			System.out.println(new MemberResponse(e));
+		});
+		
+		List<Member> members = memberRepository.dynamicQueryWithMemberOr(filters, keyword);
+		System.out.println("members : "+members);
+		return members;
 	}
 
 	
