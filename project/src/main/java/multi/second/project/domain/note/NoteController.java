@@ -67,7 +67,7 @@ public class NoteController {
         return "note/note-list";
     }
 
-    @GetMapping("/{ntIdx}")
+    @GetMapping("{ntIdx}")
     public String noteDetail(@PathVariable("ntIdx") Long ntIdx, Model model) {
             Note note = noteService.findNoteByNtIdx(ntIdx);
             model.addAttribute("note", note);
