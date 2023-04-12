@@ -19,8 +19,14 @@
     <div style="width: 785px; height: 662px;">
         <div class="container__gallery">
 
-            <div class="previous__page">
+            <div class="previous__page" th:if="${user} == ${#authentication.name}">
                 <button class="btn_prev" onclick="location.href='/gallery/list'" style="margin-left: 10px">뒤로가기</button>
+            </div>
+            <div class="previous__page" th:unless="${user} == ${#authentication.name}">
+            <form th:action="@{/gallery/other-gallery}" method="get">
+            	<input type="hidden" th:value="${user}" name="profileId"/>
+                <button class="btn_prev" style="margin-left: 10px">뒤로가기</button>
+            </form>
             </div>
 
             <div class="txt_head">[[${gallery.title}]]</div>
