@@ -42,7 +42,8 @@ public class GalleryController {
 
 	//갤러리 포스트 추가 폼
 	@GetMapping("add")
-	public String galleryForm() {
+	public String galleryForm(Model model) {
+		model.addAttribute("user", UserPrincipal.getUserPrincipal().getPrincipal().getUserId());
 		return "gallery/add";
 	}
 
