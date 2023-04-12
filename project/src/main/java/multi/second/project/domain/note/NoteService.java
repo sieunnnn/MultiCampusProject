@@ -1,8 +1,9 @@
 package multi.second.project.domain.note;
 
 import lombok.AllArgsConstructor;
-import multi.second.project.domain.member.MemberRepository;
+
 import multi.second.project.domain.member.domain.Member;
+import multi.second.project.domain.member.repository.MemberRepository;
 import multi.second.project.domain.note.domain.Note;
 import multi.second.project.domain.note.dto.request.NoteRegistRequest;
 import multi.second.project.domain.note.dto.response.NoteListResponse;

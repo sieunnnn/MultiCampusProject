@@ -1,6 +1,6 @@
 package multi.second.project.note;
 
-import multi.second.project.domain.member.MemberRepository;
+
 import multi.second.project.domain.member.domain.Member;
 import multi.second.project.domain.note.domain.Note;
 import multi.second.project.domain.note.repository.NoteRepository;
