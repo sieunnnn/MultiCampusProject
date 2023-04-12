@@ -83,19 +83,19 @@
                 [[${profile.member.userId}]] 님 안녕하세요!
             </div>
             <div class="txt__welcome" th:unless="${profile.member.userId} == ${#authentication.name}">
-                [[${profile.member.userId}]] 프로필
+                [[${profile.member.userId}]] 님의 프로필
             </div>
 
             <!-- 클릭 하면 유저 사진 바꿀수 있는 팝업창 생성 -->
             <div th:if="${profile.member.userId} == ${#authentication.name}">
-            	<button id="image-show" class="wrapper__user__pic" onclick="modalOpen();">
-                	<img id="newImage" th:src="@{/profile/download(pfIdx=${profile.pfIdx})}">
-            	</button>
+                <button id="image-show" class="wrapper__user__pic" onclick="modalOpen();">
+                    <img id="newImage" th:src="@{/profile/download(pfIdx=${profile.pfIdx})}">
+                </button>
             </div>
             <div th:unless="${profile.member.userId} == ${#authentication.name}">
-            	<button id="image-show" class="wrapper__user__pic" onclick="modalOpen();" disabled>
-                	<img id="newImage" th:src="@{/profile/download(pfIdx=${profile.pfIdx})}">
-            	</button>
+                <button id="image-show" class="wrapper__user__pic" onclick="modalOpen();" disabled>
+                    <img id="newImage" th:src="@{/profile/download(pfIdx=${profile.pfIdx})}">
+                </button>
             </div>
             
             <!--            <div>-->

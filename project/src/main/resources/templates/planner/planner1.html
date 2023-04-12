@@ -33,22 +33,19 @@
 
                     <div th:id=memberGroup class="wrapper__friends">
                         <div th:each="group : ${planner.travelGroup.getParticipants}" class="profile">
-						<form th:action="@{/profile/other-profile}" method="get">
-						<input type="hidden" th:value="${group.member.getUserId()}" name="otherId"/>
-                            <div th:if="${profile.member.getUserId()} == ${group.member.getUserId()}">
-                            	<button>
-                                	<img th:src="@{/profile/download(pfIdx=${profile.pfIdx})}" onerror="this.src='/img/user.png'">
-                                </button>
-                            </div>
-							
-                            <div th:unless="${profile.member.getUserId()} == ${group.member.getUserId()}">
-                            	
-                            		
-                            		<button>
-                            			<img th:src="@{/profile/other-download(otherId=${group.member.getUserId()})}" onerror="this.src='/img/user.png'">
-                            		</button>
-                            	
-                            </div>
+						    <form th:action="@{/profile/other-profile}" method="get">
+						        <input type="hidden" th:value="${group.member.getUserId()}" name="otherId"/>
+                                <div th:if="${profile.member.getUserId()} == ${group.member.getUserId()}">
+                                	<button>
+                                    	<img style="width: 60px; height: 60px;" th:src="@{/profile/download(pfIdx=${profile.pfIdx})}" onerror="this.src='/img/user.png'">
+                                    </button>
+                                </div>
+
+                                <div th:unless="${profile.member.getUserId()} == ${group.member.getUserId()}">
+                                    <button>
+                                        <img style="width: 60px; height: 60px" th:src="@{/profile/other-download(otherId=${group.member.getUserId()})}" onerror="this.src='/img/user.png'">
+                                    </button>
+                                </div>
                             </form>
                         </div>
                         <div th:id=memberResponse class="profile"></div>

@@ -71,7 +71,7 @@
                             <img style="width: 70px; height: 70px; border-radius: 50%" th:src="@{/profile/download(pfIdx=${profile?.pfIdx})}">
                         </div>
 
-                        <div class="wrapper__comment">
+                        <div class="wrapper__comment" style="margin: 13px 150px 0 20px;">
                             <input type="text" id="context" name="context" required="required">
                             <input type="hidden" th:value="${gallery.postIdx}" name="postIdx"/>
                         </div>
@@ -101,8 +101,8 @@
 
                         <!-- 댓글 겸 댓글 수정창 나오는 버튼 -->
                         <div class="txt__comment" th:onclick="popModify([[${comment.context}]])">
-                            <div style="font-size: 20px; font-weight: 700; margin-top: 5px">[[${comment.userId}]]</div>
-                            <div style="font-size: 24px; font-weight: 400">[[${comment.context}]]</div>
+                            <div style="font-size: 20px; font-weight: 700; margin: 5px 20px 0 20px;">[[${comment.userId}]]</div>
+                            <div style="font-size: 24px; font-weight: 400; margin: 0 20px 0 20px;">[[${comment.context}]]</div>
                         </div>
 
                         <form th:action="@{/comment/remove}" method="post" >
