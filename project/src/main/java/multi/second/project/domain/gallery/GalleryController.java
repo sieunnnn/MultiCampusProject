@@ -119,6 +119,8 @@ public class GalleryController {
 
 		Profile profile = profileService.getProfileData(UserPrincipal.getUserPrincipal().getPrincipal().getUserId());
 		model.addAttribute("profile", profile);
+		
+		model.addAttribute("user", dto.getUserId());
 
 //		//특정 포스트의 댓글을 가져오는 코드 (확인필요)(필요없을듯)
 //		System.out.println("galleryService.findCommentListByPostIdx(postIdx) :  "+galleryService.findCommentListByPostIdx(postIdx));
