@@ -65,7 +65,7 @@ public class MemberController {
 								, HttpSession session) {
 		
 		if(error.hasErrors()) {
-			return "/member/signup";
+			return "member/signup";
 		}
 		
 		session.setAttribute("signupForm", form);

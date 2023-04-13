@@ -75,7 +75,7 @@ public class PlannerController {
 		Profile profile = profileService.getProfileData(UserPrincipal.getUserPrincipal().getPrincipal().getUserId());
 		model.addAttribute("profile", profile);
 		
-		return "/planner/list";
+		return "planner/list";
 	}
 	
 	//다른사람의 플래너를 볼 때
@@ -98,7 +98,7 @@ public class PlannerController {
 		Profile profile = profileService.getProfileData(UserPrincipal.getUserPrincipal().getPrincipal().getUserId());
 		model.addAttribute("profile", profile);
 		
-		return "/planner/list";
+		return "planner/list";
 	}
 	
 	//planner추가
@@ -135,7 +135,7 @@ public class PlannerController {
 		Profile profile = profileService.getProfileData(UserPrincipal.getUserPrincipal().getPrincipal().getUserId());
 		model.addAttribute("profile", profile);
 
-		return "/planner/planner1";
+		return "planner/planner1";
 	}
 
 	

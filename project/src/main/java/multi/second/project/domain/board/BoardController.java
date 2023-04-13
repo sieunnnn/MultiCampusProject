@@ -38,11 +38,11 @@ public class BoardController {
 	@GetMapping("home")
 	public String boardHome() {
 
-		return "/board/home";
+		return "board/home";
 	}
 	@GetMapping("form")
 	public String boardForm() {
-		return "/board/board-form";
+		return "board/board-form";
 	}
 	
 	@PostMapping("upload")
@@ -68,7 +68,7 @@ public class BoardController {
 		Map<String, Object> commandMap = boardService.findBoardList(pageable); 
 		model.addAllAttributes(commandMap);
 		
-		return "/board/board-list";
+		return "board/board-list";
 	}
 	
 	@GetMapping("category")
@@ -83,7 +83,7 @@ public class BoardController {
 		Map<String, Object> commandMap = boardService.findBoardListByCategory(pageable, category); 
 		model.addAllAttributes(commandMap);
 		
-		return "/board/board-list";
+		return "board/board-list";
 	}
 	
 	@GetMapping("detail")
@@ -91,7 +91,7 @@ public class BoardController {
 		
 		BoardDetailResponse dto = boardService.findBoardByBdIdx(bdIdx);
 		model.addAttribute("board", dto);
-		return "/board/board-contents";
+		return "board/board-contents";
 	}
 	
 	@GetMapping("download")

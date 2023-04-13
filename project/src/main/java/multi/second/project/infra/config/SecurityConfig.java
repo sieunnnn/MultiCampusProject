@@ -41,6 +41,7 @@ public class SecurityConfig {
 		http.authorizeHttpRequests()
 				.antMatchers(HttpMethod.GET, "/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/member/signup", "/member/checkId", "/member/signupimpl/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/note/list").permitAll()
 				.antMatchers(HttpMethod.POST,"/member/signup").permitAll()
 				.antMatchers(HttpMethod.POST, "/mail").permitAll()
 				.antMatchers(HttpMethod.GET, "/profile", "/profile/download").permitAll()
