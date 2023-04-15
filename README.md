@@ -222,7 +222,9 @@
 <br>
 		
 ## 바로가기
+
 #### [`💁‍♀️ 멤버 소개`](https://github.com/sieunnnn/MultiCampusProject/edit/main/README.md#%ED%8C%80-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%A9%A4%EB%B2%84-%EC%86%8C%EA%B0%9C) &nbsp; [`🧑‍🏫 파이널 프로젝트 개요`](https://github.com/sieunnnn/MultiCampusProject/edit/main/README.md#%ED%8C%8C%EC%9D%B4%EB%84%90-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B0%9C%EC%9A%94) &nbsp; [`👨‍💻 프로젝트 기획`](https://github.com/sieunnnn/MultiCampusProject/edit/main/README.md#%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B8%B0%ED%9A%8D) &nbsp; [`💻사용기술 / 도구`](https://github.com/sieunnnn/MultiCampusProject/edit/main/README.md#%EC%82%AC%EC%9A%A9%EA%B8%B0%EC%88%A0%EB%8F%84%EA%B5%AC) &nbsp; <br>
+
 #### [`💁‍♂️ 프로젝트 구성 / 시연`](https://github.com/sieunnnn/MultiCampusProject/edit/main/README.md#%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B5%AC%EC%84%B1--%EC%8B%9C%EC%97%B0) &nbsp; [`🦋 이슈`](https://github.com/sieunnnn/MultiCampusProject/edit/main/README.md#%EC%9D%B4%EC%8A%88)
 
 <br>
