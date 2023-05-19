@@ -23,6 +23,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+
         <!-- javax.mail 사용을 위한 dependency-->
         <dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -39,26 +40,6 @@
             <artifactId>querydsl-jpa</artifactId>
         </dependency>
 
-<!--        &lt;!&ndash; API, java.xml.bind module &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>jakarta.xml.bind</groupId>-->
-<!--            <artifactId>jakarta.xml.bind-api</artifactId>-->
-<!--            <version>2.3.2</version>-->
-<!--        </dependency>-->
-
-<!--        &lt;!&ndash; Runtime, com.sun.xml.bind module &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.glassfish.jaxb</groupId>-->
-<!--            <artifactId>jaxb-runtime</artifactId>-->
-<!--            <version>2.3.2</version>-->
-<!--        </dependency>-->
-
-<!--        &lt;!&ndash; spring security &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-security</artifactId>-->
-<!--        </dependency>-->
-
         <!-- thymeleaf -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -71,12 +52,6 @@
             <artifactId>thymeleaf-layout-dialect</artifactId>
         </dependency>
 
-<!--        &lt;!&ndash; thymeleaf extras spring security5 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.thymeleaf.extras</groupId>-->
-<!--            <artifactId>thymeleaf-extras-springsecurity5</artifactId>-->
-<!--        </dependency>-->
-
 		<!-- javax.validation을 사용하기 위한 dependency  -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -88,12 +63,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
-<!--        &lt;!&ndash; websocket &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-websocket</artifactId>-->
-<!--        </dependency>-->
 
         <!-- dev tools -->
         <dependency>
@@ -123,11 +92,6 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-        <!-- org.springframework.security를 쓰기위한 dependency 
-        <dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-crypto</artifactId>
-		</dependency>-->
 
         <!-- security -->
         <dependency>
@@ -143,13 +107,6 @@
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 		</dependency>
-
-<!--        &lt;!&ndash; security test &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.security</groupId>-->
-<!--            <artifactId>spring-security-test</artifactId>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
 
 		<!-- websocket -->
 		<dependency>
