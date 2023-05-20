@@ -162,7 +162,7 @@
 	
 - 플래너 동시 동작<br>
 	### *⚠️ 영상의 크기가 너무 큰 관계로 노션 링크를 첨부합니다.*
-	 [🔗 플래너 동시동작 영상 바로가기](https://www.notion.so/sieun96/README-md-0a56176deba640e1938ff713f06136b1?pvs=4#3abb20b4397f4d74bbabcc6c4e399eda "🔗 플래너 동시동작 영상 바로가기")
+	 [🔗 플래너 동시동작 영상 바로가기](https://sieun96.notion.site/README-md-0a56176deba640e1938ff713f06136b1 "🔗 플래너 동시동작 영상 바로가기")
 	<br>
 	<br>
 	
@@ -174,14 +174,14 @@
 
 > ### 갤러리
 ### *⚠️ 영상의 크기가 너무 큰 관계로 노션 링크를 첨부합니다.*
-[🔗 갤러리 영상 바로가기](https://www.notion.so/sieun96/README-md-0a56176deba640e1938ff713f06136b1?pvs=4#27d8c35a98c242ba9043a32e85cb288f "🔗 갤러리 영상 바로가기")
+[🔗 갤러리 영상 바로가기](https://sieun96.notion.site/README-md-0a56176deba640e1938ff713f06136b1 "🔗 갤러리 영상 바로가기")
 
 <br>
 <br>
 
 > ### 게시판
 ### *⚠️ 영상의 크기가 너무 큰 관계로 노션 링크를 첨부합니다.*
-[🔗 게시판 영상 바로가기](https://www.notion.so/sieun96/README-md-0a56176deba640e1938ff713f06136b1?pvs=4#f25fa4f771864a019389b5d4a0b2dcc6 "🔗 게시판 영상 바로가")
+[🔗 게시판 영상 바로가기](https://sieun96.notion.site/README-md-0a56176deba640e1938ff713f06136b1 "🔗 게시판 영상 바로가")
 
 <br>
 <br>
