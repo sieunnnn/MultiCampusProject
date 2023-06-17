@@ -88,13 +88,13 @@
 
             <!-- 클릭 하면 유저 사진 바꿀수 있는 팝업창 생성 -->
             <div th:if="${profile.member.userId} == ${#authentication.name}">
-                <button id="image-show" class="wrapper__user__pic" onclick="modalOpen();">
-                    <img id="newImage" th:src="@{/profile/download(pfIdx=${profile.pfIdx})}">
+                <button id="changeProfile" class="wrapper__user__pic" onclick="modalOpen();">
+                    <img id="myImage" th:src="@{/profile/download(pfIdx=${profile.pfIdx})}">
                 </button>
             </div>
-            <div th:unless="${profile.member.userId} == ${#authentication.name}">
-                <button id="image-show" class="wrapper__user__pic" onclick="modalOpen();" disabled>
-                    <img id="newImage" th:src="@{/profile/download(pfIdx=${profile.pfIdx})}">
+            <div th:unless="${profile.member.userId} != ${#authentication.name}">
+                <button class="wrapper__user__pic" onclick="modalOpen();" disabled>
+                    <img id="otherUserImage" th:src="@{/profile/download(pfIdx=${profile.pfIdx})}">
                 </button>
             </div>
             

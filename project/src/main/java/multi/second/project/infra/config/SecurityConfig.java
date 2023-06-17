@@ -17,6 +17,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import lombok.RequiredArgsConstructor;
 import multi.second.project.infra.config.security.AuthFailureHandler;
 import multi.second.project.infra.config.security.AuthSuccessHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity // Spring Security의 기본 설정 대신 사용자가 커스터마이징한 설정을 시큐리티에 적용
@@ -37,7 +38,6 @@ public class SecurityConfig {
 	
 	@Bean                                                            
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		
 		http.authorizeHttpRequests()
 				.antMatchers(HttpMethod.GET, "/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/member/signup", "/member/checkId", "/member/signupimpl/**").permitAll()
@@ -49,8 +49,10 @@ public class SecurityConfig {
 				.antMatchers(HttpMethod.GET,"/board/home", "/board/list", "/board/detail", "/board/download").permitAll()
 				.antMatchers(HttpMethod.GET,"/gallery/list", "/gallery/detail", "/gallery/add", "/gallery/modify").permitAll()
 				.antMatchers(HttpMethod.GET, "/admin").hasAuthority("ROLE_ADMIN")
+				.antMatchers("/h2-console/**").permitAll()
 				.anyRequest().authenticated();
-		
+
+
 		http.formLogin()
 			.loginProcessingUrl("/member/login")
 			.loginPage("/member/login")
@@ -69,7 +71,8 @@ public class SecurityConfig {
 		
 		// csrf : post요청일 때 수행해야 하는 csrf 토큰 검증을 끔
 		//http.csrf().disable();
-		http.csrf().ignoringAntMatchers("/mail");
+		http.csrf().ignoringAntMatchers("/mail", "/h2-console/**")
+				.and().headers().frameOptions().sameOrigin();
 		return http.build();
 	}
 
@@ -78,7 +81,7 @@ public class SecurityConfig {
 		return web -> web.ignoring().antMatchers("/css/**","/js/**", "/img/**", "/icon/**")
 				.requestMatchers(PathRequest.toStaticResources().atCommonLocations());
 	}
-	
+
 	
 	
 	
